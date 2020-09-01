@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Travada</string>
+    <string name="title_banner_tabungan"> Wujudkan dan \npercepat \nliburanmu dengan \nmenabung.</string>
+    <string name="title_tabungan">Liburan Impian</string>
+    <string name="btn_buat_liburan">Buat Liburan Impian</string>
+
+
 </resources>

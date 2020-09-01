@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.tabungan.TabunganActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gHorizontal1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+    <View
+        android:id="@+id/vBannerTabungan"
+        android:layout_width="0dp"
+        android:layout_height="167dp"
+        android:background="@drawable/banner_tabungan"
+        app:layout_constraintTop_toBottomOf="@id/gHorizontal1"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_main_tabungan"
+        android:layout_marginEnd="11dp"
+        app:layout_constraintEnd_toEndOf="@id/vBannerTabungan"
+        app:layout_constraintTop_toTopOf="@id/vBannerTabungan"
+        app:layout_constraintBottom_toBottomOf="@id/vBannerTabungan" />
+
+    <TextView
+        android:id="@+id/tvTitleBannerTabungan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto"
+        android:textSize="@dimen/heading3"
+        android:layout_marginStart="16dp"
+        android:text="@string/title_banner_tabungan"
+        app:layout_constraintStart_toStartOf="@id/vBannerTabungan"
+        app:layout_constraintTop_toTopOf="@id/vBannerTabungan"
+        app:layout_constraintBottom_toBottomOf="@id/vBannerTabungan" />
+
+    <TextView
+        android:id="@+id/tvTitleMainTabungan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading3"
+        android:fontFamily="@font/roboto"
+        android:text="@string/title_tabungan"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/vBannerTabungan"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/btn_tabungan"
+        android:drawableLeft="@drawable/ic_baseline_add"
+        android:fontFamily="@font/roboto"
+        android:paddingStart="75dp"
+        android:paddingEnd="60dp"
+        android:text="@string/btn_buat_liburan"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleMainTabungan" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
