@@ -1,13 +1,12 @@
-package com.example.travada
+package com.example.travada.mainpage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.travada.R
 
-class MainActivity : AppCompatActivity() {
+class MainPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        setContentView(R.layout.activity_main_page)
     }
 }

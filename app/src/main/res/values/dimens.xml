@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="heading1">20sp</dimen>
     <dimen name="heading2">18sp</dimen>
     <dimen name="heading3">16sp</dimen>
@@ -9,5 +9,5 @@
 
     <dimen name="actionBarHeight"> </dimen>
 
-
+    <dimen name="design_bottom_navigation_active_text_size" tools:override = "true" >12sp</dimen>
 </resources>
