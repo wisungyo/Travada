@@ -6,24 +6,313 @@
     android:layout_height="match_parent"
     tools:context=".mainpage.MainPageActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bn_main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="184dp"
+                android:background="#2A85F4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/logo_travada_mainpage"
+                android:layout_width="100dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/logo_travada"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_mainpage_hello"
+                android:text="Hello,"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:fontFamily="@font/roboto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/logo_travada_mainpage"
+                app:layout_constraintStart_toStartOf="@id/gl_vertical_left" />
+
+            <TextView
+                android:id="@+id/tv_mainpage_username"
+                android:text="Wisnu Prasetyo"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:fontFamily="@font/roboto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_mainpage_hello"
+                app:layout_constraintStart_toStartOf="@id/gl_vertical_left" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_mainpage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:elevation="8dp"
+                android:background="@drawable/bg_mainpage_card"
+                app:layout_constraintTop_toBottomOf="@id/tv_mainpage_username"
+                app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
+                app:layout_constraintEnd_toEndOf="@id/gl_vertical_right" >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_mainpage_card_title"
+                        android:text="Saldo aktif"
+                        android:textSize="16sp"
+                        android:textColor="#777777"
+                        android:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_mainpage_card_saldo"
+                        android:text="Rp. 2.500.000"
+                        android:textSize="20sp"
+                        android:textColor="#474747"
+                        android:fontFamily="@font/roboto"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_mainpage_card_eye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_eye"
+                        app:layout_constraintTop_toTopOf="@id/tv_mainpage_card_saldo"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_mainpage_card_saldo"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <View
+                        android:id="@+id/view_mainpage_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="#EDEDED"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_saldo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_mainpage_card_mutasi"
+                        android:background="#F0F6FF"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="32dp"
+                        app:layout_constraintTop_toBottomOf="@id/view_mainpage_card"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_mainpage_card_mutasi"
+                        android:text="Mutasi"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="#474747"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_mutasi"
+                        app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_mutasi"
+                        app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_mutasi" />
+
+                    <ImageView
+                        android:id="@+id/iv_mainpage_card_transfer"
+                        android:background="#F0F6FF"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/view_mainpage_card"
+                        app:layout_constraintStart_toEndOf="@id/iv_mainpage_card_mutasi"
+                        app:layout_constraintEnd_toStartOf="@id/iv_mainpage_card_pembelian" />
+
+                    <TextView
+                        android:id="@+id/tv_mainpage_card_transfer"
+                        android:text="Transfer"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="#474747"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_transfer"
+                        app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_transfer"
+                        app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_transfer" />
+
+                    <ImageView
+                        android:id="@+id/iv_mainpage_card_pembelian"
+                        android:background="#F0F6FF"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        app:layout_constraintTop_toBottomOf="@id/view_mainpage_card"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_mainpage_card_pembelian"
+                        android:text="Pembelian"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="#474747"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_pembelian"
+                        app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_pembelian"
+                        app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_pembelian" />
+
+                    <ImageView
+                        android:id="@+id/iv_mainpage_card_ewallet"
+                        android:background="#F0F6FF"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="32dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_mutasi"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_mainpage_card_ewallet"
+                        android:text="e-Wallet"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="#474747"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_ewallet"
+                        app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_ewallet"
+                        app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_ewallet" />
+
+                    <ImageView
+                        android:id="@+id/iv_mainpage_card_tabungan"
+                        android:background="#F0F6FF"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_transfer"
+                        app:layout_constraintStart_toEndOf="@id/iv_mainpage_card_ewallet"
+                        app:layout_constraintEnd_toStartOf="@id/iv_mainpage_card_rencana" />
+
+                    <TextView
+                        android:id="@+id/tv_mainpage_card_tabungan"
+                        android:text="Tabungan"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="#474747"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_tabungan"
+                        app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_tabungan"
+                        app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_tabungan" />
+
+                    <ImageView
+                        android:id="@+id/iv_mainpage_card_rencana"
+                        android:background="#F0F6FF"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_pembelian"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_mainpage_card_rencana"
+                        android:text="Rencana"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="#474747"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_rencana"
+                        app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_rencana"
+                        app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_rencana" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:text="Tabungan Liburan Kamu"
+                android:fontFamily="@font/roboto"
+                android:textColor="#474747"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/card_mainpage"
+                app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
+                app:layout_constraintEnd_toEndOf="@id/gl_vertical_right" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_vertical_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_vertical_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        app:layout_constraintBottom_toTopOf="@id/bn_main"
-        android:background="@drawable/bn_shadow" />
+        android:background="@drawable/bn_shadow"
+        app:layout_constraintBottom_toTopOf="@id/bn_main" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bn_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_navigation"
-        app:labelVisibilityMode="labeled"
-        app:itemIconTint="@drawable/state_bn"
         app:itemBackground="@null"
-        app:itemIconSize="25dp"
         app:itemHorizontalTranslationEnabled="false"
+        app:itemIconSize="25dp"
+        app:itemIconTint="@drawable/state_bn"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:menu="@menu/bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
