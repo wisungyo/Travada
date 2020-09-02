@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.tabungan.TambahTabunganFragment2">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+    <TextView
+        android:id="@+id/tvLabelTujuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        android:text="@string/label_tanggal_pencapaian"
+        android:layout_marginTop="65dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <EditText
+        android:id="@+id/edTujuan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Pilih tanggal"
+        android:padding="12dp"
+        android:background="@drawable/board_input"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelTujuan"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2" />
+
+    <TextView
+        android:id="@+id/tvLabelSetoranAwal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        android:text="@string/label_setoran_awal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/edTujuan"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <EditText
+        android:id="@+id/edSetoranAwal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Rp "
+        android:padding="12dp"
+        android:inputType="numberDecimal"
+        android:background="@drawable/board_input"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelSetoranAwal"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2" />
+
+    <TextView
+        android:id="@+id/tvLabelMetodeTabungan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        android:text="@string/label_setoran_awal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/edSetoranAwal"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <Spinner
+        android:id="@+id/spnrMetodeTabungan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:background="@drawable/board_input"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelMetodeTabungan"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2" />
+
+    <TextView
+        android:id="@+id/tvLabelTabunganOtomatis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        android:text="@string/title_tabungan"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/spnrMetodeTabungan"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <Spinner
+        android:id="@+id/spnrTabunganotomatis"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:background="@drawable/board_input"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelTabunganOtomatis"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2" />
+
+    <TextView
+        android:id="@+id/tvLabelJumlah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        android:text="@string/label_input_jumlah"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/spnrTabunganotomatis"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <EditText
+        android:id="@+id/edJumlah"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Rp "
+        android:padding="12dp"
+        android:inputType="numberDecimal"
+        android:background="@drawable/board_input"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelJumlah"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2" />
+
+    <TextView
+        android:id="@+id/tvLabelTabunganBareng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        android:text="@string/label_tabungan_bareng"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/edJumlah"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+
+    <Button
+        android:id="@+id/btnTambahTeman"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_tabungan_white"
+        android:drawableLeft="@drawable/ic_baseline_add_blue"
+        android:fontFamily="@font/roboto"
+        android:paddingStart="75dp"
+        android:paddingEnd="60dp"
+        android:text="@string/btn_buat_liburan"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelTabunganBareng" />
+
+
+    <Button
+        android:id="@+id/btnLanjut"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="31dp"
+        android:background="@drawable/btn_inactive"
+        android:fontFamily="@font/roboto"
+        android:text="Lanjut"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@+id/btnTambahTeman" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

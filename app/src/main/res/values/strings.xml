@@ -3,6 +3,20 @@
     <string name="title_banner_tabungan"> Wujudkan dan \npercepat \nliburanmu dengan \nmenabung.</string>
     <string name="title_tabungan">Liburan Impian</string>
     <string name="btn_buat_liburan">Buat Liburan Impian</string>
+    <string name="btn_tambah_teman">Tambahkan teman kamu</string>
+    <string name="title_tambah_tabungan"> Rencanakan tabunganmu untuk mewujudkan liburan \nimpian dengan mudah</string>
+    <string name="label_tujuan"> Tujuan</string>
+    <string name="label_jumlah"> Jumlah yang akan kamu tabung</string>
+    <string name="label_tanggal_pencapaian"> Tanggal pencapaian</string>
+    <string name="label_setoran_awal"> Setoran Awal</string>
+    <string name="label_metode_tabungan"> Metode tabungan</string>
+    <string name="label_tabungan_otomatis"> Tabungan otomatis</string>
+    <string name="label_input_jumlah"> Jumlah</string>
+    <string name="label_tabungan_bareng"> Tabungan bareng teman</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
