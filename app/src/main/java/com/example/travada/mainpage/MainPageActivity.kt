@@ -1,40 +1,46 @@
 package com.example.travada.mainpage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.berita.BeritaActivity
 import kotlinx.android.synthetic.main.activity_main_page.*
 
-class MainPageActivity : AppCompatActivity() {
+class MainPageActivity : AppCompatActivity(),MainPageActivityPresenter.Listener {
+    private lateinit var presenter: MainPageActivityPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_page)
+        presenter = MainPageActivityPresenter(this)
 
-        val listTabungan = arrayListOf(
-            DataTabungan(R.drawable.gradation, "Pulau Komodo 2020"),
-            DataTabungan(R.drawable.gradation, "Gunung Bromo 2020"),
-            DataTabungan(R.drawable.gradation, "Ranu Kumbolo 2020"),
-            DataTabungan(R.drawable.gradation, "Pulau Bali 2020"),
-            DataTabungan(R.drawable.gradation, "Pulau Lombok 2020")
-        )
+        presenter.fetchData()
 
-        val listInformasi = arrayListOf(
-            DataInformasi(R.drawable.gradation),
-            DataInformasi(R.drawable.gradation),
-            DataInformasi(R.drawable.gradation),
-            DataInformasi(R.drawable.gradation),
-            DataInformasi(R.drawable.gradation)
-        )
+        tv_mainpage_berita_lihat_semua.setOnClickListener {
+            val intentSemuaBerita = Intent(this, BeritaActivity::class.java)
+            startActivity(intentSemuaBerita)
+        }
+    }
 
-        val adapterTabungan = AdapterTabungan(listTabungan)
+    override fun showDataLayout(
+        adapterTabungan: AdapterTabungan,
+        adapterInformasi: AdapterInformasi,
+        adapterTrip: AdapterTrip,
+        adapterBerita: AdapterBerita,
+        layoutTabungan: LinearLayoutManager,
+        layoutInformasi: LinearLayoutManager,
+        layoutTrip: LinearLayoutManager,
+        layoutBerita: LinearLayoutManager
+    ) {
         rv_mainpage_tabungan.adapter = adapterTabungan
-        val layoutLinearTabungan = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_mainpage_tabungan.layoutManager = layoutLinearTabungan
-
-        val adapterInformasi = AdapterInformasi(listInformasi)
+        rv_mainpage_tabungan.layoutManager = layoutTabungan
         rv_mainpage_informasi.adapter = adapterInformasi
-        val layoutLinearInformasi = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_mainpage_informasi.layoutManager = layoutLinearInformasi
+        rv_mainpage_informasi.layoutManager = layoutInformasi
+        rv_mainpage_trip.adapter = adapterTrip
+        rv_mainpage_trip.layoutManager = layoutTrip
+        rv_mainpage_berita.adapter = adapterBerita
+        rv_mainpage_berita.layoutManager = layoutBerita
     }
 }
