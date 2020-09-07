@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan
+package com.example.travada.features.tabungan.detail_tabungan
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [TambahTabunganFragment2.newInstance] factory method to
+ * Use the [TransaksiTabunganFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TambahTabunganFragment2 : Fragment() {
+class TransaksiTabunganFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +35,7 @@ class TambahTabunganFragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tambah_tabungan2, container, false)
+        return inflater.inflate(R.layout.fragment_transaksi_tabungan, container, false)
     }
 
     companion object {
@@ -45,12 +45,12 @@ class TambahTabunganFragment2 : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment TambahTabunganFragment2.
+         * @return A new instance of fragment TransaksiTabunganFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            TambahTabunganFragment2().apply {
+            TransaksiTabunganFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

@@ -9,5 +9,6 @@
 
     <dimen name="actionBarHeight"> </dimen>
 
+    <dimen name="dialog_radius">100dp</dimen>
 
 </resources>

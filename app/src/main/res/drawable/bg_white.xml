@@ -3,12 +3,10 @@
     <item>
         <shape android:shape="rectangle">
             <solid android:color="@color/white"/>
-            <corners android:radius="4dp"/>
+            <corners android:radius="5dp"/>
             <stroke
                 android:width="1dp"
-                android:color="@color/blue"
-                android:dashWidth="10px"
-                android:dashGap="10px" />
+                android:color="@color/colorBtnInactive" />
         </shape>
     </item>
 </selector>
