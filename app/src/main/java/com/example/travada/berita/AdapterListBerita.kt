@@ -8,7 +8,7 @@ import com.example.travada.R
 import com.example.travada.mainpage.DataBerita
 import kotlinx.android.synthetic.main.berita_item.view.*
 
-class AdapterListBerita (val listBerita: ArrayList<DataBerita>):
+class AdapterListBerita (val listBerita: ArrayList<DataBerita>, val presenter: BeritaActivityPresenter):
         RecyclerView.Adapter<AdapterListBerita.ViewHolder>() {
     class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -28,6 +28,10 @@ class AdapterListBerita (val listBerita: ArrayList<DataBerita>):
             holder.itemView.cl_berita_item.setPadding(0, 8, 0, 4)
         } else if (position == listBerita.size-1) {
             holder.itemView.cl_berita_item.setPadding(0, 0, 0, 32)
+        }
+
+        holder.itemView.btn_berita_item.setOnClickListener {
+            presenter.goToDetailBerita(listBerita[position])
         }
     }
 

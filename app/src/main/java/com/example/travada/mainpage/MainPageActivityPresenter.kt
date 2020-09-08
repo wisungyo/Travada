@@ -60,19 +60,24 @@ class MainPageActivityPresenter (val listener: Listener): AppCompatActivity() {
             DataBerita(
                 R.drawable.berita,
                 "Cashback Isi Saldo Rekening Travada",
+                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
                 "Berlaku sampai 31 Agustus 2020"),
             DataBerita(
                 R.drawable.berita,
                 "Cashback Isi Saldo Rekening Travada",
+                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
                 "Berlaku sampai 31 Agustus 2020"),
             DataBerita(R.drawable.berita,
                 "Cashback Isi Saldo Rekening Travada",
+                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
                 "Berlaku sampai 31 Agustus 2020"),
             DataBerita(R.drawable.berita,
                 "Cashback Isi Saldo Rekening Travada",
+                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
                 "Berlaku sampai 31 Agustus 2020"),
             DataBerita(R.drawable.berita,
                 "Cashback Isi Saldo Rekening Travada",
+                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
                 "Berlaku sampai 31 Agustus 2020")
         )
 

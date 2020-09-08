@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_berita_item"
         android:layout_width="0dp"
-        android:layout_height="142dp"
+        android:layout_height="148dp"
         android:elevation="4dp"
         app:cardCornerRadius="8dp"
         android:layout_marginTop="16dp"
@@ -62,7 +62,7 @@
                 android:paddingBottom="4dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -80,7 +80,6 @@
                 android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_berita_item"
-                app:layout_constraintTop_toTopOf="@id/btn_berita_item"
                 app:layout_constraintBottom_toBottomOf="@id/btn_berita_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".berita.BeritaActivity"></activity>
+        <activity android:name=".riwayat.RiwayatActivity"></activity>
+        <activity android:name=".berita.DetailBeritaActivity" />
+        <activity android:name=".berita.BeritaActivity" />
         <activity android:name=".mainpage.MainPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
