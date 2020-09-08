@@ -1,4 +1,4 @@
-package com.example.travada.mainpage
+package com.example.travada.sampeldata
 
 data class DataTrip (
     val img: Int,

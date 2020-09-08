@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.mainpage.AdapterBerita
-import com.example.travada.mainpage.DataBerita
+import com.example.travada.sampeldata.DataBerita
 import kotlinx.android.synthetic.main.activity_berita.*
 
 class BeritaActivity : AppCompatActivity(), BeritaActivityPresenter.Listener {

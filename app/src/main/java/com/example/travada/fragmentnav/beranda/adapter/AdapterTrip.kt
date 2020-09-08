@@ -1,11 +1,11 @@
-package com.example.travada.mainpage
+package com.example.travada.fragmentnav.beranda.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
-import kotlinx.android.synthetic.main.main_page_item_tabungan.view.*
+import com.example.travada.sampeldata.DataTrip
 import kotlinx.android.synthetic.main.main_page_item_trip.view.*
 
 class AdapterTrip (val listTrip: ArrayList<DataTrip>):
@@ -29,6 +29,8 @@ class AdapterTrip (val listTrip: ArrayList<DataTrip>):
             // IDKW, 28 becomes 16dp in the result
             holder.itemView.cl_mainpage_item_trip.setPadding(0, 0, 28, 14)
         }
+
+
     }
 
     override fun getItemCount(): Int {

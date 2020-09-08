@@ -3,7 +3,7 @@ package com.example.travada.berita
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.mainpage.DataBerita
+import com.example.travada.sampeldata.DataBerita
 
 class BeritaActivityPresenter (val listener: Listener): AppCompatActivity() {
 

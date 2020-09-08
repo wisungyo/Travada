@@ -3,7 +3,7 @@ package com.example.travada.berita
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.travada.R
-import com.example.travada.mainpage.DataBerita
+import com.example.travada.sampeldata.DataBerita
 import kotlinx.android.synthetic.main.activity_detail_berita.*
 
 class DetailBeritaActivity : AppCompatActivity() {

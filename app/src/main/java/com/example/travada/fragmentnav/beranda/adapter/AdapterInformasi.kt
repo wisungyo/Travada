@@ -1,12 +1,12 @@
-package com.example.travada.mainpage
+package com.example.travada.fragmentnav.beranda.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.sampeldata.DataInformasi
 import kotlinx.android.synthetic.main.main_page_item_informasi.view.*
-import kotlinx.android.synthetic.main.main_page_item_tabungan.view.*
 
 class AdapterInformasi (val listInformmasi: ArrayList<DataInformasi>):
     RecyclerView.Adapter<AdapterInformasi.ViewHolder>() {

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
-import com.example.travada.mainpage.DataBerita
+import com.example.travada.sampeldata.DataBerita
 import kotlinx.android.synthetic.main.berita_item.view.*
 
 class AdapterListBerita (val listBerita: ArrayList<DataBerita>, val presenter: BeritaActivityPresenter):

@@ -1,16 +1,12 @@
-package com.example.travada.mainpage
+package com.example.travada.fragmentnav.beranda.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginEnd
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.sampeldata.DataTabungan
 import kotlinx.android.synthetic.main.main_page_item_tabungan.view.*
-import kotlinx.android.synthetic.main.main_page_item_trip.view.*
 
 class AdapterTabungan (val listTabungan: ArrayList<DataTabungan>):
     RecyclerView.Adapter<AdapterTabungan.ViewHolder>() {

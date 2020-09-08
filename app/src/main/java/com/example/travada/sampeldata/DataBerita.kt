@@ -1,4 +1,4 @@
-package com.example.travada.mainpage
+package com.example.travada.sampeldata
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
