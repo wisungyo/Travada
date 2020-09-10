@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".features.tabungan.TopUpActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+
+
+    <View
+        android:id="@+id/barTabungan"
+        android:layout_width="0dp"
+        android:layout_height="133dp"
+        android:background="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/ic_baseline_arrow_back"
+            android:layout_marginBottom="103dp"
+            app:layout_constraintBottom_toBottomOf="@id/barTabungan"
+            app:layout_constraintStart_toStartOf="@id/gVertical1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Trava Up Tabungan"
+            android:textColor="@color/white"
+            android:textSize="@dimen/heading3"
+            app:layout_constraintBottom_toBottomOf="@id/btnBack"
+            app:layout_constraintStart_toEndOf="@id/btnBack"
+            app:layout_constraintTop_toTopOf="@id/btnBack"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView5"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
+
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/barTabungan"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        android:theme="@style/Theme.MaterialComponents.Light">
+
+        <TextView
+            android:id="@+id/titleSaldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="14dp"
+            android:text="Saldo Aktif"
+            android:textColor="@color/black"
+            android:textSize="@dimen/heading4" />
+
+        <TextView
+            android:id="@+id/tvSaldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp"
+            android:text="Rp 10.500.000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/heading4" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvTitleTopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        android:text="Nominal Top Up Tabungan"
+        app:layout_constraintTop_toBottomOf="@id/barTabungan"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEtJumlah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        app:prefixText="Rp. "
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTopup"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etJumlah"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/hint_jumlah"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnKonfirmasi"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_inactive"
+        android:fontFamily="@font/roboto"
+        android:text="Konfirmasi"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="26dp"
+        android:clickable="true"
+        android:focusable="true"
+        style="?android:attr/borderlessButtonStyle"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
