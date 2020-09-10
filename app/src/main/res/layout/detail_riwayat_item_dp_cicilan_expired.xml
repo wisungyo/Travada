@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/view_detail_riwayat_item_card_expired"
+        android:background="@drawable/bg_detail_riwayat_item_card_expired"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_detail_riwayat_item_expired"
+        android:text="Maaf, pengajuan rencana ditolak"
+        android:fontFamily="@font/roboto"
+        android:textSize="14dp"
+        android:textColor="#474747"
+        android:layout_marginTop="27dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/view_detail_riwayat_item_card_expired"
+        app:layout_constraintStart_toStartOf="@id/view_detail_riwayat_item_card_expired"
+        app:layout_constraintEnd_toEndOf="@id/view_detail_riwayat_item_card_expired" />
+
+    <TextView
+        android:id="@+id/tv_detail_riwayat_item_expired_reason"
+        android:text="Passpord kamu tidak memenuhi syarat"
+        android:fontFamily="@font/roboto"
+        android:textSize="14dp"
+        android:textColor="#474747"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_riwayat_item_expired"
+        app:layout_constraintStart_toStartOf="@id/view_detail_riwayat_item_card_expired"
+        app:layout_constraintEnd_toEndOf="@id/view_detail_riwayat_item_card_expired" />
+
+    <ImageView
+        android:id="@+id/iv_detail_riwayat_item_coution"
+        android:background="@drawable/ic_coution"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/view_detail_riwayat_item_card_expired"
+        app:layout_constraintStart_toStartOf="@id/view_detail_riwayat_item_card_expired" />
+
+    <TextView
+        android:id="@+id/tv_coution_text"
+        android:text="Jika ingin melanjutkan, siapkan dokumen dan silakan hubungi CS atau datang ke kantor Travada."
+        android:fontFamily="@font/roboto"
+        android:textSize="10sp"
+        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/iv_detail_riwayat_item_coution"
+        app:layout_constraintStart_toEndOf="@id/iv_detail_riwayat_item_coution"
+        app:layout_constraintEnd_toEndOf="@id/view_detail_riwayat_item_card_expired" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

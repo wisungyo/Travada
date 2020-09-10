@@ -15,11 +15,11 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         val dataUser = DataUser("Wisnu Agung Prasetyo", 10000000)
 
         val listTabungan = arrayListOf(
-            DataTabungan(R.drawable.tabungan, "Pulau Komodo 2020", 80),
-            DataTabungan(R.drawable.tabungan, "Gunung Bromo 2020", 60),
-            DataTabungan(R.drawable.tabungan, "Ranu Kumbolo 2020", 30),
-            DataTabungan(R.drawable.tabungan, "Pulau Bali 2020",50),
-            DataTabungan(R.drawable.tabungan, "Pulau Lombok 2020",10)
+            DataTabungan(R.drawable.tabungan, "Pulau Komodo", 80),
+            DataTabungan(R.drawable.tabungan, "Gunung Bromo", 60),
+            DataTabungan(R.drawable.tabungan, "Ranu Kumbolo", 30),
+            DataTabungan(R.drawable.tabungan, "Pulau Bali",50),
+            DataTabungan(R.drawable.tabungan, "Kota Blitar",10)
         )
 
         val listInformasi = arrayListOf(
@@ -33,32 +33,32 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         val listTrip = arrayListOf(
             DataTrip(
                 R.drawable.trip,
-                "Tokyo & Mount Fuji",
-                "Rp. 16.000.000",
-                "5 hari"
+                "Tokyo & Mount Fuji 1",
+                "Rp. 11,000,000",
+                "1 hari"
             ),
             DataTrip(
                 R.drawable.trip,
-                "Tokyo & Mount Fuji",
-                "Rp. 16.000.000",
-                "5 hari"
+                "Tokyo & Mount Fuji 2",
+                "Rp. 22,000,000",
+                "2 hari"
             ),
             DataTrip(
                 R.drawable.trip,
-                "Tokyo & Mount Fuji",
-                "Rp. 16.000.000",
-                "5 hari"
+                "Tokyo & Mount Fuji 3",
+                "Rp. 33,000,000",
+                "3 hari"
             ),
             DataTrip(
                 R.drawable.trip,
-                "Tokyo & Mount Fuji",
-                "Rp. 16.000.000",
-                "5 hari"
+                "Tokyo & Mount Fuji 4",
+                "Rp. 44,000,000",
+                "4 hari"
             ),
             DataTrip(
                 R.drawable.trip,
-                "Tokyo & Mount Fuji",
-                "Rp. 16.000.000",
+                "Tokyo & Mount Fuji 5",
+                "Rp. 55,000,000",
                 "5 hari"
             )
         )
@@ -66,26 +66,26 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         val listBerita = arrayListOf(
             DataBerita(
                 R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Cashback Isi Saldo Rekening Travada 1",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2020"),
+                "Berlaku sampai 31 Agustus 2021"),
             DataBerita(
                 R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Cashback Isi Saldo Rekening Travada 2",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2020"),
+                "Berlaku sampai 31 Agustus 2022"),
             DataBerita(R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Cashback Isi Saldo Rekening Travada 3",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2020"),
+                "Berlaku sampai 31 Agustus 2023"),
             DataBerita(R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Cashback Isi Saldo Rekening Travada 4",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2020"),
+                "Berlaku sampai 31 Agustus 2024"),
             DataBerita(R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Cashback Isi Saldo Rekening Travada 5",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2020")
+                "Berlaku sampai 31 Agustus 2025")
         )
 
         val adapterTabungan = AdapterTabungan(listTabungan)

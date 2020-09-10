@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.fragmentnav.riwayat.fragmentriwayat.StatusFragmentPresenter
 import com.example.travada.sampeldata.DataRiwayat
 import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 
-class AdapterRiwayatStatus(val listDataRiwayat: ArrayList<DataRiwayat>):
+class AdapterRiwayatStatus(val listDataRiwayat: ArrayList<DataRiwayat>, val presenter: StatusFragmentPresenter):
     RecyclerView.Adapter<AdapterRiwayatStatus.ViewHolder>(){
     class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -25,7 +26,7 @@ class AdapterRiwayatStatus(val listDataRiwayat: ArrayList<DataRiwayat>):
         holder.itemView.iv_riwayat_item.setBackgroundResource(listDataRiwayat[position].img)
         holder.itemView.tv_riwayat_item_title.text = listDataRiwayat[position].title
         holder.itemView.tv_riwayat_item_date.text = "${listDataRiwayat[position].startDate} - ${listDataRiwayat[position].endDate}"
-        holder.itemView.tv_riwayat_item_made_date.text = listDataRiwayat[position].madeDate
+        holder.itemView.tv_riwayat_item_made_date.text = listDataRiwayat[position].bookingDate
         holder.itemView.tv_riwayat_item_status.text = listDataRiwayat[position].status
 
         when (listDataRiwayat[position].status) {
@@ -45,6 +46,10 @@ class AdapterRiwayatStatus(val listDataRiwayat: ArrayList<DataRiwayat>):
                 holder.itemView.tv_riwayat_item_status.setTextColor(Color.parseColor("#777777"))
                 holder.itemView.view_riwayat_item_status.setBackgroundResource(R.drawable.bg_riwayat_item_status_grey)
             }
+        }
+
+        holder.itemView.wrapper_riwayat_proses_item.setOnClickListener {
+            presenter.goToDetailRiwayat(listDataRiwayat[position])
         }
     }
 

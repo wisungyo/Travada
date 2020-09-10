@@ -24,7 +24,7 @@ class AdapterRiwayatProses(val listDataRiwayat: ArrayList<DataRiwayat>):
         holder.itemView.iv_riwayat_item.setBackgroundResource(listDataRiwayat[position].img)
         holder.itemView.tv_riwayat_item_title.text = listDataRiwayat[position].title
         holder.itemView.tv_riwayat_item_date.text = "${listDataRiwayat[position].startDate} - ${listDataRiwayat[position].endDate}"
-        holder.itemView.tv_riwayat_item_made_date.text = listDataRiwayat[position].madeDate
+        holder.itemView.tv_riwayat_item_made_date.text = listDataRiwayat[position].bookingDate
         holder.itemView.tv_riwayat_item_status.text = listDataRiwayat[position].status
     }
 

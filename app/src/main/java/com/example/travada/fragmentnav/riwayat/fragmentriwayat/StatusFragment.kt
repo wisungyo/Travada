@@ -1,5 +1,6 @@
 package com.example.travada.fragmentnav.riwayat.fragmentriwayat
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatStatus
+import com.example.travada.detailriwayat.DetailRiwayatActivity
+import com.example.travada.sampeldata.DataRiwayat
 import kotlinx.android.synthetic.main.fragment_riwayat_status.*
 
 class StatusFragment : Fragment(), StatusFragmentPresenter.Listener {
@@ -36,5 +39,9 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener {
         rv_riwayat_status.layoutManager = linearLayoutRiwayatStatus
     }
 
-
+    override fun showDetailRiwayat(dataRiwayat: DataRiwayat) {
+        val intentDetailRiwayat = Intent(context, DetailRiwayatActivity::class.java)
+        intentDetailRiwayat.putExtra("RIWAYAT", dataRiwayat)
+        startActivity(intentDetailRiwayat)
+    }
 }

@@ -11,29 +11,26 @@ class BeritaActivityPresenter (val listener: Listener): AppCompatActivity() {
         val listBerita = arrayListOf(
             DataBerita(
                 R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Cashback Isi Saldo Rekening Travada 1",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "31 Agustus 2020"),
+                "Berlaku sampai 31 Agustus 2021"),
             DataBerita(
                 R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Cashback Isi Saldo Rekening Travada 2",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "31 Agustus 2020"),
-            DataBerita(
-                R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Berlaku sampai 31 Agustus 2022"),
+            DataBerita(R.drawable.berita,
+                "Cashback Isi Saldo Rekening Travada 3",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "31 Agustus 2020"),
-            DataBerita(
-                R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Berlaku sampai 31 Agustus 2023"),
+            DataBerita(R.drawable.berita,
+                "Cashback Isi Saldo Rekening Travada 4",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "31 Agustus 2020"),
-            DataBerita(
-                R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada",
+                "Berlaku sampai 31 Agustus 2024"),
+            DataBerita(R.drawable.berita,
+                "Cashback Isi Saldo Rekening Travada 5",
                 "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "31 Agustus 2020")
+                "Berlaku sampai 31 Agustus 2025")
         )
 
         val adapterBerita = AdapterListBerita(listBerita, this)
