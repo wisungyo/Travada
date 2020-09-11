@@ -16,6 +16,7 @@ class TabunganActivity : AppCompatActivity() {
             val goToFormTabunganOne = Intent(this,
                 FormTabunganActivityOne::class.java)
             startActivity(goToFormTabunganOne)
+//            /
         }
     }
 }
