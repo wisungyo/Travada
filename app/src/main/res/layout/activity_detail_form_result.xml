@@ -305,17 +305,6 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
-
-
-
-
-
-
-
-
-
-
     <Button
         android:id="@+id/btnLanjutForm1"
         style="?android:attr/borderlessButtonStyle"
