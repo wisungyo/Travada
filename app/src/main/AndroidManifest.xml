@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".features.tabungan.detail_tabungan.DetailTabunganActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".features.tabungan.DetailFormResultActivity"></activity>
         <activity android:name=".features.tabungan.form_three.FormTabunganActivityThree" />
@@ -23,10 +26,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".features.tabungan.main_tabungan.TabunganActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
