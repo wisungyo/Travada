@@ -30,9 +30,9 @@ class DetailFormResultActivity : AppCompatActivity() {
 
         // adapter
         val layoutManagerLinear = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvTabungBareng.layoutManager = layoutManagerLinear
-        rvTabungBareng.adapter = adapterGabungBareng
-
-        rvTabungBareng.overScrollMode = View.OVER_SCROLL_NEVER
+//        rvTabungBareng.layoutManager = layoutManagerLinear
+//        rvTabungBareng.adapter = adapterGabungBareng
+//
+//        rvTabungBareng.overScrollMode = View.OVER_SCROLL_NEVER
     }
 }
