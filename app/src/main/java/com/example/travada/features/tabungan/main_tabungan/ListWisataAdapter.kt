@@ -25,11 +25,11 @@ class ListWisataAdapter(val listWisata: ArrayList<DataListWisata>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var images = holder.itemView.imagePerson
 
-//        holder.itemView.tvNamaWisata.setText(listWisata[position].namaWisata)
-//        holder.itemView.tvBiayaWisata.setText(listWisata[position].biaya)
-//        holder.itemView.tvBulan.setText(listWisata[position].bulan)
-//        holder.itemView.tvProgresNumber.setText(listWisata[position].progresNumber)
-//        Glide.with(holder.itemView.context).load(listWisata[position].gambar).into(images)
+        holder.itemView.tvNamaWisata.setText(listWisata[position].namaWisata)
+        holder.itemView.tvBiayaWisata.setText(listWisata[position].biaya)
+        holder.itemView.tvBulan.setText(listWisata[position].bulan)
+        holder.itemView.tvProgresNumber.setText(listWisata[position].progresNumber)
+        Glide.with(holder.itemView.context).load(listWisata[position].gambar).into(images)
     }
 
 
