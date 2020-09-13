@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Travada</string>
+    <string name="fontmedium">@font/roboto</string>
+    <string name="font">@font/roboto</string>
 </resources>
