@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.maintabungan
+package com.example.travada.features.tabungan.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

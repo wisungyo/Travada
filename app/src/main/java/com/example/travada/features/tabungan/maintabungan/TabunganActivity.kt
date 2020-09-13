@@ -8,15 +8,41 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.ListWisataAdapter
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
+import com.example.travada.features.tabungan.models.DataWisata
 import kotlinx.android.synthetic.main.activity_tabungan.*
 
 class TabunganActivity : AppCompatActivity() {
     private val listWisata = arrayListOf(
-        DataWisata("Pantai Ancol", "Rp. 100.000", "1 bulan ", R.drawable.leicester),
-        DataWisata("Pantai Ancol", "Rp. 100.000", "1 bulan ", R.drawable.leicester),
-        DataWisata("Pantai Ancol", "Rp. 100.000", "1 bulan ", R.drawable.leicester),
-        DataWisata("Pantai Ancol", "Rp. 100.000", "1 bulan ", R.drawable.leicester),
-        DataWisata("Pantai Ancol", "Rp. 100.000", "1 bulan ", R.drawable.leicester)
+        DataWisata(
+            "Pantai Ancol",
+            "Rp. 100.000",
+            "1 bulan ",
+            R.drawable.leicester
+        ),
+        DataWisata(
+            "Pantai Ancol",
+            "Rp. 100.000",
+            "1 bulan ",
+            R.drawable.leicester
+        ),
+        DataWisata(
+            "Pantai Ancol",
+            "Rp. 100.000",
+            "1 bulan ",
+            R.drawable.leicester
+        ),
+        DataWisata(
+            "Pantai Ancol",
+            "Rp. 100.000",
+            "1 bulan ",
+            R.drawable.leicester
+        ),
+        DataWisata(
+            "Pantai Ancol",
+            "Rp. 100.000",
+            "1 bulan ",
+            R.drawable.leicester
+        )
     )
 
     val adapterWisata =

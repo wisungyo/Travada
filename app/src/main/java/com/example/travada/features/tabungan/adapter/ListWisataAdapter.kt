@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.travada.R
-import com.example.travada.features.tabungan.maintabungan.DataWisata
+import com.example.travada.features.tabungan.models.DataWisata
 import kotlinx.android.synthetic.main.list_liburan_pilihan.view.*
 
 class ListWisataAdapter(val listWisata: ArrayList<DataWisata>) :

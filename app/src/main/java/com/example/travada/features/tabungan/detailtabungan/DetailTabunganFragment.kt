@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.DetailTabunganAdapter
+import com.example.travada.features.tabungan.models.DataDetailTabungan
 import kotlinx.android.synthetic.main.fragment_detail_tabungan.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,10 +24,30 @@ private const val ARG_PARAM2 = "param2"
 class DetailTabunganFragment : Fragment() {
 
     private val detailList = arrayListOf(
-        DataDetailTabungan("Enno bening", "12000", "73647364734", "EB"),
-        DataDetailTabungan("Enno bening", "12000", "73647364734", "EB"),
-        DataDetailTabungan("Enno bening", "12000", "73647364734", "EB"),
-        DataDetailTabungan("Enno bening", "12000", "73647364734", "EB")
+        DataDetailTabungan(
+            "Enno bening",
+            "12000",
+            "73647364734",
+            "EB"
+        ),
+        DataDetailTabungan(
+            "Enno bening",
+            "12000",
+            "73647364734",
+            "EB"
+        ),
+        DataDetailTabungan(
+            "Enno bening",
+            "12000",
+            "73647364734",
+            "EB"
+        ),
+        DataDetailTabungan(
+            "Enno bening",
+            "12000",
+            "73647364734",
+            "EB"
+        )
     )
 
     // TODO: Rename and change types of parameters

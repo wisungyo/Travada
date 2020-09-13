@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
-import com.example.travada.features.tabungan.detailtabungan.DataDetailTabungan
+import com.example.travada.features.tabungan.models.DataDetailTabungan
 import kotlinx.android.synthetic.main.list_teman_gabung.view.*
 
 class DetailTabunganAdapter(val listDetail: ArrayList<DataDetailTabungan>) :

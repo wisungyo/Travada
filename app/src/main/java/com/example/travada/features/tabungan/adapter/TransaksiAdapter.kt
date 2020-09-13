@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
-import com.example.travada.features.tabungan.detailtabungan.DataTransaksi
+import com.example.travada.features.tabungan.models.DataTransaksi
 import kotlinx.android.synthetic.main.list_transaksi.view.*
 
 class TransaksiAdapter(val listTransaksi: ArrayList<DataTransaksi>) :

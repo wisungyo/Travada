@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
-import com.example.travada.features.tabungan.detailtabungan.DataBulan
+import com.example.travada.features.tabungan.models.DataBulan
 import kotlinx.android.synthetic.main.list_bulan_transaksi.view.*
 
 class BulanAdapter(val listBulanTransaksi: ArrayList<DataBulan>) :
