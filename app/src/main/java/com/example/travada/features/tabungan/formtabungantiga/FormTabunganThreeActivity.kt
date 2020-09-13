@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.form_three
+package com.example.travada.features.tabungan.formtabungantiga
 
 import android.content.Intent
 import android.graphics.Color
@@ -9,8 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import com.example.travada.R
 import com.example.travada.features.tabungan.PeriksaRekeningDialog
-import com.example.travada.features.tabungan.form_two.FormTabunganTwoActivity
-import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
+import com.example.travada.features.tabungan.formtabungandua.FormTabunganTwoActivity
 import kotlinx.android.synthetic.main.activity_form_tabungan_three.*
 
 class FormTabunganThreeActivity : AppCompatActivity(),

@@ -1,10 +1,11 @@
-package com.example.travada.features.tabungan.form_result_detail
+package com.example.travada.features.tabungan.formdetailtabungan
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.features.tabungan.adapter.TabungBarengAdapter
 import kotlinx.android.synthetic.main.activity_detail_form_result.*
 
 class DetailFormResultActivity : AppCompatActivity() {
@@ -15,7 +16,10 @@ class DetailFormResultActivity : AppCompatActivity() {
         DataTabungBareng("Cyntia Devi", "14343400", "AA")
     )
 
-    val adapterGabungBareng = TabungBarengAdapter(gabungBareng)
+    val adapterGabungBareng =
+        TabungBarengAdapter(
+            gabungBareng
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,10 +1,11 @@
-package com.example.travada.features.tabungan.detail_tabungan
+package com.example.travada.features.tabungan.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.features.tabungan.detailtabungan.DataTransaksi
 import kotlinx.android.synthetic.main.list_transaksi.view.*
 
 class TransaksiAdapter(val listTransaksi: ArrayList<DataTransaksi>) :
@@ -14,7 +15,9 @@ class TransaksiAdapter(val listTransaksi: ArrayList<DataTransaksi>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_transaksi, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {

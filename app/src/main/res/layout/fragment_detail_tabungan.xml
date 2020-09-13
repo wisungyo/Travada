@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".features.tabungan.detail_tabungan.DetailTabunganFragment">
+    tools:context=".features.tabungan.detailtabungan.DetailTabunganFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gHorizontal"
@@ -27,14 +27,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gVertical2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".95" />
+        app:layout_constraintGuide_end="16dp" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
@@ -43,6 +43,7 @@
         android:theme="@style/Theme.MaterialComponents.Light"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
+        app:layout_constraintTop_toTopOf="@id/gHorizontal"
         app:layout_constraintEnd_toEndOf="@id/gVertical2"
         app:layout_constraintStart_toStartOf="@id/gVertical1"
         app:strokeColor="@color/colorBtnInactive"
@@ -168,10 +169,10 @@
         app:layout_constraintTop_toBottomOf="@id/cardView2" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTabungan"
+        android:id="@+id/rvDetailTabungan"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="@id/gHorizontal2"
         app:layout_constraintEnd_toEndOf="@id/gVertical2"
         app:layout_constraintStart_toStartOf="@id/gVertical1"

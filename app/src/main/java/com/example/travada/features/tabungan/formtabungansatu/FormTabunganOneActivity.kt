@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.form_one
+package com.example.travada.features.tabungan.formtabungansatu
 
 import android.Manifest
 import android.content.Intent
@@ -24,8 +24,8 @@ import com.example.travada.features.tabungan.DataPermissions.Companion.CAMERA_RE
 import com.example.travada.features.tabungan.DataPermissions.Companion.GALLERY_REQUEST
 import com.example.travada.features.tabungan.DataPermissions.Companion.REQUEST_CODE
 import com.example.travada.features.tabungan.DataPermissions.Companion.arrayListPermission
-import com.example.travada.features.tabungan.form_two.FormTabunganTwoActivity
-import com.example.travada.features.tabungan.MainTabungan.TabunganActivity
+import com.example.travada.features.tabungan.formtabungandua.FormTabunganTwoActivity
+import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
 import java.io.ByteArrayOutputStream

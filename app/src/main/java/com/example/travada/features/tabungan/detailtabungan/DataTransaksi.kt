@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.detail_tabungan
+package com.example.travada.features.tabungan.detailtabungan
 
 data class DataTransaksi(
     val image: String,

@@ -1,8 +1,4 @@
-package com.example.travada.features.tabungan.MainTabungan
-
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.travada.R
+package com.example.travada.features.tabungan.maintabungan
 
 //class TabunganPresenter(val listener: Listener): AppCompatActivity() {
 //    fun fetchCicilanData() {

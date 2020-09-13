@@ -1,10 +1,11 @@
-package com.example.travada.features.tabungan.form_result_detail
+package com.example.travada.features.tabungan.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.features.tabungan.formdetailtabungan.DataTabungBareng
 import kotlinx.android.synthetic.main.list_tabung_bareng.view.*
 
 class TabungBarengAdapter(val listTemanGabung: ArrayList<DataTabungBareng>) :
@@ -14,7 +15,9 @@ RecyclerView.Adapter<TabungBarengAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_tabung_bareng, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {

@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.form_two
+package com.example.travada.features.tabungan.formtabungandua
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -18,11 +18,12 @@ import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.features.tabungan.CalendarHelper
-import com.example.travada.features.tabungan.form_result_detail.DataTabungBareng
-import com.example.travada.features.tabungan.form_three.FormTabunganThreeActivity
-import com.example.travada.features.tabungan.form_one.FormTabunganOneActivity
-import com.example.travada.features.tabungan.form_result_detail.DetailFormResultActivity
+import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
+import com.example.travada.features.tabungan.helper.CalendarHelper
+import com.example.travada.features.tabungan.formdetailtabungan.DataTabungBareng
+import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeActivity
+import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
+import com.example.travada.features.tabungan.formdetailtabungan.DetailFormResultActivity
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.util.*
 
@@ -35,7 +36,10 @@ class FormTabunganTwoActivity : AppCompatActivity(),
         DataTabungBareng("Nicholas", "3434343", "N")
     )
 
-    val adapterBarengTeman = BarengTemanAdapter(listTabungBareng)
+    val adapterBarengTeman =
+        BarengTemanAdapter(
+            listTabungBareng
+        )
 
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter

@@ -3,34 +3,64 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="6dp"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView3"
         android:layout_width="match_parent"
         android:layout_height="72dp"
+        android:theme="@style/Theme.MaterialComponents.Light"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/colorBtnInactive"
         app:strokeWidth="1dp"
-        android:layout_marginTop="16dp"
-        android:theme="@style/Theme.MaterialComponents.Light"
         tools:ignore="MissingConstraints">
 
+        <TextView
+            android:id="@+id/tvDetailImageTeman"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal|center_vertical|start"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_baseline_brightness_1_24"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="AB"
+            android:textColor="@color/blue"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvDetailNamaTeman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="72dp"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:text="Perkiraan tanggal \npencapaian"
+            android:text="Enno Destias"
             android:textColor="@color/black"
-            android:textSize="13dp" />
+            android:textSize="@dimen/heading4" />
 
         <TextView
+            android:id="@+id/tvDetailRekening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="40dp"
+            android:text="43433434335"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text" />
+
+
+        <TextView
+            android:id="@+id/tvDetailNominal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"

@@ -13,21 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".features.tabungan.detail_tabungan.DetailTabunganActivity">
+        <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".features.tabungan.form_result_detail.DetailFormResultActivity">
+        <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity">
 
         </activity>
-        <activity android:name=".features.tabungan.form_three.FormTabunganThreeActivity" />
-        <activity android:name=".features.tabungan.form_two.FormTabunganTwoActivity" />
-        <activity android:name=".features.tabungan.form_one.FormTabunganOneActivity" />
+        <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />
+        <activity android:name=".features.tabungan.formtabungandua.FormTabunganTwoActivity" />
+        <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".features.tabungan.MainTabungan.TabunganActivity">
+        <activity android:name=".features.tabungan.maintabungan.TabunganActivity">
 
         </activity>
 

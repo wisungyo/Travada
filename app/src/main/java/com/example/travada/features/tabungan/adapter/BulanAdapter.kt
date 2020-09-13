@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.detail_tabungan
+package com.example.travada.features.tabungan.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.features.tabungan.detailtabungan.DataBulan
 import kotlinx.android.synthetic.main.list_bulan_transaksi.view.*
 
 class BulanAdapter(val listBulanTransaksi: ArrayList<DataBulan>) :
@@ -27,7 +28,9 @@ class BulanAdapter(val listBulanTransaksi: ArrayList<DataBulan>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_bulan_transaksi, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {
@@ -45,7 +48,10 @@ class BulanAdapter(val listBulanTransaksi: ArrayList<DataBulan>) :
         layoutManager.initialPrefetchItemCount = item.listTransfer.size
 
         // create sub item view adapter
-        val subItemAdapter = TransaksiAdapter(item.listTransfer)
+        val subItemAdapter =
+            TransaksiAdapter(
+                item.listTransfer
+            )
 
         holder.rvBulanTransaksi.layoutManager = layoutManager
         holder.rvBulanTransaksi.adapter = subItemAdapter

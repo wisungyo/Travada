@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.tabungan.detail_tabungan.DetailTabunganActivity">
+    tools:context=".features.tabungan.detailtabungan.DetailTabunganActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"

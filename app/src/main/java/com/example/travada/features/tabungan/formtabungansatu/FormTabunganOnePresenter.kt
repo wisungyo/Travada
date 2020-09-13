@@ -1,6 +1,4 @@
-package com.example.travada.features.tabungan.form_one
-
-import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
+package com.example.travada.features.tabungan.formtabungansatu
 
 class FormTabunganOnePresenter(private val listener: Listener)  {
 

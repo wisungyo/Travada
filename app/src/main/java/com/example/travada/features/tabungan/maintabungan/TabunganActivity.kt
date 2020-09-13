@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.MainTabungan
+package com.example.travada.features.tabungan.maintabungan
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.features.tabungan.form_one.FormTabunganOneActivity
+import com.example.travada.features.tabungan.adapter.ListWisataAdapter
+import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import kotlinx.android.synthetic.main.activity_tabungan.*
 
 class TabunganActivity : AppCompatActivity() {
@@ -18,7 +19,10 @@ class TabunganActivity : AppCompatActivity() {
         DataWisata("Pantai Ancol", "Rp. 100.000", "1 bulan ", R.drawable.leicester)
     )
 
-    val adapterWisata = ListWisataAdapter(listWisata)
+    val adapterWisata =
+        ListWisataAdapter(
+            listWisata
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
