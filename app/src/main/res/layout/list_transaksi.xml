@@ -53,7 +53,7 @@
         android:textColor="#8e8e8e"
         android:textSize="11sp"
         android:layout_marginEnd="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/garis"
+        app:layout_constraintBottom_toTopOf="@+id/vGaris"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/garis"
+        android:id="@+id/vGaris"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="34dp"

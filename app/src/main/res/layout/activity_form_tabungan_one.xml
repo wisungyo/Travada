@@ -5,21 +5,21 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.tabungan.form_one.FormTabunganActivityOne">
+    tools:context=".features.tabungan.form_one.FormTabunganOneActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gVertical1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".05" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gVertical2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".95" />
+        app:layout_constraintGuide_end="16dp" />
 
     <View
         android:id="@+id/barTabungan"
@@ -31,10 +31,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/btnBack"
+        android:id="@+id/ivFormOneBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="22dp"
         android:src="@drawable/ic_baseline_arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/barTabungan"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,14 +43,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="22dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Trava Save"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
-        app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        app:layout_constraintStart_toEndOf="@id/btnBack"
-        app:layout_constraintTop_toTopOf="@id/btnBack"/>
+        app:layout_constraintBottom_toBottomOf="@id/ivFormThreeBack"
+        app:layout_constraintStart_toEndOf="@id/ivFormThreeBack"
+        app:layout_constraintTop_toTopOf="@id/ivFormThreeBack"/>
 
 
 
@@ -67,10 +67,10 @@
 
         <ImageView
             android:id="@+id/ivImageTabungan"
-            android:scaleType="centerCrop"
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="167dp"
-            android:src="@drawable/banner_tabungan"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/banner_tabungan" />
 
         <View
             android:id="@+id/img_camera"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:text="Max file 1MB"
             android:textColor="@color/white"
-            android:textSize="@dimen/heading4"
+            android:textSize="@dimen/text"
             android:layout_marginBottom="36dp"
             android:layout_gravity="center|bottom"
             />
@@ -107,7 +107,7 @@
         android:id="@+id/tvTitleMainTabungan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="34dp"
         android:fontFamily="@font/roboto"
         android:text="@string/title_tambah_tabungan"
         android:textColor="@color/black"
@@ -145,6 +145,7 @@
         android:paddingStart="14dp"
         android:paddingEnd="14dp"
         app:prefixText="Rp. "
+        app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="@id/gVertical1"
         app:layout_constraintTop_toBottomOf="@id/layoutEtTujuan"
         app:layout_constraintEnd_toEndOf="@id/gVertical2">
@@ -159,7 +160,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnLanjutForm1"
+        android:id="@+id/btnBuatSekarang"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="40dp"

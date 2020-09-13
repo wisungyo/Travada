@@ -17,11 +17,11 @@
 
         </activity>
         <activity android:name=".features.tabungan.DetailFormResultActivity"></activity>
-        <activity android:name=".features.tabungan.form_three.FormTabunganActivityThree" />
-        <activity android:name=".features.tabungan.form_two.FormTabunganActivityTwo" />
-        <activity android:name=".features.tabungan.form_one.FormTabunganActivityOne" />
+        <activity android:name=".features.tabungan.form_three.FormTabunganThreeActivity" />
+        <activity android:name=".features.tabungan.form_two.FormTabunganTwoActivity" />
+        <activity android:name=".features.tabungan.form_one.FormTabunganOneActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".features.tabungan.main_tabungan.TabunganActivity">
+        <activity android:name=".features.tabungan.MainTabungan.TabunganActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

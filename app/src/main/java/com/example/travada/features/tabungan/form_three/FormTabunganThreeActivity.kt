@@ -1,5 +1,6 @@
 package com.example.travada.features.tabungan.form_three
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,16 +9,22 @@ import android.text.TextWatcher
 import android.util.Log
 import com.example.travada.R
 import com.example.travada.features.tabungan.PeriksaRekeningDialog
+import com.example.travada.features.tabungan.form_two.FormTabunganTwoActivity
 import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
 import kotlinx.android.synthetic.main.activity_form_tabungan_three.*
 
-class FormTabunganActivityThree : AppCompatActivity(),
+class FormTabunganThreeActivity : AppCompatActivity(),
     FormTabunganThreePresenter.Listener {
 
     private lateinit var presenter: FormTabunganThreePresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_tabungan_three)
+
+        ivFormThreeBack.setOnClickListener {
+            val backToTabungan = Intent(this, FormTabunganTwoActivity::class.java)
+            startActivity(backToTabungan)
+        }
 
         btnPeriksa.setOnClickListener {
             Log.d("Main", "button pressed")

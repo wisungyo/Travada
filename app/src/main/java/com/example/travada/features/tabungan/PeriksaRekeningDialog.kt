@@ -1,5 +1,6 @@
 package com.example.travada.features.tabungan
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.travada.R
+import com.example.travada.features.tabungan.form_two.FormTabunganTwoActivity
 import kotlinx.android.synthetic.main.fragment_periksa_rekening_dialog.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,6 +40,15 @@ class PeriksaRekeningDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        btnBatal.setOnClickListener {
+            dismiss()
+        }
+
+        btnLanjutPeriksa.setOnClickListener {
+            val backToTabungan = Intent(context, FormTabunganTwoActivity::class.java)
+            startActivity(backToTabungan)
+        }
     }
 
     companion object {

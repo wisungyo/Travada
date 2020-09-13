@@ -1,10 +1,10 @@
-package com.example.travada.features.tabungan.main_tabungan
+package com.example.travada.features.tabungan.MainTabungan
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class DataListWisata(
+data class DataWisata(
     val namaWisata: String,
     val biaya: String,
     var tempo: String,

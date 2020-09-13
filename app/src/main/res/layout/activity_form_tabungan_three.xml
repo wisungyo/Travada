@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.tabungan.form_three.FormTabunganActivityThree">
+    tools:context=".features.tabungan.form_three.FormTabunganThreeActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gVertical1"
@@ -30,10 +30,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/btnBack"
+        android:id="@+id/ivFormThreeBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="22dp"
         android:src="@drawable/ic_baseline_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,14 +42,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="22dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Tambah Teman"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
-        app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        app:layout_constraintStart_toEndOf="@id/btnBack"
-        app:layout_constraintTop_toTopOf="@id/btnBack" />
+        app:layout_constraintBottom_toBottomOf="@id/ivFormThreeBack"
+        app:layout_constraintStart_toEndOf="@id/ivFormThreeBack"
+        app:layout_constraintTop_toTopOf="@id/ivFormThreeBack" />
 
     <TextView
         android:id="@+id/tvTitleTabunganBareng"

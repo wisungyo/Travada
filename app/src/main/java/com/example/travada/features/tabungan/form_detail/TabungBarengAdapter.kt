@@ -4,10 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.travada.R
-import com.example.travada.features.tabungan.main_tabungan.ListWisataAdapter
-import kotlinx.android.synthetic.main.list_liburan_pilihan.view.*
 import kotlinx.android.synthetic.main.list_tabung_bareng.view.*
 
 class TabungBarengAdapter(val listTemanGabung: ArrayList<DataTabungBareng>) :

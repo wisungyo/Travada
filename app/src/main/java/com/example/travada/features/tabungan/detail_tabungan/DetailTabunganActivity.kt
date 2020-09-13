@@ -2,7 +2,6 @@ package com.example.travada.features.tabungan.detail_tabungan
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewpager.widget.PagerAdapter
 import com.example.travada.R
 import kotlinx.android.synthetic.main.activity_detail_tabungan.*
 

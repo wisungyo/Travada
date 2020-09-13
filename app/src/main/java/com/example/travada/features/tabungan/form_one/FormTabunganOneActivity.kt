@@ -24,8 +24,8 @@ import com.example.travada.features.tabungan.DataPermissions.Companion.CAMERA_RE
 import com.example.travada.features.tabungan.DataPermissions.Companion.GALLERY_REQUEST
 import com.example.travada.features.tabungan.DataPermissions.Companion.REQUEST_CODE
 import com.example.travada.features.tabungan.DataPermissions.Companion.arrayListPermission
-import com.example.travada.features.tabungan.form_two.FormTabunganActivityTwo
-import com.example.travada.features.tabungan.main_tabungan.TabunganActivity
+import com.example.travada.features.tabungan.form_two.FormTabunganTwoActivity
+import com.example.travada.features.tabungan.MainTabungan.TabunganActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
 import java.io.ByteArrayOutputStream
@@ -34,18 +34,17 @@ import java.io.FileOutputStream
 import java.util.*
 
 
-class FormTabunganActivityOne : AppCompatActivity(),
+class FormTabunganOneActivity : AppCompatActivity(),
     FormTabunganOnePresenter.Listener {
 
     private lateinit var presenter: FormTabunganOnePresenter
     lateinit var bitmapResult: Bitmap
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_tabungan_one)
 
-        btnBack.setOnClickListener {
+        ivFormOneBack.setOnClickListener {
             val backToTabungan = Intent(this, TabunganActivity::class.java)
             startActivity(backToTabungan)
         }
@@ -112,21 +111,27 @@ class FormTabunganActivityOne : AppCompatActivity(),
             }
         }
 
-        presenter =
-            FormTabunganOnePresenter(
-                this
-            )
+
+        presenter = FormTabunganOnePresenter(this)
         etTujuan.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
+            override fun afterTextChanged(count: Editable?) {
+                if (count?.length!! > layoutEtTujuan.counterMaxLength){
+                    layoutEtTujuan.error = "karakter lebih dari 25"
+                } else {
+                    layoutEtTujuan.error = null
+                }
+            }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.checked(etTujuan.text.toString(), etJumlah.text.toString())
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
+               presenter.checked(etTujuan.text.toString(), etJumlah.text.toString())
+
             }
         })
 
 
         etJumlah.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(edit: Editable?) {}
+            override fun afterTextChanged(count: Editable?) {}
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 presenter.checked(etTujuan.text.toString(), etJumlah.text.toString())
@@ -243,20 +248,20 @@ class FormTabunganActivityOne : AppCompatActivity(),
 
     // TODO : tombol lanjut
     override fun btnActive() {
-        btnLanjutForm1.setBackgroundResource(R.drawable.bg_active)
-        btnLanjutForm1.setTextColor(Color.parseColor("#ffffff"))
-        btnLanjutForm1.setElevation(2f)
-        btnLanjutForm1.isClickable = true
+        btnBuatSekarang.setBackgroundResource(R.drawable.bg_active)
+        btnBuatSekarang.setTextColor(Color.parseColor("#ffffff"))
+        btnBuatSekarang.setElevation(2f)
+        btnBuatSekarang.isClickable = true
 
-        btnLanjutForm1.setOnClickListener {
-            val goToFormTabunganTwo = Intent(this, FormTabunganActivityTwo::class.java)
+        btnBuatSekarang.setOnClickListener {
+            val goToFormTabunganTwo = Intent(this, FormTabunganTwoActivity::class.java)
             startActivity(goToFormTabunganTwo)
         }
     }
 
     override fun btnInactive() {
-        btnLanjutForm1.setBackgroundResource(R.drawable.bg_inactive)
-        btnLanjutForm1.isClickable = false
+        btnBuatSekarang.setBackgroundResource(R.drawable.bg_inactive)
+        btnBuatSekarang.isClickable = false
     }
 
 

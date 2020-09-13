@@ -10,21 +10,34 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.CalendarHelper
-import com.example.travada.features.tabungan.form_three.FormTabunganActivityThree
-import com.example.travada.features.tabungan.form_one.FormTabunganActivityOne
-import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
+import com.example.travada.features.tabungan.DetailFormResultActivity
+import com.example.travada.features.tabungan.form_detail.DataTabungBareng
+import com.example.travada.features.tabungan.form_three.FormTabunganThreeActivity
+import com.example.travada.features.tabungan.form_one.FormTabunganOneActivity
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
-import kotlinx.android.synthetic.main.activity_form_tabungan_two.btnBack
 import java.util.*
 
-class FormTabunganActivityTwo : AppCompatActivity(),
+class FormTabunganTwoActivity : AppCompatActivity(),
     FormTabunganTwoPresenter.Listener {
+
+    private val listTabungBareng = arrayListOf(
+        DataTabungBareng("Nanda Adi", "1212131", "AN"),
+        DataTabungBareng("Abigail", "1212122", "A"),
+        DataTabungBareng("Nicholas", "3434343", "N")
+    )
+
+    val adapterBarengTeman = BarengTemanAdapter(listTabungBareng)
+
+
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter
 
@@ -33,16 +46,24 @@ class FormTabunganActivityTwo : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_tabungan_two)
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
+        val layoutManagerLinear =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvBarengTeman.layoutManager = layoutManagerLinear
+        rvBarengTeman.adapter = adapterBarengTeman
+        rvBarengTeman.overScrollMode = View.OVER_SCROLL_NEVER
+
         btnTambahTeman.setOnClickListener {
-            val goToFormTambahTeman = Intent(this, FormTabunganActivityThree::class.java)
+            val goToFormTambahTeman = Intent(this, FormTabunganThreeActivity::class.java)
             startActivity(goToFormTambahTeman)
         }
 
         DateEditText = findViewById(R.id.etTanggal)
         showDatePicker()
 
-        btnBack.setOnClickListener {
-            val backToTabungan = Intent(this, FormTabunganActivityOne::class.java)
+        ivFormTwoBack.setOnClickListener {
+            val backToTabungan = Intent(this, FormTabunganOneActivity::class.java)
             startActivity(backToTabungan)
         }
 
@@ -198,19 +219,19 @@ class FormTabunganActivityTwo : AppCompatActivity(),
     }
 
     override fun btnActive() {
-        btnLanjutForm.setBackgroundResource(R.drawable.bg_active)
-        btnLanjutForm.setTextColor(Color.parseColor("#ffffff"))
-        btnLanjutForm.setElevation(2f)
-        btnLanjutForm.isClickable = true
+        btnLanjutFormTwo.setBackgroundResource(R.drawable.bg_active)
+        btnLanjutFormTwo.setTextColor(Color.parseColor("#ffffff"))
+        btnLanjutFormTwo.setElevation(2f)
+        btnLanjutFormTwo.isClickable = true
 
-//        btnLanjutForm2.setOnClickListener {
-//            val goToFormTabunganThree = Intent(this, FormTabunganActivityThree::class.java)
-//            startActivity(goToFormTabunganThree)
-//        }
+        btnLanjutFormTwo.setOnClickListener {
+            val goToFormTabunganDetail = Intent(this, DetailFormResultActivity::class.java)
+            startActivity(goToFormTabunganDetail)
+        }
     }
 
     override fun btnInactive() {
-        btnLanjutForm.setBackgroundResource(R.drawable.bg_inactive)
-        btnLanjutForm.isClickable = false
+        btnLanjutFormTwo.setBackgroundResource(R.drawable.bg_inactive)
+        btnLanjutFormTwo.isClickable = false
     }
 }

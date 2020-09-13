@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".features.tabungan.form_two.FormTabunganActivityTwo">
+    tools:context=".features.tabungan.form_two.FormTabunganTwoActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="78dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gVertical1"
@@ -31,10 +38,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/btnBack"
+        android:id="@+id/ivFormTwoBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="22dp"
         android:src="@drawable/ic_baseline_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,14 +50,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="22dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Trava Save"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
-        app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        app:layout_constraintStart_toEndOf="@id/btnBack"
-        app:layout_constraintTop_toTopOf="@id/btnBack" />
+        app:layout_constraintBottom_toBottomOf="@id/ivFormTwoBack"
+        app:layout_constraintStart_toEndOf="@id/ivFormTwoBack"
+        app:layout_constraintTop_toTopOf="@id/ivFormTwoBack" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -170,7 +177,7 @@
         android:id="@+id/tvTitleTabunganBareng"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:textColor="@color/black"
         android:textSize="@dimen/heading3"
         android:fontFamily="@font/roboto"
@@ -183,7 +190,7 @@
         android:id="@+id/btnTambahTeman"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/bg_white_dash"
         android:drawableStart="@drawable/ic_baseline_add_blue"
@@ -199,24 +206,36 @@
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="@id/gVertical2"
         app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleTabunganBareng"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTabunganBareng" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBarengTeman"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/gHorizontal"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/btnTambahTeman"
+        tools:listitem="@layout/list_tabung_bareng_teman" />
 
     <Button
-        android:id="@+id/btnLanjutForm"
+        android:id="@+id/btnLanjutFormTwo"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/bg_inactive"
+        android:clickable="true"
+        android:focusable="true"
         android:fontFamily="@font/roboto"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="Lanjut"
         android:textAllCaps="false"
         android:textColor="@color/gray"
-        android:layout_marginBottom="26dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gVertical2"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/gVertical1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

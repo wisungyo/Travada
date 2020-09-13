@@ -10,6 +10,17 @@ class FormTabunganOnePresenter(private val listener: Listener)  {
         }
     }
 
+
+
+//
+//    fun checkTujuan(tujuan: String){
+//        if (tujuan.length > 25 ){
+//            tujuan.error("kelebihan kata")
+//        } else{
+//            tujuan.error = null
+//        }
+//    }
+
     interface Listener {
         fun btnActive()
         fun btnInactive()

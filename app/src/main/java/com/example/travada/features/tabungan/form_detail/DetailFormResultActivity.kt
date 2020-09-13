@@ -2,14 +2,8 @@ package com.example.travada.features.tabungan.form_detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.features.tabungan.main_tabungan.DataListWisata
-import com.example.travada.features.tabungan.main_tabungan.ListWisataAdapter
-import kotlinx.android.synthetic.main.activity_detail_form_result.*
-import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
-import kotlinx.android.synthetic.main.activity_tabungan.*
 
 class DetailFormResultActivity : AppCompatActivity() {
 
