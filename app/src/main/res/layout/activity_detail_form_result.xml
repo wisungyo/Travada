@@ -265,7 +265,7 @@
         app:layout_constraintTop_toBottomOf="@id/cardView4"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDetailResult"
+        android:id="@+id/rvDetail"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -276,7 +276,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvLabelTabungBareng" />
 
     <Button
-        android:id="@+id/btnBuatSekarang"
+        android:id="@+id/btnLanjutFormOne"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="40dp"

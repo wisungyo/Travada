@@ -1,5 +1,7 @@
 package com.example.travada.features.tabungan.form_one
 
+import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
+
 class FormTabunganOnePresenter(private val listener: Listener)  {
 
     fun checked(tujuan: String, jumlah: String) {
@@ -9,17 +11,6 @@ class FormTabunganOnePresenter(private val listener: Listener)  {
             listener.btnInactive()
         }
     }
-
-
-
-//
-//    fun checkTujuan(tujuan: String){
-//        if (tujuan.length > 25 ){
-//            tujuan.error("kelebihan kata")
-//        } else{
-//            tujuan.error = null
-//        }
-//    }
 
     interface Listener {
         fun btnActive()

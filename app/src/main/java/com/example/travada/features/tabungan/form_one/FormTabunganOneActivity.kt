@@ -49,10 +49,9 @@ class FormTabunganOneActivity : AppCompatActivity(),
             startActivity(backToTabungan)
         }
 
-
         //TODO: btn image call button sheet
         ivImageTabungan.setOnClickListener {
-            if(checkPermissions()){
+            if (checkPermissions()) {
                 val dialog = BottomSheetDialog(this)
                 val view = layoutInflater.inflate(R.layout.camera_dialog_layout, null)
                 val close = view.findViewById<Button>(R.id.btnBatal)
@@ -62,12 +61,12 @@ class FormTabunganOneActivity : AppCompatActivity(),
                     dialog.dismiss()
                 }
 
-                kamera.setOnClickListener{
+                kamera.setOnClickListener {
                     takePhotoFromCamera()
                     dialog.dismiss()
                 }
 
-                galeri.setOnClickListener{
+                galeri.setOnClickListener {
                     choosePhotoFromGallery()
                     dialog.dismiss()
                 }
@@ -77,13 +76,13 @@ class FormTabunganOneActivity : AppCompatActivity(),
                 dialog.show()
 
 
-            }else{
+            } else {
                 requestRequiredPermissions()
             }
         }
 
         ivEditImage.setOnClickListener {
-            if(checkPermissions()){
+            if (checkPermissions()) {
                 val dialog = BottomSheetDialog(this)
                 val view = layoutInflater.inflate(R.layout.camera_dialog_layout, null)
                 val close = view.findViewById<Button>(R.id.btnBatal)
@@ -93,12 +92,12 @@ class FormTabunganOneActivity : AppCompatActivity(),
                     dialog.dismiss()
                 }
 
-                kamera.setOnClickListener{
+                kamera.setOnClickListener {
                     takePhotoFromCamera()
                     dialog.dismiss()
                 }
 
-                galeri.setOnClickListener{
+                galeri.setOnClickListener {
                     choosePhotoFromGallery()
                     dialog.dismiss()
                 }
@@ -106,25 +105,25 @@ class FormTabunganOneActivity : AppCompatActivity(),
                 dialog.setCancelable(true)
                 dialog.setContentView(view)
                 dialog.show()
-            }else{
+            } else {
                 requestRequiredPermissions()
             }
         }
 
-
         presenter = FormTabunganOnePresenter(this)
         etTujuan.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(count: Editable?) {
-                if (count?.length!! > layoutEtTujuan.counterMaxLength){
+                if (count?.length!! > layoutEtTujuan.counterMaxLength) {
                     layoutEtTujuan.error = "karakter lebih dari 25"
                 } else {
                     layoutEtTujuan.error = null
                 }
             }
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
-               presenter.checked(etTujuan.text.toString(), etJumlah.text.toString())
+                presenter.checked(etTujuan.text.toString(), etJumlah.text.toString())
 
             }
         })
@@ -140,7 +139,7 @@ class FormTabunganOneActivity : AppCompatActivity(),
     }
 
     //Mengecek semua permission yang dibutuhkan. Akan false jika setidaknya ada 1 permission yang belum mendapatkan izin.
-    fun checkPermissions(): Boolean{
+    fun checkPermissions(): Boolean {
         return (
                 (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) &&
                         (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
@@ -149,23 +148,35 @@ class FormTabunganOneActivity : AppCompatActivity(),
     }
 
     //melakukan semua request permission yang dibutuhkan aplikasi
-    fun requestRequiredPermissions(){
+    fun requestRequiredPermissions() {
         requestPermissions(arrayListPermission, REQUEST_CODE)
     }
 
     //Callback / respon dari konfirmasi permission (pilihan allow / deny)
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         //Cek request codenya sama seperti request code ketika meminta permission.
-        when(requestCode){
+        when (requestCode) {
             REQUEST_CODE -> {
                 //Loop semua permission apakah diizinkan atau tidak.
-                for(i in permissions.indices){
-                    if ((permissions[i] == arrayListPermission[i]) && (grantResults[i] == PackageManager.PERMISSION_GRANTED)){
-                        Toast.makeText(this, "Permission ${permissions[i]} Diizinkan", Toast.LENGTH_LONG).show()
-                    }else{
-                        Toast.makeText(this, "Permission ${permissions[i]} Ditolak", Toast.LENGTH_LONG).show()
+                for (i in permissions.indices) {
+                    if ((permissions[i] == arrayListPermission[i]) && (grantResults[i] == PackageManager.PERMISSION_GRANTED)) {
+                        Toast.makeText(
+                            this,
+                            "Permission ${permissions[i]} Diizinkan",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Permission ${permissions[i]} Ditolak",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -178,9 +189,9 @@ class FormTabunganOneActivity : AppCompatActivity(),
         super.onActivityResult(requestCode, resultCode, data)
 
         //Jika user memilih Gallery, menjalankan block ini.
-        if(requestCode == GALLERY_REQUEST){
+        if (requestCode == GALLERY_REQUEST) {
             //Cek data hasil responnya tidak null
-            if(data!=null){
+            if (data != null) {
                 val contentUri = data.data
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, contentUri)
                 Toast.makeText(this, "image loaded", Toast.LENGTH_SHORT).show()
@@ -188,46 +199,47 @@ class FormTabunganOneActivity : AppCompatActivity(),
                 bitmapResult = bitmap
                 ivEditImage.visibility = View.VISIBLE
                 img_camera.visibility = View.GONE
-                ivImageTabungan.isClickable=false
+                ivImageTabungan.isClickable = false
                 tvImageMax.visibility = View.INVISIBLE
 
-            }else{
+            } else {
                 Toast.makeText(this, "Image Loading Failed", Toast.LENGTH_LONG).show()
             }
-        }else if(requestCode == CAMERA_REQUEST){
+        } else if (requestCode == CAMERA_REQUEST) {
             val thumbnail = data?.extras?.get("data") as Bitmap
             ivImageTabungan.setImageBitmap(thumbnail)
 
             bitmapResult = thumbnail
             ivEditImage.visibility = View.VISIBLE
             img_camera.visibility = View.GONE
-            ivImageTabungan.isClickable=false
+            ivImageTabungan.isClickable = false
             tvImageMax.visibility = View.INVISIBLE
         }
     }
 
-    fun choosePhotoFromGallery(){
+    fun choosePhotoFromGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galleryIntent, GALLERY_REQUEST)
     }
 
-    fun takePhotoFromCamera(){
+    fun takePhotoFromCamera() {
         val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(intentCamera, CAMERA_REQUEST)
     }
 
-    fun saveImage(bitmap: Bitmap): String{
+    fun saveImage(bitmap: Bitmap): String {
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 70, bytes)
 
-        val directoryTarget = File((Environment.getExternalStorageDirectory()).toString() + "/PICTURES")
-        Log.d("CH8",directoryTarget.toString())
+        val directoryTarget =
+            File((Environment.getExternalStorageDirectory()).toString() + "/PICTURES")
+        Log.d("CH8", directoryTarget.toString())
 
-        if(!directoryTarget.exists()){
+        if (!directoryTarget.exists()) {
             directoryTarget.mkdirs()
         }
 
-        val file = File(directoryTarget, ((Calendar.getInstance().timeInMillis).toString()+".jpg"))
+        val file = File(directoryTarget, ((Calendar.getInstance().timeInMillis).toString() + ".jpg"))
 
         file.createNewFile()
 
@@ -238,30 +250,28 @@ class FormTabunganOneActivity : AppCompatActivity(),
         MediaScannerConnection.scanFile(this, arrayOf(file.path), arrayOf("images/jpg"), null)
 
         fileOutputStream.close()
-
-        Log.d("CH8","File saved in ${file.absolutePath}")
+        Log.d("CH8", "File saved in ${file.absolutePath}")
 
         return file.absolutePath
     }
 
 
-
-    // TODO : tombol lanjut
+    // TODO : tombol lanjut ke form berikutnya
     override fun btnActive() {
-        btnBuatSekarang.setBackgroundResource(R.drawable.bg_active)
-        btnBuatSekarang.setTextColor(Color.parseColor("#ffffff"))
-        btnBuatSekarang.setElevation(2f)
-        btnBuatSekarang.isClickable = true
+        btnLanjutFormOne.setBackgroundResource(R.drawable.bg_active)
+        btnLanjutFormOne.setTextColor(Color.parseColor("#ffffff"))
+        btnLanjutFormOne.setElevation(2f)
+        btnLanjutFormOne.isClickable = true
 
-        btnBuatSekarang.setOnClickListener {
+        btnLanjutFormOne.setOnClickListener {
             val goToFormTabunganTwo = Intent(this, FormTabunganTwoActivity::class.java)
             startActivity(goToFormTabunganTwo)
         }
     }
 
     override fun btnInactive() {
-        btnBuatSekarang.setBackgroundResource(R.drawable.bg_inactive)
-        btnBuatSekarang.isClickable = false
+        btnLanjutFormOne.setBackgroundResource(R.drawable.bg_inactive)
+        btnLanjutFormOne.isClickable = false
     }
 
 

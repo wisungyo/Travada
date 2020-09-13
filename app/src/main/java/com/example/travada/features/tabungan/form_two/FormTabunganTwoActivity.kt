@@ -19,10 +19,10 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.CalendarHelper
-import com.example.travada.features.tabungan.DetailFormResultActivity
 import com.example.travada.features.tabungan.form_result_detail.DataTabungBareng
 import com.example.travada.features.tabungan.form_three.FormTabunganThreeActivity
 import com.example.travada.features.tabungan.form_one.FormTabunganOneActivity
+import com.example.travada.features.tabungan.form_result_detail.DetailFormResultActivity
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.util.*
 

@@ -14,18 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".features.tabungan.detail_tabungan.DetailTabunganActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".features.tabungan.form_result_detail.DetailFormResultActivity">
 
         </activity>
-        <activity android:name=".features.tabungan.DetailFormResultActivity"></activity>
         <activity android:name=".features.tabungan.form_three.FormTabunganThreeActivity" />
         <activity android:name=".features.tabungan.form_two.FormTabunganTwoActivity" />
         <activity android:name=".features.tabungan.form_one.FormTabunganOneActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".features.tabungan.MainTabungan.TabunganActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <meta-data
