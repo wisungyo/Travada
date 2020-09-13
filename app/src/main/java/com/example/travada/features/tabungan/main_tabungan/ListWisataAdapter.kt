@@ -14,7 +14,8 @@ class ListWisataAdapter(val listWisata: ArrayList<DataListWisata>) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_liburan_pilihan, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_liburan_pilihan, parent, false)
         return ViewHolder(view)
     }
 
@@ -23,13 +24,17 @@ class ListWisataAdapter(val listWisata: ArrayList<DataListWisata>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var images = holder.itemView.imagePerson
 
-//        holder.itemView.tvNamaWisata.setText(listWisata[position].namaWisata)
-//        holder.itemView.tvBiayaWisata.setText(listWisata[position].biaya)
-//        holder.itemView.tvBulan.setText(listWisata[position].bulan)
-//        holder.itemView.tvProgresNumber.setText(listWisata[position].progresNumber)
-//        Glide.with(holder.itemView.context).load(listWisata[position].gambar).into(images)
+        if (listWisata.size > 0) {
+            var images = holder.itemView.imagePerson
+
+            holder.itemView.tvNamaWisata.text = listWisata[position].namaWisata
+            holder.itemView.tvBiayaWisata.text = listWisata[position].biaya
+            holder.itemView.tvTempo.text = listWisata[position].tempo
+            Glide.with(holder.itemView.context).load(listWisata[position].gambar).into(images)
+        }
+
+
     }
 
 
