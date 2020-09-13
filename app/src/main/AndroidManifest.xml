@@ -33,7 +33,11 @@
         </activity>
         <activity android:name=".welcomepage.loginpin.LoginPinActivity" />
         <activity android:name=".welcomepage.login.LoginActivity" />
-        <activity android:name=".welcomepage.onboarding.OnboardingEndActivity" >
+        <activity android:name=".welcomepage.onboarding.OnboardingEndActivity" />
+        <activity android:name=".detailriwayat.DetailRiwayatActivity"></activity>
+        <activity android:name=".berita.DetailBeritaActivity" />
+        <activity android:name=".berita.BeritaActivity" />
+        <activity android:name=".mainpage.MainPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

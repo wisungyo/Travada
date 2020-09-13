@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bn_beranda"
+        android:title="Beranda"
+        android:icon="@drawable/ic_beranda" />
+
+    <item
+        android:id="@+id/bn_riwayat"
+        android:title="Riwayat"
+        android:icon="@drawable/ic_riwayat" />
+
+    <item
+        android:id="@+id/bn_notifikasi"
+        android:title="Notifikasi"
+        android:icon="@drawable/ic_notifikasi" />
+
+    <item
+        android:id="@+id/bn_akun"
+        android:title="Akun"
+        android:icon="@drawable/ic_akun" />
+</menu>
