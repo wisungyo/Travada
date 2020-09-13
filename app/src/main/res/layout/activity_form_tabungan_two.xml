@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".features.tabungan.formtabungandua.FormTabunganTwoActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="78dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+    <View
+        android:id="@+id/barTabungan"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFormTwoBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/ic_baseline_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/barTabungan" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Trava Save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintBottom_toBottomOf="@id/ivFormTwoBack"
+        app:layout_constraintStart_toEndOf="@id/ivFormTwoBack"
+        app:layout_constraintTop_toTopOf="@id/ivFormTwoBack" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEtTgltarget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/barTabungan">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTanggal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:hint="Tanggal target pencapaian"
+            android:focusable="false"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEtSetoranAwal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:prefixText="Rp. "
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/layoutEtTgltarget">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSetoranAwal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Setoran awal"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEtMetodeTabungan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/layoutEtSetoranAwal">
+
+        <AutoCompleteTextView
+            android:id="@+id/etMetodeTabungan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableEnd="@drawable/ic_polygon"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Metode tabungan"
+            android:inputType="none"
+            android:textIsSelectable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEtPeriodeTabungan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/layoutEtMetodeTabungan">
+
+        <AutoCompleteTextView
+            android:id="@+id/etPeriodeTabungan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableEnd="@drawable/ic_polygon"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textIsSelectable="false"
+            android:hint="Periode tabungan"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEtJumlahTabungan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:prefixText="Rp. "
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/layoutEtPeriodeTabungan">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etJumlahTabungan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Jumlah"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/tvTitleTabunganBareng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading3"
+        android:fontFamily="@font/roboto"
+        app:layout_goneMarginTop="25dp"
+        android:text="Tabungan bareng teman"
+        app:layout_constraintTop_toBottomOf="@id/layoutEtJumlahTabungan"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <Button
+        android:id="@+id/btnTambahTeman"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="14dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@drawable/bg_white_dash"
+        android:drawableStart="@drawable/ic_baseline_add_blue"
+        android:fontFamily="@font/roboto"
+        android:paddingStart="100dp"
+        android:paddingEnd="90dp"
+        android:text="Tambah teman"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/heading3"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTabunganBareng" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBarengTeman"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/gHorizontal"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"
+        app:layout_constraintTop_toBottomOf="@id/btnTambahTeman"
+        tools:listitem="@layout/list_tabung_bareng_teman" />
+
+    <Button
+        android:id="@+id/btnLanjutFormTwo"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_inactive"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/roboto"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Lanjut"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/gVertical1" />
+</androidx.constraintlayout.widget.ConstraintLayout>
