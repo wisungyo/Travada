@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.CalendarHelper
 import com.example.travada.features.tabungan.DetailFormResultActivity
-import com.example.travada.features.tabungan.form_detail.DataTabungBareng
+import com.example.travada.features.tabungan.form_result_detail.DataTabungBareng
 import com.example.travada.features.tabungan.form_three.FormTabunganThreeActivity
 import com.example.travada.features.tabungan.form_one.FormTabunganOneActivity
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
@@ -37,7 +37,6 @@ class FormTabunganTwoActivity : AppCompatActivity(),
 
     val adapterBarengTeman = BarengTemanAdapter(listTabungBareng)
 
-
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter
 
@@ -48,8 +47,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        val layoutManagerLinear =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val layoutManagerLinear = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvBarengTeman.layoutManager = layoutManagerLinear
         rvBarengTeman.adapter = adapterBarengTeman
         rvBarengTeman.overScrollMode = View.OVER_SCROLL_NEVER
@@ -97,10 +95,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
             periodeTabungan.showDropDown()
         }
 
-        presenter =
-            FormTabunganTwoPresenter(
-                this
-            )
+        presenter = FormTabunganTwoPresenter(this)
         etTanggal.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
 

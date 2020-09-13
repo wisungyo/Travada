@@ -4,12 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.travada.R
-import com.example.travada.features.tabungan.form_detail.DataTabungBareng
-import com.example.travada.features.tabungan.form_detail.TabungBarengAdapter
-import kotlinx.android.synthetic.main.list_tabung_bareng.view.*
-import kotlinx.android.synthetic.main.list_tabung_bareng.view.tvRekeningTemanGabung
+import com.example.travada.features.tabungan.form_result_detail.DataTabungBareng
 import kotlinx.android.synthetic.main.list_tabung_bareng_teman.view.*
 
 class BarengTemanAdapter(val listBarengTeman: ArrayList<DataTabungBareng>) :

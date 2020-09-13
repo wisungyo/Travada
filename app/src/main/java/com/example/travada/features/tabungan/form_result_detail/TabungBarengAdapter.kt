@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.form_detail
+package com.example.travada.features.tabungan.form_result_detail
 
 import android.view.LayoutInflater
 import android.view.View
@@ -22,8 +22,6 @@ RecyclerView.Adapter<TabungBarengAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
         holder.itemView.tvNamaTemanGabung.setText(listTemanGabung[position].nama)
         holder.itemView.tvRekeningTemanGabung.setText(listTemanGabung[position].nomorRekening)
         holder.itemView.imageTeman.setText(listTemanGabung[position].gambar)
