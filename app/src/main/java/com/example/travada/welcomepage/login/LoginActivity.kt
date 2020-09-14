@@ -9,6 +9,8 @@ import android.text.TextWatcher
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.example.travada.R
+import com.example.travada.fragmentnav.beranda.BerandaFragment
+import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
 import com.example.travada.welcomepage.forgetpass.inputemail.ForgetpassInputEmailActivity
 import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
@@ -67,7 +69,7 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
         }
 
         btn_login.setOnClickListener {
-            presenter.loginCheck(et_username.text.toString(), et_password.text.toString())
+            goToNextPage()
         }
 
     }
@@ -86,7 +88,7 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
     }
 
     override fun goToNextPage() {
-        val goToNextActivity = Intent(this, Register1Activity::class.java)
+        val goToNextActivity = Intent(this, MainPageActivity::class.java)
         startActivity(goToNextActivity)
     }
 

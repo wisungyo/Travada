@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.berita.BeritaActivity
 import com.example.travada.berita.DetailBeritaActivity
+import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
 import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTabungan
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTrip
+import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.sampeldata.DataBerita
 import com.example.travada.sampeldata.DataUser
 import kotlinx.android.synthetic.main.fragment_beranda.*
@@ -44,7 +46,11 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         iv_mainpage_card_transfer.setOnClickListener { presenter.doTransfer() }
         iv_mainpage_card_pembelian.setOnClickListener { presenter.doPembelian() }
         iv_mainpage_card_ewallet.setOnClickListener { presenter.doEwallet() }
-        iv_mainpage_card_tabungan.setOnClickListener { presenter.doTabungan() }
+        iv_mainpage_card_tabungan.setOnClickListener {
+            //TODO gimmic buat besok senen
+            val goToNextActivity = Intent(context, TabunganActivity::class.java)
+            startActivity(goToNextActivity)
+        }
         iv_mainpage_card_rencana.setOnClickListener { presenter.doRencana() }
 
         // lihat semua berita
@@ -114,11 +120,11 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     }
 
     override fun showTabungan() {
-        Toast.makeText(
-            context,
-            "Tabungan under construction..",
-            Toast.LENGTH_SHORT
-        ).show()
+//        Toast.makeText(
+//            context,
+//            "Tabungan under construction..",
+//            Toast.LENGTH_SHORT
+//        ).show()
     }
 
     override fun showRencana() {

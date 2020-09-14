@@ -18,7 +18,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         >
-
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity"></activity>
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
         <activity android:name=".welcomepage.register.takepicKTP.TakePicKTPActivity"></activity>
@@ -39,10 +38,7 @@
         <activity android:name=".berita.BeritaActivity" />
         <activity android:name=".mainpage.MainPageActivity"/>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity">
@@ -51,13 +47,17 @@
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />
         <activity android:name=".features.tabungan.formtabungandua.FormTabunganTwoActivity" />
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".features.tabungan.maintabungan.TabunganActivity">
 
         </activity>
 
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
-        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity"></activity>
+        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity" />
 
         <meta-data
