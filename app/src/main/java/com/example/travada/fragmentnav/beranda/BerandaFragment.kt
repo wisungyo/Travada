@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.berita.BeritaActivity
 import com.example.travada.berita.DetailBeritaActivity
+import com.example.travada.features.rencana.wisnu.RencanaActivity
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
 import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
@@ -47,16 +48,13 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         iv_mainpage_card_pembelian.setOnClickListener { presenter.doPembelian() }
         iv_mainpage_card_ewallet.setOnClickListener { presenter.doEwallet() }
         iv_mainpage_card_tabungan.setOnClickListener {
-            //TODO gimmic buat besok senen
-            val goToNextActivity = Intent(context, TabunganActivity::class.java)
-            startActivity(goToNextActivity)
+            presenter.doTabungan()
         }
         iv_mainpage_card_rencana.setOnClickListener { presenter.doRencana() }
 
         // lihat semua berita
         tv_mainpage_berita_lihat_semua.setOnClickListener {
-            val intentSemuaBerita = Intent(context, BeritaActivity::class.java)
-            startActivity(intentSemuaBerita)
+            presenter.doLihatSemuaBerita()
         }
     }
 
@@ -120,24 +118,23 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     }
 
     override fun showTabungan() {
-//        Toast.makeText(
-//            context,
-//            "Tabungan under construction..",
-//            Toast.LENGTH_SHORT
-//        ).show()
+        val goToNextActivity = Intent(context, TabunganActivity::class.java)
+        startActivity(goToNextActivity)
     }
 
     override fun showRencana() {
-        Toast.makeText(
-            context,
-            "Rencana under construction..",
-            Toast.LENGTH_SHORT
-        ).show()
+        val intentRencana = Intent(context, RencanaActivity::class.java)
+        startActivity(intentRencana)
     }
 
     override fun showDetailBerita(itemBerita: DataBerita) {
         val intentToDetailBerita = Intent(context, DetailBeritaActivity::class.java)
         intentToDetailBerita.putExtra("DATA", itemBerita)
         startActivity(intentToDetailBerita)
+    }
+
+    override fun showLihatSemuaBerita() {
+        val intentSemuaBerita = Intent(context, BeritaActivity::class.java)
+        startActivity(intentSemuaBerita)
     }
 }
