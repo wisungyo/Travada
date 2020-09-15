@@ -1,7 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Travada</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fontmedium" tools:ignore="ReferenceType">@font/roboto_medium</string>
+    <string name="font" tools:ignore="ReferenceType">@font/roboto</string>
 
     //hanif
     <string name="title_banner_tabungan"> Wujudkan dan \npercepat \nliburanmu dengan \nmenabung.</string>
