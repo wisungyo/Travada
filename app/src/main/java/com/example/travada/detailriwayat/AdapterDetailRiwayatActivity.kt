@@ -30,30 +30,32 @@ class AdapterDetailRiwayatActivity (val listItem: ArrayList<DataCicilan>, val pr
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (listItem.size > 0) {
             holder.itemView.tv_detail_riwayat_item_title.text = listItem[position].title
-            holder.itemView.tv_detail_riwayat_item_jumlah.text = listItem[position].jumlah
+            holder.itemView.tv_detail_riwayat_item_jumlah.text = listItem[position].jumlah.toString()
             holder.itemView.tv_detail_riwayat_item_tempo.text = listItem[position].tempo
             holder.itemView.tv_detail_riwayat_item_status.text = listItem[position].status
 
-            if (listItem[position].status == "Expired") {
-                holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
-                    R.drawable.bg_detail_riwayat_item_status_grey)
-                holder.itemView.tv_detail_riwayat_item_status.setTextColor(Color.parseColor("#ffffff"))
-                holder.itemView.btn_detail_riwayat_item.isEnabled = false
-                holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn_disable)
-            }
-            else if (listItem[position].status == "Dibayar") {
-                holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
-                    R.drawable.bg_detail_riwayat_item_status_green)
-                holder.itemView.tv_detail_riwayat_item_status.setTextColor(Color.parseColor("#ffffff"))
-                holder.itemView.btn_detail_riwayat_item.isEnabled = false
-                holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn_disable)
-            }
-            else if (listItem[position].status == "Menunggu Persetujuan") {
-                holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
-                    R.drawable.bg_detail_riwayat_item_status_blue)
-                holder.itemView.tv_detail_riwayat_item_status.setTextColor(Color.parseColor("#ffffff"))
-                holder.itemView.btn_detail_riwayat_item.isEnabled = false
-                holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn_disable)
+            when (listItem[position].status) {
+                "Expired" -> {
+                    holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
+                        R.drawable.bg_detail_riwayat_item_status_grey)
+                    holder.itemView.tv_detail_riwayat_item_status.setTextColor(Color.parseColor("#ffffff"))
+                    holder.itemView.btn_detail_riwayat_item.isEnabled = false
+                    holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn_disable)
+                }
+                "Dibayar" -> {
+                    holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
+                        R.drawable.bg_detail_riwayat_item_status_green)
+                    holder.itemView.tv_detail_riwayat_item_status.setTextColor(Color.parseColor("#ffffff"))
+                    holder.itemView.btn_detail_riwayat_item.isEnabled = false
+                    holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn_disable)
+                }
+                "Menunggu Persetujuan" -> {
+                    holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
+                        R.drawable.bg_detail_riwayat_item_status_blue)
+                    holder.itemView.tv_detail_riwayat_item_status.setTextColor(Color.parseColor("#ffffff"))
+                    holder.itemView.btn_detail_riwayat_item.isEnabled = false
+                    holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn_disable)
+                }
             }
 
             holder.itemView.btn_detail_riwayat_item.setOnClickListener {

@@ -20,9 +20,12 @@ import com.example.travada.fragmentnav.beranda.adapter.AdapterTrip
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.sampeldata.DataBerita
 import com.example.travada.sampeldata.DataUser
+import kotlinx.android.synthetic.main.activity_pesan_rencana.*
 import kotlinx.android.synthetic.main.fragment_beranda.*
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
+import java.util.*
 
 class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     private lateinit var presenter: BerandaFragmentPresenter
@@ -69,10 +72,14 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         linearLayoutTrip: LinearLayoutManager,
         linearLayoutBerita: LinearLayoutManager
     ) {
-        val formatter: NumberFormat = DecimalFormat("#,###")
-        val formattedSaldo: String = formatter.format(dataUser.saldo)
-        tv_mainpage_username.text = dataUser.name
-        tv_mainpage_card_saldo.text = "Rp. $formattedSaldo"
+//        val formatter: NumberFormat = DecimalFormat("#,###")
+//        val formattedSaldo: String = formatter.format(dataUser.saldo)
+//        tv_mainpage_username.text = dataUser.name
+//        tv_mainpage_card_saldo.text = "Rp. $formattedSaldo"
+
+        val df = DecimalFormat("#,###")
+        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+        tv_mainpage_card_saldo.text = "Rp. ${df.format(dataUser.saldo)}"
 
         rv_mainpage_tabungan.adapter = adapterTabungan
         rv_mainpage_informasi.adapter = adapterInformasi
