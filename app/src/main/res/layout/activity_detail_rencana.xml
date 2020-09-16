@@ -39,7 +39,7 @@
         app:layout_constraintStart_toEndOf="@id/ivDetailRencana"
         app:layout_constraintTop_toTopOf="@id/ivDetailRencana" />
 
-
+    <!--RecyclerView nested-->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedView"
         android:layout_width="match_parent"
@@ -74,24 +74,338 @@
                 android:id="@+id/rvDetailRencana"
                 android:layout_width="0dp"
                 android:layout_height="43dp"
-                android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivGambarWisata" />
 
+            <!--Negara-->
             <TextView
                 android:id="@+id/tvHeadingDetailRencana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Tokyo &amp; Mount Fuji"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/rvDetailRencana"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvDetailRencana" />
+
+            <ImageView
+                android:id="@+id/ivNegara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/ic_kite"
+                app:layout_constraintStart_toStartOf="@id/tvHeadingDetailRencana"
+                app:layout_constraintTop_toBottomOf="@id/tvHeadingDetailRencana" />
+
+            <TextView
+                android:id="@+id/tvNegara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Asia"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text"
+                app:layout_constraintBottom_toBottomOf="@id/ivNegara"
+                app:layout_constraintStart_toEndOf="@id/ivNegara"
+                app:layout_constraintTop_toTopOf="@id/ivNegara" />
+
+            <!--Waktu-->
+            <ImageView
+                android:id="@+id/ivWaktu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:src="@drawable/ic_time"
+                app:layout_constraintBottom_toBottomOf="@id/tvNegara"
+                app:layout_constraintStart_toEndOf="@id/tvNegara"
+                app:layout_constraintTop_toTopOf="@id/tvNegara" />
+
+            <TextView
+                android:id="@+id/tvWaktu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="5 hari"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text"
+                app:layout_constraintBottom_toBottomOf="@id/ivWaktu"
+                app:layout_constraintStart_toEndOf="@id/ivWaktu"
+                app:layout_constraintTop_toTopOf="@id/ivWaktu" />
+
+            <!--peserta-->
+            <ImageView
+                android:id="@+id/ivPeserta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:src="@drawable/ic_people"
+                app:layout_constraintBottom_toBottomOf="@id/tvWaktu"
+                app:layout_constraintStart_toEndOf="@id/tvWaktu"
+                app:layout_constraintTop_toTopOf="@id/tvWaktu" />
+
+            <TextView
+                android:id="@+id/tvPeserta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="20 orang"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text"
+                app:layout_constraintBottom_toBottomOf="@id/ivPeserta"
+                app:layout_constraintStart_toEndOf="@id/ivPeserta"
+                app:layout_constraintTop_toTopOf="@id/ivPeserta" />
+
+            <View
+                android:id="@+id/vGaris1"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="21dp"
+                android:background="#ecf1f5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivNegara" />
+
+            <!--overview-->
+            <TextView
+                android:id="@+id/tvOverview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Overview"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vGaris1" />
+
+            <TextView
+                android:id="@+id/tvOverviewKonten"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/overview_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
+
+            <TextView
+                android:id="@+id/tvMulai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto"
+                android:text="mulai"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/heading4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOverviewKonten" />
+
+            <TextView
+                android:id="@+id/tvBiayaDetailRencana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Rp 16.500.000"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/heading4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMulai" />
+
+            <Button
+                android:id="@+id/btnPesanSekarangDetailRencana"
+                android:layout_width="154dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_active"
+                android:fontFamily="@font/roboto"
+                android:text="Pesan Sekarang"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintBottom_toBottomOf="@id/tvBiayaDetailRencana"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvMulai"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <View
+                android:id="@+id/vGaris2"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="21dp"
+                android:background="#ecf1f5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnPesanSekarangDetailRencana" />
+
+            <TextView
+                android:id="@+id/tvDeskripsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Deskripsi"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vGaris2" />
+
+            <TextView
+                android:id="@+id/tvDeskripsiKonten"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="10"
+                android:text="@string/deskripsi_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDeskripsi" />
+
+            <View
+                android:id="@+id/vGradient"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white_gradient"
+                app:layout_constraintBottom_toBottomOf="@id/tvDeskripsiKonten"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSelengkapnya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="Selengkapnya"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/heading4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vGradient" />
+
+            <View
+                android:id="@+id/vGaris3"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="21dp"
+                android:background="#ecf1f5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSelengkapnya" />
+
+
+            <TextView
+                android:id="@+id/tvRencanaPerjalan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Rencana Perjalanan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vGaris3" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRencanaPerjalan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="vertical"
+                tools:listitem="@layout/list_rencana_perjalanan"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRencanaPerjalan" />
+
+            <View
+                android:id="@+id/vGradient2"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white_gradient"
+                app:layout_constraintBottom_toBottomOf="@id/rvRencanaPerjalan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSelengkapnya2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="Selengkapnya"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/heading4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vGradient2" />
+
+            <View
+                android:id="@+id/vGaris4"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="21dp"
+                android:background="#ecf1f5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSelengkapnya2" />
+
+            <TextView
+                android:id="@+id/tvFasilitas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Fasilitas"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vGaris4" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFasilitasPerjalan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="vertical"
+                tools:listitem="@layout/list_fasilitas_perjalanan"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvFasilitas" />
+
+            <View
+                android:id="@+id/vGaris5"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="21dp"
+                android:background="#ecf1f5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvFasilitasPerjalan" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
