@@ -39,11 +39,25 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
         listener.showCicilanList(adapterKonfirmasiRencana, linearLayoutKonfirmasiRencana)
     }
 
+    fun checkNextButtonCondition(jumlahOrang: Int) {
+        var condition = true
+        for (i in 1..jumlahOrang) {
+            if (!listUser[i-1].status) {
+                condition = false
+            }
+        }
+        listener.showNextButtonCondition(condition)
+    }
+
+    /*
+        LISTENER
+     */
     interface Listener {
         fun showDataCicilan(jumlahOrang: Int, jumlahBiaya: Int)
         fun showCicilanList(
             adapterKonfirmasiRencanaActivity: AdapterKonfirmasiRencanaActivity,
             linearLayoutManager: LinearLayoutManager
         )
+        fun showNextButtonCondition(condition: Boolean)
     }
 }
