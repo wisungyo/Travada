@@ -89,15 +89,24 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
 
     fun minOrang(jumlahOrang: Int) {
         var jumlahOrangNew = jumlahOrang - 1
-        if (jumlahOrangNew < 0) jumlahOrangNew = 0
+        if (jumlahOrangNew < 1) jumlahOrangNew = 1
         listener.showMinOrang(jumlahOrangNew)
     }
 
+    fun doKonfirmasi() {
+        listener.showKonfirmasi()
+    }
+
+
+    /*
+        INTERFACE
+    */
     interface Listener {
         fun showSpinner(arraySpinner: ArrayList<String>)
         fun showCicilanData(adapter: AdapterPesanRencanaActivity, layout: LinearLayoutManager)
         fun addBiaya(addBiaya: Int)
         fun showAddOrang(addOrang: Int)
         fun showMinOrang(addOrang: Int)
+        fun showKonfirmasi()
     }
 }

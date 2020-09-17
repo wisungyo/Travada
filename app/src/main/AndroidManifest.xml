@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".features.rencana.wisnu.KonfirmasiRencanaActivity"></activity>
         <activity android:name=".features.rencana.wisnu.PesanRencanaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,9 +44,7 @@
         <activity android:name=".detailriwayat.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity">
-
-        </activity>
+        <activity android:name=".mainpage.MainPageActivity"></activity>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
         <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.rencana.wisnu.KonfirmasiRencanaActivity">
+
+    <View
+        android:id="@+id/view_konfirmasi_rencana_topbar"
+        android:background="#2A85F4"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_konfirmasi_rencana_back"
+        android:src="@drawable/ic_back"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/view_konfirmasi_rencana_topbar"
+        app:layout_constraintStart_toStartOf="@id/view_konfirmasi_rencana_topbar"
+        app:layout_constraintBottom_toBottomOf="@id/view_konfirmasi_rencana_topbar" />
+
+    <TextView
+        android:id="@+id/tv_konfirmasi_rencana_topbar"
+        android:text="Tokyo &amp; Mount Fuji"
+        android:fontFamily="@font/roboto"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_konfirmasi_rencana_back"
+        app:layout_constraintTop_toTopOf="@id/view_konfirmasi_rencana_topbar"
+        app:layout_constraintBottom_toBottomOf="@id/view_konfirmasi_rencana_topbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/view_konfirmasi_rencana_topbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/view_konfirmasi_rencana_bot_bar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/view_konfirmasi_rencana_top_bg"
+                android:background="#2A85F4"
+                android:layout_width="match_parent"
+                android:layout_height="155dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:id="@+id/view_konfirmasi_rencana_card"
+                android:background="@drawable/bg_detail_riwayat_card"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_konfirmasi_rencana"
+                android:src="@drawable/trip"
+                android:scaleType="fitXY"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="60dp"
+                android:layout_height="45dp"
+                app:layout_constraintTop_toTopOf="@id/view_konfirmasi_rencana_card"
+                app:layout_constraintStart_toStartOf="@id/view_konfirmasi_rencana_card" />
+
+            <TextView
+                android:id="@+id/tv_konfirmasi_rencana_title"
+                android:text="Tokyo &amp; Mount Fuji"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
+                android:textColor="#2A85F4"
+                android:maxLines="1"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/view_konfirmasi_rencana_card"
+                app:layout_constraintStart_toEndOf="@id/iv_konfirmasi_rencana" />
+
+            <TextView
+                android:id="@+id/tv_konfirmasi_rencana_member"
+                android:text="Jumlah: 2 orang"
+                android:fontFamily="@font/roboto"
+                android:textSize="12sp"
+                android:textColor="#777777"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_konfirmasi_rencana_title"
+                app:layout_constraintBottom_toBottomOf="@id/iv_konfirmasi_rencana"/>
+
+            <ImageView
+                android:id="@+id/iv_konfirmasi_rencana_clock"
+                android:src="@drawable/ic_clock_blue"
+                android:layout_marginTop="17dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                app:layout_constraintTop_toBottomOf="@id/iv_konfirmasi_rencana"
+                app:layout_constraintStart_toStartOf="@id/iv_konfirmasi_rencana" />
+
+            <TextView
+                android:id="@+id/tv_konfirmasi_rencana_date"
+                android:text="1 Oktober - 6 Oktober 2020"
+                android:fontFamily="@font/roboto"
+                android:textSize="12sp"
+                android:textColor="#777777"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/iv_konfirmasi_rencana"
+                app:layout_constraintStart_toEndOf="@id/iv_konfirmasi_rencana_clock" />
+
+            <TextView
+                android:id="@+id/tv_konfirmasi_rencana_detail_pemesanan"
+                android:text="Detail Pemesanan"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
+                android:textColor="#474747"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/view_konfirmasi_rencana_top_bg"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_konfirmasi_rencana"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                tools:listitem="@layout/konfirmasi_rencana_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:clipChildren="false"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_konfirmasi_rencana_detail_pemesanan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:id="@+id/view_konfirmasi_rencana_separator"
+                android:background="#EDEDED"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                app:layout_constraintTop_toBottomOf="@id/rv_konfirmasi_rencana"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_konfirmasi_rencana_total_cicilan"
+                android:text="Total Cicilan"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
+                android:textColor="#474747"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/view_konfirmasi_rencana_separator"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_konfirmasi_rencana_jumlah_orang"
+                android:text="2 Orang"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
+                android:textColor="#474747"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_konfirmasi_rencana_total_cicilan"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_konfirmasi_rencana_jumlah_biaya"
+                android:text="Rp. 33.000.000"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
+                android:textColor="#474747"
+                android:layout_marginEnd="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tv_konfirmasi_rencana_jumlah_orang"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_konfirmasi_rencana_jumlah_orang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/view_konfirmasi_rencana_bot_bar"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/btn_konfirmas_rencana"
+        android:text="Lanjut"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:minHeight="0dp"
+        android:background="@drawable/bg_konfirmasi_rencana_btn"
+        android:paddingTop="8dp"
+        android:paddingBottom="11dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
