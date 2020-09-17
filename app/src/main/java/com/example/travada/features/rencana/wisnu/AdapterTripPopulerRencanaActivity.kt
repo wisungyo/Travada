@@ -8,7 +8,7 @@ import com.example.travada.R
 import com.example.travada.sampeldata.DataTrip
 import kotlinx.android.synthetic.main.main_page_item_trip.view.*
 
-class AdapterTripPopulerRencanaActivity (val listTrip: ArrayList<DataTrip>):
+class AdapterTripPopulerRencanaActivity (val listTrip: ArrayList<DataTrip>, val presenter: RencanaActivityPresenter):
     RecyclerView.Adapter<AdapterTripPopulerRencanaActivity.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -30,7 +30,9 @@ class AdapterTripPopulerRencanaActivity (val listTrip: ArrayList<DataTrip>):
             holder.itemView.cl_mainpage_item_trip.setPadding(0, 0, 28, 14)
         }
 
-
+        holder.itemView.cv_mainpage_item_trip.setOnClickListener {
+            presenter.itemClicked()
+        }
     }
 
     override fun getItemCount(): Int {

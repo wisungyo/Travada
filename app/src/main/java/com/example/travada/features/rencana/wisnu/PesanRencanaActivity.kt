@@ -43,6 +43,10 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
             }
         }
 
+        iv_rencana_pesan_back.setOnClickListener {
+            presenter.doBack()
+        }
+
         iv_rencana_pesan_add.setOnClickListener {
             presenter.addOrang(jumlahOrang)
         }
@@ -74,6 +78,10 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     ) {
         rv_rencana_pesan_card.adapter = adapter
         rv_rencana_pesan_card.layoutManager = layout
+    }
+
+    override fun showBack() {
+        finish()
     }
 
     override fun addBiaya(addBiaya: Int) {

@@ -30,6 +30,13 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         }
         presenter.fetchDataCicilanLayout()
 
+        iv_konfirmasi_rencana_back.setOnClickListener {
+            presenter.doBack()
+        }
+
+        btn_konfirmas_rencana.setOnClickListener {
+            presenter.nextButtonClicked()
+        }
     }
 
     override fun showDataCicilan(jumlahOrang: Int, jumlahBiaya: Int) {
@@ -60,6 +67,14 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
             btn_konfirmas_rencana.setBackgroundResource(R.drawable.bg_konfirmasi_rencana_btn)
             btn_konfirmas_rencana.setTextColor(Color.parseColor("#ffffff"))
         }
+    }
+
+    override fun showNextButtonClicked(title: String) {
+        DialogKonfirmasi.newInstance(title).show(supportFragmentManager, DialogKonfirmasi.TAG)
+    }
+
+    override fun showBack() {
+        finish()
     }
 
 }

@@ -74,8 +74,8 @@ class RencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
             )
         )
 
-        val adapterTripPopuler = AdapterTripPopulerRencanaActivity(listTripPopuler)
-        val adapterTrip = AdapterTripRencanaActivity(listTrip)
+        val adapterTripPopuler = AdapterTripPopulerRencanaActivity(listTripPopuler, this)
+        val adapterTrip = AdapterTripRencanaActivity(listTrip, this)
         val linearLayoutTripPopuler = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val linearLayoutTrip = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -91,6 +91,10 @@ class RencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
         listener.showBack()
     }
 
+    fun itemClicked() {
+        listener.showItemClicked()
+    }
+
     interface Listener {
         fun showData(
             adapterTripPopuler: AdapterTripPopulerRencanaActivity,
@@ -99,5 +103,6 @@ class RencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
             linearLayoutTrip: LinearLayoutManager
         )
         fun showBack()
+        fun showItemClicked()
     }
 }

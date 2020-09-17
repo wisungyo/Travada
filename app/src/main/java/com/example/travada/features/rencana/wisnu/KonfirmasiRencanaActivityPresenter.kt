@@ -49,6 +49,14 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
         listener.showNextButtonCondition(condition)
     }
 
+    fun nextButtonClicked() {
+        listener.showNextButtonClicked("Detail pemesanan sudah benar?")
+    }
+
+    fun doBack() {
+        listener.showBack()
+    }
+
     /*
         LISTENER
      */
@@ -59,5 +67,7 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
             linearLayoutManager: LinearLayoutManager
         )
         fun showNextButtonCondition(condition: Boolean)
+        fun showNextButtonClicked(title: String)
+        fun showBack()
     }
 }

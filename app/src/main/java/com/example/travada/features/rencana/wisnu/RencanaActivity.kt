@@ -1,5 +1,6 @@
 package com.example.travada.features.rencana.wisnu
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,5 +41,10 @@ class RencanaActivity : AppCompatActivity(), RencanaActivityPresenter.Listener {
 
     override fun showBack() {
         finish()
+    }
+
+    override fun showItemClicked() {
+        val intentItemClicked = Intent(this, PesanRencanaActivity::class.java)
+        startActivity(intentItemClicked)
     }
 }

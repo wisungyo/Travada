@@ -79,6 +79,10 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
         listener.showCicilanData(adapterRencanaPesan, linearLayoutRencanaPesan)
     }
 
+    fun doBack() {
+        listener.showBack()
+    }
+
     fun addBiaya(addBiaya: Int) {
         listener.addBiaya(addBiaya)
     }
@@ -104,6 +108,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
     interface Listener {
         fun showSpinner(arraySpinner: ArrayList<String>)
         fun showCicilanData(adapter: AdapterPesanRencanaActivity, layout: LinearLayoutManager)
+        fun showBack()
         fun addBiaya(addBiaya: Int)
         fun showAddOrang(addOrang: Int)
         fun showMinOrang(addOrang: Int)
