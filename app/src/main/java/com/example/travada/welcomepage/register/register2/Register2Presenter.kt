@@ -10,11 +10,27 @@ import java.util.*
 
 class Register2Presenter(val listener: Listener) {
 
-    fun checket(uriKTP: String, uriSelfieKTP: String, KTPnumb:String, KTPname:String, birth:String, gender:String) {
-        if (uriKTP.isNotEmpty() && uriSelfieKTP.isNotEmpty() && KTPnumb.isNotEmpty() && KTPname.isNotEmpty() && birth.isNotEmpty() && gender.isNotEmpty()) {
+    fun checket(
+        uriKTP: String,
+        uriSelfieKTP: String,
+        KTPnumb: String,
+        KTPname: String,
+        birth: String,
+        gender: String
+    ) {
+        if (uriKTP.isNotEmpty() && uriSelfieKTP.isNotEmpty() && KTPnumb.length == 16 && KTPname.isNotEmpty() && birth.isNotEmpty() && gender.isNotEmpty()) {
             listener.btnActive()
         } else {
             listener.btnInactive()
+        }
+    }
+
+    fun checkKTPnumb(KTPnumb: String){
+        if (KTPnumb.length != 16) {
+            listener.errKTPnumb("Nomor KTP harus 16 digit")
+            listener.btnInactive()
+        } else {
+            listener.errKTPnumb(null)
         }
     }
 
@@ -30,7 +46,7 @@ class Register2Presenter(val listener: Listener) {
         listener.goToTakePicSelfieKTPActivity()
     }
 
-    fun setDatepicker(cal:android.icu.util.Calendar, text:String) {
+    fun setDatepicker(cal: android.icu.util.Calendar, text: String) {
         if (text.isNotEmpty()) {
             val date = SimpleDateFormat("dd-MM-yyyy").parse(text)
             val year = SimpleDateFormat("yyyy").format(date).toInt()
@@ -54,5 +70,6 @@ class Register2Presenter(val listener: Listener) {
         fun goToTakePicSelfieKTPActivity()
         fun btnBack()
         fun callDatepicker(cal: Calendar)
+        fun errKTPnumb(text: String?)
     }
 }

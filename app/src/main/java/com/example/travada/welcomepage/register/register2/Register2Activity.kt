@@ -17,6 +17,7 @@ import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.travada.R
+import com.example.travada.features.tabungan.helper.CalendarHelper
 import com.example.travada.welcomepage.register.register3.Register3Activity
 import com.example.travada.welcomepage.register.takepicKTP.TakePicKTPActivity
 import com.example.travada.welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity
@@ -74,7 +75,7 @@ class Register2Activity : AppCompatActivity(), Register2Presenter.Listener {
         }
 
         radio_group.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+            RadioGroup.OnCheckedChangeListener { _, checkedId ->
                 val radio: RadioButton = findViewById(checkedId)
                 gender = radio.text.toString()
                 presenter.checket(
@@ -114,6 +115,7 @@ class Register2Activity : AppCompatActivity(), Register2Presenter.Listener {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                presenter.checkKTPnumb(et_KTPnumb.text.toString())
                 presenter.checket(
                     uriKTP,
                     uriSelfieKTP,
@@ -158,7 +160,7 @@ class Register2Activity : AppCompatActivity(), Register2Presenter.Listener {
                     R.drawable.ic_outline_check_circle_24,
                     0
                 )
-                data?.getStringExtra("result")?.let { uriSelfieKTP = it  }
+                data?.getStringExtra("result")?.let { uriSelfieKTP = it }
                 presenter.checket(
                     uriKTP,
                     uriSelfieKTP,
@@ -232,13 +234,19 @@ class Register2Activity : AppCompatActivity(), Register2Presenter.Listener {
             }
         }
 
-        DatePickerDialog(
+        val dialog = DatePickerDialog(
             this@Register2Activity,
             dateSetListener,
             cal.get(android.icu.util.Calendar.YEAR),
             cal.get(android.icu.util.Calendar.MONTH),
             cal.get(android.icu.util.Calendar.DAY_OF_MONTH)
-        ).show()
+        )
+        dialog.datePicker.maxDate = CalendarHelper.getCurrentDateInMills()
+        dialog.show()
+    }
+
+    override fun errKTPnumb(text: String?) {
+        til_KTPnumb.error = text
     }
 
 }

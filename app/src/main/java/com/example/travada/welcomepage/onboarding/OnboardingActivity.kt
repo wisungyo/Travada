@@ -14,26 +14,42 @@ import kotlinx.android.synthetic.main.activity_onboarding.*
 class OnboardingActivity : AppCompatActivity() {
 
     val onBoarding = arrayListOf(
+//        SlideOnboarding(
+//            "TRANSAKSI MUDAH",
+//            "Segala transaksi perbankan jadi lebih \n" +
+//                    "mudah tanpa ribet",
+//            R.drawable.image_onboarding1
+//        ),
+//        SlideOnboarding(
+//            "TABUNGAN LIBURAN",
+//            "Wujudkan dan percepat liburanmu \n" +
+//                    "dengan menabung. Liburan bareng \n" +
+//                    " teman kini lebih mudah dengan \n" +
+//                    " menabung bersama",
+//            R.drawable.image_onboarding2
+//        ),
+//        SlideOnboarding(
+//            "RENCANA LIBURAN",
+//            "Mudah rencanakan liburanmu.\n" +
+//                    "Pilih trip impianmu, dan cicil sekarang",
+//            R.drawable.image_onboarding3
+//        )
         SlideOnboarding(
             "TRANSAKSI MUDAH",
-            "Segala transaksi perbankan jadi lebih \n" +
-                    "mudah tanpa ribet",
+            "Segala transaksi perbankan jadi lebih mudah tanpa ribet",
             R.drawable.image_onboarding1
         ),
         SlideOnboarding(
             "TABUNGAN LIBURAN",
-            "Wujudkan dan percepat liburanmu \n" +
-                    "dengan menabung. Liburan bareng \n" +
-                    " teman kini lebih mudah dengan \n" +
-                    " menabung bersama",
+            "Wujudkan dan percepat liburanmu dengan menabung. Liburan bareng teman kini lebih mudah dengan menabung bersama",
             R.drawable.image_onboarding2
         ),
         SlideOnboarding(
             "RENCANA LIBURAN",
-            "Mudah rencanakan liburanmu.\n" +
-                    "Pilih trip impianmu, dan cicil sekarang",
+            "Mudah rencanakan liburanmu. Pilih trip impianmu, dan cicil sekarang",
             R.drawable.image_onboarding3
         )
+
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

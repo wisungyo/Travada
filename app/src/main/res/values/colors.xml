@@ -18,4 +18,6 @@
     <color name="colorBtnInactive">#EDEDED</color>
     <color name="inactiveblue">#DBEBF5</color>
     <color name="colorBtnDone">#EBF7FF</color>
+    <color name="bluelink">#2A85F4</color>
+    <color name="grayblue">#E5E5E5</color>
 </resources>

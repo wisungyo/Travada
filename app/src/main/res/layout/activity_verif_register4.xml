@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="@id/actionbar"
         app:layout_constraintBottom_toBottomOf="@id/actionbar"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
         />
 
     <TextView
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="@id/actionbar"
         app:layout_constraintBottom_toBottomOf="@id/actionbar"
         app:layout_constraintStart_toEndOf="@id/btn_back"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
         android:text="Daftar"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"

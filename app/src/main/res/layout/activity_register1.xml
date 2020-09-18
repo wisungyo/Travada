@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="@id/actionbar"
         app:layout_constraintBottom_toBottomOf="@id/actionbar"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
         />
 
     <TextView
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="@id/actionbar"
         app:layout_constraintBottom_toBottomOf="@id/actionbar"
         app:layout_constraintStart_toEndOf="@id/btn_back"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
         android:text="Daftar"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
@@ -129,7 +129,9 @@
                 android:layout_marginEnd="@dimen/marginform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_desc">
+                app:layout_constraintTop_toBottomOf="@id/tv_desc"
+                app:errorEnabled="true"
+                >
 
                 <EditText
                     android:id="@+id/et_name"
@@ -137,7 +139,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Nama Lengkap"
                     android:inputType="text"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,38 +1,39 @@
 package com.example.travada.welcomepage.login
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.core.widget.addTextChangedListener
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.travada.R
-import com.example.travada.fragmentnav.beranda.BerandaFragment
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
+import com.example.travada.util.util
 import com.example.travada.welcomepage.forgetpass.inputemail.ForgetpassInputEmailActivity
-import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
-import com.example.travada.welcomepage.register.register1.Register1Activity
-import com.example.travada.welcomepage.register.register2.Register2Activity
-import com.example.travada.welcomepage.splashscreen.SplashScreenActivity
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.btn_login
-import kotlinx.android.synthetic.main.activity_login.iv_image
-import kotlinx.android.synthetic.main.activity_login_pin.*
-import kotlinx.android.synthetic.main.activity_onboarding_end.*
-import kotlinx.android.synthetic.main.activity_splash_screen.*
+
 
 class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
     private lateinit var presenter: LoginPresenter
     val MyFragment= LoadingDialog()
+    lateinit var sharedPreferences: android.content.SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         presenter = LoginPresenter(this)
+        sharedPreferences = getSharedPreferences(
+            util.SF,
+            Context.MODE_PRIVATE
+        )
 
 
         Glide
@@ -69,7 +70,7 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
         }
 
         btn_login.setOnClickListener {
-            goToNextPage()
+            presenter.loginCheck(et_username.text.toString(), et_password.text.toString(), sharedPreferences)
         }
 
     }
@@ -95,6 +96,7 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
     override fun goToForgotPassPage() {
         val goToNextActivity = Intent(this, ForgetpassInputEmailActivity::class.java)
         startActivity(goToNextActivity)
+        finish()
     }
 
     override fun showLoadingDialog() {
@@ -107,7 +109,7 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
         MyFragment.dismiss()
     }
 
-    override fun showErrorUsername(text: String) {
+    override fun showErrorUsername(text: String?) {
         til_username.error = text
     }
 
@@ -115,12 +117,19 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
         til_username.error = null
     }
 
-    override fun showErrorPassword(text: String) {
+    override fun showErrorPassword(text: String?) {
         til_password.error = text
     }
 
     override fun hideErrorPassword() {
         til_password.error = null
+    }
+
+    override fun showToast(text: String) {
+        Toast.makeText(
+            this@LoginActivity, text,
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     companion object {

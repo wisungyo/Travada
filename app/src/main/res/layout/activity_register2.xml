@@ -18,7 +18,7 @@
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
         android:background="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintBottom_toBottomOf="@id/actionbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         android:id="@+id/actionbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
         android:fontFamily="@string/fontmedium"
         android:text="Daftar"
         android:textColor="@color/white"
@@ -170,7 +170,9 @@
                 android:layout_marginEnd="@dimen/marginform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_SelfieKTP">
+                app:layout_constraintTop_toBottomOf="@id/btn_SelfieKTP"
+                app:errorEnabled="true"
+                >
 
                 <EditText
                     android:id="@+id/et_KTPnumb"

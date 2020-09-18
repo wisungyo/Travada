@@ -6,19 +6,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.travada.R
+import com.example.travada.util.loadingdialog.LoadingDialog
 import com.example.travada.welcomepage.register.register2.Register2Activity
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_register1.*
 import kotlinx.android.synthetic.main.activity_register1.et_username
+import java.lang.reflect.Array.getInt
 
 class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
     private lateinit var presenter: Register1Presenter
+    val MyFragment = LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register1)
+
 
         presenter = Register1Presenter(this)
 
@@ -35,6 +40,7 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                presenter.checkName(et_name.text.toString())
                 presenter.checket(
                     et_name.text.toString(),
                     et_email.text.toString(),
@@ -42,8 +48,6 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
                     et_phone.text.toString(),
                     et_accountnumb.text.toString()
                 )
-
-
             }
         })
 
@@ -55,7 +59,8 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.checkemail(et_email.text.toString(), til_email)
+                errEmail(null)
+                presenter.checkEmail(et_email.text.toString())
                 presenter.checket(
                     et_name.text.toString(),
                     et_email.text.toString(),
@@ -74,7 +79,8 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.checkusername(et_username.text.toString(), til_username)
+                errUsername(null)
+                presenter.checkUsername(et_username.text.toString())
                 presenter.checket(
                     et_name.text.toString(),
                     et_email.text.toString(),
@@ -93,7 +99,8 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.checkphone(et_phone.text.toString(), til_phone)
+                errPhone(null)
+                presenter.checkPhone(et_phone.text.toString())
                 presenter.checket(
                     et_name.text.toString(),
                     et_email.text.toString(),
@@ -112,6 +119,8 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                errAccountnumb(null)
+                presenter.checkAccountnumb(et_accountnumb.text.toString())
                 presenter.checket(
                     et_name.text.toString(),
                     et_email.text.toString(),
@@ -119,12 +128,17 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
                     et_phone.text.toString(),
                     et_accountnumb.text.toString()
                 )
-
             }
         })
 
         btn_next.setOnClickListener {
-            presenter.goToNextPage()
+            presenter.checkData(
+                et_email.text.toString(),
+                et_phone.text.toString(),
+                et_accountnumb.text.toString(),
+                et_username.text.toString()
+
+            )
         }
 
         btn_back.setOnClickListener {
@@ -160,14 +174,41 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
         finish()
     }
 
-    override fun showErrorMessage(layout: TextInputLayout, message: String) {
-        layout.error = message
-        isError = true
+    override fun errName(message: String?) {
+        til_name.error = message
     }
 
-    override fun hideErrorMessage(layout: TextInputLayout) {
-        layout.error = null
-        isError = false
+    override fun errEmail(message: String?) {
+        til_email.error = message
+    }
+
+    override fun errUsername(message: String?) {
+        til_username.error = message
+    }
+
+    override fun errPhone(message: String?) {
+        til_phone.error = message
+    }
+
+    override fun errAccountnumb(message: String?) {
+        til_accountnumb.error = message
+    }
+
+    override fun showLoadingDialog() {
+        val fm = supportFragmentManager
+        MyFragment.isCancelable = false
+        MyFragment.show(fm, "Fragment")
+    }
+
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
+    }
+
+    override fun showToast(text:String) {
+        Toast.makeText(
+            this@Register1Activity, text,
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     companion object {

@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,46 +17,39 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
-        <activity android:name=".welcomepage.register.register4.VerifRegister4Activity"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".features.rencana.searchpage.TPSearchPageActivity">
+
+        </activity>
+        <activity android:name=".welcomepage.register.registerverifcode.RegisterVerifCodeActivity" />
+        <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
-        <activity android:name=".welcomepage.register.takepicKTP.TakePicKTPActivity"></activity>
+        <activity android:name=".welcomepage.register.takepicKTP.TakePicKTPActivity" />
         <activity android:name=".welcomepage.forgetpass.inputnewpass.ForgetpassInputNewPassActivity" />
         <activity android:name=".welcomepage.forgetpass.inputcode.ForgetpassInputCodeActivity" />
         <activity android:name=".welcomepage.forgetpass.inputemail.ForgetpassInputEmailActivity" />
         <activity android:name=".welcomepage.register.register4.Register4Activity" />
-        <activity android:name=".welcomepage.register.register3.Register3Activity">
-        </activity>
-        <activity android:name=".welcomepage.register.register2.Register2Activity"></activity>
-        <activity android:name=".welcomepage.register.register1.Register1Activity">
-        </activity>
+        <activity android:name=".welcomepage.register.register3.Register3Activity" />
+        <activity android:name=".welcomepage.register.register2.Register2Activity" />
+        <activity android:name=".welcomepage.register.register1.Register1Activity" />
         <activity android:name=".welcomepage.loginpin.LoginPinActivity" />
         <activity android:name=".welcomepage.login.LoginActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingEndActivity" />
-        <activity android:name=".detailriwayat.DetailRiwayatActivity"></activity>
+        <activity android:name=".detailriwayat.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity"/>
-        <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity">
-
-        </activity>
-
-        <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity">
-
-        </activity>
+        <activity android:name=".mainpage.MainPageActivity" />
+        <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
+        <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />
         <activity android:name=".features.tabungan.formtabungandua.FormTabunganTwoActivity" />
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
-        <activity android:name=".features.tabungan.maintabungan.TabunganActivity">
-
-        </activity>
-
+        <activity android:name=".features.tabungan.maintabungan.TabunganActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
         <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
