@@ -15,6 +15,11 @@ import com.example.travada.fragmentnav.riwayat.fragmentriwayat.ProsesFragmentPre
 import kotlinx.android.synthetic.main.activity_detail_rencana.*
 
 class DetailRencanaActivity : AppCompatActivity(),DetailRencanaPresenter.Listener {
+
+
+    private var expandableListView: ExpandableListView? = null
+    private var adapter: ExpandableListAdapter? = null
+    private var titleList: List<String>? = null
     private lateinit var presenter: DetailRencanaPresenter
 
     //private lateinit var data: DataGambarWisata
@@ -41,7 +46,46 @@ class DetailRencanaActivity : AppCompatActivity(),DetailRencanaPresenter.Listene
         presenter.fetchFasilitasWisata()
         presenter.fetchGambarWisata()
         presenter.fetchRencanaPerjalanan()
-        presenter.dataInfoPerjalanan()
+
+        // info tambahan
+        expandableListView = findViewById(R.id.expendableList)
+        if (expandableListView != null) {
+            val listData = DataInfoTambahan.dataInfoTambahan
+            titleList = ArrayList(listData.keys)
+            adapter = InfoTambahanAdapter(this, titleList as ArrayList<String>, listData)
+            expandableListView!!.setAdapter(adapter)
+
+            expandableListView!!.setOnGroupExpandListener { groupPosition ->
+                Toast.makeText(
+                    applicationContext,
+                    (titleList as ArrayList<String>)[groupPosition] + " List Expanded.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            expandableListView!!.setOnGroupCollapseListener { groupPosition ->
+                Toast.makeText(
+                    applicationContext,
+                    (titleList as ArrayList<String>)[groupPosition] + " List Collapsed.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            expandableListView!!.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
+                Toast.makeText(
+                    applicationContext,
+                    "Clicked: " + (titleList as ArrayList<String>)[groupPosition] + " -> " + listData[(
+                            titleList as
+                                    ArrayList<String>
+                            )
+                            [groupPosition]]!!.get(
+                        childPosition
+                    ),
+                    Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+        }
 
         tvSelengkapnya.setOnClickListener {
             btnSelengkapnyaSatu()
