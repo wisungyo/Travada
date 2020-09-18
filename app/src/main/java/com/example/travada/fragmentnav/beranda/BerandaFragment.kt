@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.berita.BeritaActivity
 import com.example.travada.berita.DetailBeritaActivity
+import com.example.travada.features.rencana.wisnu.RencanaActivity
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
 import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
@@ -19,9 +20,12 @@ import com.example.travada.fragmentnav.beranda.adapter.AdapterTrip
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.sampeldata.DataBerita
 import com.example.travada.sampeldata.DataUser
+import kotlinx.android.synthetic.main.activity_pesan_rencana.*
 import kotlinx.android.synthetic.main.fragment_beranda.*
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
+import java.util.*
 
 class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     private lateinit var presenter: BerandaFragmentPresenter
@@ -47,16 +51,13 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         iv_mainpage_card_pembelian.setOnClickListener { presenter.doPembelian() }
         iv_mainpage_card_ewallet.setOnClickListener { presenter.doEwallet() }
         iv_mainpage_card_tabungan.setOnClickListener {
-            //TODO gimmic buat besok senen
-            val goToNextActivity = Intent(context, TabunganActivity::class.java)
-            startActivity(goToNextActivity)
+            presenter.doTabungan()
         }
         iv_mainpage_card_rencana.setOnClickListener { presenter.doRencana() }
 
         // lihat semua berita
         tv_mainpage_berita_lihat_semua.setOnClickListener {
-            val intentSemuaBerita = Intent(context, BeritaActivity::class.java)
-            startActivity(intentSemuaBerita)
+            presenter.doLihatSemuaBerita()
         }
     }
 
@@ -71,10 +72,14 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         linearLayoutTrip: LinearLayoutManager,
         linearLayoutBerita: LinearLayoutManager
     ) {
-        val formatter: NumberFormat = DecimalFormat("#,###")
-        val formattedSaldo: String = formatter.format(dataUser.saldo)
-        tv_mainpage_username.text = dataUser.name
-        tv_mainpage_card_saldo.text = "Rp. $formattedSaldo"
+//        val formatter: NumberFormat = DecimalFormat("#,###")
+//        val formattedSaldo: String = formatter.format(dataUser.saldo)
+//        tv_mainpage_username.text = dataUser.name
+//        tv_mainpage_card_saldo.text = "Rp. $formattedSaldo"
+
+        val df = DecimalFormat("#,###")
+        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+        tv_mainpage_card_saldo.text = "Rp. ${df.format(dataUser.saldo)}"
 
         rv_mainpage_tabungan.adapter = adapterTabungan
         rv_mainpage_informasi.adapter = adapterInformasi
@@ -120,24 +125,23 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     }
 
     override fun showTabungan() {
-//        Toast.makeText(
-//            context,
-//            "Tabungan under construction..",
-//            Toast.LENGTH_SHORT
-//        ).show()
+        val goToNextActivity = Intent(context, TabunganActivity::class.java)
+        startActivity(goToNextActivity)
     }
 
     override fun showRencana() {
-        Toast.makeText(
-            context,
-            "Rencana under construction..",
-            Toast.LENGTH_SHORT
-        ).show()
+        val intentRencana = Intent(context, RencanaActivity::class.java)
+        startActivity(intentRencana)
     }
 
     override fun showDetailBerita(itemBerita: DataBerita) {
         val intentToDetailBerita = Intent(context, DetailBeritaActivity::class.java)
         intentToDetailBerita.putExtra("DATA", itemBerita)
         startActivity(intentToDetailBerita)
+    }
+
+    override fun showLihatSemuaBerita() {
+        val intentSemuaBerita = Intent(context, BeritaActivity::class.java)
+        startActivity(intentSemuaBerita)
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_dialog_konfirmasi_title"
+        android:text="Detail pemesanan sudah benar?"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        android:textColor="#2A85F4"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_dialog_konfirmasi_btn_yes"
+        android:text="Ya"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="11dp"
+        android:background="@drawable/bg_konfirmasi_rencana_btn"
+        android:layout_marginTop="24dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_konfirmasi_title"
+        app:layout_constraintStart_toStartOf="@id/tv_dialog_konfirmasi_title"
+        app:layout_constraintEnd_toEndOf="@id/tv_dialog_konfirmasi_title" />
+
+    <Button
+        android:id="@+id/btn_dialog_konfirmasi_btn_no"
+        android:text="Cek Lagi"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textColor="#2A85F4"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="11dp"
+        android:background="@drawable/bg_konfirmasi_rencana_btn_stroke"
+        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btn_dialog_konfirmasi_btn_yes"
+        app:layout_constraintStart_toStartOf="@id/tv_dialog_konfirmasi_title"
+        app:layout_constraintEnd_toEndOf="@id/tv_dialog_konfirmasi_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_dialog_konfirmasi_btn_no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

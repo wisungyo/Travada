@@ -12,35 +12,35 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
             DataCicilan(
                 "ABC123",
                 "DP",
-                "4,500,000",
+                2500000,
                 "09 Juli 2020",
                 "Menunggu Persetujuan"
             ),
             DataCicilan(
                 "ABC123",
                 "Cicilan 1/4",
-                "2,500,000",
+                2500000,
                 "09 Agustus 2020",
                 "Dibayar"
             ),
             DataCicilan(
                 "ABC123",
                 "Cicilan 2/4",
-                "2,500,000",
+                2500000,
                 "09 September 2020",
                 "Menunggu Pembayaran"
             ),
             DataCicilan(
                 "ABC123",
                 "Cicilan 3/4",
-                "2,500,000",
+                2500000,
                 "09 Oktober 2020",
                 "Expired"
             ),
             DataCicilan(
                 "ABC123",
                 "Cicilan 4/4",
-                "2,500,000",
+                2500000,
                 "09 Agustus 2020",
                 "November Pembayaran"
             )

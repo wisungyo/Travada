@@ -4,9 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-feature android:name="android.hardware.camera.any" />
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -23,6 +21,11 @@
         </activity>
         <activity android:name=".welcomepage.register.registerverifcode.RegisterVerifCodeActivity" />
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
+        <activity android:name=".features.rencana.wisnu.KonfirmasiRencanaActivity"></activity>
+        <activity android:name=".features.rencana.wisnu.PesanRencanaActivity"></activity>
+        <activity android:name=".features.rencana.wisnu.RencanaActivity">
+        </activity>
+        <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
         <activity android:name=".welcomepage.register.takepicKTP.TakePicKTPActivity" />
         <activity android:name=".welcomepage.forgetpass.inputnewpass.ForgetpassInputNewPassActivity" />
@@ -38,6 +41,9 @@
         <activity android:name=".detailriwayat.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
+        <activity android:name=".mainpage.MainPageActivity"></activity>
+        <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
+        <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
         <activity android:name=".mainpage.MainPageActivity" />
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
         <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />

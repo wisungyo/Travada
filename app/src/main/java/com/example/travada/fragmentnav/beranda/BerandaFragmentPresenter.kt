@@ -139,6 +139,10 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         listener.showDetailBerita(itemBerita)
     }
 
+    fun doLihatSemuaBerita() {
+        listener.showLihatSemuaBerita()
+    }
+
     interface Listener {
         fun showData(
             dataUser: DataUser,
@@ -158,5 +162,6 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         fun showTabungan()
         fun showRencana()
         fun showDetailBerita(itemBerita: DataBerita)
+        fun showLihatSemuaBerita()
     }
 }
