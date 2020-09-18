@@ -2,7 +2,7 @@ package com.example.travada.welcomepage.login
 
 import android.content.SharedPreferences
 import com.example.travada.welcomepage.login.LoginActivity.Companion.isError
-import com.example.travada.welcomepage.network.ApiClient
+import com.example.travada.welcomepage.network.WPApiClient
 import com.example.travada.welcomepage.pojo.PostLoginRequest
 import com.example.travada.welcomepage.pojo.PostLoginResponse
 import com.google.gson.Gson
@@ -18,7 +18,7 @@ class LoginPresenter(val listener: Listener) {
         )
 
         listener.showLoadingDialog()
-        ApiClient.apiServices.Login(login).enqueue(object : Callback<PostLoginResponse> {
+        WPApiClient.WP_API_SERVICES.Login(login).enqueue(object : Callback<PostLoginResponse> {
             override fun onResponse(
                 call: Call<PostLoginResponse>,
                 response: Response<PostLoginResponse>

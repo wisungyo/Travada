@@ -1,13 +1,10 @@
 package com.example.travada.welcomepage.register.register1
 
-import android.content.SharedPreferences
 import android.util.Patterns
 import com.example.travada.welcomepage.login.LoginActivity
-import com.example.travada.welcomepage.network.ApiClient
+import com.example.travada.welcomepage.network.WPApiClient
 import com.example.travada.welcomepage.pojo.PostCheckRegister1Request
 import com.example.travada.welcomepage.pojo.PostCheckRegister1Response
-import com.example.travada.welcomepage.pojo.PostLoginRequest
-import com.example.travada.welcomepage.pojo.PostLoginResponse
 import com.example.travada.welcomepage.register.register1.Register1Activity.Companion.isError
 import com.google.gson.Gson
 import retrofit2.Call
@@ -22,7 +19,7 @@ class Register1Presenter(val listener: Register1Presenter.Listener) {
         )
 
         listener.showLoadingDialog()
-        ApiClient.apiServices.checkRegister1(register1).enqueue(object : Callback<PostCheckRegister1Response> {
+        WPApiClient.WP_API_SERVICES.checkRegister1(register1).enqueue(object : Callback<PostCheckRegister1Response> {
             override fun onFailure(call: Call<PostCheckRegister1Response>, t: Throwable) {
                 listener.showToast(t.message.toString())
                 listener.hideLoadingDialog()

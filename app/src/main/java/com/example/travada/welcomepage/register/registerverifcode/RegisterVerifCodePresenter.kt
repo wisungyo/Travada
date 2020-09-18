@@ -2,7 +2,7 @@ package com.example.travada.welcomepage.register.registerverifcode
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import com.example.travada.welcomepage.network.ApiClient
+import com.example.travada.welcomepage.network.WPApiClient
 import com.example.travada.welcomepage.pojo.PostConfirmRequest
 import com.example.travada.welcomepage.pojo.PostConfirmResponse
 import com.example.travada.welcomepage.pojo.PostResendRequest
@@ -38,7 +38,7 @@ class RegisterVerifCodePresenter(val listener: Listener) {
 
 
         listener.showLoadingDialog()
-        ApiClient.apiServices.confirm(confirm).enqueue(object : Callback<PostConfirmResponse> {
+        WPApiClient.WP_API_SERVICES.confirm(confirm).enqueue(object : Callback<PostConfirmResponse> {
             override fun onFailure(call: Call<PostConfirmResponse>, t: Throwable) {
                 listener.showToast(t.message.toString())
                 listener.hideLoadingDialog()
@@ -76,7 +76,7 @@ class RegisterVerifCodePresenter(val listener: Listener) {
         )
 
         listener.showLoadingDialog()
-        ApiClient.apiServices.resend(resend).enqueue(object : Callback<PostResendResponse> {
+        WPApiClient.WP_API_SERVICES.resend(resend).enqueue(object : Callback<PostResendResponse> {
             override fun onFailure(call: Call<PostResendResponse>, t: Throwable) {
                 listener.showToast(t.message.toString())
                 listener.hideLoadingDialog()

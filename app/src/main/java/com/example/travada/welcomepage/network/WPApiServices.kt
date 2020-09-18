@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface ApiServices {
+interface WPApiServices {
 
     //Method Post
     @POST("auth/login")

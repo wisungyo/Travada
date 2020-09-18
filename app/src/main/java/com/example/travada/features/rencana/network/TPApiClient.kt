@@ -1,16 +1,14 @@
-package com.example.travada.welcomepage.network
+package com.example.travada.features.rencana.network
 
-import android.icu.util.TimeUnit
 import com.example.travada.util.util
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiClient {
+object TPApiClient {
+
     private const val BASE_URL = util.BASE_URL
-
-
 
     private val logging: HttpLoggingInterceptor
         get() {
@@ -26,14 +24,14 @@ object ApiClient {
         .writeTimeout(90, java.util.concurrent.TimeUnit.SECONDS)
         .build()
 
-    val apiServices : ApiServices by lazy {
+    val TP_API_SERVICES : TPApiServices by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
 
-        retrofit.create(ApiServices::class.java)
+        retrofit.create(TPApiServices::class.java)
     }
 
 }
