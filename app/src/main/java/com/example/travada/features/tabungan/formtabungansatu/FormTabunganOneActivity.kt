@@ -201,7 +201,6 @@ class FormTabunganOneActivity : AppCompatActivity(),
                 img_camera.visibility = View.GONE
                 ivImageTabungan.isClickable = false
                 tvImageMax.visibility = View.INVISIBLE
-
             } else {
                 Toast.makeText(this, "Image Loading Failed", Toast.LENGTH_LONG).show()
             }
@@ -273,6 +272,4 @@ class FormTabunganOneActivity : AppCompatActivity(),
         btnLanjutFormOne.setBackgroundResource(R.drawable.bg_inactive)
         btnLanjutFormOne.isClickable = false
     }
-
-
 }

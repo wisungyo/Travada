@@ -13,8 +13,6 @@ class DetailRencanaPresenter(val listener: Listener) : AppCompatActivity() {
         val INTENT_PARCELABEL = "OBJECT_IMAGE"
     }
 
-
-
     fun fetchGambarWisata() {
         val gambarWisata = arrayListOf(
             DataGambarWisata(R.drawable.img_tokyo),
@@ -79,8 +77,8 @@ class DetailRencanaPresenter(val listener: Listener) : AppCompatActivity() {
             adapterFasilitasWIsata: FasilitasWisataAdapter,
             linearLayoutFasilitasWisata: LinearLayoutManager) {}
 
-
         fun btnSelengkapnyaSatu()
+
         fun btnSelengkapnyaDua()
 
     }
