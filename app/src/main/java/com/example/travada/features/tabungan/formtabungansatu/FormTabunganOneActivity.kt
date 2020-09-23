@@ -183,12 +183,11 @@ class FormTabunganOneActivity : AppCompatActivity(),
         }
     }
 
-    //Method yang menangani hasil / respon dari Implicit Intent ke Aplikasi Gallery maupun Aplikasi Camera
+
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        //Jika user memilih Gallery, menjalankan block ini.
         if (requestCode == GALLERY_REQUEST) {
             //Cek data hasil responnya tidak null
             if (data != null) {
@@ -255,7 +254,7 @@ class FormTabunganOneActivity : AppCompatActivity(),
     }
 
 
-    // TODO : tombol lanjut ke form berikutnya
+
     override fun btnActive() {
         btnLanjutFormOne.setBackgroundResource(R.drawable.bg_active)
         btnLanjutFormOne.setTextColor(Color.parseColor("#ffffff"))

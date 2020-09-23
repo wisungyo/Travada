@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.os.bundleOf
 import com.example.travada.R
-import com.example.travada.features.rencana.detailrencana.DetailRencanaPresenter.Companion.INTENT_PARCELABEL
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_gambar_wisata.*
 import kotlin.random.Random.Default.Companion
@@ -45,11 +44,11 @@ class GambarWisataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val gambar = ivGambarWisata
         val bundle = arguments
-        if (bundle != null) {
-            val parseData = bundle.getParcelable<DataGambarWisata>(INTENT_PARCELABEL)
-            gambar.setImageResource(parseData?.gambar!!)
-
-        }
+//        if (bundle != null) {
+//            val parseData = bundle.getParcelable<DataGambarWisata>(INTENT_PARCELABEL)
+//            gambar.setImageResource(parseData?.gambar!!)
+//
+//        }
 
 }
 

@@ -1,85 +1,61 @@
 package com.example.travada.features.rencana.detailrencana
 
-import android.net.sip.SipSession
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.features.rencana.network.TPApiClient
+import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class DetailRencanaPresenter(val listener: Listener) : AppCompatActivity() {
+class DetailRencanaPresenter(val listener: Listener) {
 
+    fun getDetailRencana(){
+        TPApiClient.TP_API_SERVICES.getDetailDestination().enqueue(object : Callback<GetDestinasiDetailResponse> {
+            override fun onFailure(call: Call<GetDestinasiDetailResponse>, t: Throwable) {
+                t.message?.let {
+            // isi
+                }
+            }
 
-    companion object {
-        val INTENT_PARCELABEL = "OBJECT_IMAGE"
+            override fun onResponse(call: Call<GetDestinasiDetailResponse>, response: Response<GetDestinasiDetailResponse>) {
+                response.body()?.data?.let {
+                    listener.implementDetailDestinasi(it.toMutableList())
+                }
+            }
+        })
     }
 
-    fun fetchGambarWisata() {
-        val gambarWisata = arrayListOf(
-            DataGambarWisata(R.drawable.img_tokyo),
-            DataGambarWisata(R.drawable.img_kyoto),
-            DataGambarWisata(R.drawable.img_china),
-            DataGambarWisata(R.drawable.img_beijing),
-            DataGambarWisata(R.drawable.img_kyoto)
-        )
-        val adapterGambar = GambarWisataAdapter(gambarWisata)
-        val linearLayoutGambarWisata =  LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        listener.showDataGambarWisata(adapterGambar,linearLayoutGambarWisata)
-    }
 
-    fun fetchFasilitasWisata() {
-        val fasilitasPerjalan = arrayListOf(
-            DataFasitasWisata("Return full servica flight"),
-            DataFasitasWisata("3/4 starts hotel"),
-            DataFasitasWisata("Air port transfer"),
-            DataFasitasWisata("3 days subway pass"),
-            DataFasitasWisata("Trip Buddy")
-        )
-        val adapterFasilitasPerjalanan = FasilitasWisataAdapter(fasilitasPerjalan)
-        val linearLayoutFasilitasWisata = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-        listener.showDataFasilitasWisata(adapterFasilitasPerjalanan,linearLayoutFasilitasWisata)
-    }
+//        val adapterGambar = GambarWisataAdapter(gambarWisata,this)
+//        val linearLayoutGambarWisata =  LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        listener.showDataGambarWisata(adapterGambar,linearLayoutGambarWisata)
 
-    fun fetchRencanaPerjalanan() {
-        val rencanaPerjalanan = arrayListOf(
-            DataRencanaPerjalanan(
-                "Hari ke-1",
-                "Jakarta",
-                "Peserta akan berkumpul di Bandara Soekarno Hatta Jakarta sesuai waktu dan tempat yang akan ditetapkan nanti. Setelah check-in, mengurus bagasi, dan lain-lain, kita akan terbang menuju negara Jepang. Sesampainya di Haneda, kita akan langsung check in Hotel"
-            ),
-            DataRencanaPerjalanan(
-                "Hari ke-2",
-                "Tokyo",
-                "Peserta akan berkumpul di Bandara Soekarno Hatta Jakarta sesuai waktu dan tempat yang akan ditetapkan nanti. Setelah check-in, mengurus bagasi, dan lain-lain, kita akan terbang menuju negara Jepang. Sesampainya di Haneda, kita akan langsung check in Hotel"
-            ),
-            DataRencanaPerjalanan(
-                "Hari ke-3",
-                "China",
-                "Peserta akan berkumpul di Bandara Soekarno Hatta Jakarta sesuai waktu dan tempat yang akan ditetapkan nanti. Setelah check-in, mengurus bagasi, dan lain-lain, kita akan terbang menuju negara Jepang. Sesampainya di Haneda, kita akan langsung check in Hotel"
-            )
-        )
-        val adapterRencanaPerjalanan = RencanaPerjalananAdapter(rencanaPerjalanan)
-        val linearLayoutRencanaPerjalanan = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        listener.showDataRencanaPerjalanan(adapterRencanaPerjalanan,linearLayoutRencanaPerjalanan)
-    }
+
+//        val adapterRencanaPerjalanan = RencanaPerjalananAdapter(rencanaPerjalanan)
+//        val linearLayoutRencanaPerjalanan = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+//        listener.showDataRencanaPerjalanan(adapterRencanaPerjalanan,linearLayoutRencanaPerjalanan)
+
 
 
     interface Listener {
 
-        fun showDataGambarWisata(
-            adapterGambarWisata: GambarWisataAdapter,
-            linearLayoutGambarWisata: LinearLayoutManager) {}
+//        fun showDataGambarWisata(
+//            adapterGambarWisata: GambarWisataAdapter,
+//            linearLayoutGambarWisata: LinearLayoutManager) {}
+//
+//        fun showDataRencanaPerjalanan(
+//            adapterRencanaPerjalanan: RencanaPerjalananAdapter,
+//            linearLayoutRencanaWisata: LinearLayoutManager) {}
 
-        fun showDataRencanaPerjalanan(
-            adapterRencanaPerjalanan: RencanaPerjalananAdapter,
-            linearLayoutRencanaWisata: LinearLayoutManager) {}
 
-        fun showDataFasilitasWisata(
-            adapterFasilitasWIsata: FasilitasWisataAdapter,
-            linearLayoutFasilitasWisata: LinearLayoutManager) {}
+        // fun btnSelengkapnyaDeskripsi()
 
-        fun btnSelengkapnyaSatu()
+        // fun btnSelengkapnyaPerjalanan()
 
-        fun btnSelengkapnyaDua()
+        fun implementDetailDestinasi(getDestinasi: MutableList<GetDestinasiDetailResponse.Data>){}
+
 
     }
 }
