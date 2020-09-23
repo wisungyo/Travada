@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class GetDestinasiDetailResponse(
     @SerializedName("data")
-    val `data`: List<Data>,
+    val `data`: Data,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

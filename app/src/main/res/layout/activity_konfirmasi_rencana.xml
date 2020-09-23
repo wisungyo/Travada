@@ -146,18 +146,19 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_konfirmasi_rencana"
-                android:orientation="vertical"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never"
-                tools:listitem="@layout/konfirmasi_rencana_item"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:clipChildren="false"
-                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_konfirmasi_rencana_detail_pemesanan"
+                android:layout_marginTop="12dp"
+                android:clipChildren="false"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/tv_konfirmasi_rencana_detail_pemesanan"
+                tools:listitem="@layout/konfirmasi_rencana_item" />
 
             <View
                 android:id="@+id/view_konfirmasi_rencana_separator"

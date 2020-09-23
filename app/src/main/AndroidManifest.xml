@@ -27,8 +27,11 @@
         <activity android:name=".welcomepage.register.registerverifcode.RegisterVerifCodeActivity" />
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
         <activity android:name=".features.rencana.wisnu.KonfirmasiRencanaActivity"></activity>
-        <activity android:name=".features.rencana.wisnu.PesanRencanaActivity"></activity>
+        <activity android:name=".features.rencana.wisnu.PesanRencanaActivity">
+
+        </activity>
         <activity android:name=".features.rencana.wisnu.RencanaActivity">
+
         </activity>
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
         <activity android:name=".welcomepage.register.takepicKTP.TakePicKTPActivity" />

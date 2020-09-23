@@ -22,6 +22,7 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesan_rencana)
+
         presenter = PesanRencanaActivityPresenter(this)
         jumlahBiaya = 0
         jumlahOrang = 1
