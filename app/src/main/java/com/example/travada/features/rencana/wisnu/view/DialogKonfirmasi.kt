@@ -1,4 +1,4 @@
-package com.example.travada.features.rencana.wisnu
+package com.example.travada.features.rencana.wisnu.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -11,20 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.berita.BeritaActivity
 import com.example.travada.berita.DetailBeritaActivity
-import com.example.travada.features.rencana.wisnu.RencanaActivity
+import com.example.travada.features.rencana.wisnu.view.RencanaActivity
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
 import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTabungan
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTrip
-import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.sampeldata.DataBerita
 import com.example.travada.sampeldata.DataUser
-import kotlinx.android.synthetic.main.activity_pesan_rencana.*
 import kotlinx.android.synthetic.main.fragment_beranda.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import java.text.NumberFormat
 import java.util.*
 
 class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {

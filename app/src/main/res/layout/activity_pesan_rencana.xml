@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".features.rencana.wisnu.PesanRencanaActivity">
+    tools:context=".features.rencana.wisnu.view.PesanRencanaActivity">
 
     <View
         android:id="@+id/view_rencana_pesan"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/roboto"
-        android:text="Tokyo &amp; Mount Fuji"
+        android:text=" "
         android:textColor="#fff"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/view_rencana_pesan"

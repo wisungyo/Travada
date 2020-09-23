@@ -1,10 +1,11 @@
-package com.example.travada.features.rencana.wisnu
+package com.example.travada.features.rencana.wisnu.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
 import com.example.travada.sampeldata.DataCicilanUser
 import kotlinx.android.synthetic.main.konfirmasi_rencana_item.view.*
 import kotlin.collections.ArrayList

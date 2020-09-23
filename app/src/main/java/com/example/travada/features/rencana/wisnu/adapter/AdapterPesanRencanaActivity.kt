@@ -1,16 +1,15 @@
-package com.example.travada.features.rencana.wisnu
+package com.example.travada.features.rencana.wisnu.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.features.rencana.wisnu.presenter.PesanRencanaActivityPresenter
 import com.example.travada.sampeldata.DataCicilan
-import kotlinx.android.synthetic.main.activity_pesan_rencana.*
 import kotlinx.android.synthetic.main.rencana_pesan_card_item.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 

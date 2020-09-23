@@ -1,13 +1,18 @@
-package com.example.travada.features.rencana.wisnu
+package com.example.travada.features.rencana.wisnu.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.features.rencana.pojo.GetDestinasiResponse
+import com.example.travada.features.rencana.wisnu.adapter.AdapterPesanRencanaActivity
+import com.example.travada.features.rencana.wisnu.presenter.PesanRencanaActivityPresenter
+import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
 import kotlinx.android.synthetic.main.activity_pesan_rencana.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -23,9 +28,11 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesan_rencana)
         presenter = PesanRencanaActivityPresenter(this)
+        val intentPosition = intent.getIntExtra("DESTINASI_ID", 3)
         jumlahBiaya = 0
         jumlahOrang = 1
 
+        presenter.fetchMainData(intentPosition)
         presenter.fetchSpinnerData()
         presenter.fetchCicilanData()
 
@@ -56,8 +63,16 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         }
 
         btn_rencana_pesan.setOnClickListener {
-            presenter.doKonfirmasi()
+            presenter.doKonfirmasi(intentPosition)
         }
+    }
+
+    override fun showMainData(data: GetDestinasiResponse.Data) {
+        tv_rencana_pesan_topbar.text = data.namaTrip
+
+        val df = DecimalFormat("#,###")
+        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+        tv_rencana_pesan_total.text = "Rp. ${df.format(data.hargaSatuan)}"
     }
 
     override fun showSpinner(arraySpinner: ArrayList<String>) {
@@ -78,6 +93,14 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     ) {
         rv_rencana_pesan_card.adapter = adapter
         rv_rencana_pesan_card.layoutManager = layout
+    }
+
+    override fun showDataError(localizedMessage: String?) {
+        Toast.makeText(
+            this,
+            "Error : ${localizedMessage}",
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun showBack() {
@@ -102,12 +125,11 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         et_rencana_pesan_jumlah_orang.setText(jumlahOrang.toString())
     }
 
-    override fun showKonfirmasi() {
+    override fun showKonfirmasi(position: Int) {
         val intentKonfirmasi = Intent(this, KonfirmasiRencanaActivity::class.java)
-        val bundleKonfirmasi = Bundle()
-        bundleKonfirmasi.putInt("JUMLAH_ORANG", jumlahOrang)
-        bundleKonfirmasi.putInt("JUMLAH_BIAYA", jumlahBiaya)
-        intentKonfirmasi.putExtras(bundleKonfirmasi)
+        intentKonfirmasi.putExtra("DESTINASI_ID", position)
+        intentKonfirmasi.putExtra("JUMLAH_ORANG", jumlahOrang)
+        intentKonfirmasi.putExtra("JUMLAH_BIAYA", jumlahBiaya)
         startActivity(intentKonfirmasi)
     }
 }
