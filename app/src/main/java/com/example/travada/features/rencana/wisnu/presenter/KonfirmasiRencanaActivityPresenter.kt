@@ -14,7 +14,7 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
     private lateinit var listUser: ArrayList<DataCicilanUser>
 
     fun fetchMainData(position: Int, jumlahOrang: Int) {
-        TPApiClient.TP_API_SERVICES.getDestination(position+1).enqueue(object : Callback<GetDestinasiResponse> {
+        TPApiClient.TP_API_SERVICES.getDestination(position).enqueue(object : Callback<GetDestinasiResponse> {
             override fun onResponse(
                 call: Call<GetDestinasiResponse>,
                 response: Response<GetDestinasiResponse>

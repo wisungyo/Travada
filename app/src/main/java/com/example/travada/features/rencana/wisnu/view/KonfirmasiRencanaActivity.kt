@@ -58,21 +58,18 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         }
 
         // get the title from API
+        tv_konfirmasi_rencana_topbar.text = data.namaTrip
         tv_konfirmasi_rencana_title.text = data.namaTrip
 
         // get the people from API
-        tv_konfirmasi_rencana_member.text = "Jumlah : ${data.kapasitas} orang"
+        val intentJumlahOrang = intent.getIntExtra("JUMLAH_ORANG", 1)
+        tv_konfirmasi_rencana_member.text = "Jumlah : ${intentJumlahOrang} orang"
         
         // get the schedule from API
         tv_konfirmasi_rencana_date.text = "${data.berangkat} - ${data.pulang}"
 
         // get the total member
         tv_konfirmasi_rencana_jumlah_orang.text = "${jumlahOrang} orang"
-
-        // get total from API
-        val df = DecimalFormat("#,###")
-        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-        tv_konfirmasi_rencana_jumlah_biaya.text = "Rp. ${df.format(data.hargaSatuan)}"
     }
 
     override fun showDataCicilan(jumlahOrang: Int, jumlahBiaya: Int) {

@@ -3,24 +3,30 @@ package com.example.travada.features.rencana.wisnu.presenter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.features.rencana.network.TPApiClient
+import com.example.travada.features.rencana.pojo.GetCicilanResponse
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterPesanRencanaActivity
-import com.example.travada.sampeldata.DataCicilan
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Math.abs
 
 
 class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity() {
 
-    fun fetchMainData(position: Int) {
-        TPApiClient.TP_API_SERVICES.getDestination(position+1).enqueue(object : Callback<GetDestinasiResponse> {
+    fun fetchMainData(id: Int) {
+        val arraySpinner = ArrayList<String>()
+        TPApiClient.TP_API_SERVICES.getDestination(id).enqueue(object : Callback<GetDestinasiResponse> {
             override fun onResponse(
                 call: Call<GetDestinasiResponse>,
                 response: Response<GetDestinasiResponse>
             ) {
                 if (response.isSuccessful && response.body()?.status == "OK") {
-                    response.body()?.data?.let { listener.showMainData(it) }
+                    response.body()?.data?.let {
+                        listener.showMainData(it)
+                        arraySpinner.add(it.berangkat)
+                        listener.showSpinner(arraySpinner)
+                    }
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
@@ -34,69 +40,36 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
         })
     }
 
-    fun fetchSpinnerData() {
-        val arraySpinner = ArrayList<String>()
-        arraySpinner.add("Item 1")
-        arraySpinner.add("Item 2")
-        arraySpinner.add("Item 3")
+    fun fetchCicilanData(id: Int, jumlahOrang: Int) {
+        TPApiClient.TP_API_SERVICES.getCicilan(id, jumlahOrang).enqueue(object : Callback<GetCicilanResponse> {
+            override fun onResponse(
+                call: Call<GetCicilanResponse>,
+                response: Response<GetCicilanResponse>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.data?.let {
+                        getAdapterCicilan(it)
 
-        listener.showSpinner(arraySpinner)
+                        var jumlahBiaya = 0
+                        for (i in 0..it.size-1) {
+                            jumlahBiaya = jumlahBiaya + abs(it[i].jumlah)
+                        }
+                        listener.showJumlahBiaya(jumlahBiaya)
+                    }
+                } else {
+                    getDataError("Mohon maaf. Ada kesalahan.")
+                }
+            }
+
+            override fun onFailure(call: Call<GetCicilanResponse>, t: Throwable) {
+                getDataError(t.localizedMessage)
+            }
+        })
+
     }
 
-    fun fetchCicilanData() {
-        val listCicilan = arrayListOf(
-            DataCicilan(
-                "ABC123",
-                "DP",
-                6000000,
-                "Januari",
-                "Menunggu Persetujuan"
-            ),
-            DataCicilan(
-                "ABC123",
-                "Cicilan 1/5",
-                4500000,
-                "Februari",
-                "Menunggu Persetujuan"
-            ),
-            DataCicilan(
-                "ABC123",
-                "Cicilan 2/5",
-                4500000,
-                "Maret",
-                "Menunggu Persetujuan"
-            ),
-            DataCicilan(
-                "ABC123",
-                "Cicilan 3/5",
-                4500000,
-                "April",
-                "Menunggu Persetujuan"
-            ),
-            DataCicilan(
-                "ABC123",
-                "Cicilan 4/5",
-                4500000,
-                "Mei",
-                "Menunggu Persetujuan"
-            ),
-            DataCicilan(
-                "ABC123",
-                "Cicilan 5/5",
-                4500000,
-                "Juni",
-                "Menunggu Persetujuan"
-            ),
-            DataCicilan(
-                "ABC123",
-                "Pelunasan",
-                5000000,
-                "Juli",
-                "Menunggu Persetujuan"
-            )
-        )
-
-        val adapterRencanaPesan = AdapterPesanRencanaActivity(listCicilan, this)
+    fun getAdapterCicilan(data: List<GetCicilanResponse.Data>) {
+        val adapterRencanaPesan = AdapterPesanRencanaActivity(data, this)
         val linearLayoutRencanaPesan = LinearLayoutManager(
             this,
             LinearLayoutManager.VERTICAL,
@@ -146,5 +119,6 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
         fun showAddOrang(addOrang: Int)
         fun showMinOrang(addOrang: Int)
         fun showKonfirmasi(intentPosition: Int)
+        fun showJumlahBiaya(jumlahBiaya: Int)
     }
 }

@@ -61,7 +61,7 @@ class AdapterTripPopulerRencanaActivity (private val listTrip: List<GetPopulerRe
         }
 
         holder.itemView.cv_mainpage_item_trip.setOnClickListener {
-            presenter.itemClicked(position)
+            presenter.itemClicked(listTrip[position].id)
         }
     }
 

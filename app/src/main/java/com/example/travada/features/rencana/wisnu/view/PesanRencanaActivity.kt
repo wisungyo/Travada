@@ -12,7 +12,6 @@ import com.example.travada.R
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterPesanRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.PesanRencanaActivityPresenter
-import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
 import kotlinx.android.synthetic.main.activity_pesan_rencana.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -28,13 +27,13 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesan_rencana)
         presenter = PesanRencanaActivityPresenter(this)
-        val intentPosition = intent.getIntExtra("DESTINASI_ID", 3)
+        val intentId = intent.getIntExtra("DESTINASI_ID", 3)
         jumlahBiaya = 0
         jumlahOrang = 1
 
-        presenter.fetchMainData(intentPosition)
-        presenter.fetchSpinnerData()
-        presenter.fetchCicilanData()
+        presenter.fetchMainData(intentId)
+//        presenter.fetchSpinnerData()
+        presenter.fetchCicilanData(intentId, jumlahOrang)
 
         spinner_rencana_pesan.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -63,7 +62,7 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         }
 
         btn_rencana_pesan.setOnClickListener {
-            presenter.doKonfirmasi(intentPosition)
+            presenter.doKonfirmasi(intentId)
         }
     }
 
@@ -98,7 +97,7 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     override fun showDataError(localizedMessage: String?) {
         Toast.makeText(
             this,
-            "Error : ${localizedMessage}",
+            "Error : $localizedMessage",
             Toast.LENGTH_LONG
         ).show()
     }
@@ -108,28 +107,44 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     }
 
     override fun addBiaya(addBiaya: Int) {
-        jumlahBiaya+=addBiaya
-
-        val df = DecimalFormat("#,###")
-        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-        tv_rencana_pesan_total.text = "Rp. ${df.format(jumlahBiaya)}"
+//        jumlahBiaya+=addBiaya
+//        val df = DecimalFormat("#,###")
+//        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+//        tv_rencana_pesan_total.text = "Rp. ${df.format(jumlahBiaya)}"
     }
 
     override fun showAddOrang(addOrang: Int) {
         jumlahOrang = addOrang
         et_rencana_pesan_jumlah_orang.setText(jumlahOrang.toString())
+
+        // refresh table view
+        presenter = PesanRencanaActivityPresenter(this)
+        val intentId = intent.getIntExtra("DESTINASI_ID", 3)
+        presenter.fetchCicilanData(intentId, jumlahOrang)
     }
 
     override fun showMinOrang(addOrang: Int) {
         jumlahOrang = addOrang
         et_rencana_pesan_jumlah_orang.setText(jumlahOrang.toString())
+
+        // refresh table view
+        presenter = PesanRencanaActivityPresenter(this)
+        val intentId = intent.getIntExtra("DESTINASI_ID", 3)
+        presenter.fetchCicilanData(intentId, jumlahOrang)
     }
 
-    override fun showKonfirmasi(position: Int) {
+    override fun showKonfirmasi(intentPosition: Int) {
         val intentKonfirmasi = Intent(this, KonfirmasiRencanaActivity::class.java)
-        intentKonfirmasi.putExtra("DESTINASI_ID", position)
+        intentKonfirmasi.putExtra("DESTINASI_ID", intentPosition)
         intentKonfirmasi.putExtra("JUMLAH_ORANG", jumlahOrang)
-        intentKonfirmasi.putExtra("JUMLAH_BIAYA", jumlahBiaya)
+        intentKonfirmasi.putExtra("JUMLAH_BIAYA", this.jumlahBiaya)
         startActivity(intentKonfirmasi)
+    }
+
+    override fun showJumlahBiaya(jumlahBiaya: Int) {
+        this.jumlahBiaya = jumlahBiaya
+        val df = DecimalFormat("#,###")
+        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+        tv_rencana_pesan_total.text = "Rp. ${df.format(this.jumlahBiaya)}"
     }
 }
