@@ -30,37 +30,31 @@
         app:layout_constraintBottom_toBottomOf="@id/ivBulet"
         app:layout_constraintStart_toEndOf="@id/ivBulet"/>
 
-    <TextView
-        android:id="@+id/tvTempatDetailRencana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Jakarta"
-        android:textColor="@color/black"
-        android:textSize="@dimen/heading4"
-        app:layout_constraintStart_toStartOf="@id/tvHariDetailRencana"
-        app:layout_constraintTop_toBottomOf="@id/tvHariDetailRencana" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvTempatDetailRencana"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:fontFamily="@font/roboto_medium"-->
+<!--        android:text="Jakarta"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/heading4"-->
+<!--        app:layout_constraintStart_toStartOf="@id/tvHariDetailRencana"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvHariDetailRencana" />-->
 
-    <TextView
-        android:id="@+id/tvDeskripsiPerjalanan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/deskripsi_perjalanan"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text"
-        android:layout_marginEnd="13dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tvTempatDetailRencana"
-        app:layout_constraintTop_toBottomOf="@id/tvTempatDetailRencana" />
-
-
-
-
-
-
+<!--    <TextView-->
+<!--        android:id="@+id/tvDeskripsiPerjalanan"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:fontFamily="@font/roboto"-->
+<!--        android:text="@string/deskripsi_perjalanan"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/text"-->
+<!--        android:layout_marginEnd="13dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@id/tvTempatDetailRencana"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvTempatDetailRencana" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

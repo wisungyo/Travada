@@ -1,6 +1,7 @@
 package com.example.travada.features.rencana.detailrencana
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ExpandableListAdapter
@@ -8,9 +9,12 @@ import android.widget.ExpandableListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.travada.R
+import com.example.travada.detailriwayat.DetailRiwayatActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
 import kotlinx.android.synthetic.main.activity_detail_rencana.*
+import kotlinx.android.synthetic.main.list_gambar_wisata.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -30,20 +34,9 @@ class DetailRencanaActivity : AppCompatActivity(), DetailRencanaPresenter.Listen
         setContentView(R.layout.activity_detail_rencana)
         nestedView.overScrollMode = View.OVER_SCROLL_NEVER
 
-        // bundle PR , sekalian mau di kasih API
-        // val bundle = Bundle()
-        //bundle.putParcelable(INTENT_PARCELABEL, data)
-
-//        val fragment = GambarWisataFragment()
-//        fragment.setArguments(bundle)
-//        val fragmentManager = supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.frameFragment, fragment)
-//        fragmentTransaction.commit()
 
         presenter = DetailRencanaPresenter(this)
-        presenter.fetchRencanaPerjalanan()
-        presenter.getDetailRencana()
+        presenter.getDetailRencana(15)
 
         // info tambahan
         expandableListView = findViewById(R.id.expendableList)
@@ -99,13 +92,49 @@ class DetailRencanaActivity : AppCompatActivity(), DetailRencanaPresenter.Listen
 
     }
 
-    override fun showDataRencanaPerjalanan(
-        adapterRencanaPerjalanan: RencanaPerjalananAdapter,
-        linearLayoutRencanaWisata: LinearLayoutManager
-    ) {
+    override fun implementDetailDestinasi(getDestinasi: GetDestinasiDetailResponse.Data) {
+        val df = DecimalFormat("#,###")
+        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
 
-        rvRencanaPerjalan.layoutManager = linearLayoutRencanaWisata
-        rvRencanaPerjalan.adapter = adapterRencanaPerjalanan
+        tvTitleDetailRencana.text = getDestinasi.namaTrip
+        tvHeadingDetailRencana.text = getDestinasi.namaTrip
+        tvBenua.text = getDestinasi.benua
+        tvWaktu.text = "${getDestinasi.durasi} hari"
+        tvPeserta.text = "${getDestinasi.kapasitas} orang"
+        tvOverviewKonten.text = getDestinasi.overview
+        tvDeskripsiKonten.text = getDestinasi.deskripsi
+        tvBiayaDetailRencana.text = "Rp. ${df.format(getDestinasi.hargaSatuan)}"
+
+        Glide.with(this).load(getDestinasi.gambarList[0]).into(ivDetailGambar)
+
+        listGambar(getDestinasi.gambarList)
+        listPerjalanan(getDestinasi.rencanaList)
+        listFasilitas(getDestinasi.fasilitas)
+
+    }
+
+    override fun listGambar(gambarList: List<String>) {
+        rvDetailGambarWisata.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvDetailGambarWisata.adapter = GambarWisataAdapter(gambarList, presenter)
+        rvDetailGambarWisata.overScrollMode = View.OVER_SCROLL_NEVER
+    }
+
+    override fun gambarDetail(detailGambar: String) {
+        Glide.with(this).load(detailGambar).into(ivDetailGambar)
+    }
+
+    override fun listFasilitas(fasilitasList: List<String>) {
+        rvFasilitasPerjalan.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvFasilitasPerjalan.adapter = FasilitasWisataAdapter(fasilitasList, presenter)
+        rvFasilitasPerjalan.overScrollMode = View.OVER_SCROLL_NEVER
+    }
+
+    override fun listPerjalanan(PerjalananList: List<String>) {
+        rvRencanaPerjalan.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvRencanaPerjalan.adapter = RencanaPerjalananAdapter(PerjalananList, presenter)
         rvRencanaPerjalan.overScrollMode = View.OVER_SCROLL_NEVER
     }
 
@@ -120,29 +149,4 @@ class DetailRencanaActivity : AppCompatActivity(), DetailRencanaPresenter.Listen
         vGradient2.visibility = View.GONE
         rvRencanaPerjalan.adapter?.itemCount
     }
-
-    override fun implementDetailDestinasi(getDestinasi: GetDestinasiDetailResponse.Data) {
-        val df = DecimalFormat("#,###")
-        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-
-        tvTitleDetailRencana.text = getDestinasi.namaTrip
-        tvHeadingDetailRencana.text = getDestinasi.namaTrip
-        tvBenua.text = getDestinasi.benua
-        tvWaktu.text = "${getDestinasi.durasi} hari"
-        tvPeserta.text = "${getDestinasi.kapasitas} orang"
-        tvOverviewKonten.text = getDestinasi.overview
-        tvDeskripsiKonten.text = getDestinasi.deskripsi
-        tvBiayaDetailRencana.text = "Rp. ${df.format(getDestinasi.hargaSatuan)}"
-
-        val fasilitas = getDestinasi.fasilitas
-        rvFasilitasPerjalan.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-        rvFasilitasPerjalan.adapter = FasilitasWisataAdapter(fasilitas,presenter)
-
-        val gambar = getDestinasi.gambarList
-        rvDetailGambarWisata.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
-        rvDetailGambarWisata.adapter = GambarWisataAdapter(gambar,presenter)
-        rvDetailGambarWisata.overScrollMode = View.OVER_SCROLL_NEVER
-
-    }
-
 }

@@ -71,10 +71,10 @@
                 app:layout_constraintTop_toTopOf="@id/ghorizontal1">
 
                 <ImageView
+                    android:id="@+id/ivDetailGambar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img_tokyo" />
+                    android:scaleType="centerCrop" />
             </FrameLayout>
 
 

@@ -1,7 +1,9 @@
 package com.example.travada.features.rencana.pojo
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class GetDestinasiDetailResponse(
     @SerializedName("data")
@@ -11,6 +13,7 @@ data class GetDestinasiDetailResponse(
     @SerializedName("status")
     val status: String
 ) {
+    @Parcelize
     data class Data(
         @SerializedName("benua")
         val benua: String,
@@ -54,5 +57,5 @@ data class GetDestinasiDetailResponse(
         val syaratKetentuan: String,
         @SerializedName("updatedAt")
         val updatedAt: String
-    )
+    ): Parcelable
 }

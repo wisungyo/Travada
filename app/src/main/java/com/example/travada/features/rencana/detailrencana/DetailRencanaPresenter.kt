@@ -2,17 +2,23 @@ package com.example.travada.features.rencana.detailrencana
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
+import com.example.travada.sampeldata.DataCicilanUser
+import kotlinx.android.synthetic.main.activity_detail_rencana.*
+import kotlinx.android.synthetic.main.activity_detail_rencana.view.*
+import kotlinx.android.synthetic.main.activity_detail_rencana.view.ivDetailGambar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DetailRencanaPresenter(val listener: Listener) : AppCompatActivity() {
+    private lateinit var listUser: GetDestinasiDetailResponse.Data
 
-    fun getDetailRencana(){
-        TPApiClient.TP_API_SERVICES.getDetailDestination().enqueue(object : Callback<GetDestinasiDetailResponse> {
+    fun getDetailRencana(id : Int){
+        TPApiClient.TP_API_SERVICES.getDetailDestination(15).enqueue(object : Callback<GetDestinasiDetailResponse> {
             override fun onFailure(call: Call<GetDestinasiDetailResponse>, t: Throwable) {
                 t.message?.let {
             // isi
@@ -28,44 +34,25 @@ class DetailRencanaPresenter(val listener: Listener) : AppCompatActivity() {
     }
 
 
-
-    fun fetchRencanaPerjalanan() {
-        val rencanaPerjalanan = arrayListOf(
-            DataRencanaPerjalanan(
-                "Hari ke-1",
-                "Jakarta",
-                "Peserta akan berkumpul di Bandara Soekarno Hatta Jakarta sesuai waktu dan tempat yang akan ditetapkan nanti. Setelah check-in, mengurus bagasi, dan lain-lain, kita akan terbang menuju negara Jepang. Sesampainya di Haneda, kita akan langsung check in Hotel"
-            ),
-            DataRencanaPerjalanan(
-                "Hari ke-2",
-                "Tokyo",
-                "Peserta akan berkumpul di Bandara Soekarno Hatta Jakarta sesuai waktu dan tempat yang akan ditetapkan nanti. Setelah check-in, mengurus bagasi, dan lain-lain, kita akan terbang menuju negara Jepang. Sesampainya di Haneda, kita akan langsung check in Hotel"
-            ),
-            DataRencanaPerjalanan(
-                "Hari ke-3",
-                "China",
-                "Peserta akan berkumpul di Bandara Soekarno Hatta Jakarta sesuai waktu dan tempat yang akan ditetapkan nanti. Setelah check-in, mengurus bagasi, dan lain-lain, kita akan terbang menuju negara Jepang. Sesampainya di Haneda, kita akan langsung check in Hotel"
-            )
-        )
-        val adapterRencanaPerjalanan = RencanaPerjalananAdapter(rencanaPerjalanan)
-        val linearLayoutRencanaPerjalanan = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        listener.showDataRencanaPerjalanan(adapterRencanaPerjalanan,linearLayoutRencanaPerjalanan)
+    fun gambarDetail(detailGambar : String){
+        listener.gambarDetail(detailGambar)
     }
 
-
     interface Listener {
-
-
-        fun showDataRencanaPerjalanan(
-            adapterRencanaPerjalanan: RencanaPerjalananAdapter,
-            linearLayoutRencanaWisata: LinearLayoutManager) {}
-
 
         fun btnSelengkapnyaDeskripsi()
 
         fun btnSelengkapnyaPerjalanan()
 
         fun implementDetailDestinasi(getDestinasi: GetDestinasiDetailResponse.Data){}
+
+        fun listGambar(gambarList : List<String>){}
+
+        fun listPerjalanan(PerjalananList : List<String>){}
+
+        fun listFasilitas(fasilitasList : List<String>){}
+
+        fun gambarDetail(detailGambar : String){}
 
 
     }

@@ -10,15 +10,11 @@ internal object DataInfoTambahan {
             val waktuDanCuaca: MutableList<String> = ArrayList()
             waktuDanCuaca.add("cuaca panas")
 
-
             val persiapanBerangkat: MutableList<String> = ArrayList()
             persiapanBerangkat.add("jam 10:00")
 
-
             val kesehatanDanKeamanan: MutableList<String> = ArrayList()
             kesehatanDanKeamanan.add("CIA and FBI")
-
-
 
             detailInfoTambahan["Waktu dan Cuaca"] = waktuDanCuaca
             detailInfoTambahan["Persiapan sebelum berangkat"] = persiapanBerangkat
@@ -26,6 +22,5 @@ internal object DataInfoTambahan {
 
             return detailInfoTambahan
         }
-
 }
 

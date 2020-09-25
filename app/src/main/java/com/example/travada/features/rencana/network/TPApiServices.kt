@@ -8,12 +8,13 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface TPApiServices {
 
     @GET("destinasi/all")
     fun getalldestination() : Call<GetDestinasiAllResponse>
 
-    @GET("destinasi/15")
-    fun getDetailDestination() : Call<GetDestinasiDetailResponse>
+    @GET("destinasi/{id}")
+    fun getDetailDestination(@Path("id")id: Int) : Call<GetDestinasiDetailResponse>
 }

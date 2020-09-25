@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
 import kotlinx.android.synthetic.main.list_rencana_perjalanan.view.*
 
-class RencanaPerjalananAdapter(val listRencanaPerjalanan: ArrayList<DataRencanaPerjalanan>) :
+class RencanaPerjalananAdapter(val listRencanaPerjalanan: List<String>,val presenter: DetailRencanaPresenter) :
     RecyclerView.Adapter<RencanaPerjalananAdapter.ViewHolder>() {
 
 
@@ -24,9 +24,7 @@ class RencanaPerjalananAdapter(val listRencanaPerjalanan: ArrayList<DataRencanaP
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.tvHariDetailRencana.text=listRencanaPerjalanan[position].hari
-        holder.itemView.tvTempatDetailRencana.text=listRencanaPerjalanan[position].kota
-        holder.itemView.tvDeskripsiPerjalanan.text=listRencanaPerjalanan[position].deskripsiRencana
+        holder.itemView.tvHariDetailRencana.text=listRencanaPerjalanan[position]
     }
 
 }
