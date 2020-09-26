@@ -37,7 +37,7 @@ class InfoTambahanAdapter (var context: Context, var expandableListView : Expand
                 expandableListView.collapseGroup(groupPosition)
             else
                 expandableListView.expandGroup(groupPosition)
-            Toast.makeText(context, getGroup(groupPosition), Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context, getGroup(groupPosition), Toast.LENGTH_SHORT).show()
         }
         return convertView
     }
@@ -63,7 +63,7 @@ class InfoTambahanAdapter (var context: Context, var expandableListView : Expand
         val title = convertView?.findViewById<TextView>(R.id.tvListInfoTambahan)
         title?.text = getChild(groupPosition,childPosition)
         title?.setOnClickListener {
-            Toast.makeText(context, getChild(groupPosition,childPosition), Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(context, getChild(groupPosition,childPosition), Toast.LENGTH_SHORT).show()
         }
         return convertView
     }

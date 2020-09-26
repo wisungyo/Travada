@@ -37,10 +37,7 @@ class DetailRencanaActivity : AppCompatActivity(),
         setContentView(R.layout.activity_detail_rencana)
         nestedView.overScrollMode = View.OVER_SCROLL_NEVER
 
-        presenter =
-            DetailRencanaPresenter(
-                this
-            )
+        presenter = DetailRencanaPresenter (this)
         presenter.getDetailRencana(93)
 
         tvSelengkapnya.setOnClickListener {
