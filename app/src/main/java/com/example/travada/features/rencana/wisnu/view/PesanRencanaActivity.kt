@@ -1,5 +1,6 @@
 package com.example.travada.features.rencana.wisnu.view
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.travada.R
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterPesanRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.PesanRencanaActivityPresenter
+import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_pesan_rencana.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -22,11 +24,15 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     private lateinit var presenter: PesanRencanaActivityPresenter
     var jumlahBiaya by Delegates.notNull<Int>()
     var jumlahOrang by Delegates.notNull<Int>()
+    private lateinit var progressDialog: ProgressDialog
+//    val MyFragment= LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesan_rencana)
         presenter = PesanRencanaActivityPresenter(this)
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Mohon tunggu...")
         val intentId = intent.getIntExtra("DESTINASI_ID", 3)
         jumlahBiaya = 0
         jumlahOrang = 1
@@ -146,5 +152,17 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         val df = DecimalFormat("#,###")
         df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
         tv_rencana_pesan_total.text = "Rp. ${df.format(this.jumlahBiaya)}"
+    }
+
+    override fun showProgressDialog() {
+        progressDialog.show()
+//        val fm=supportFragmentManager
+//        MyFragment.isCancelable = false
+//        MyFragment.show(fm, "Fragment")
+    }
+
+    override fun dismissProgressDialog() {
+        progressDialog.dismiss()
+//        MyFragment.dismiss()
     }
 }

@@ -1,5 +1,7 @@
 package com.example.travada.features.rencana.wisnu.view
 
+import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +12,7 @@ import com.example.travada.R
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
+import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -17,11 +20,15 @@ import java.util.*
 
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
     private lateinit var presenter: KonfirmasiRencanaActivityPresenter
+    private lateinit var progressDialog: ProgressDialog
+//    val MyFragment= LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_konfirmasi_rencana)
         presenter = KonfirmasiRencanaActivityPresenter(this)
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Mohon tunggu...")
 
         val intentPosition = intent.getIntExtra("DESTINASI_ID", 3)
         val intentJumlahOrang = intent.getIntExtra("JUMLAH_ORANG", 1)
@@ -116,6 +123,18 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
 
     override fun showBack() {
         finish()
+    }
+
+    override fun showProgressDialog() {
+        progressDialog.show()
+//        val fm=supportFragmentManager
+//        MyFragment.isCancelable = false
+//        MyFragment.show(fm, "Fragment")
+    }
+
+    override fun dismissProgressDialog() {
+        progressDialog.dismiss()
+//        MyFragment.dismiss()
     }
 
 }

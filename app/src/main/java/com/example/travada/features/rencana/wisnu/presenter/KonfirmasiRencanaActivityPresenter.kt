@@ -14,6 +14,7 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
     private lateinit var listUser: ArrayList<DataCicilanUser>
 
     fun fetchMainData(position: Int, jumlahOrang: Int) {
+        listener.showProgressDialog()
         TPApiClient.TP_API_SERVICES.getDestination(position).enqueue(object : Callback<GetDestinasiResponse> {
             override fun onResponse(
                 call: Call<GetDestinasiResponse>,
@@ -27,10 +28,12 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
+                listener.dismissProgressDialog()
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
+                listener.dismissProgressDialog()
             }
         })
     }
@@ -103,5 +106,7 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
         fun showNextButtonClicked(title: String)
         fun showDataError(localizedMessage: String?)
         fun showBack()
+        fun showProgressDialog()
+        fun dismissProgressDialog()
     }
 }

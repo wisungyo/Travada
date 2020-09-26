@@ -16,6 +16,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
 
     fun fetchMainData(id: Int) {
         val arraySpinner = ArrayList<String>()
+        listener.showProgressDialog()
         TPApiClient.TP_API_SERVICES.getDestination(id).enqueue(object : Callback<GetDestinasiResponse> {
             override fun onResponse(
                 call: Call<GetDestinasiResponse>,
@@ -30,17 +31,20 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
+                listener.dismissProgressDialog()
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
 //                listener.dismissProgressDialog()
+                listener.dismissProgressDialog()
             }
 
         })
     }
 
     fun fetchCicilanData(id: Int, jumlahOrang: Int) {
+        listener.showProgressDialog()
         TPApiClient.TP_API_SERVICES.getCicilan(id, jumlahOrang).enqueue(object : Callback<GetCicilanResponse> {
             override fun onResponse(
                 call: Call<GetCicilanResponse>,
@@ -51,18 +55,20 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                         getAdapterCicilan(it)
 
                         var jumlahBiaya = 0
-                        for (i in 0..it.size-1) {
-                            jumlahBiaya = jumlahBiaya + abs(it[i].jumlah)
+                        for (i in 0 until it.size-1) {
+                            jumlahBiaya += kotlin.math.abs(it[i].jumlah)
                         }
                         listener.showJumlahBiaya(jumlahBiaya)
                     }
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
+                listener.dismissProgressDialog()
             }
 
             override fun onFailure(call: Call<GetCicilanResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
+                listener.dismissProgressDialog()
             }
         })
 
@@ -120,5 +126,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
         fun showMinOrang(addOrang: Int)
         fun showKonfirmasi(intentPosition: Int)
         fun showJumlahBiaya(jumlahBiaya: Int)
+        fun showProgressDialog()
+        fun dismissProgressDialog()
     }
 }

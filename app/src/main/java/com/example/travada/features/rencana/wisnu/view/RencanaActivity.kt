@@ -10,11 +10,13 @@ import com.example.travada.R
 import com.example.travada.features.rencana.wisnu.adapter.AdapterTripPopulerRencanaActivity
 import com.example.travada.features.rencana.wisnu.adapter.AdapterTripRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.RencanaActivityPresenter
+import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_rencana.*
 
 class RencanaActivity : AppCompatActivity(), RencanaActivityPresenter.Listener {
     private lateinit var presenter: RencanaActivityPresenter
     private lateinit var progressDialog: ProgressDialog
+//    val MyFragment = LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +73,13 @@ class RencanaActivity : AppCompatActivity(), RencanaActivityPresenter.Listener {
 
     override fun showProgressDialog() {
         progressDialog.show()
+//        val fm=supportFragmentManager
+//        MyFragment.isCancelable = false
+//        MyFragment.show(fm, "Fragment")
     }
 
     override fun dismissProgressDialog() {
         progressDialog.dismiss()
+//        MyFragment.dismiss()
     }
 }
