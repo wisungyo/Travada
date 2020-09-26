@@ -82,8 +82,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDetailGambarWisata"
                 android:layout_width="0dp"
-                android:layout_marginTop="3dp"
                 android:layout_height="43dp"
+                android:layout_marginTop="3dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -283,8 +283,8 @@
                 android:layout_marginTop="16dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto"
-                android:text="nothing content"
                 android:maxLines="10"
+                android:text="nothing content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -340,22 +340,29 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clRecyclerRencanaPerjalanan"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvRencanaPerjalan">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvRencanaPerjalan"
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:nestedScrollingEnabled="false"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/clRecyclerRencanaPerjalanan"
-                    tools:listitem="@layout/list_rencana_perjalanan" />
+                    app:layout_constraintTop_toTopOf="@id/clRecyclerRencanaPerjalanan">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRencanaPerjalan"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/list_rencana_perjalanan" />
+
+                </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -373,9 +380,9 @@
                 android:id="@+id/tvSelengkapnya2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
                 android:text="Selengkapnya"
-                android:layout_marginTop="16dp"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/heading4"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -387,8 +394,8 @@
                 android:id="@+id/vGaris4"
                 android:layout_width="0dp"
                 android:layout_height="4dp"
-                android:background="#ecf1f5"
                 android:layout_marginTop="21dp"
+                android:background="#ecf1f5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSelengkapnya2" />
@@ -445,11 +452,11 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clExpandable"
                 android:layout_width="0dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvInfoTambahan"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_height="wrap_content">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvInfoTambahan">
 
                 <ExpandableListView
                     android:id="@+id/elInfoTambahan"

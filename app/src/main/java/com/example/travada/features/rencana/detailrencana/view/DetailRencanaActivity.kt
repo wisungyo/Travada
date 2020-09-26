@@ -2,6 +2,7 @@ package com.example.travada.features.rencana.detailrencana.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +22,7 @@ import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class DetailRencanaActivity : AppCompatActivity(),
     DetailRencanaPresenter.Listener {
@@ -140,9 +142,8 @@ class DetailRencanaActivity : AppCompatActivity(),
     override fun btnSelengkapnyaPerjalanan() {
         tvSelengkapnya2.visibility = View.GONE
         vGradient2.visibility = View.GONE
-        clRecyclerRencanaPerjalanan.layoutParams = ConstraintLayout.LayoutParams(
-            ConstraintLayout.LayoutParams.WRAP_CONTENT,
-            Constraints.LayoutParams.WRAP_CONTENT)
+        val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+        rvRencanaPerjalan.setLayoutParams(lp)
     }
 
     override fun showLoadingDialog() {
