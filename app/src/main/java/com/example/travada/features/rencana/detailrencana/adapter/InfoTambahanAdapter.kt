@@ -1,4 +1,4 @@
-package com.example.travada.features.rencana.detailrencana
+package com.example.travada.features.rencana.detailrencana.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

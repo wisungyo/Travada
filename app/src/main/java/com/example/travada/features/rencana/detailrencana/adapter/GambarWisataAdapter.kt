@@ -1,4 +1,4 @@
-package com.example.travada.features.rencana.detailrencana
+package com.example.travada.features.rencana.detailrencana.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.travada.R
+import com.example.travada.features.rencana.detailrencana.presenter.DetailRencanaPresenter
 import kotlinx.android.synthetic.main.list_gambar_wisata.view.*
 
 class GambarWisataAdapter( val listGambarWisata: List<String>, val presenter: DetailRencanaPresenter
@@ -15,7 +16,9 @@ class GambarWisataAdapter( val listGambarWisata: List<String>, val presenter: De
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_gambar_wisata, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {
