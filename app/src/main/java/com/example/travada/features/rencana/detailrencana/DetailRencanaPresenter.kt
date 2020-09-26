@@ -15,10 +15,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailRencanaPresenter(val listener: Listener) : AppCompatActivity() {
-    private lateinit var listUser: GetDestinasiDetailResponse.Data
 
     fun getDetailRencana(id : Int){
-        TPApiClient.TP_API_SERVICES.getDetailDestination(15).enqueue(object : Callback<GetDestinasiDetailResponse> {
+        TPApiClient.TP_API_SERVICES.getDetailDestination(93).enqueue(object : Callback<GetDestinasiDetailResponse> {
             override fun onFailure(call: Call<GetDestinasiDetailResponse>, t: Throwable) {
                 t.message?.let {
             // isi
@@ -33,27 +32,20 @@ class DetailRencanaPresenter(val listener: Listener) : AppCompatActivity() {
         })
     }
 
-
     fun gambarDetail(detailGambar : String){
         listener.gambarDetail(detailGambar)
     }
 
     interface Listener {
-
         fun btnSelengkapnyaDeskripsi()
-
         fun btnSelengkapnyaPerjalanan()
-
         fun implementDetailDestinasi(getDestinasi: GetDestinasiDetailResponse.Data){}
-
         fun listGambar(gambarList : List<String>){}
-
         fun listPerjalanan(PerjalananList : List<String>){}
-
         fun listFasilitas(fasilitasList : List<String>){}
-
         fun gambarDetail(detailGambar : String){}
-
-
+        fun infoSyaratKetentuan(syaratKetentuan : String){}
+        fun infoPersiapan(persiapan : String){}
+        fun infoWaktuCuaca(waktuCuaca : String){}
     }
 }

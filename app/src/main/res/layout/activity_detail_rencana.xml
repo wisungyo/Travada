@@ -82,6 +82,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDetailGambarWisata"
                 android:layout_width="0dp"
+                android:layout_marginTop="3dp"
                 android:layout_height="43dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -202,7 +203,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
-                android:text="@string/overview_content"
+                android:text="nothing content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -282,8 +283,8 @@
                 android:layout_marginTop="16dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto"
+                android:text="nothing content"
                 android:maxLines="10"
-                android:text="@string/deskripsi_content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -432,7 +433,7 @@
 
 
             <ExpandableListView
-                android:id="@+id/expendableList"
+                android:id="@+id/elInfoTambahan"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:layout_marginTop="16dp"
