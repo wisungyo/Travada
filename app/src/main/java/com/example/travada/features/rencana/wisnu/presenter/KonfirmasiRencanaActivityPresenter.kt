@@ -38,28 +38,34 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
         })
     }
 
-    fun fetchDataCicilan(jumlahOrang: Int, jumlahBiaya: Int) {
+    fun fetchDetailPemesanan(jumlahOrang: Int, jumlahBiaya: Int) {
         listener.showDataCicilan(jumlahOrang, jumlahBiaya)
         listUser = ArrayList<DataCicilanUser>()
-        for (i in 1..jumlahOrang) {
+        for (i in 0..jumlahOrang-1) {
             listUser.add(
                 DataCicilanUser(
-                    "ABC1230${i}",
+                    i,
                     "Orang $i",
                     "123456${i}",
                     "orang${i}@gmail.com",
+                    "uriKTP",
+                    "uriPassport",
                     false
                 )
             )
         }
     }
 
-    fun changeCicilanUserStatus(position: Int) {
-        listUser[position].status = !listUser[position].status
-        fetchDataCicilanLayout()
+    fun updateList(id: Int, name: String, phone: String, email: String, uriKTP: String, uriPassword: String) {
+        val newSet = DataCicilanUser(id, name, phone, email, uriKTP, uriPassword, true)
+        listUser[id] = newSet
+    }
+
+    fun doDetailOrang(orang: Int) {
+        listener.showDetailOrang(orang)
     }
     
-    fun fetchDataCicilanLayout() {
+    fun fetchDetailPemesananLayout() {
         val adapterKonfirmasiRencana = AdapterKonfirmasiRencanaActivity(listUser, this)
         val linearLayoutKonfirmasiRencana = LinearLayoutManager(
             this,
@@ -70,10 +76,12 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
         listener.showCicilanList(adapterKonfirmasiRencana, linearLayoutKonfirmasiRencana)
     }
 
-    fun checkNextButtonCondition(jumlahOrang: Int) {
+    fun checkNextButtonCondition() {
+        val jumlahOrang = listUser.size
+
         var condition = true
-        for (i in 1..jumlahOrang) {
-            if (!listUser[i-1].status) {
+        for (i in 0..jumlahOrang-1) {
+            if (!listUser[i].status) {
                 condition = false
             }
         }
@@ -98,6 +106,7 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
     interface Listener {
         fun showMainData(data: GetDestinasiResponse.Data, jumlahOrang: Int)
         fun showDataCicilan(jumlahOrang: Int, jumlahBiaya: Int)
+        fun showDetailOrang(orang: Int)
         fun showCicilanList(
             adapterKonfirmasiRencanaActivity: AdapterKonfirmasiRencanaActivity,
             linearLayoutManager: LinearLayoutManager

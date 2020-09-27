@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActivity
+import com.example.travada.features.rencana.searchpage.TPSearchPageActivity
 import com.example.travada.features.rencana.wisnu.adapter.AdapterTripPopulerRencanaActivity
 import com.example.travada.features.rencana.wisnu.adapter.AdapterTripRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.RencanaActivityPresenter
@@ -31,9 +33,8 @@ class RencanaActivity : AppCompatActivity(), RencanaActivityPresenter.Listener {
         }
 
         tv_rencana_trip_lihat_semua.setOnClickListener {
-            //
-            // INTENT TO ALL TRIP LIST (MAS NANDA)
-            //
+            val intentLihatSemuaRencana = Intent(this, TPSearchPageActivity::class.java)
+            startActivity(intentLihatSemuaRencana)
         }
     }
 
@@ -58,7 +59,7 @@ class RencanaActivity : AppCompatActivity(), RencanaActivityPresenter.Listener {
     }
 
     override fun showItemClicked(position: Int) {
-        val intentItemClicked = Intent(this, PesanRencanaActivity::class.java)
+        val intentItemClicked = Intent(this, DetailRencanaActivity::class.java)
         intentItemClicked.putExtra("DESTINASI_ID", position)
         startActivity(intentItemClicked)
     }

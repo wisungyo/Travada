@@ -22,6 +22,9 @@ interface TPApiServices {
     @GET("destinasi/{id}")
     fun getDetailDestination(@Path("id")id: Int) : Call<GetDestinasiDetailResponse>
 
+    @GET("destinasi/hargabenua")
+    fun getFilteredDestination(@Query("termurah") termurah: String?, @Query("termahal") termahal: String?, @Query("benua") benua: String?): Call<GetDestinasiAllResponse>
+
     /*
     WISNU'S HERE
     ------------------------- */
@@ -37,7 +40,4 @@ interface TPApiServices {
     @GET("cicilan/{idDestinasi}/{jumlahOrang}")
     fun getCicilan(@Path("idDestinasi") idDestinasi: Int,
                    @Path("jumlahOrang") jumlahOrang: Int) : Call<GetCicilanResponse>
-
-    @GET("destinasi/hargabenua")
-    fun getFilteredDestination(@Query("termurah") termurah: String?, @Query("termahal") termahal: String?, @Query("benua") benua: String?): Call<GetDestinasiAllResponse>
 }

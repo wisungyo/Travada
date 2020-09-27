@@ -44,7 +44,6 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
     }
 
     fun fetchCicilanData(id: Int, jumlahOrang: Int) {
-        listener.showProgressDialog()
         TPApiClient.TP_API_SERVICES.getCicilan(id, jumlahOrang).enqueue(object : Callback<GetCicilanResponse> {
             override fun onResponse(
                 call: Call<GetCicilanResponse>,
@@ -55,7 +54,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                         getAdapterCicilan(it)
 
                         var jumlahBiaya = 0
-                        for (i in 0 until it.size-1) {
+                        for (i in 0..it.size-1) {
                             jumlahBiaya += kotlin.math.abs(it[i].jumlah)
                         }
                         listener.showJumlahBiaya(jumlahBiaya)
@@ -63,12 +62,11 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
-                listener.dismissProgressDialog()
             }
 
             override fun onFailure(call: Call<GetCicilanResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
-                listener.dismissProgressDialog()
+//                listener.dismissProgressDialog()
             }
         })
 
@@ -103,7 +101,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
 
     fun minOrang(jumlahOrang: Int) {
         var jumlahOrangNew = jumlahOrang - 1
-        if (jumlahOrangNew < 1) jumlahOrangNew = 1
+        if (jumlahOrangNew <= 1) jumlahOrangNew = 1
         listener.showMinOrang(jumlahOrangNew)
     }
 

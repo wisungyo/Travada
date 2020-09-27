@@ -1,5 +1,6 @@
 package com.example.travada.features.rencana.searchpage
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.travada.R
+import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiAllResponse
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_tp_search_result.*
@@ -114,5 +116,11 @@ class TpSearchResultFragment : Fragment(), TPSearchResultPresenter.Listener {
 
     override fun hideErrorImage() {
         iv_error_image.visibility = INVISIBLE
+    }
+
+    override fun showClickedItem(id: Int) {
+        val intentDetailRencanaActivity = Intent(activity, DetailRencanaActivity::class.java)
+        intentDetailRencanaActivity.putExtra("DESTINASI_ID", id)
+        startActivity(intentDetailRencanaActivity)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.travada.features.rencana.detailrencana.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RelativeLayout
@@ -16,6 +17,7 @@ import com.example.travada.features.rencana.detailrencana.adapter.InfoTambahanAd
 import com.example.travada.features.rencana.detailrencana.adapter.RencanaPerjalananAdapter
 import com.example.travada.features.rencana.detailrencana.presenter.DetailRencanaPresenter
 import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
+import com.example.travada.features.rencana.wisnu.view.PesanRencanaActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_detail_rencana.*
 import java.text.DecimalFormat
@@ -36,9 +38,10 @@ class DetailRencanaActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_rencana)
         nestedView.overScrollMode = View.OVER_SCROLL_NEVER
+        val intentId = intent.getIntExtra("DESTINASI_ID", 3)
 
         presenter = DetailRencanaPresenter (this)
-        presenter.getDetailRencana(93)
+        presenter.getDetailRencana(intentId)
 
         tvSelengkapnya.setOnClickListener {
             btnSelengkapnyaDeskripsi()
@@ -49,7 +52,9 @@ class DetailRencanaActivity : AppCompatActivity(),
         }
 
         btnPesanSekarangDetailRencana.setOnClickListener {
-            // ISI
+            val intentPesanRencana = Intent(this, PesanRencanaActivity::class.java)
+            intentPesanRencana.putExtra("DESTINASI_ID", intentId)
+            startActivity(intentPesanRencana)
         }
 
     }
@@ -73,9 +78,9 @@ class DetailRencanaActivity : AppCompatActivity(),
         showListPerjalanan(getDestinasi.rencanaList)
         showListFasilitas(getDestinasi.fasilitas)
 
-        showInfoSyaratKetentuan(getDestinasi.syaratKetentuan)
-        showInfoPersiapan(getDestinasi.infoPersiapan)
-        showInfoWaktuCuaca(getDestinasi.infoWaktuCuaca)
+        showInfoSyaratKetentuan("${getDestinasi.syaratKetentuan}") // adding "" to handle null reference, in order not force-close
+        showInfoPersiapan("${getDestinasi.infoPersiapan}") // adding "" to handle null reference, in order not force-close
+        showInfoWaktuCuaca("${getDestinasi.infoWaktuCuaca}") // adding "" to handle null reference, in order not force-close
 
         elInfoTambahan.setAdapter(InfoTambahanAdapter(this, elInfoTambahan, header, body))
     }

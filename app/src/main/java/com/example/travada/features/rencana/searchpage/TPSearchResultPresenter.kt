@@ -106,6 +106,10 @@ class TPSearchResultPresenter(val listener:Listener) {
         }
     }
 
+    fun showClickedItem(id: Int) {
+        listener.showClickedItem(id)
+    }
+
     interface Listener {
         fun showDestinasiResult(List: MutableList<GetDestinasiAllResponse.Data>)
         fun showLoadingDialog()
@@ -113,5 +117,6 @@ class TPSearchResultPresenter(val listener:Listener) {
         fun showToast(text:String)
         fun showErrorImage()
         fun hideErrorImage()
+        fun showClickedItem(id: Int)
     }
 }

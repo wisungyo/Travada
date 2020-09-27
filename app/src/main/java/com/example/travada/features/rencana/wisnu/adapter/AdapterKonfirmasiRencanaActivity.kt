@@ -54,8 +54,7 @@ class AdapterKonfirmasiRencanaActivity (val listCicilanUser: ArrayList<DataCicil
         }
 
         holder.itemView.cv_konfirmasi_rencana_item.setOnClickListener {
-            presenter.changeCicilanUserStatus(position)
-            presenter.checkNextButtonCondition(listCicilanUser.size)
+            presenter.doDetailOrang(position)
         }
     }
 

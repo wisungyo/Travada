@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".features.rencana.wisnu.view.ResultRencanaActivity"></activity>
-        <activity android:name=".features.rencana.detailrencana.DetailRencanaActivity" />
+        <activity android:name=".features.rencana.detailrencana.view.DetailRencanaActivity" />
         <activity android:name=".features.rencana.searchpage.TPSearchPageActivity" />
         <activity android:name=".welcomepage.register.registerverifcode.RegisterVerifCodeActivity" />
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
@@ -29,6 +29,7 @@
         <activity android:name=".features.rencana.wisnu.view.RencanaActivity">
 
         </activity>
+        <activity android:name=".features.rencana.person.TPPersonActivity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
         <activity android:name=".welcomepage.register.takepicKTP.TakePicKTPActivity" />
         <activity android:name=".welcomepage.forgetpass.inputnewpass.ForgetpassInputNewPassActivity" />

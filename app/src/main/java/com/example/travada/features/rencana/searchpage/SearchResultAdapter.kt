@@ -1,9 +1,6 @@
 package com.example.travada.features.rencana.searchpage
 
-import android.icu.text.DecimalFormat
-import android.icu.text.MessageFormat.format
 import android.icu.text.NumberFormat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +11,6 @@ import com.example.travada.R
 import com.example.travada.features.rencana.pojo.GetDestinasiAllResponse
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.item_t_p_search_page.view.*
-import java.lang.String.format
 import java.util.*
 
 class SearchResultAdapter(val list:List<GetDestinasiAllResponse.Data>, val presenter: TPSearchResultPresenter) : RecyclerView.Adapter<SearchResultAdapter.ViewHolder>() {
@@ -56,7 +52,10 @@ class SearchResultAdapter(val list:List<GetDestinasiAllResponse.Data>, val prese
         val numberFormat = NumberFormat.getCurrencyInstance(localeID)
         holder.itemView.tv_price.text = "${numberFormat.format(list[position].hargaSatuan)}"
 
-
+        // adding click-listener
+        holder.itemView.SearchResult_Item.setOnClickListener {
+            presenter.showClickedItem(list[position].id)
+        }
     }
 
 

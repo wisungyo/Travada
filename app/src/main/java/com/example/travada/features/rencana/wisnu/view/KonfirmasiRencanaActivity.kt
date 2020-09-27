@@ -1,5 +1,6 @@
 package com.example.travada.features.rencana.wisnu.view
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
@@ -9,10 +10,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
+import com.example.travada.features.rencana.person.TPPersonActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
-import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -21,6 +22,7 @@ import java.util.*
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
     private lateinit var presenter: KonfirmasiRencanaActivityPresenter
     private lateinit var progressDialog: ProgressDialog
+    private val SECOND_ACTIVITY_REQUEST_CODE = 1
 //    val MyFragment= LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,14 +32,16 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Mohon tunggu...")
 
-        val intentPosition = intent.getIntExtra("DESTINASI_ID", 3)
+        val intentId = intent.getIntExtra("DESTINASI_ID", 3)
         val intentJumlahOrang = intent.getIntExtra("JUMLAH_ORANG", 1)
         val intentJumlahBiaya = intent.getIntExtra("JUMLAH_BIAYA", 0)
 
-        presenter.fetchMainData(intentPosition, intentJumlahOrang)
-        presenter.fetchDataCicilan(intentJumlahOrang, intentJumlahBiaya)
-        presenter.fetchDataCicilanLayout()
-        presenter.checkNextButtonCondition(intentJumlahOrang)
+        presenter.fetchMainData(intentId, intentJumlahOrang)
+        // to declare recycler view according to how many people. only for the first time.
+        presenter.fetchDetailPemesanan(intentJumlahOrang, intentJumlahBiaya)
+        // to show the  layout of detail pemesanan
+        presenter.fetchDetailPemesananLayout()
+        presenter.checkNextButtonCondition()
 
         iv_konfirmasi_rencana_back.setOnClickListener {
             presenter.doBack()
@@ -45,6 +49,36 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
 
         btn_konfirmas_rencana.setOnClickListener {
             presenter.nextButtonClicked()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                val name = data?.getStringExtra("name")
+                val phone = data?.getStringExtra("phone")
+                val email = data?.getStringExtra("email")
+                val uriKTP = data?.getStringExtra("uriKTP")
+                val uriPassport = data?.getStringExtra("uriPassport")
+                val id = data?.getIntExtra("id", 1)
+
+                if (id != null && name != null && phone != null && email != null && uriKTP != null && uriPassport != null) {
+                    presenter.updateList(
+                        id,
+                        name,
+                        phone,
+                        email,
+                        uriKTP,
+                        uriPassport
+                    )
+                    Toast.makeText(this, "Add Success", Toast.LENGTH_LONG).show()
+                }
+
+                presenter.fetchDetailPemesananLayout()
+                presenter.checkNextButtonCondition()
+            }
         }
     }
 
@@ -85,6 +119,12 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         val df = DecimalFormat("#,###")
         df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
         tv_konfirmasi_rencana_jumlah_biaya.text = "Rp. ${df.format(jumlahBiaya)}"
+    }
+
+    override fun showDetailOrang(orang: Int) {
+        val intentDetailOrang = Intent(this, TPPersonActivity::class.java)
+        intentDetailOrang.putExtra("ORANG", orang)
+        startActivityForResult(intentDetailOrang, SECOND_ACTIVITY_REQUEST_CODE)
     }
 
     override fun showCicilanList(

@@ -27,16 +27,18 @@ import java.util.*
 
 class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
     private lateinit var presenter: TPPersonPresenter
-    private lateinit var bundle: Bundle
+//    private lateinit var bundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_t_p_person)
 
         //Bundle isinya Orang ke berapa
+        val orang = intent.getIntExtra("ORANG", 1)
+
         //TODO : change name in action bar
-        //actionbar_title.text = bundle.getString("Name")
-        intent?.extras?.let { bundle = it }
+        actionbar_title.text = "Orang ${orang+1}"
+
         presenter = TPPersonPresenter(this)
 
         if (Build.VERSION.SDK_INT >= 24) {
@@ -135,16 +137,18 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
     }
 
     override fun goToNextPage() {
+        val orang = intent.getIntExtra("ORANG", 1)
         val returnIntent = Intent()
         returnIntent.putExtra("name", et_name.text.toString())
         returnIntent.putExtra("phone", et_phone.text.toString())
         returnIntent.putExtra("email", et_email.text.toString())
         returnIntent.putExtra("uriKTP", uriKTP)
         returnIntent.putExtra("uriPassport", uriPassport)
+        returnIntent.putExtra("id", orang)
         setResult(Activity.RESULT_OK, returnIntent)
         finish()
 
-        showToast("$uriPassport , $uriKTP , ${et_name.text} " )
+//        showToast("$uriPassport , $uriKTP , ${et_name.text} " )
 
     }
 
