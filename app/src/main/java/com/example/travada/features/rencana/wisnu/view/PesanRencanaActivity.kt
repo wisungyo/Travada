@@ -30,6 +30,7 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesan_rencana)
+
         presenter = PesanRencanaActivityPresenter(this)
         progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Mohon tunggu...")

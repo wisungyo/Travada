@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".features.rencana.detailrencana.DetailRencanaActivity">
+    tools:context=".features.rencana.detailrencana.view.DetailRencanaActivity">
 
     <View
         android:id="@+id/barRencana"
@@ -71,10 +71,10 @@
                 app:layout_constraintTop_toTopOf="@id/ghorizontal1">
 
                 <ImageView
+                    android:id="@+id/ivDetailGambar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img_tokyo" />
+                    android:scaleType="centerCrop" />
             </FrameLayout>
 
 
@@ -83,6 +83,7 @@
                 android:id="@+id/rvDetailGambarWisata"
                 android:layout_width="0dp"
                 android:layout_height="43dp"
+                android:layout_marginTop="3dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +106,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/rvDetailGambarWisata" />
 
             <ImageView
-                android:id="@+id/ivNegara"
+                android:id="@+id/ivBenua"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
@@ -114,16 +115,16 @@
                 app:layout_constraintTop_toBottomOf="@id/tvHeadingDetailRencana" />
 
             <TextView
-                android:id="@+id/tvNegara"
+                android:id="@+id/tvBenua"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Asia"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/text"
-                app:layout_constraintBottom_toBottomOf="@id/ivNegara"
-                app:layout_constraintStart_toEndOf="@id/ivNegara"
-                app:layout_constraintTop_toTopOf="@id/ivNegara" />
+                app:layout_constraintBottom_toBottomOf="@id/ivBenua"
+                app:layout_constraintStart_toEndOf="@id/ivBenua"
+                app:layout_constraintTop_toTopOf="@id/ivBenua" />
 
             <!--Waktu-->
             <ImageView
@@ -132,9 +133,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
                 android:src="@drawable/ic_time"
-                app:layout_constraintBottom_toBottomOf="@id/tvNegara"
-                app:layout_constraintStart_toEndOf="@id/tvNegara"
-                app:layout_constraintTop_toTopOf="@id/tvNegara" />
+                app:layout_constraintBottom_toBottomOf="@id/tvBenua"
+                app:layout_constraintStart_toEndOf="@id/tvBenua"
+                app:layout_constraintTop_toTopOf="@id/tvBenua" />
 
             <TextView
                 android:id="@+id/tvWaktu"
@@ -179,7 +180,7 @@
                 android:background="#ecf1f5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivNegara" />
+                app:layout_constraintTop_toBottomOf="@id/ivBenua" />
 
             <!--overview-->
             <TextView
@@ -202,7 +203,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
-                android:text="@string/overview_content"
+                android:text="nothing content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -283,7 +284,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto"
                 android:maxLines="10"
-                android:text="@string/deskripsi_content"
+                android:text="nothing content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -336,27 +337,43 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vGaris3" />
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvRencanaPerjalan"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clRecyclerRencanaPerjalanan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvRencanaPerjalan"
-                tools:listitem="@layout/list_rencana_perjalanan" />
+                app:layout_constraintTop_toBottomOf="@id/tvRencanaPerjalan">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/clRecyclerRencanaPerjalanan">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRencanaPerjalan"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/list_rencana_perjalanan" />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/vGradient2"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_white_gradient"
-                app:layout_constraintBottom_toBottomOf="@id/rvRencanaPerjalan"
+                app:layout_constraintBottom_toBottomOf="@id/clRecyclerRencanaPerjalanan"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -369,6 +386,7 @@
                 android:textColor="@color/blue"
                 android:textSize="@dimen/heading4"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vGradient2" />
 
@@ -387,7 +405,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Fasilitas"
                 android:textColor="@color/black"
@@ -431,18 +449,34 @@
                 app:layout_constraintTop_toBottomOf="@+id/vGaris5" />
 
 
-            <ExpandableListView
-                android:id="@+id/expendableList"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clExpandable"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:divider="@android:color/background_light"
-                android:dividerHeight="0.5dp"
-                android:layoutDirection="rtl"
-                android:nestedScrollingEnabled="false"
-                android:scrollbars="none"
-                app:layout_constraintTop_toBottomOf="@+id/tvInfoTambahan"
-                tools:listitem="@layout/list_info_tambahan" />
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvInfoTambahan">
+
+
+                    <ExpandableListView
+                        android:id="@+id/elInfoTambahan"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:divider="@android:color/background_light"
+                        android:dividerHeight="0.5dp"
+                        android:layoutDirection="rtl"
+                        android:scrollbars="none"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/clExpandable"
+                        android:orientation="vertical"
+                        tools:listitem="@layout/list_info_tambahan" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
