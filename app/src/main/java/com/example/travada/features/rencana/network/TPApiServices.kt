@@ -5,11 +5,9 @@ import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
 import com.example.travada.features.rencana.pojo.*
 import com.example.travada.welcomepage.pojo.PostResendRequest
 import com.example.travada.welcomepage.pojo.PostResendResponse
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface TPApiServices {
 
@@ -40,4 +38,10 @@ interface TPApiServices {
     @GET("cicilan/{idDestinasi}/{jumlahOrang}")
     fun getCicilan(@Path("idDestinasi") idDestinasi: Int,
                    @Path("jumlahOrang") jumlahOrang: Int) : Call<GetCicilanResponse>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @POST("pemesanan")
+    fun postPemesanan(
+        @Header ("Authorization") token: String,
+        @Body body: RequestBody): Call<PostPemesananResponse>
 }

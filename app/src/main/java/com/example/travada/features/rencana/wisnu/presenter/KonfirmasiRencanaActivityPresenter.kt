@@ -96,6 +96,10 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
         listener.showNextButtonClicked("Detail pemesanan sudah benar?")
     }
 
+    fun postPemesananData() {
+        listener.doPostPemesanan(listUser)
+    }
+
     fun doBack() {
         listener.showBack()
     }
@@ -113,6 +117,8 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
         )
         fun showNextButtonCondition(condition: Boolean)
         fun showNextButtonClicked(title: String)
+        fun showResultRencana()
+        fun doPostPemesanan(listUser: ArrayList<DataCicilanUser>)
         fun showDataError(localizedMessage: String?)
         fun showBack()
         fun showProgressDialog()

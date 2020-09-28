@@ -3,21 +3,36 @@ package com.example.travada.features.rencana.wisnu.view
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
+import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.person.TPPersonActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
+import com.example.travada.features.rencana.pojo.PostPemesananResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
+import com.example.travada.sampeldata.DataCicilanUser
 import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+import kotlin.collections.ArrayList
 
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
     private lateinit var presenter: KonfirmasiRencanaActivityPresenter
@@ -52,6 +67,10 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         }
     }
 
+    fun showKonfirmasiYes() {
+        presenter.postPemesananData()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -74,6 +93,7 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                         uriPassport
                     )
                     Toast.makeText(this, "Add Success", Toast.LENGTH_LONG).show()
+                    Log.d("ALAMATIMG","$uriKTP & $uriPassport")
                 }
 
                 presenter.fetchDetailPemesananLayout()
@@ -151,6 +171,58 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
 
     override fun showNextButtonClicked(title: String) {
         DialogKonfirmasi.newInstance(title).show(supportFragmentManager, DialogKonfirmasi.TAG)
+    }
+
+    override fun showResultRencana() {
+        val intentResultRencana = Intent(this, ResultRencanaActivity::class.java)
+        startActivity(intentResultRencana)
+        finishAffinity()
+    }
+
+    override fun doPostPemesanan(listUser: ArrayList<DataCicilanUser>) {
+        val builder: MultipartBody.Builder =
+            MultipartBody.Builder().setType(MultipartBody.FORM)
+
+        builder.addFormDataPart("idDestinasi", "3") // change no 98
+        builder.addFormDataPart("orang", (listUser.size-1).toString())
+
+        for (i in 0..listUser.size-1) {
+            val bitmapKTP: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(listUser[i].uriKTP))
+            val bitmapPassport: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(listUser[i].uriPassport))
+            val bos1 = ByteArrayOutputStream()
+            bitmapKTP.compress(Bitmap.CompressFormat.JPEG, 25, bos1)
+            val bos2 = ByteArrayOutputStream()
+            bitmapPassport.compress(Bitmap.CompressFormat.JPEG, 25, bos2)
+
+            // prepare the data
+            builder.addFormDataPart("nama", listUser[i].name)
+            builder.addFormDataPart("no_hp", listUser[i].phone)
+            builder.addFormDataPart("email", listUser[i].email)
+            builder.addFormDataPart("ktp", "ktp.jpg",
+                RequestBody.create(MultipartBody.FORM, bos1.toByteArray()))
+            builder.addFormDataPart("paspor", "passport.jpg",
+                RequestBody.create(MultipartBody.FORM, bos2.toByteArray()))
+        }
+
+        val token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
+        TPApiClient.TP_API_SERVICES.postPemesanan(token, builder.build()).enqueue(object :
+            Callback<PostPemesananResponse> {
+            override fun onResponse(
+                call: Call<PostPemesananResponse>,
+                response: Response<PostPemesananResponse>
+            ) {
+                if (response.isSuccessful) {
+                    showResultRencana()
+                } else {
+                    showDataError("Mohon maaf ada kesalahan")
+                }
+            }
+
+            override fun onFailure(call: Call<PostPemesananResponse>, t: Throwable) {
+                showDataError(t.message.toString())
+            }
+
+        })
     }
 
     override fun showDataError(localizedMessage: String?) {

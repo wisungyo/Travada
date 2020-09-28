@@ -56,9 +56,7 @@ class DialogKonfirmasi: DialogFragment() {
     private fun setupClickListeners(view: View) {
         view.btn_dialog_konfirmasi_btn_yes.setOnClickListener {
             dismiss()
-            val intentResultRencana = Intent(activity, ResultRencanaActivity::class.java)
-            startActivity(intentResultRencana)
-            activity?.let { it1 -> finishAffinity(it1) }
+            (activity as KonfirmasiRencanaActivity).showKonfirmasiYes()
         }
         view.btn_dialog_konfirmasi_btn_no.setOnClickListener {
             // TODO: Do some task here
