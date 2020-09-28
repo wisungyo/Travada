@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
@@ -17,10 +18,16 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.travada.R
+import com.example.travada.welcomepage.register.takepicKTP.TakePicKTPActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_t_p_person.*
+import kotlinx.android.synthetic.main.activity_t_p_person.btn_back
+import kotlinx.android.synthetic.main.activity_take_pic_k_t_p.*
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.lang.reflect.Method
 import java.util.*
 
@@ -118,7 +125,18 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
         })
 
         btn_next.setOnClickListener {
-            presenter.nextPage()
+            showToast(uriKTP.toString())
+
+            Glide
+                .with(this@TPPersonActivity)
+                .asBitmap()
+                .load(
+                    uriKTP
+                )
+                .centerCrop()
+                .into(btn_back)
+
+//            presenter.nextPage()
         }
     }
 
@@ -144,7 +162,7 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
         setResult(Activity.RESULT_OK, returnIntent)
         finish()
 
-        showToast("$uriPassport , $uriKTP , ${et_name.text} " )
+        showToast("$uriPassport , $uriKTP , ${et_name.text} ")
 
     }
 
@@ -228,24 +246,26 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
     }
 
     fun takePhotoFromCamera(code: Int) {
-        val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        val imageFileName = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis()).toString()
+//        val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+//        val imageFileName =
+//            SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
+//                .toString()
 //        val imageFileName = "cobaaa"
-val outputDirectory = getOutputDirectory()
+//        val outputDirectory = getOutputDirectory()
+//
+//        val image: File = File(
+//            outputDirectory,
+//            imageFileName + ".jpg"
+//
+//        )
+//
+//        val uri = Uri.fromFile(image)
+//        val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+//        startActivityForResult(takePhotoIntent, code)
 
-        val image: File = File(
-            outputDirectory,
-            imageFileName + ".jpg"
-
-        )
-
-        val uri = Uri.fromFile(image)
-        val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-        startActivityForResult(takePhotoIntent, code)
-
-//        val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        startActivityForResult(intentCamera, code)
+        val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intentCamera, code)
     }
 
     private fun getOutputDirectory(): File {
@@ -330,7 +350,32 @@ val outputDirectory = getOutputDirectory()
 
         if (requestCode == CAMERA_REQUEST_KTP) {
             if (data != null) {
-                uriKTP = data.data.toString()
+                var bitmap = data?.extras?.get("data") as Bitmap
+
+                val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+                val imageFileName =
+                    SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
+                        .toString()
+                val outputDirectory = getOutputDirectory()
+                val image: File = File(
+                    outputDirectory,
+                    imageFileName + ".jpg"
+                )
+
+                if (!image.exists()) {
+                    var fos: FileOutputStream? = null
+                    try {
+                        fos = FileOutputStream(image)
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                        fos.flush()
+                        fos.close()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+
+                uriKTP = Uri.fromFile(image).toString()
+
 
                 btn_KTP.setBackgroundResource(R.drawable.bg_btndone)
                 btn_KTP.setCompoundDrawablesWithIntrinsicBounds(
@@ -339,6 +384,7 @@ val outputDirectory = getOutputDirectory()
                     R.drawable.ic_outline_check_circle_24,
                     0
                 )
+
                 presenter.checket(
                     et_name.text.toString(),
                     et_phone.text.toString(),
@@ -346,6 +392,8 @@ val outputDirectory = getOutputDirectory()
                     uriKTP,
                     uriPassport
                 )
+
+
             } else {
                 showToast("Gagal memuat gambar")
             }

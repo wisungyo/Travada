@@ -59,7 +59,9 @@
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
         <activity android:name=".features.tabungan.maintabungan.TabunganActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
-        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity" />
+        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
+
+        </activity>
         <activity android:name=".MainActivity" />
 
         <meta-data
