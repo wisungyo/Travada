@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64   /*  NEED TO IMPORT IT MANUALLY. DAMN !!  */
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,13 +18,13 @@ import com.example.travada.R
 import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.person.TPPersonActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
+import com.example.travada.features.rencana.pojo.PostPemesananBase64Request
 import com.example.travada.features.rencana.pojo.PostPemesananResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
 import com.example.travada.sampeldata.DataCicilanUser
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +32,8 @@ import java.io.ByteArrayOutputStream
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+import kotlin.collections.ArrayList
+
 
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
     private lateinit var presenter: KonfirmasiRencanaActivityPresenter
@@ -45,11 +48,11 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Mohon tunggu...")
 
-        val intentId = intent.getIntExtra("DESTINASI_ID", 3)
+        val intentIdDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
         val intentJumlahOrang = intent.getIntExtra("JUMLAH_ORANG", 1)
         val intentJumlahBiaya = intent.getIntExtra("JUMLAH_BIAYA", 0)
 
-        presenter.fetchMainData(intentId, intentJumlahOrang)
+        presenter.fetchMainData(intentIdDestinasi, intentJumlahOrang)
         // to declare recycler view according to how many people. only for the first time.
         presenter.fetchDetailPemesanan(intentJumlahOrang, intentJumlahBiaya)
         // to show the  layout of detail pemesanan
@@ -178,11 +181,15 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
     }
 
     override fun doPostPemesanan(listUser: ArrayList<DataCicilanUser>) {
-        val builder: MultipartBody.Builder =
-            MultipartBody.Builder().setType(MultipartBody.FORM)
-
-        builder.addFormDataPart("idDestinasi", "3") // change no 98
-        builder.addFormDataPart("orang", (listUser.size - 1).toString())
+        /*
+        STATIC ID_USER */
+        val idUser = 5
+        val idDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
+        val listNama = ArrayList<String>()
+        val listEmail = ArrayList<String>()
+        val listNoHP = ArrayList<String>()
+        val listKTP = ArrayList<String>()
+        val listPaspor = ArrayList<String>()
 
         for (i in 0..listUser.size-1) {
             val bitmapKTP: Bitmap = MediaStore.Images.Media.getBitmap(
@@ -195,43 +202,66 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                     listUser[i].uriPassport
                 )
             )
+
             val bos1 = ByteArrayOutputStream()
-            bitmapKTP.compress(Bitmap.CompressFormat.JPEG, 25, bos1)
+            bitmapKTP.compress(Bitmap.CompressFormat.JPEG, 100, bos1)
             val bos2 = ByteArrayOutputStream()
-            bitmapPassport.compress(Bitmap.CompressFormat.JPEG, 25, bos2)
+            bitmapPassport.compress(Bitmap.CompressFormat.JPEG, 100, bos2)
 
-//            val baos = ByteArrayOutputStream()
-//            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.logo)
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-//            val imageBytes = baos.toByteArray()
-//            val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+            val byteArrayKTP = bos1.toByteArray()
+            val encodedStringKTP: String = Base64.encodeToString(byteArrayKTP, Base64.DEFAULT)
+            val byteArrayPaspor = bos1.toByteArray()
+            val encodedStringPaspor: String = Base64.encodeToString(byteArrayPaspor, Base64.DEFAULT)
 
-            // prepare the data
-            builder.addFormDataPart("nama", listUser[i].name)
-            builder.addFormDataPart("no_hp", listUser[i].phone)
-            builder.addFormDataPart("email", listUser[i].email)
-            builder.addFormDataPart(
-                "ktp", "ktp.jpg",
-                RequestBody.create(MultipartBody.FORM, bos1.toByteArray())
-            )
-            builder.addFormDataPart(
-                "paspor", "passport.jpg",
-                RequestBody.create(MultipartBody.FORM, bos2.toByteArray())
-            )
+            /*
+            INSERT THE DATA */
+            listNama.add(listUser[i].name)
+            listEmail.add(listUser[i].email)
+            listNoHP.add(listUser[i].phone)
+            listKTP.add(encodedStringKTP)
+            listPaspor.add(encodedStringPaspor)
         }
 
+
+
+//        Log.d("LIST", "$listNama")
+//        Log.d("LIST", "$listEmail")
+//        Log.d("LIST", "$listNoHP")
+//        Log.d("LIST", "$listKTP")
+//        Log.d("LIST", "$listPaspor")
+
+        val postPemesanan = PostPemesananBase64Request(
+            idDestinasi,
+            listUser.size,
+            listNama,
+            listEmail,
+            listNoHP,
+            listKTP,
+            listPaspor
+        )
+
+//        val jsonObject = JsonObject()
+//        jsonObject.addProperty("idDestinasi", idDestinasi)
+//        jsonObject.addProperty("orang", idDestinasi)
+//        jsonObject.addProperty("idDestinasi", idDestinasi)
+//        jsonObject.addProperty("idDestinasi", idDestinasi)
+//        jsonObject.addProperty("idDestinasi", idDestinasi)
+
+        /*
+        STATIC TOKEN  */
         val token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
-        TPApiClient.TP_API_SERVICES.postPemesanan(token, builder.build()).enqueue(object :
+        TPApiClient.TP_API_SERVICES.postPemesanan(token, idUser, postPemesanan).enqueue(object :
             Callback<PostPemesananResponse> {
             override fun onResponse(
                 call: Call<PostPemesananResponse>,
                 response: Response<PostPemesananResponse>
             ) {
-                if (response.isSuccessful) {
-                    showResultRencana()
-                } else {
+                if (!response.isSuccessful) {
                     showDataError("Mohon maaf ada kesalahan")
+                    return
                 }
+
+                showResultRencana()
             }
 
             override fun onFailure(call: Call<PostPemesananResponse>, t: Throwable) {

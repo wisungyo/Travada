@@ -13,9 +13,9 @@ import retrofit2.Response
 class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
     private lateinit var listUser: ArrayList<DataCicilanUser>
 
-    fun fetchMainData(position: Int, jumlahOrang: Int) {
+    fun fetchMainData(idDestinasi: Int, jumlahOrang: Int) {
         listener.showProgressDialog()
-        TPApiClient.TP_API_SERVICES.getDestination(position).enqueue(object : Callback<GetDestinasiResponse> {
+        TPApiClient.TP_API_SERVICES.getDestination(idDestinasi).enqueue(object : Callback<GetDestinasiResponse> {
             override fun onResponse(
                 call: Call<GetDestinasiResponse>,
                 response: Response<GetDestinasiResponse>
@@ -24,7 +24,9 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
 //                    listener.showMainData(it, jumlahOrang)
 //                }
                 if (response.isSuccessful && response.body()?.status == "OK") {
-                    response.body()?.data?.let { listener.showMainData(it, jumlahOrang) }
+                    response.body()?.data?.let {
+                        listener.showMainData(it, jumlahOrang)
+                    }
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }

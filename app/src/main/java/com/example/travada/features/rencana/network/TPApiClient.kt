@@ -17,12 +17,12 @@ object TPApiClient {
                 level = HttpLoggingInterceptor.Level.BODY
             }
         }
-
-    private val client = OkHttpClient.Builder()
-        .connectTimeout(90, java.util.concurrent.TimeUnit.SECONDS)
-        .readTimeout(90, java.util.concurrent.TimeUnit.SECONDS)
-        .writeTimeout(90, java.util.concurrent.TimeUnit.SECONDS)
-        .build()
+    private var client = OkHttpClient()
+//    private val client = OkHttpClient.Builder()
+//        .connectTimeout(90, java.util.concurrent.TimeUnit.SECONDS)
+//        .readTimeout(90, java.util.concurrent.TimeUnit.SECONDS)
+//        .writeTimeout(90, java.util.concurrent.TimeUnit.SECONDS)
+//        .build()
 
     val TP_API_SERVICES : TPApiServices by lazy {
         val retrofit = Retrofit.Builder()
