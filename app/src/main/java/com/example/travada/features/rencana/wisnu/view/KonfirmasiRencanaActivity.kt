@@ -6,12 +6,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
@@ -32,7 +31,6 @@ import java.io.ByteArrayOutputStream
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
-import kotlin.collections.ArrayList
 
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
     private lateinit var presenter: KonfirmasiRencanaActivityPresenter
@@ -93,7 +91,7 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                         uriPassport
                     )
                     Toast.makeText(this, "Add Success", Toast.LENGTH_LONG).show()
-                    Log.d("ALAMATIMG","$uriKTP & $uriPassport")
+                    Log.d("ALAMATIMG", "$uriKTP & $uriPassport")
                 }
 
                 presenter.fetchDetailPemesananLayout()
@@ -184,27 +182,45 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
             MultipartBody.Builder().setType(MultipartBody.FORM)
 
         builder.addFormDataPart("idDestinasi", "3") // change no 98
-        builder.addFormDataPart("orang", (listUser.size-1).toString())
+        builder.addFormDataPart("orang", (listUser.size - 1).toString())
 
         for (i in 0..listUser.size-1) {
-            val bitmapKTP: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(listUser[i].uriKTP))
-            val bitmapPassport: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(listUser[i].uriPassport))
+            val bitmapKTP: Bitmap = MediaStore.Images.Media.getBitmap(
+                getContentResolver(), Uri.parse(
+                    listUser[i].uriKTP
+                )
+            )
+            val bitmapPassport: Bitmap = MediaStore.Images.Media.getBitmap(
+                getContentResolver(), Uri.parse(
+                    listUser[i].uriPassport
+                )
+            )
             val bos1 = ByteArrayOutputStream()
             bitmapKTP.compress(Bitmap.CompressFormat.JPEG, 25, bos1)
             val bos2 = ByteArrayOutputStream()
             bitmapPassport.compress(Bitmap.CompressFormat.JPEG, 25, bos2)
 
+//            val baos = ByteArrayOutputStream()
+//            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.logo)
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//            val imageBytes = baos.toByteArray()
+//            val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+
             // prepare the data
             builder.addFormDataPart("nama", listUser[i].name)
             builder.addFormDataPart("no_hp", listUser[i].phone)
             builder.addFormDataPart("email", listUser[i].email)
-            builder.addFormDataPart("ktp", "ktp.jpg",
-                RequestBody.create(MultipartBody.FORM, bos1.toByteArray()))
-            builder.addFormDataPart("paspor", "passport.jpg",
-                RequestBody.create(MultipartBody.FORM, bos2.toByteArray()))
+            builder.addFormDataPart(
+                "ktp", "ktp.jpg",
+                RequestBody.create(MultipartBody.FORM, bos1.toByteArray())
+            )
+            builder.addFormDataPart(
+                "paspor", "passport.jpg",
+                RequestBody.create(MultipartBody.FORM, bos2.toByteArray())
+            )
         }
 
-        val token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
+        val token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
         TPApiClient.TP_API_SERVICES.postPemesanan(token, builder.build()).enqueue(object :
             Callback<PostPemesananResponse> {
             override fun onResponse(

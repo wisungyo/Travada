@@ -44,4 +44,11 @@ interface TPApiServices {
     fun postPemesanan(
         @Header ("Authorization") token: String,
         @Body body: RequestBody): Call<PostPemesananResponse>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("pemesanan/destinasi/{idDestinasi}")
+    fun getPemesananDestinasi(
+        @Header ("Authorization") token: String,
+        @Path ("idDestinasi") id: Int
+    ) : Call<GetPemesananDestinasiResponse>
 }
