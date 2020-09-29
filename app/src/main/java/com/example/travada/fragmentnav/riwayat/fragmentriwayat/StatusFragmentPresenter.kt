@@ -23,7 +23,7 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
                 response: Response<GetPemesananRiwayatResponse>
             ) {
                 if (!response.isSuccessful) {
-//                    TODO("Not yet implemented")
+                    listener.showDataError(response.code().toString())
                     return
                 }
 
@@ -41,14 +41,13 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
             }
 
             override fun onFailure(call: Call<GetPemesananRiwayatResponse>, t: Throwable) {
-//                TODO("Not yet implemented")
+                listener.showDataError(t.toString())
             }
         })
     }
 
     fun getDestinasiInfo(
         data: GetPemesananRiwayatResponse.Data,
-        position: Int,
         holder: AdapterRiwayatStatus.ViewHolder
     ) {
         TPApiClient.TP_API_SERVICES.getDestination(data.idDestinasi).enqueue(object : Callback<GetDestinasiResponse> {
@@ -57,14 +56,14 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
                 response: Response<GetDestinasiResponse>
             ) {
                 if (!response.isSuccessful) {
-//                    listener.showDataError(response.code().toString())
+                    listener.showDataError(response.code().toString())
                     return
                 }
                 listenerAdapter.showData(response.body()?.data, data, holder)
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
-//                listener.showDataError(t.toString())
+                listener.showDataError(t.toString())
             }
         })
     }
@@ -76,6 +75,7 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
     interface Listener {
         fun showData(list: List<GetPemesananRiwayatResponse.Data>)
         fun showDetailRiwayat(idDestinasi: Int)
+        fun showDataError(error: String)
     }
 
     interface ListenerAdapter {

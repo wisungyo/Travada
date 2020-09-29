@@ -44,7 +44,6 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
 
     fun getDestinasiInfo(
         data: GetPemesananRiwayatResponse.Data,
-        position: Int,
         holder: AdapterRiwayatProses.ViewHolder
     ){
         TPApiClient.TP_API_SERVICES.getDestination(data.idDestinasi).enqueue(object :

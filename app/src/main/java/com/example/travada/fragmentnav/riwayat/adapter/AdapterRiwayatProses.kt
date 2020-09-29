@@ -30,7 +30,7 @@ class AdapterRiwayatProses(val listDataRiwayat: List<GetPemesananRiwayatResponse
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        presenter.getDestinasiInfo(listDataRiwayat[position], position, holder)
+        presenter.getDestinasiInfo(listDataRiwayat[position], holder)
 
         holder.itemView.wrapper_riwayat_proses_item.setOnClickListener {
             presenter.goToDetailRiwayat(listDataRiwayat[position].idDestinasi)

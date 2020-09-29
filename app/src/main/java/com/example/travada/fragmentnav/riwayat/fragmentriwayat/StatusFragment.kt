@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
@@ -55,6 +56,10 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
         val intentDetailRiwayat = Intent(context, DetailRiwayatActivity::class.java)
         intentDetailRiwayat.putExtra("ID_DESTINASI", idDestinasi)
         startActivity(intentDetailRiwayat)
+    }
+
+    override fun showDataError(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_LONG).show()
     }
 
     override fun showData(
