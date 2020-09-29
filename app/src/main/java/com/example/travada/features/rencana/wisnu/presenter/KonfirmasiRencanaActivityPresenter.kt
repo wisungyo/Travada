@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
+import com.example.travada.features.rencana.pojo.PostPemesananResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.sampeldata.DataCicilanUser
 import retrofit2.Call
@@ -26,6 +27,7 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
                 if (response.isSuccessful && response.body()?.status == "OK") {
                     response.body()?.data?.let {
                         listener.showMainData(it, jumlahOrang)
+
                     }
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
@@ -119,7 +121,7 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
         )
         fun showNextButtonCondition(condition: Boolean)
         fun showNextButtonClicked(title: String)
-        fun showResultRencana()
+        fun showResultRencana(data: PostPemesananResponse.Data)
         fun doPostPemesanan(listUser: ArrayList<DataCicilanUser>)
         fun showDataError(localizedMessage: String?)
         fun showBack()

@@ -174,8 +174,15 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         DialogKonfirmasi.newInstance(title).show(supportFragmentManager, DialogKonfirmasi.TAG)
     }
 
-    override fun showResultRencana() {
+    override fun showResultRencana(data: PostPemesananResponse.Data) {
+        val idDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
+
         val intentResultRencana = Intent(this, ResultRencanaActivity::class.java)
+        intentResultRencana.putExtra("ID_DESTINASI", idDestinasi)
+        intentResultRencana.putExtra("ID_PEMESANAN", data.pemesanan.id)
+        intentResultRencana.putExtra("ORANG", data.pemesanan.orang)
+        intentResultRencana.putExtra("TOTAL", data.pemesanan.total)
+        intentResultRencana.putExtra("TGL_PEMESANAN", data.pemesanan.createdAt)
         startActivity(intentResultRencana)
         finishAffinity()
     }
@@ -222,14 +229,6 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
             listPaspor.add(encodedStringPaspor)
         }
 
-
-
-//        Log.d("LIST", "$listNama")
-//        Log.d("LIST", "$listEmail")
-//        Log.d("LIST", "$listNoHP")
-//        Log.d("LIST", "$listKTP")
-//        Log.d("LIST", "$listPaspor")
-
         val postPemesanan = PostPemesananBase64Request(
             idDestinasi,
             listUser.size,
@@ -239,13 +238,6 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
             listKTP,
             listPaspor
         )
-
-//        val jsonObject = JsonObject()
-//        jsonObject.addProperty("idDestinasi", idDestinasi)
-//        jsonObject.addProperty("orang", idDestinasi)
-//        jsonObject.addProperty("idDestinasi", idDestinasi)
-//        jsonObject.addProperty("idDestinasi", idDestinasi)
-//        jsonObject.addProperty("idDestinasi", idDestinasi)
 
         /*
         STATIC TOKEN  */
@@ -261,7 +253,7 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                     return
                 }
 
-                showResultRencana()
+                response.body()?.data?.let { showResultRencana(it) }
             }
 
             override fun onFailure(call: Call<PostPemesananResponse>, t: Throwable) {
