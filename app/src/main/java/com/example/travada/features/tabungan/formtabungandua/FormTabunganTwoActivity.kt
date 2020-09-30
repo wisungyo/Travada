@@ -20,10 +20,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
 import com.example.travada.features.tabungan.helper.CalendarHelper
-import com.example.travada.features.tabungan.formdetailtabungan.DataTabungBareng
+import com.example.travada.features.tabungan.formresulttabungan.DataTabungBareng
 import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeActivity
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
-import com.example.travada.features.tabungan.formdetailtabungan.DetailFormResultActivity
+import com.example.travada.features.tabungan.formresulttabungan.DetailFormResultActivity
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.util.*
 
@@ -52,9 +52,9 @@ class FormTabunganTwoActivity : AppCompatActivity(),
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         val layoutManagerLinear = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvBarengTeman.layoutManager = layoutManagerLinear
-        rvBarengTeman.adapter = adapterBarengTeman
-        rvBarengTeman.overScrollMode = View.OVER_SCROLL_NEVER
+        rvTabunganBarengTeman.layoutManager = layoutManagerLinear
+        rvTabunganBarengTeman.adapter = adapterBarengTeman
+        rvTabunganBarengTeman.overScrollMode = View.OVER_SCROLL_NEVER
 
         btnTambahTeman.setOnClickListener {
             val goToFormTambahTeman = Intent(this, FormTabunganThreeActivity::class.java)

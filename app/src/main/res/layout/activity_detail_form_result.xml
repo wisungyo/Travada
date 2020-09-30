@@ -5,40 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".features.tabungan.formdetailtabungan.DetailFormResultActivity">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gVertical1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gVertical2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ghorizontal1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.88" />
+    tools:context=".features.tabungan.formresulttabungan.DetailFormResultActivity">
 
     <View
         android:id="@+id/barTabungan"
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:background="@color/blue"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/ivFormThreeBack"
+        android:id="@+id/ivFormResultBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -55,244 +34,307 @@
         android:text="Trava Save"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
-        app:layout_constraintBottom_toBottomOf="@id/ivFormThreeBack"
-        app:layout_constraintStart_toEndOf="@id/ivFormThreeBack"
-        app:layout_constraintTop_toTopOf="@id/ivFormThreeBack"/>
+        app:layout_constraintBottom_toBottomOf="@id/ivFormResultBack"
+        app:layout_constraintStart_toEndOf="@id/ivFormResultBack"
+        app:layout_constraintTop_toTopOf="@id/ivFormResultBack" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        app:strokeColor="@color/colorBtnInactive"
-        app:strokeWidth="1dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/barTabungan"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2"
-        android:theme="@style/Theme.MaterialComponents.Light">
-
-        <ImageView
-            android:id="@+id/imageWisata"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_baseline_brightness_1_24"
-            android:layout_gravity="center_horizontal|center_vertical|start"
-            />
-
-        <TextView
-            android:id="@+id/tvNamaTempat"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="96dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pulau Komodo 2020"
-            android:textColor="@color/black"
-            android:textSize="@dimen/heading4"
-            android:layout_gravity="top|start"/>
-
-        <TextView
-            android:id="@+id/tvBiaya"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|start"
-            android:layout_marginTop="44dp"
-            android:layout_marginStart="96dp"
-            android:text="Rp. 10.000.000"
-            android:textColor="@color/black"
-            android:textSize="@dimen/heading4" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-    android:id="@+id/cardView2"
-    android:layout_width="0dp"
-    android:layout_height="60dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="0dp"
-    app:strokeColor="@color/colorBtnInactive"
-    app:strokeWidth="1dp"
-    android:layout_marginTop="16dp"
-    app:layout_constraintTop_toBottomOf="@id/cardView"
-    app:layout_constraintStart_toStartOf="@id/gVertical1"
-    app:layout_constraintEnd_toEndOf="@id/gVertical2"
-    android:theme="@style/Theme.MaterialComponents.Light">
-
-    <TextView
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ghorizontal3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_gravity="center_vertical|center_horizontal|start"
-        android:text="@string/desc_detail_tabungan"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text" />
-</com.google.android.material.card.MaterialCardView>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="80dp" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView3"
-        android:layout_width="0dp"
-        android:layout_height="129dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        app:strokeColor="@color/colorBtnInactive"
-        app:strokeWidth="1dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cardView2"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2"
-        android:theme="@style/Theme.MaterialComponents.Light">
-
-        <View
-            android:id="@+id/vGaris"
-            android:layout_width="370dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:background="@color/colorBtnInactive" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:text="Setoran awal"
-            android:textColor="@color/black"
-            android:textSize="@dimen/heading4" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginTop="36dp"
-            android:layout_marginStart="16dp"
-            android:text="Sekarang"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="16dp"
-            android:text="Rp. 2.000.000"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/heading3" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="30dp"
-            android:text="Rp. 2.000.000"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/heading3" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="42dp"
-            android:text="Tabungan Bulanan"
-            android:textColor="@color/black"
-            android:textSize="@dimen/heading4" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="24dp"
-            android:layout_marginStart="16dp"
-            android:text="Mulai bulan depan"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView4"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        app:strokeColor="@color/colorBtnInactive"
-        app:strokeWidth="1dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cardView3"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2"
-        android:theme="@style/Theme.MaterialComponents.Light">
-
-        <TextView
-        android:id="@+id/tvDescPerkiran"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_gravity="start"
-        android:text="Tabunganmu diperkirakan tercapai pada"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text" />
-
-        <TextView
-            android:id="@+id/tvPerkiranTabungan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_gravity="start"
-            android:text="16 Juli 2020"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/heading4" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <TextView
-        android:id="@+id/tvLabelTabungBareng"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tabung Bareng"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/heading4"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintTop_toBottomOf="@id/cardView4"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDetail"
-        android:layout_width="0dp"
+    <!--RecyclerView nested -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2"
-        tools:listitem="@layout/list_tabung_bareng"
-        app:layout_constraintBottom_toBottomOf="@id/ghorizontal1"
-        app:layout_constraintTop_toBottomOf="@id/tvLabelTabungBareng" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barTabungan">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gVertical1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gVertical2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/ghorizontal1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/ghorizontal2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="80dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/ghorizontal1"
+                app:strokeColor="@color/colorBtnInactive"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:id="@+id/imageWisata"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal|center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_baseline_brightness_1_24" />
+
+                <TextView
+                    android:id="@+id/tvNamaTempat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="96dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Pulau Komodo 2020"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4" />
+
+                <TextView
+                    android:id="@+id/tvBiaya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="96dp"
+                    android:layout_marginTop="44dp"
+                    android:text="Rp. 10.000.000"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/cardView"
+                app:strokeColor="@color/colorBtnInactive"
+                app:strokeWidth="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal|start"
+                    android:layout_marginStart="14dp"
+                    android:text="@string/desc_detail_tabungan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView3"
+                android:layout_width="0dp"
+                android:layout_height="129dp"
+                android:layout_marginTop="16dp"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/cardView2"
+                app:strokeColor="@color/colorBtnInactive"
+                app:strokeWidth="1dp">
+
+                <View
+                    android:id="@+id/vGaris"
+                    android:layout_width="370dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@color/colorBtnInactive" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Setoran awal"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="36dp"
+                    android:text="Sekarang"
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Rp. 2.000.000"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/heading3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="Rp. 2.000.000"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/heading3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="42dp"
+                    android:text="Tabungan Bulanan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="Mulai bulan depan"
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView4"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/cardView3"
+                app:strokeColor="@color/colorBtnInactive"
+                app:strokeWidth="1dp">
+
+                <TextView
+                    android:id="@+id/tvDescPerkiran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Tabunganmu diperkirakan tercapai pada"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text" />
+
+                <TextView
+                    android:id="@+id/tvPerkiranTabungan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="16 Juli 2020"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/heading4" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tvLabelTabungBareng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Tabung Bareng"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading4"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/cardView4" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                tools:listitem="@layout/list_tabung_bareng"
+                app:layout_constraintBottom_toBottomOf="@id/ghorizontal2"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelTabungBareng" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/viewButton"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
-        android:id="@+id/btnLanjutFormOne"
+        android:id="@+id/btnBuatSekarang"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:background="@drawable/bg_active"
-        android:fontFamily="@font/roboto"
-        android:text="Buat Sekarang"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
         android:layout_marginBottom="32dp"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@drawable/bg_active"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
+        android:fontFamily="@font/roboto"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Buat Sekarang"
+        android:layout_marginHorizontal="16dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/viewButton"
+        app:layout_constraintEnd_toEndOf="@id/viewButton"
+        app:layout_constraintStart_toStartOf="@id/viewButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

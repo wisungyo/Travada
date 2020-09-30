@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
-import com.example.travada.features.tabungan.formdetailtabungan.DataTabungBareng
+import com.example.travada.features.tabungan.formresulttabungan.DataTabungBareng
 import kotlinx.android.synthetic.main.list_tabung_bareng_teman.view.*
 
 class BarengTemanAdapter(val listBarengTeman: ArrayList<DataTabungBareng>) :

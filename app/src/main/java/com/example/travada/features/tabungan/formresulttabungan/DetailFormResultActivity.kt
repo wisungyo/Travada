@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.formdetailtabungan
+package com.example.travada.features.tabungan.formresulttabungan
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

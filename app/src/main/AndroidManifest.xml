@@ -50,7 +50,7 @@
 
         </activity>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
-        <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
+        <activity android:name=".features.tabungan.formresulttabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />
         <activity android:name=".features.tabungan.formtabungandua.FormTabunganTwoActivity" />
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
