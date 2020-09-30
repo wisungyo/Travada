@@ -3,6 +3,7 @@ package com.example.travada.features.tabungan.formtabungandua
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
+import android.icu.text.NumberFormat
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,7 @@ import com.example.travada.features.tabungan.formresulttabungan.DataTabungBareng
 import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeActivity
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import com.example.travada.features.tabungan.formresulttabungan.DetailFormResultActivity
+import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.util.*
 
@@ -36,10 +38,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
         DataTabungBareng("Nicholas", "3434343", "N")
     )
 
-    val adapterBarengTeman =
-        BarengTemanAdapter(
-            listTabungBareng
-        )
+    val adapterBarengTeman = BarengTemanAdapter(listTabungBareng)
 
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter
@@ -50,6 +49,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
         setContentView(R.layout.activity_form_tabungan_two)
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        presenter = FormTabunganTwoPresenter(this)
 
         val layoutManagerLinear = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvTabunganBarengTeman.layoutManager = layoutManagerLinear
@@ -99,7 +99,6 @@ class FormTabunganTwoActivity : AppCompatActivity(),
             periodeTabungan.showDropDown()
         }
 
-        presenter = FormTabunganTwoPresenter(this)
         etTanggal.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
 
@@ -117,7 +116,30 @@ class FormTabunganTwoActivity : AppCompatActivity(),
         })
 
         etSetoranAwal.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
+            var processed = ""
+            @RequiresApi(Build.VERSION_CODES.N)
+            override fun afterTextChanged(count: Editable?) {
+                val initial = count.toString()
+
+                if (etSetoranAwal == null) return
+                if (initial.isEmpty()) return
+
+                val cleanString = initial.replace(".", "")
+                val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
+                nf.setGroupingUsed(true);
+
+                var myNumber = cleanString.toDouble()
+                processed = nf.format(myNumber)
+                etSetoranAwal.removeTextChangedListener(this)
+                etSetoranAwal.setText(processed)
+
+                try {
+                    etSetoranAwal.setSelection(processed.length)
+                } catch (e: NumberFormatException) {
+                    e.printStackTrace()
+                }
+                etSetoranAwal.addTextChangedListener(this)
+            }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -165,7 +187,30 @@ class FormTabunganTwoActivity : AppCompatActivity(),
         })
 
         etJumlahTabungan.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
+            var processed = ""
+            @RequiresApi(Build.VERSION_CODES.N)
+            override fun afterTextChanged(count: Editable?) {
+                val initial = count.toString()
+
+                if (etJumlahTabungan == null) return
+                if (initial.isEmpty()) return
+
+                val cleanString = initial.replace(".", "")
+                val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
+                nf.setGroupingUsed(true);
+
+                var myNumber = cleanString.toDouble()
+                processed = nf.format(myNumber)
+                etJumlahTabungan.removeTextChangedListener(this)
+                etJumlahTabungan.setText(processed)
+
+                try {
+                    etJumlahTabungan.setSelection(processed.length)
+                } catch (e: NumberFormatException) {
+                    e.printStackTrace()
+                }
+                etJumlahTabungan.addTextChangedListener(this)
+            }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -179,24 +224,20 @@ class FormTabunganTwoActivity : AppCompatActivity(),
                 )
             }
         })
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun showDatePicker() {
         // DatePicker
         DateEditText.setText(SimpleDateFormat("dd-MMM-yyyy").format(System.currentTimeMillis()))
-
         var cal = Calendar.getInstance()
-
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val myFormat = "EEEE-MMM-yyyy" // mention the format you need
+                val myFormat = "dd MMM yyyy" // mention the format you need
                 val sdf = SimpleDateFormat(myFormat, Locale.US)
                 DateEditText.setText(sdf.format(cal.time))
             }
@@ -211,7 +252,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)
             )
-            dialog.datePicker.maxDate =
+            dialog.datePicker.minDate =
                 CalendarHelper.getCurrentDateInMills()
             dialog.show()
         }
