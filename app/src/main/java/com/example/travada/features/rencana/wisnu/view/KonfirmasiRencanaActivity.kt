@@ -242,6 +242,7 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         /*
         STATIC TOKEN  */
         val token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
+        progressDialog.show()
         TPApiClient.TP_API_SERVICES.postPemesanan(token, idUser, postPemesanan).enqueue(object :
             Callback<PostPemesananResponse> {
             override fun onResponse(
@@ -254,10 +255,12 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                 }
 
                 response.body()?.data?.let { showResultRencana(it) }
+                progressDialog.dismiss()
             }
 
             override fun onFailure(call: Call<PostPemesananResponse>, t: Throwable) {
                 showDataError(t.message.toString())
+                progressDialog.dismiss()
             }
 
         })

@@ -29,6 +29,7 @@
         <activity android:name=".features.rencana.wisnu.view.RencanaActivity">
 
         </activity>
+        <activity android:name=".features.rencana.searchpage.TPFilterPageActivity" />
         <activity android:name=".features.rencana.person.TPPersonActivity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
         <activity android:name=".welcomepage.register.takepicKTP.TakePicKTPActivity" />

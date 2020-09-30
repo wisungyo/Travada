@@ -1,5 +1,6 @@
 package com.example.travada.features.rencana.wisnu.view
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,11 +17,14 @@ import java.util.*
 
 class ResultRencanaActivity : AppCompatActivity(), ResultRencanaActivityPresenter.Listener {
     private lateinit var presenter: ResultRencanaActivityPresenter
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_rencana)
         presenter = ResultRencanaActivityPresenter(this)
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Mohon tunggu...")
         val idDestinasi = intent.getIntExtra("ID_DESTINASI", 3)
 
         presenter.fetchData(idDestinasi)
