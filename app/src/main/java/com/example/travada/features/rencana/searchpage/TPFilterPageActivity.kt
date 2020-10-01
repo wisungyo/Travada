@@ -25,7 +25,7 @@ class TPFilterPageActivity : AppCompatActivity(), TPFilterPagePresenter.Listener
         setContentView(R.layout.activity_t_p_filter_page)
 
 
-        sb_price.setOnRangeSeekbarChangeListener(OnRangeSeekbarChangeListener { minValue, maxValue ->
+        sb_price.setOnRangeSeekbarChangeListener({ minValue, maxValue ->
             onValueChange(minValue, maxValue)
         })
 

@@ -1,6 +1,6 @@
 package com.example.travada.fragmentnav.akun
 
-class AkunFragmentPresenter () {
+class AkunFragmentPresenter(val listener : Listener) {
 
     interface Listener {
 

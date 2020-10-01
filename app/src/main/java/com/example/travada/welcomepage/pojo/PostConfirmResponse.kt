@@ -15,6 +15,8 @@ data class PostConfirmResponse(
         @SerializedName("token")
         val token: String,
         @SerializedName("token_type")
-        val tokenType: String
+        val tokenType: String,
+        @SerializedName("session")
+        val session: String
     )
 }

@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".util.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,15 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".detailriwayat.view.BayarCicilanActivity"></activity>
+
+        <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity"></activity>
+        <activity android:name=".welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity" />
         <activity android:name=".features.rencana.wisnu.view.ResultRencanaActivity" />
+        <activity android:name=".detailriwayat.view.BayarCicilanActivity"></activity>
         <activity android:name=".features.rencana.detailrencana.view.DetailRencanaActivity" />
         <activity android:name=".features.rencana.searchpage.TPSearchPageActivity" />
         <activity android:name=".welcomepage.register.registerverifcode.RegisterVerifCodeActivity" />
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
         <activity android:name=".features.rencana.wisnu.view.KonfirmasiRencanaActivity" />
         <activity android:name=".features.rencana.wisnu.view.PesanRencanaActivity" />
-        <activity android:name=".features.rencana.wisnu.view.RencanaActivity"></activity>
+        <activity android:name=".features.rencana.wisnu.view.RencanaActivity" />
         <activity android:name=".features.rencana.searchpage.TPFilterPageActivity" />
         <activity android:name=".features.rencana.person.TPPersonActivity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
@@ -42,15 +46,10 @@
         <activity android:name=".welcomepage.loginpin.LoginPinActivity" />
         <activity android:name=".welcomepage.login.LoginActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingEndActivity" />
-        <activity android:name=".detailriwayat.view.DetailRiwayatActivity" />
+        <activity android:name=".detailriwayat.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".mainpage.MainPageActivity" >
         </activity>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
         <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
@@ -59,7 +58,13 @@
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
         <activity android:name=".features.tabungan.maintabungan.TabunganActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
-        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity" />
+        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity" />
 
         <meta-data
