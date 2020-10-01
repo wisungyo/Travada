@@ -11,6 +11,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.os.CountDownTimer
+import android.util.Base64
+import com.example.travada.util.util
+import com.orhanobut.hawk.Hawk
+import java.nio.charset.StandardCharsets
 
 class RegisterVerifCodePresenter(val listener: Listener) {
 
@@ -22,7 +26,7 @@ class RegisterVerifCodePresenter(val listener: Listener) {
         }
     }
 
-    fun checkVerif(bundle: Bundle, code: String, sf: SharedPreferences) {
+    fun checkVerif(bundle: Bundle, code: String) {
         lateinit var username: String
         lateinit var password:String
 
@@ -49,11 +53,19 @@ class RegisterVerifCodePresenter(val listener: Listener) {
                 response: Response<PostConfirmResponse>
             ) {
                 if (response.isSuccessful) {
-                    val editor = sf.edit()
-                    editor.putString("id", response.body()?.data?.token)
-                    editor.putString("pin", bundle.getString("pin"))
-                    editor.putBoolean("isLogin", true)
-                    editor.apply()
+//                    val editor = sf.edit()
+//                    editor.putString(util.SF_TOKEN, response.body()?.data?.token)
+//                    editor.putString(util.SF_TOKEN_TYPE, response.body()?.data?.tokenType)
+//                    editor.putString(util.SF_PIN, response.body()?.data?.pin)
+//                    editor.putBoolean(util.SF_ISLOGIN, true)
+//                    editor.apply()
+                    val data: ByteArray =
+                        Base64.decode(response.body()?.data?.session, Base64.DEFAULT)
+                    val pin = String(data, StandardCharsets.UTF_8)
+
+                    Hawk.put(util.SF_SESSION, pin)
+                    Hawk.put(util.SF_TOKEN, "${response.body()?.data?.tokenType} ${response.body()?.data?.token}")
+                    Hawk.put(util.SF_ISLOGIN, true)
                     listener.goToNextPage(bundle)
                 } else {
                     listener.ShowErrorMessage()

@@ -30,7 +30,7 @@ class RegisterVerifCodeActivity : AppCompatActivity(), RegisterVerifCodePresente
     private lateinit var bundle: Bundle
     val LoadingDialog = LoadingDialog()
     val DoneDialog = com.example.travada.util.donedialog.DoneDialog()
-    lateinit var sharedPreferences: android.content.SharedPreferences
+//    lateinit var sharedPreferences: android.content.SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +38,10 @@ class RegisterVerifCodeActivity : AppCompatActivity(), RegisterVerifCodePresente
 
         intent?.extras?.let { bundle = it }
         presenter = RegisterVerifCodePresenter(this)
-        sharedPreferences = getSharedPreferences(
-            util.SF,
-            Context.MODE_PRIVATE
-        )
+//        sharedPreferences = getSharedPreferences(
+//            util.SF,
+//            Context.MODE_PRIVATE
+//        )
 
         Glide
             .with(this)
@@ -52,7 +52,7 @@ class RegisterVerifCodeActivity : AppCompatActivity(), RegisterVerifCodePresente
         tv_email.text = bundle.getString("email")
 
         btn_next.setOnClickListener {
-            presenter.checkVerif(bundle, firstPinView.text.toString(), sharedPreferences)
+            presenter.checkVerif(bundle, firstPinView.text.toString())
         }
 
         btn_back.setOnClickListener {
@@ -113,7 +113,7 @@ class RegisterVerifCodeActivity : AppCompatActivity(), RegisterVerifCodePresente
             DoneDialog.dismiss()
             startActivity(goToNextActivity)
             finishAffinity()
-        }, 6000)
+        }, 7000)
 
     }
 

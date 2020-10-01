@@ -1,61 +1,49 @@
 package com.example.travada.features.rencana.person
 
 import android.Manifest
+import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.icu.text.SimpleDateFormat
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.StrictMode
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Base64.encodeToString
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.travada.R
-import com.example.travada.welcomepage.register.takepicKTP.TakePicKTPActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_t_p_person.*
-import kotlinx.android.synthetic.main.activity_t_p_person.btn_back
-import kotlinx.android.synthetic.main.activity_take_pic_k_t_p.*
+import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.lang.reflect.Method
 import java.util.*
+import android.util.Base64
 
 
 class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
     private lateinit var presenter: TPPersonPresenter
-//    private lateinit var bundle: Bundle
+    //    private lateinit var bundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_t_p_person)
+        isError = false
+        uriKTP = ""
+        uriPassport = ""
 
         //Bundle isinya Orang ke berapa
         val orang = intent.getIntExtra("ORANG", 1)
 
         //TODO : change name in action bar
-        actionbar_title.text = "Orang ${orang+1}"
+        actionbar_title.text = "Orang ${orang + 1}"
 
         presenter = TPPersonPresenter(this)
-
-        if (Build.VERSION.SDK_INT >= 24) {
-            try {
-                val m: Method = StrictMode::class.java.getMethod("disableDeathOnFileUriExposure")
-                m.invoke(null)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
 
         btn_back.setOnClickListener {
             finish()
@@ -127,18 +115,7 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
         })
 
         btn_next.setOnClickListener {
-            showToast(uriKTP.toString())
-
-            Glide
-                .with(this@TPPersonActivity)
-                .asBitmap()
-                .load(
-                    uriKTP
-                )
-                .centerCrop()
-                .into(btn_back)
-
-//            presenter.nextPage()
+            presenter.nextPage()
         }
     }
 
@@ -165,9 +142,6 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
         returnIntent.putExtra("id", orang)
         setResult(Activity.RESULT_OK, returnIntent)
         finish()
-
-//        showToast("$uriPassport , $uriKTP , ${et_name.text} " )
-
     }
 
     override fun errName(message: String?) {
@@ -250,24 +224,6 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
     }
 
     fun takePhotoFromCamera(code: Int) {
-//        val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-//        val imageFileName =
-//            SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
-//                .toString()
-//        val imageFileName = "cobaaa"
-//        val outputDirectory = getOutputDirectory()
-//
-//        val image: File = File(
-//            outputDirectory,
-//            imageFileName + ".jpg"
-//
-//        )
-//
-//        val uri = Uri.fromFile(image)
-//        val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-//        startActivityForResult(takePhotoIntent, code)
-
         val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(intentCamera, code)
     }
@@ -356,29 +312,35 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
             if (data != null) {
                 var bitmap = data?.extras?.get("data") as Bitmap
 
-                val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-                val imageFileName =
-                    SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
-                        .toString()
-                val outputDirectory = getOutputDirectory()
-                val image: File = File(
-                    outputDirectory,
-                    imageFileName + ".jpg"
-                )
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val imageBytes: ByteArray = baos.toByteArray()
+                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+                uriKTP = imageString
 
-                if (!image.exists()) {
-                    var fos: FileOutputStream? = null
-                    try {
-                        fos = FileOutputStream(image)
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
-                        fos.flush()
-                        fos.close()
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-                }
-
-                uriKTP = Uri.fromFile(image).toString()
+//                val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+//                val imageFileName =
+//                    SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
+//                        .toString()
+//                val outputDirectory = getOutputDirectory()
+//                val image: File = File(
+//                    outputDirectory,
+//                    imageFileName + ".jpg"
+//                )
+//
+//                if (!image.exists()) {
+//                    var fos: FileOutputStream? = null
+//                    try {
+//                        fos = FileOutputStream(image)
+//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+//                        fos.flush()
+//                        fos.close()
+//                    } catch (e: IOException) {
+//                        e.printStackTrace()
+//                    }
+//                }
+//
+//                uriKTP = Uri.fromFile(image).toString()
 
 
                 btn_KTP.setBackgroundResource(R.drawable.bg_btndone)
@@ -403,7 +365,15 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
             }
         } else if (requestCode == GALLERY_REQUEST_KTP) {
             if (data != null) {
-                uriKTP = data.data.toString()
+//                uriKTP = data.data.toString()
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(contentResolver, data.data)
+
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val imageBytes: ByteArray = baos.toByteArray()
+                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+                uriKTP = imageString
 
                 btn_KTP.setBackgroundResource(R.drawable.bg_btndone)
                 btn_KTP.setCompoundDrawablesWithIntrinsicBounds(
@@ -424,7 +394,14 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
             }
         } else if (requestCode == CAMERA_REQUEST_PASSPORT) {
             if (data != null) {
-                uriPassport = data.toString()
+                var bitmap = data?.extras?.get("data") as Bitmap
+//                uriPassport = data.toString()
+
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val imageBytes: ByteArray = baos.toByteArray()
+                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+                uriPassport = imageString
 
                 btn_Passport.setBackgroundResource(R.drawable.bg_btndone)
                 btn_Passport.setCompoundDrawablesWithIntrinsicBounds(
@@ -445,7 +422,15 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
             }
         } else if (requestCode == GALLERY_REQUEST_PASSPORT) {
             if (data != null) {
-                uriPassport = data.data.toString()
+//                uriPassport = data.data.toString()
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(contentResolver, data.data)
+
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val imageBytes: ByteArray = baos.toByteArray()
+                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+                uriPassport = imageString
 
                 btn_Passport.setBackgroundResource(R.drawable.bg_btndone)
                 btn_Passport.setCompoundDrawablesWithIntrinsicBounds(

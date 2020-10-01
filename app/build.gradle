@@ -126,5 +126,8 @@ dependencies {
     //lib coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8'
 
+    //Hawk penganti Shared Preferences
+    compile "com.orhanobut:hawk:2.0.1"
+
 
 }
