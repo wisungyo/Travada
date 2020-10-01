@@ -1,5 +1,6 @@
 package com.example.travada.detailriwayat.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,6 @@ import java.util.*
 
 class DetailRiwayatActivity : AppCompatActivity(), DetailRiwayatActivityPresenter.Listener {
     private lateinit var presenter: DetailRiwayatActivityPresenter
-    private lateinit var result: DataRiwayat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,5 +95,10 @@ class DetailRiwayatActivity : AppCompatActivity(), DetailRiwayatActivityPresente
             df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
             tv_detail_riwayat_pembayaran.text = "Rp. ${df.format(data.pemesanan.total)}"
         }
+    }
+
+    override fun showBayarCicilan() {
+        val intentBayarCicilan = Intent(this, BayarCicilanActivity::class.java)
+        startActivity(intentBayarCicilan)
     }
 }

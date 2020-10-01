@@ -284,6 +284,17 @@
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/card_mainpage" />
 
+        <TextView
+            android:id="@+id/tv_mainpage_trip_lihat_semua_liburan_kamu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="Lihat semua"
+            android:textColor="#2A85F4"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/gl_vertical_right"
+            app:layout_constraintBottom_toBottomOf="@id/tv_mainpage_tabungan" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mainpage_tabungan"
             android:layout_marginTop="16dp"
@@ -363,7 +374,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_mainpage_trip" />
 
         <TextView
-            android:id="@+id/tv_mainpage_trip_lihat_semua"
+            android:id="@+id/tv_mainpage_trip_lihat_semua_trip_pilihan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"

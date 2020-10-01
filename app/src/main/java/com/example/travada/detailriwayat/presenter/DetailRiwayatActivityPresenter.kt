@@ -108,6 +108,10 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
         listener.showData(adapterDetailRiwayat, linearLayoutDetailRiwayat)
     }
 
+    fun goToBayarCicilan() {
+        listener.showBayarCicilan()
+    }
+
     interface Listener {
         fun showData(
             adapterDetailRiwayatActivity: AdapterDetailRiwayatActivityDisetujui,
@@ -120,5 +124,6 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
             linearLayoutDetailRiwayatActivity: LinearLayoutManager)
         fun showDestinasiData(data: GetDestinasiResponse.Data?)
         fun showPemesananDataOnDestinasiData(data: GetPemesananDetailResponse.Data?)
+        fun showBayarCicilan()
     }
 }

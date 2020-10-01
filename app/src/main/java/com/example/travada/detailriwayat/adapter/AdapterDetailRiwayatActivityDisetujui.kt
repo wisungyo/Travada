@@ -85,7 +85,7 @@ class AdapterDetailRiwayatActivityDisetujui(
             }
 
             holder.itemView.btn_detail_riwayat_item.setOnClickListener {
-//                val intent(this, )
+                presenter.goToBayarCicilan()
             }
         }
     }

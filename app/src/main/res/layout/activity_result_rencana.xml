@@ -226,7 +226,7 @@
 
     <Button
         android:id="@+id/btn_konfirmas_rencana"
-        android:text="Cek Riwayat"
+        android:text="Selesai"
         android:fontFamily="@font/roboto"
         android:textSize="16sp"
         android:textColor="#fff"

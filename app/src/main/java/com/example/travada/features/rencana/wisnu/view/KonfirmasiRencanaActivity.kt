@@ -23,7 +23,6 @@ import com.example.travada.features.rencana.pojo.PostPemesananResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
 import com.example.travada.sampeldata.DataCicilanUser
-import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -93,8 +92,6 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                         uriKTP,
                         uriPassport
                     )
-                    Toast.makeText(this, "Add Success", Toast.LENGTH_LONG).show()
-                    Log.d("ALAMATIMG", "$uriKTP & $uriPassport")
                 }
 
                 presenter.fetchDetailPemesananLayout()
@@ -170,8 +167,8 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         }
     }
 
-    override fun showNextButtonClicked(title: String) {
-        DialogKonfirmasi.newInstance(title).show(supportFragmentManager, DialogKonfirmasi.TAG)
+    override fun showNextButtonClicked(title: String, subtitle: String) {
+        DialogKonfirmasiPemesanan.newInstance(title, subtitle).show(supportFragmentManager, DialogKonfirmasiPemesanan.TAG)
     }
 
     override fun showResultRencana(data: PostPemesananResponse.Data) {
