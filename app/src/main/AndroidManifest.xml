@@ -19,16 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".features.rencana.wisnu.view.ResultRencanaActivity"></activity>
+        <activity android:name=".detailriwayat.view.BayarCicilanActivity"></activity>
+        <activity android:name=".features.rencana.wisnu.view.ResultRencanaActivity" />
         <activity android:name=".features.rencana.detailrencana.view.DetailRencanaActivity" />
         <activity android:name=".features.rencana.searchpage.TPSearchPageActivity" />
         <activity android:name=".welcomepage.register.registerverifcode.RegisterVerifCodeActivity" />
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
         <activity android:name=".features.rencana.wisnu.view.KonfirmasiRencanaActivity" />
         <activity android:name=".features.rencana.wisnu.view.PesanRencanaActivity" />
-        <activity android:name=".features.rencana.wisnu.view.RencanaActivity">
-
-        </activity>
+        <activity android:name=".features.rencana.wisnu.view.RencanaActivity"></activity>
         <activity android:name=".features.rencana.searchpage.TPFilterPageActivity" />
         <activity android:name=".features.rencana.person.TPPersonActivity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
@@ -46,7 +45,7 @@
         <activity android:name=".detailriwayat.view.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity" >
+        <activity android:name=".mainpage.MainPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +59,7 @@
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
         <activity android:name=".features.tabungan.maintabungan.TabunganActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
-        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity"></activity>
+        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity" />
         <activity android:name=".MainActivity" />
 
         <meta-data
