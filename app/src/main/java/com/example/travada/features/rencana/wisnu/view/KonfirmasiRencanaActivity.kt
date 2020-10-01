@@ -6,25 +6,25 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64   /*  NEED TO IMPORT IT MANUALLY. DAMN !!  */
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.person.TPPersonActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
+import com.example.travada.features.rencana.pojo.PostPemesananBase64Request
 import com.example.travada.features.rencana.pojo.PostPemesananResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
 import com.example.travada.sampeldata.DataCicilanUser
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +33,7 @@ import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
     private lateinit var presenter: KonfirmasiRencanaActivityPresenter
@@ -47,11 +48,11 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Mohon tunggu...")
 
-        val intentId = intent.getIntExtra("DESTINASI_ID", 3)
+        val intentIdDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
         val intentJumlahOrang = intent.getIntExtra("JUMLAH_ORANG", 1)
         val intentJumlahBiaya = intent.getIntExtra("JUMLAH_BIAYA", 0)
 
-        presenter.fetchMainData(intentId, intentJumlahOrang)
+        presenter.fetchMainData(intentIdDestinasi, intentJumlahOrang)
         // to declare recycler view according to how many people. only for the first time.
         presenter.fetchDetailPemesanan(intentJumlahOrang, intentJumlahBiaya)
         // to show the  layout of detail pemesanan
@@ -93,7 +94,7 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                         uriPassport
                     )
                     Toast.makeText(this, "Add Success", Toast.LENGTH_LONG).show()
-                    Log.d("ALAMATIMG","$uriKTP & $uriPassport")
+                    Log.d("ALAMATIMG", "$uriKTP & $uriPassport")
                 }
 
                 presenter.fetchDetailPemesananLayout()
@@ -173,53 +174,93 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         DialogKonfirmasi.newInstance(title).show(supportFragmentManager, DialogKonfirmasi.TAG)
     }
 
-    override fun showResultRencana() {
+    override fun showResultRencana(data: PostPemesananResponse.Data) {
+        val idDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
+
         val intentResultRencana = Intent(this, ResultRencanaActivity::class.java)
+        intentResultRencana.putExtra("ID_DESTINASI", idDestinasi)
+        intentResultRencana.putExtra("ID_PEMESANAN", data.pemesanan.id)
+        intentResultRencana.putExtra("ORANG", data.pemesanan.orang)
+        intentResultRencana.putExtra("TOTAL", data.pemesanan.total)
+        intentResultRencana.putExtra("TGL_PEMESANAN", data.pemesanan.createdAt)
         startActivity(intentResultRencana)
         finishAffinity()
     }
 
     override fun doPostPemesanan(listUser: ArrayList<DataCicilanUser>) {
-        val builder: MultipartBody.Builder =
-            MultipartBody.Builder().setType(MultipartBody.FORM)
-
-        builder.addFormDataPart("idDestinasi", "3") // change no 98
-        builder.addFormDataPart("orang", (listUser.size-1).toString())
+        /*
+        STATIC ID_USER */
+        val idUser = 5
+        val idDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
+        val listNama = ArrayList<String>()
+        val listEmail = ArrayList<String>()
+        val listNoHP = ArrayList<String>()
+        val listKTP = ArrayList<String>()
+        val listPaspor = ArrayList<String>()
 
         for (i in 0..listUser.size-1) {
-            val bitmapKTP: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(listUser[i].uriKTP))
-            val bitmapPassport: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(listUser[i].uriPassport))
-            val bos1 = ByteArrayOutputStream()
-            bitmapKTP.compress(Bitmap.CompressFormat.JPEG, 25, bos1)
-            val bos2 = ByteArrayOutputStream()
-            bitmapPassport.compress(Bitmap.CompressFormat.JPEG, 25, bos2)
+            val bitmapKTP: Bitmap = MediaStore.Images.Media.getBitmap(
+                getContentResolver(), Uri.parse(
+                    listUser[i].uriKTP
+                )
+            )
+            val bitmapPassport: Bitmap = MediaStore.Images.Media.getBitmap(
+                getContentResolver(), Uri.parse(
+                    listUser[i].uriPassport
+                )
+            )
 
-            // prepare the data
-            builder.addFormDataPart("nama", listUser[i].name)
-            builder.addFormDataPart("no_hp", listUser[i].phone)
-            builder.addFormDataPart("email", listUser[i].email)
-            builder.addFormDataPart("ktp", "ktp.jpg",
-                RequestBody.create(MultipartBody.FORM, bos1.toByteArray()))
-            builder.addFormDataPart("paspor", "passport.jpg",
-                RequestBody.create(MultipartBody.FORM, bos2.toByteArray()))
+            val bos1 = ByteArrayOutputStream()
+            bitmapKTP.compress(Bitmap.CompressFormat.JPEG, 100, bos1)
+            val bos2 = ByteArrayOutputStream()
+            bitmapPassport.compress(Bitmap.CompressFormat.JPEG, 100, bos2)
+
+            val byteArrayKTP = bos1.toByteArray()
+            val encodedStringKTP: String = Base64.encodeToString(byteArrayKTP, Base64.DEFAULT)
+            val byteArrayPaspor = bos1.toByteArray()
+            val encodedStringPaspor: String = Base64.encodeToString(byteArrayPaspor, Base64.DEFAULT)
+
+            /*
+            INSERT THE DATA */
+            listNama.add(listUser[i].name)
+            listEmail.add(listUser[i].email)
+            listNoHP.add(listUser[i].phone)
+            listKTP.add(encodedStringKTP)
+            listPaspor.add(encodedStringPaspor)
         }
 
-        val token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
-        TPApiClient.TP_API_SERVICES.postPemesanan(token, builder.build()).enqueue(object :
+        val postPemesanan = PostPemesananBase64Request(
+            idDestinasi,
+            listUser.size,
+            listNama,
+            listEmail,
+            listNoHP,
+            listKTP,
+            listPaspor
+        )
+
+        /*
+        STATIC TOKEN  */
+        val token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
+        progressDialog.show()
+        TPApiClient.TP_API_SERVICES.postPemesanan(token, idUser, postPemesanan).enqueue(object :
             Callback<PostPemesananResponse> {
             override fun onResponse(
                 call: Call<PostPemesananResponse>,
                 response: Response<PostPemesananResponse>
             ) {
-                if (response.isSuccessful) {
-                    showResultRencana()
-                } else {
+                if (!response.isSuccessful) {
                     showDataError("Mohon maaf ada kesalahan")
+                    return
                 }
+
+                response.body()?.data?.let { showResultRencana(it) }
+                progressDialog.dismiss()
             }
 
             override fun onFailure(call: Call<PostPemesananResponse>, t: Throwable) {
                 showDataError(t.message.toString())
+                progressDialog.dismiss()
             }
 
         })

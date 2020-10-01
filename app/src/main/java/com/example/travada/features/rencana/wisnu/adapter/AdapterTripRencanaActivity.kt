@@ -58,7 +58,7 @@ class AdapterTripRencanaActivity (val listTrip: List<GetPilihanResponse.Data>, v
         }
 
         holder.itemView.cv_mainpage_item_trip.setOnClickListener {
-            presenter.itemClicked(position)
+            presenter.itemClicked(listTrip[position].id)
         }
     }
 

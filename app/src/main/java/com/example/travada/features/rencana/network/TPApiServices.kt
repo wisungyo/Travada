@@ -40,8 +40,17 @@ interface TPApiServices {
                    @Path("jumlahOrang") jumlahOrang: Int) : Call<GetCicilanResponse>
 
     @Headers("Content-Type: application/json;charset=UTF-8")
-    @POST("pemesanan")
+    @POST("pemesanan/base64/{idUser}")
     fun postPemesanan(
         @Header ("Authorization") token: String,
-        @Body body: RequestBody): Call<PostPemesananResponse>
+        @Path ("idUser") idUser: Int,
+        @Body base64Request: PostPemesananBase64Request
+    ): Call<PostPemesananResponse>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("pemesanan/destinasi/{idDestinasi}")
+    fun getPemesananDestinasi(
+        @Header ("Authorization") token: String,
+        @Path ("idDestinasi") id: Int
+    ) : Call<GetPemesananDestinasiResponse>
 }

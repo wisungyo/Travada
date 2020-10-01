@@ -2,10 +2,37 @@ package com.example.travada.detailriwayat
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.travada.features.rencana.network.TPApiClient
+import com.example.travada.features.rencana.pojo.GetPemesananDestinasiResponse
 import com.example.travada.sampeldata.DataCicilan
-import com.example.travada.sampeldata.DataRiwayat
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity() {
+
+    fun fetchDestinasiData(idDestinasi: Int) {
+        val token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
+
+        TPApiClient.TP_API_SERVICES.getPemesananDestinasi(token, idDestinasi).enqueue(object : Callback<GetPemesananDestinasiResponse> {
+            override fun onResponse(
+                call: Call<GetPemesananDestinasiResponse>,
+                response: Response<GetPemesananDestinasiResponse>
+            ) {
+                if (!response.isSuccessful) {
+                    //
+                    return
+                }
+
+                listener.showDestinasiData(response.body()?.data)
+            }
+
+            override fun onFailure(call: Call<GetPemesananDestinasiResponse>, t: Throwable) {
+//                TODO("Not yet implemented")
+            }
+
+        })
+    }
 
     fun fetchCicilanData() {
         val listCicilan = arrayListOf(
@@ -42,7 +69,7 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
                 "Cicilan 4/4",
                 2500000,
                 "09 Agustus 2020",
-                "November Pembayaran"
+                "Menunggu Pembayaran"
             )
         )
 
@@ -56,5 +83,6 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
         fun showData(
             adapterDetailRiwayatActivity: AdapterDetailRiwayatActivity,
             linearLayoutDetailRiwayatActivity: LinearLayoutManager)
+        fun showDestinasiData(data: GetPemesananDestinasiResponse.Data?)
     }
 }
