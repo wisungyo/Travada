@@ -12,11 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatStatus
-import com.example.travada.detailriwayat.DetailRiwayatActivity
+import com.example.travada.detailriwayat.view.DetailRiwayatActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
-import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatProses
 import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
-import com.example.travada.sampeldata.DataRiwayat
 import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 import kotlinx.android.synthetic.main.fragment_riwayat_status.*
 import java.text.DecimalFormat
@@ -52,9 +50,10 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
         rv_riwayat_status.layoutManager = linearLayoutRiwayatStatus
     }
 
-    override fun showDetailRiwayat(idDestinasi: Int) {
+    override fun showDetailRiwayat(idDestinasi: Int, idPemesanan: Int) {
         val intentDetailRiwayat = Intent(context, DetailRiwayatActivity::class.java)
         intentDetailRiwayat.putExtra("ID_DESTINASI", idDestinasi)
+        intentDetailRiwayat.putExtra("ID_PEMESANAN", idPemesanan)
         startActivity(intentDetailRiwayat)
     }
 

@@ -27,7 +27,7 @@ class AdapterRiwayatStatus(val listDataRiwayat: List<GetPemesananRiwayatResponse
         presenter.getDestinasiInfo(listDataRiwayat[position], holder)
 
         holder.itemView.wrapper_riwayat_proses_item.setOnClickListener {
-            presenter.goToDetailRiwayat(listDataRiwayat[position].idDestinasi)
+            presenter.goToDetailRiwayat(listDataRiwayat[position].idDestinasi, listDataRiwayat[position].pemesanan.id)
         }
     }
 

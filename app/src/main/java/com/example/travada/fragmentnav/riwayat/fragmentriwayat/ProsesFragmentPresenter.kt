@@ -65,13 +65,13 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
         })
     }
 
-    fun goToDetailRiwayat(idDestinasi: Int) {
-        listener.showDetailRiwayat(idDestinasi)
+    fun goToDetailRiwayat(idDestinasi: Int, idPemesanan: Int) {
+        listener.showDetailRiwayat(idDestinasi, idPemesanan)
     }
 
     interface Listener {
         fun showData(list: List<GetPemesananRiwayatResponse.Data>)
-        fun showDetailRiwayat(idDestinasi: Int)
+        fun showDetailRiwayat(idDestinasi: Int, idPemesanan: Int)
         fun showDataError(error: String)
     }
 

@@ -1,14 +1,11 @@
 package com.example.travada.fragmentnav.riwayat.fragmentriwayat
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
-import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatProses
 import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatStatus
 import com.example.travada.fragmentnav.riwayat.network.ApiClientRiwayat
 import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
-import com.example.travada.sampeldata.DataRiwayat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -68,13 +65,13 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
         })
     }
     
-    fun goToDetailRiwayat(idDestinasi: Int) {
-        listener.showDetailRiwayat(idDestinasi)
+    fun goToDetailRiwayat(idDestinasi: Int, idPemesanan: Int) {
+        listener.showDetailRiwayat(idDestinasi, idPemesanan)
     }
 
     interface Listener {
         fun showData(list: List<GetPemesananRiwayatResponse.Data>)
-        fun showDetailRiwayat(idDestinasi: Int)
+        fun showDetailRiwayat(idDestinasi: Int, idPemesanan: Int)
         fun showDataError(error: String)
     }
 
