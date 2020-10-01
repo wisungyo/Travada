@@ -11,48 +11,15 @@ import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneAct
 import com.example.travada.features.tabungan.models.DataWisata
 import kotlinx.android.synthetic.main.activity_tabungan.*
 
-class TabunganActivity : AppCompatActivity() {
-    private val listWisata = arrayListOf(
-        DataWisata(
-            "Pantai Ancol",
-            "Rp. 100.000",
-            "1 bulan ",
-            R.drawable.leicester
-        ),
-        DataWisata(
-            "Pantai Ancol",
-            "Rp. 100.000",
-            "1 bulan ",
-            R.drawable.leicester
-        ),
-        DataWisata(
-            "Pantai Ancol",
-            "Rp. 100.000",
-            "1 bulan ",
-            R.drawable.leicester
-        ),
-        DataWisata(
-            "Pantai Ancol",
-            "Rp. 100.000",
-            "1 bulan ",
-            R.drawable.leicester
-        ),
-        DataWisata(
-            "Pantai Ancol",
-            "Rp. 100.000",
-            "1 bulan ",
-            R.drawable.leicester
-        )
-    )
+class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
 
-    val adapterWisata =
-        ListWisataAdapter(
-            listWisata
-        )
+    private lateinit var presenter: TabunganPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tabungan)
+
+        presenter = TabunganPresenter(this)
 
         btnBuatLiburan.setOnClickListener {
             val goToFormTabunganOne = Intent(
@@ -62,10 +29,17 @@ class TabunganActivity : AppCompatActivity() {
             startActivity(goToFormTabunganOne)
         }
 
+        ivBackMainTabungan.setOnClickListener {
+            finish()
+        }
+        presenter.fetchWisataPilihanData()
+    }
+
+    override fun showData(adapterWisataPilihan: ListWisataAdapter) {
         val layoutManagerLinear =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMainTabungan.layoutManager = layoutManagerLinear
-        rvMainTabungan.adapter = adapterWisata
+        rvMainTabungan.adapter = adapterWisataPilihan
         rvMainTabungan.overScrollMode = View.OVER_SCROLL_NEVER
     }
 

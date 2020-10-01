@@ -21,11 +21,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
 import com.example.travada.features.tabungan.helper.CalendarHelper
-import com.example.travada.features.tabungan.formresulttabungan.DataTabungBareng
+import com.example.travada.features.tabungan.models.DataTabungBareng
 import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeActivity
-import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import com.example.travada.features.tabungan.formresulttabungan.DetailFormResultActivity
-import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.util.*
 
@@ -33,9 +31,21 @@ class FormTabunganTwoActivity : AppCompatActivity(),
     FormTabunganTwoPresenter.Listener {
 
     private val listTabungBareng = arrayListOf(
-        DataTabungBareng("Nanda Adi", "1212131", "AN"),
-        DataTabungBareng("Abigail", "1212122", "A"),
-        DataTabungBareng("Nicholas", "3434343", "N")
+        DataTabungBareng(
+            "Nanda Adi",
+            "1212131",
+            "AN"
+        ),
+        DataTabungBareng(
+            "Abigail",
+            "1212122",
+            "A"
+        ),
+        DataTabungBareng(
+            "Nicholas",
+            "3434343",
+            "N"
+        )
     )
 
     val adapterBarengTeman = BarengTemanAdapter(listTabungBareng)
@@ -65,8 +75,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
         showDatePicker()
 
         ivFormTwoBack.setOnClickListener {
-            val backToTabungan = Intent(this, FormTabunganOneActivity::class.java)
-            startActivity(backToTabungan)
+            finish()
         }
 
         var metodeTabungan = etMetodeTabungan as AutoCompleteTextView

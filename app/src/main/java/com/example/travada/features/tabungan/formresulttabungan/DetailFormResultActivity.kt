@@ -1,19 +1,33 @@
 package com.example.travada.features.tabungan.formresulttabungan
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.TabungBarengAdapter
+import com.example.travada.features.tabungan.maintabungan.TabunganActivity
+import com.example.travada.features.tabungan.models.DataTabungBareng
 import kotlinx.android.synthetic.main.activity_detail_form_result.*
 
 class DetailFormResultActivity : AppCompatActivity() {
-
     private val gabungBareng = arrayListOf(
-        DataTabungBareng("Abigail Nicole", "12534530", "AA"),
-        DataTabungBareng("Nofa Adelia", "4343400", "AA"),
-        DataTabungBareng("Cyntia Devi", "14343400", "AA")
+        DataTabungBareng(
+            "Abigail Nicole",
+            "12534530",
+            "AA"
+        ),
+        DataTabungBareng(
+            "Nofa Adelia",
+            "4343400",
+            "AA"
+        ),
+        DataTabungBareng(
+            "Cyntia Devi",
+            "14343400",
+            "AA"
+        )
     )
 
     val adapterGabungBareng =
@@ -30,5 +44,14 @@ class DetailFormResultActivity : AppCompatActivity() {
         rvDetail.layoutManager = layoutManagerLinear
         rvDetail.adapter = adapterGabungBareng
         rvDetail.overScrollMode = View.OVER_SCROLL_NEVER
+
+        btnBuatSekarang.setOnClickListener {
+            val gotoMainTabungan = Intent(this,TabunganActivity::class.java)
+            startActivity(gotoMainTabungan)
+        }
+
+        ivFormResultBack.setOnClickListener {
+            finish()
+        }
     }
 }

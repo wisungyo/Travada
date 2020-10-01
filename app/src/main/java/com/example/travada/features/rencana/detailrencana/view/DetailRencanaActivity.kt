@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Constraints
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
@@ -37,7 +38,7 @@ class DetailRencanaActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_rencana)
-        nestedView.overScrollMode = View.OVER_SCROLL_NEVER
+        // nestedView.overScrollMode = View.OVER_SCROLL_NEVER
         val intentId = intent.getIntExtra("DESTINASI_ID", 3)
 
         presenter = DetailRencanaPresenter (this)
@@ -83,6 +84,10 @@ class DetailRencanaActivity : AppCompatActivity(),
         showInfoWaktuCuaca("${getDestinasi.infoWaktuCuaca}") // adding "" to handle null reference, in order not force-close
 
         elInfoTambahan.setAdapter(InfoTambahanAdapter(this, elInfoTambahan, header, body))
+
+        ivBackDetailRencana.setOnClickListener {
+            finish()
+        }
     }
 
     override fun showInfoSyaratKetentuan(syaratKetentuan: String) {
@@ -123,7 +128,7 @@ class DetailRencanaActivity : AppCompatActivity(),
 
     override fun showListFasilitas(fasilitasList: List<String>) {
         rvFasilitasPerjalan.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            GridLayoutManager(this, 2)
         rvFasilitasPerjalan.adapter = FasilitasWisataAdapter(fasilitasList, presenter)
         rvFasilitasPerjalan.overScrollMode = View.OVER_SCROLL_NEVER
     }

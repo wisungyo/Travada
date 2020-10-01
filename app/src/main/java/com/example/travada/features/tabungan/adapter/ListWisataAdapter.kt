@@ -27,15 +27,10 @@ class ListWisataAdapter(val listWisata: ArrayList<DataWisata>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         var images = holder.itemView.ivFotoWisata
         holder.itemView.tvNamaWisata.text = listWisata[position].namaWisata
-        holder.itemView.tvBiayaWisata.text = listWisata[position].biaya
-        holder.itemView.tvTempoWisata.text = listWisata[position].tempo
+        holder.itemView.tvBiayaWisata.text = "Rp.${listWisata[position].biaya}"
+        holder.itemView.tvTempoWisata.text = "${listWisata[position].tempo} bulan lagi"
         Glide.with(holder.itemView.context).load(listWisata[position].gambar).into(images)
-
-
     }
-
-
 }

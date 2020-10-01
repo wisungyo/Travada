@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.formresulttabungan
+package com.example.travada.features.tabungan.models
 
 data class DataTabungBareng(
     val nama: String,

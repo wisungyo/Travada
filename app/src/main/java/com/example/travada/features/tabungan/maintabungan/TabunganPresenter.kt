@@ -1,50 +1,36 @@
 package com.example.travada.features.tabungan.maintabungan
 
-//class TabunganPresenter(val listener: Listener): AppCompatActivity() {
-//    fun fetchCicilanData() {
-//        val listCicilan = arrayListOf(
-//            DataWisata(
-//                "Pantai Ancol",
-//                "1.000.000",
-//                "1 bulan algi",
-//                R.drawable.leicester
-//            ),
-//            DataWisata(
-//                "Pantai Ancol",
-//                "1.000.000",
-//                "1 bulan algi",
-//                R.drawable.leicester
-//            ),
-//            DataWisata(
-//                "Pantai Ancol",
-//                "1.000.000",
-//                "1 bulan algi",
-//                R.drawable.leicester
-//            ),
-//            DataWisata(
-//                "Pantai Ancol",
-//                "1.000.000",
-//                "1 bulan algi",
-//                R.drawable.leicester
-//            ),
-//            DataWisata(
-//                "Pantai Ancol",
-//                "1.000.000",
-//                "1 bulan algi",
-//                R.drawable.leicester
-//            )
-//        )
-//
-//        val adapterWisataActivity = ListWisataAdapter(listCicilan)
-//        val linearLayoutWisata = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//
-//        listener.showData(adapterWisataActivity, linearLayoutWisata)
-//    }
-//
-//    interface Listener {
-//        fun showData(
-//            adapterWisataActivityActivity: ListWisataAdapter,
-//            linearLayoutWisataActivity: LinearLayoutManager
-//        )
-//    }
-//}
+import com.example.travada.R
+import com.example.travada.features.tabungan.adapter.ListWisataAdapter
+import com.example.travada.features.tabungan.models.DataWisata
+
+class TabunganPresenter(val listener: Listener) {
+    fun fetchWisataPilihanData() {
+        val listWisataPilihan = arrayListOf(
+            DataWisata(
+                "Pantai Ancol",
+                "1.000.000",
+                "5",
+                R.drawable.leicester
+            ),
+            DataWisata(
+                "Pantai Ancol",
+                "1.000.000",
+                "6",
+                R.drawable.leicester
+            ),
+            DataWisata(
+                "Pantai Ancol",
+                "1.000.000",
+                "4",
+                R.drawable.leicester
+            )
+        )
+        val adapterWisataPilihan = ListWisataAdapter(listWisataPilihan)
+        listener.showData(adapterWisataPilihan)
+    }
+
+    interface Listener {
+        fun showData( adapterWisataPilihan: ListWisataAdapter)
+    }
+}
