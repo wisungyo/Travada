@@ -3,7 +3,7 @@ package com.example.travada.welcomepage.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class PostLoginResponse(
+data class CobaDataClass(
     @SerializedName("data")
     val `data`: Data,
     @SerializedName("message")
@@ -12,8 +12,8 @@ data class PostLoginResponse(
     val status: String
 ) {
     data class Data(
-        @SerializedName("session")
-        val session: String,
+        @SerializedName("pin")
+        val pin: String,
         @SerializedName("token")
         val token: String,
         @SerializedName("token_type")

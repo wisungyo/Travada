@@ -1,18 +1,23 @@
 package com.example.travada.welcomepage.login
 
-import android.content.SharedPreferences
+import android.util.Base64
+import android.util.Log
+import com.example.travada.util.util
 import com.example.travada.welcomepage.login.LoginActivity.Companion.isError
 import com.example.travada.welcomepage.network.WPApiClient
 import com.example.travada.welcomepage.pojo.PostLoginRequest
 import com.example.travada.welcomepage.pojo.PostLoginResponse
 import com.google.gson.Gson
+import com.orhanobut.hawk.Hawk
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.nio.charset.StandardCharsets
 
 class LoginPresenter(val listener: Listener) {
 
-    fun loginCheck(username: String, pass: String, sf: SharedPreferences) {
+
+    fun loginCheck(username: String, pass: String) {
         val login = PostLoginRequest(
             pass, username
         )
@@ -24,11 +29,22 @@ class LoginPresenter(val listener: Listener) {
                 response: Response<PostLoginResponse>
             ) {
                 if (response.isSuccessful && response.body()?.status == "OK") {
-                    val editor = sf.edit()
-                    editor.putString("id", response.body()?.data?.token)
-                    editor.putBoolean("isLogin", true)
-                    editor.apply()
+//                    val editor = sf.edit()
+//                    editor.putString(util.SF_TOKEN, response.body()?.data?.token)
+//                    editor.putString(util.SF_TOKEN_TYPE, response.body()?.data?.tokenType)
+//                    editor.putString(util.SF_PIN, response.body()?.data?.session)
+//                    editor.putBoolean(util.SF_ISLOGIN, true)
+//                    editor.apply()
+
+                    val data: ByteArray =
+                        Base64.decode(response.body()?.data?.session, Base64.DEFAULT)
+                    val pin = String(data, StandardCharsets.UTF_8)
+
+                    Hawk.put(util.SF_SESSION, pin)
+                    Hawk.put(util.SF_TOKEN, "${response.body()?.data?.tokenType} ${response.body()?.data?.token}")
+                    Hawk.put(util.SF_ISLOGIN, true)
                     listener.goToNextPage()
+
                 } else {
                     val errorResponse: PostLoginResponse = Gson().fromJson(
                         response.errorBody()?.string(),

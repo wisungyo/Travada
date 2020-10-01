@@ -16,13 +16,14 @@ import com.example.travada.util.loadingdialog.LoadingDialog
 import com.example.travada.util.util
 import com.example.travada.welcomepage.forgetpass.inputemail.ForgetpassInputEmailActivity
 import com.google.gson.Gson
+import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
     private lateinit var presenter: LoginPresenter
     val MyFragment= LoadingDialog()
-    lateinit var sharedPreferences: android.content.SharedPreferences
+//    lateinit var sharedPreferences: android.content.SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,10 +31,10 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
         setContentView(R.layout.activity_login)
 
         presenter = LoginPresenter(this)
-        sharedPreferences = getSharedPreferences(
-            util.SF,
-            Context.MODE_PRIVATE
-        )
+//        sharedPreferences = getSharedPreferences(
+//            util.SF,
+//            Context.MODE_PRIVATE
+//        )
 
 
         Glide
@@ -70,7 +71,7 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
         }
 
         btn_login.setOnClickListener {
-            presenter.loginCheck(et_username.text.toString(), et_password.text.toString(), sharedPreferences)
+            presenter.loginCheck(et_username.text.toString(), et_password.text.toString())
         }
 
     }
