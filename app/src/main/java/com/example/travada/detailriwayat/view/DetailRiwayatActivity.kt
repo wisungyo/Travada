@@ -22,15 +22,27 @@ import java.util.*
 class DetailRiwayatActivity : AppCompatActivity(), DetailRiwayatActivityPresenter.Listener {
     private lateinit var presenter: DetailRiwayatActivityPresenter
 
+    object ids {
+        var idDestinasi = 0
+        var idPemesanan = 0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_riwayat)
         presenter = DetailRiwayatActivityPresenter(this)
-        val idDestinasi = intent.getIntExtra("ID_DESTINASI", 1)
-        val idPemesanan = intent.getIntExtra("ID_PEMESANAN", 1)
+        val idDestinasi = intent.getIntExtra("ID_DESTINASI", 0)
+        val idPemesanan = intent.getIntExtra("ID_PEMESANAN", 0)
 
-        presenter.fetchDestinasiData(idDestinasi, idPemesanan)
-        presenter.fetchCicilanData(idPemesanan)
+        if (idDestinasi != 0) {
+            ids.idDestinasi = idDestinasi
+        }
+        if (idPemesanan != 0) {
+            ids.idPemesanan = idPemesanan
+        }
+
+        presenter.fetchDestinasiData(ids.idDestinasi, ids.idPemesanan)
+        presenter.fetchCicilanData(ids.idPemesanan)
 
         iv_detail_riwayat_back.setOnClickListener {
             finish()

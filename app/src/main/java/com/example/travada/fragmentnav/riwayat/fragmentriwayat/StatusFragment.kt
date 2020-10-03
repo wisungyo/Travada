@@ -15,6 +15,7 @@ import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatStatus
 import com.example.travada.detailriwayat.view.DetailRiwayatActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
+import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 import kotlinx.android.synthetic.main.fragment_riwayat_status.*
 import java.text.DecimalFormat
@@ -22,8 +23,8 @@ import java.text.DecimalFormatSymbols
 import java.util.*
 
 class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragmentPresenter.ListenerAdapter {
-
     private lateinit var presenter: StatusFragmentPresenter
+    val MyFragment= LoadingDialog()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,5 +108,15 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
                 }
             }
         }
+    }
+
+    override fun showLoadingDialog() {
+        val fm=fragmentManager
+        MyFragment.isCancelable = false
+        fm?.let { MyFragment.show(it, "Fragment") }
+    }
+
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
     }
 }

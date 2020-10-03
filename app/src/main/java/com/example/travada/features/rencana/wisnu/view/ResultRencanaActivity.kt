@@ -1,30 +1,28 @@
 package com.example.travada.features.rencana.wisnu.view
 
-import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.wisnu.presenter.ResultRencanaActivityPresenter
 import com.example.travada.mainpage.MainPageActivity
+import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_result_rencana.*
-import kotlinx.android.synthetic.main.main_page_item_trip.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 
 class ResultRencanaActivity : AppCompatActivity(), ResultRencanaActivityPresenter.Listener {
     private lateinit var presenter: ResultRencanaActivityPresenter
-    private lateinit var progressDialog: ProgressDialog
+    val MyFragment= LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_rencana)
         presenter = ResultRencanaActivityPresenter(this)
-        progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Mohon tunggu...")
         val idDestinasi = intent.getIntExtra("ID_DESTINASI", 3)
 
         presenter.fetchData(idDestinasi)
@@ -64,5 +62,23 @@ class ResultRencanaActivity : AppCompatActivity(), ResultRencanaActivityPresente
         val df = DecimalFormat("#,###")
         df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
         tv_result_rencana_pembayaran.text = "Rp. ${df.format(total)}"
+    }
+
+    override fun showDataError(error: String) {
+        Toast.makeText(
+            this,
+            "Error : $error",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    override fun showLoadingDialog() {
+        val fm=supportFragmentManager
+        MyFragment.isCancelable = false
+        MyFragment.show(fm, "Fragment")
+    }
+
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
     }
 }

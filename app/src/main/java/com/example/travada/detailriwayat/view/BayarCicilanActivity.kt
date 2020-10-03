@@ -1,5 +1,6 @@
 package com.example.travada.detailriwayat.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.travada.R
@@ -38,6 +39,11 @@ class BayarCicilanActivity : AppCompatActivity(), BayarCicilanActivityPresenter.
         val gson = Gson()
         val modelList: List<SaldoSpinnerData> = gson.fromJson(json_string, Array<SaldoSpinnerData>::class.java).toList()
         return modelList
+    }
+
+    fun showPinKonfirmasi() {
+        val intentPinKonfirmasi = Intent(this, PinBayarCicilanActivity::class.java)
+        startActivity((intentPinKonfirmasi))
     }
 
     override fun showDialogKonfirmasi(title: String, subtitle: String) {

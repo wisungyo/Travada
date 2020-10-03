@@ -310,14 +310,14 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
 
         if (requestCode == CAMERA_REQUEST_KTP) {
             if (data != null) {
-                var bitmap = data?.extras?.get("data") as Bitmap
-
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val imageBytes: ByteArray = baos.toByteArray()
-                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-                uriKTP = imageString
-
+//                var bitmap = data?.extras?.get("data") as Bitmap
+//
+//                val baos = ByteArrayOutputStream()
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//                val imageBytes: ByteArray = baos.toByteArray()
+//                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+//                uriKTP = imageString
+                uriKTP = data.data.toString()
 //                val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
 //                val imageFileName =
 //                    SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
@@ -365,15 +365,15 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
             }
         } else if (requestCode == GALLERY_REQUEST_KTP) {
             if (data != null) {
-//                uriKTP = data.data.toString()
-                val bitmap =
-                    MediaStore.Images.Media.getBitmap(contentResolver, data.data)
-
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val imageBytes: ByteArray = baos.toByteArray()
-                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-                uriKTP = imageString
+                uriKTP = data.data.toString()
+//                val bitmap =
+//                    MediaStore.Images.Media.getBitmap(contentResolver, data.data)
+//
+//                val baos = ByteArrayOutputStream()
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//                val imageBytes: ByteArray = baos.toByteArray()
+//                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+//                uriKTP = imageString
 
                 btn_KTP.setBackgroundResource(R.drawable.bg_btndone)
                 btn_KTP.setCompoundDrawablesWithIntrinsicBounds(
@@ -394,14 +394,14 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
             }
         } else if (requestCode == CAMERA_REQUEST_PASSPORT) {
             if (data != null) {
-                var bitmap = data?.extras?.get("data") as Bitmap
-//                uriPassport = data.toString()
+//                var bitmap = data?.extras?.get("data") as Bitmap
+                uriPassport = data.data.toString()
 
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val imageBytes: ByteArray = baos.toByteArray()
-                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-                uriPassport = imageString
+//                val baos = ByteArrayOutputStream()
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//                val imageBytes: ByteArray = baos.toByteArray()
+//                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+//                uriPassport = imageString
 
                 btn_Passport.setBackgroundResource(R.drawable.bg_btndone)
                 btn_Passport.setCompoundDrawablesWithIntrinsicBounds(
@@ -422,15 +422,15 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
             }
         } else if (requestCode == GALLERY_REQUEST_PASSPORT) {
             if (data != null) {
-//                uriPassport = data.data.toString()
-                val bitmap =
-                    MediaStore.Images.Media.getBitmap(contentResolver, data.data)
-
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val imageBytes: ByteArray = baos.toByteArray()
-                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-                uriPassport = imageString
+                uriPassport = data.data.toString()
+//                val bitmap =
+//                    MediaStore.Images.Media.getBitmap(contentResolver, data.data)
+//
+//                val baos = ByteArrayOutputStream()
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//                val imageBytes: ByteArray = baos.toByteArray()
+//                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+//                uriPassport = imageString
 
                 btn_Passport.setBackgroundResource(R.drawable.bg_btndone)
                 btn_Passport.setCompoundDrawablesWithIntrinsicBounds(

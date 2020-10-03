@@ -16,7 +16,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
 
     fun fetchMainData(id: Int) {
         val arraySpinner = ArrayList<String>()
-        listener.showProgressDialog()
+        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getDestination(id).enqueue(object : Callback<GetDestinasiResponse> {
             override fun onResponse(
                 call: Call<GetDestinasiResponse>,
@@ -31,19 +31,19 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
-                listener.dismissProgressDialog()
+//                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
-//                listener.dismissProgressDialog()
-                listener.dismissProgressDialog()
+//                listener.hideLoadingDialog()
             }
 
         })
     }
 
     fun fetchCicilanData(id: Int, jumlahOrang: Int) {
+//        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getCicilan(id, jumlahOrang).enqueue(object : Callback<GetCicilanResponse> {
             override fun onResponse(
                 call: Call<GetCicilanResponse>,
@@ -62,11 +62,12 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
+                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetCicilanResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
-//                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
         })
 
@@ -89,10 +90,6 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
 
     fun doBack() {
         listener.showBack()
-    }
-
-    fun addBiaya(addBiaya: Int) {
-        listener.addBiaya(addBiaya)
     }
 
     fun addOrang(jumlahOrang: Int) {
@@ -119,12 +116,11 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
         fun showCicilanData(adapter: AdapterPesanRencanaActivity, layout: LinearLayoutManager)
         fun showDataError(localizedMessage: String?)
         fun showBack()
-        fun addBiaya(addBiaya: Int)
         fun showAddOrang(addOrang: Int)
         fun showMinOrang(addOrang: Int)
         fun showKonfirmasi(intentPosition: Int)
         fun showJumlahBiaya(jumlahBiaya: Int)
-        fun showProgressDialog()
-        fun dismissProgressDialog()
+        fun showLoadingDialog()
+        fun hideLoadingDialog()
     }
 }

@@ -59,4 +59,8 @@ interface TPApiServices {
     fun getPemesananDetail(
         @Path ("idPemesanan") idPemesanan: Int
     ) : Call<GetPemesananDetailResponse>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("auth/user/me")
+    fun getUserInfo(@Header("Authorization") token: String) : Call<GetUserInfo>
 }

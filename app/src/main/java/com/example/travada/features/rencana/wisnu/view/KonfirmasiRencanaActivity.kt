@@ -1,7 +1,6 @@
 package com.example.travada.features.rencana.wisnu.view
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -9,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64   /*  NEED TO IMPORT IT MANUALLY. DAMN !!  */
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +21,8 @@ import com.example.travada.features.rencana.pojo.PostPemesananResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
 import com.example.travada.sampeldata.DataCicilanUser
+import com.example.travada.util.loadingdialog.LoadingDialog
+import com.example.travada.util.util
 import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,20 +32,19 @@ import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 import kotlin.collections.ArrayList
+import com.orhanobut.hawk.Hawk
 
 
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
     private lateinit var presenter: KonfirmasiRencanaActivityPresenter
-    private lateinit var progressDialog: ProgressDialog
     private val SECOND_ACTIVITY_REQUEST_CODE = 1
-//    val MyFragment= LoadingDialog()
+    val MyFragment= LoadingDialog()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_konfirmasi_rencana)
         presenter = KonfirmasiRencanaActivityPresenter(this)
-        progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Mohon tunggu...")
 
         val intentIdDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
         val intentJumlahOrang = intent.getIntExtra("JUMLAH_ORANG", 1)
@@ -185,9 +184,6 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
     }
 
     override fun doPostPemesanan(listUser: ArrayList<DataCicilanUser>) {
-        /*
-        STATIC ID_USER */
-        val idUser = 5
         val idDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
         val listNama = ArrayList<String>()
         val listEmail = ArrayList<String>()
@@ -237,9 +233,11 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         )
 
         /*
-        STATIC TOKEN  */
-        val token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
-        progressDialog.show()
+        DINAMIC TOKEN & ID_USER */
+        val token = Hawk.get(util.SF_TOKEN, "")
+        val idUser = Hawk.get(util.SF_ID, 0)
+
+        showLoadingDialog()
         TPApiClient.TP_API_SERVICES.postPemesanan(token, idUser, postPemesanan).enqueue(object :
             Callback<PostPemesananResponse> {
             override fun onResponse(
@@ -252,12 +250,12 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                 }
 
                 response.body()?.data?.let { showResultRencana(it) }
-                progressDialog.dismiss()
+                hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<PostPemesananResponse>, t: Throwable) {
                 showDataError(t.message.toString())
-                progressDialog.dismiss()
+                hideLoadingDialog()
             }
 
         })
@@ -266,7 +264,7 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
     override fun showDataError(localizedMessage: String?) {
         Toast.makeText(
             this,
-            "Error : ${localizedMessage}",
+            "Error : $localizedMessage",
             Toast.LENGTH_LONG
         ).show()
     }
@@ -275,16 +273,13 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         finish()
     }
 
-    override fun showProgressDialog() {
-        progressDialog.show()
-//        val fm=supportFragmentManager
-//        MyFragment.isCancelable = false
-//        MyFragment.show(fm, "Fragment")
+    override fun showLoadingDialog() {
+        val fm=supportFragmentManager
+        MyFragment.isCancelable = false
+        MyFragment.show(fm, "Fragment")
     }
 
-    override fun dismissProgressDialog() {
-        progressDialog.dismiss()
-//        MyFragment.dismiss()
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
     }
-
 }

@@ -57,6 +57,7 @@ class DialogKonfirmasiBayarCicilan: DialogFragment() {
     private fun setupClickListeners(view: View) {
         view.btn_dialog_konfirmasi_btn_yes.setOnClickListener {
             dismiss()
+            (activity as BayarCicilanActivity).showPinKonfirmasi()
         }
         view.btn_dialog_konfirmasi_btn_no.setOnClickListener {
             // TODO: Do some task here

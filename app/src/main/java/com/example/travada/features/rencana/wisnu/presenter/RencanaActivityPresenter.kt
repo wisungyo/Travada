@@ -19,7 +19,7 @@ class RencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
     fun fetchData() {
         /*
         GET POPULER TRIP DATA FROM API */
-        listener.showProgressDialog()
+        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getPopulerDestination().enqueue(object : Callback<GetPopulerResponse> {
             override fun onResponse(
                 call: Call<GetPopulerResponse>,
@@ -30,18 +30,18 @@ class RencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
-                listener.dismissProgressDialog()
+//                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetPopulerResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
-                listener.dismissProgressDialog()
+//                listener.hideLoadingDialog()
             }
         })
 
         /*
         GET PILIHAN TRIP DATA FROM API */
-        listener.showProgressDialog()
+//        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getPilihanDestination().enqueue(object : Callback<GetPilihanResponse> {
             override fun onResponse(
                 call: Call<GetPilihanResponse>,
@@ -50,12 +50,12 @@ class RencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
                 response.body()?.data?.let {
                     getAdapterTripPilihan(it)
                 }
-                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetPilihanResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
-                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
         })
     }
@@ -72,6 +72,7 @@ class RencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
     fun getAdapterTripPopuler(it: List<GetPopulerResponse.Data>) {
         val adapterTripPopuler = AdapterTripPopulerRencanaActivity(it, this)
         val linearLayoutTripPopuler = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
         listener.showTripPopuler(
             adapterTripPopuler,
             linearLayoutTripPopuler
@@ -102,7 +103,7 @@ class RencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
         fun showBack()
         fun showItemClicked(position: Int)
         fun showDataError(localizedMessage: String?)
-        fun showProgressDialog()
-        fun dismissProgressDialog()
+        fun showLoadingDialog()
+        fun hideLoadingDialog()
     }
 }
