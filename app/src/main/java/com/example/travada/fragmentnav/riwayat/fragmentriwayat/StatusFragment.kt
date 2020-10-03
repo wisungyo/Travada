@@ -45,9 +45,9 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
     }
 
     override fun showData(list: List<GetPemesananRiwayatResponse.Data>) {
-        val adapterRiwayatStatus = AdapterRiwayatStatus(list, presenter, this)
-        val linearLayoutRiwayatStatus = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        rv_riwayat_status.adapter = adapterRiwayatStatus
+        val adapterRiwayatStatus        = AdapterRiwayatStatus(list, presenter, this)
+        val linearLayoutRiwayatStatus   = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        rv_riwayat_status.adapter       = adapterRiwayatStatus
         rv_riwayat_status.layoutManager = linearLayoutRiwayatStatus
     }
 
@@ -83,8 +83,32 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
             }
 
             holder.itemView.tv_riwayat_item_title.text = dataInfo.namaTrip
-            holder.itemView.tv_riwayat_item_date.text = "${dataInfo.berangkat} - ${dataInfo.pulang}"
-            holder.itemView.tv_riwayat_item_made_date.text = dataInfo.createdAt
+
+            val berangkatTahun      = extractTahun(dataInfo.berangkat)
+            val berangkatBulan      = extractBulan(dataInfo.berangkat)
+            val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
+            val berangkatTanggal    = extractTanggal(dataInfo.berangkat)
+
+            val pulangTahun         = extractTahun(dataInfo.pulang)
+            val pulangBulan         = extractBulan(dataInfo.pulang)
+            val namaBulanPulang:String     = changeBulan(pulangBulan)
+            val pulangTanggal       = extractTanggal(dataInfo.pulang)
+
+            if (namaBulanBerangkat == namaBulanPulang) {
+                holder.itemView.tv_riwayat_item_date.text =
+                    "$berangkatTanggal $namaBulanBerangkat - $pulangTanggal $namaBulanPulang $pulangTahun"
+            } else {
+                holder.itemView.tv_riwayat_item_date.text =
+                    "$berangkatTanggal $namaBulanBerangkat $berangkatTahun - $pulangTanggal $namaBulanPulang $pulangTahun"
+            }
+
+            val dibuatTahun         = extractTahun(dataPemesananRiwayatResponse.pemesanan.createdAt)
+            val dibuatBulan         = extractBulan(dataPemesananRiwayatResponse.pemesanan.createdAt)
+            val namaBulanDibuat     = changeBulan(dibuatBulan)
+            val dibuatTanggal       = extractTanggal(dataPemesananRiwayatResponse.pemesanan.createdAt)
+
+            holder.itemView.tv_riwayat_item_made_date.text =
+                "$dibuatTanggal $namaBulanDibuat $dibuatTahun"
 
             val df = DecimalFormat("#,###")
             df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
@@ -108,6 +132,37 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
                 }
             }
         }
+    }
+
+    fun extractTanggal(tanggal: String): String {
+        return tanggal.subSequence(8,10).toString()
+    }
+
+    fun extractBulan(bulan: String): String {
+        return bulan.subSequence(5,7).toString()
+    }
+
+    fun extractTahun(tahun: String): String {
+        return tahun.subSequence(0,4).toString()
+    }
+
+    fun changeBulan(bulan: String): String {
+        var namaBulan = ""
+        when (bulan) {
+            "01" -> namaBulan = "Januari"
+            "02" -> namaBulan = "Februari"
+            "03" -> namaBulan = "Maret"
+            "04" -> namaBulan = "April"
+            "05" -> namaBulan = "Mei"
+            "06" -> namaBulan = "Juni"
+            "07" -> namaBulan = "Juli"
+            "08" -> namaBulan = "Agustus"
+            "09" -> namaBulan = "September"
+            "10" -> namaBulan = "Oktober"
+            "11" -> namaBulan = "November"
+            "12" -> namaBulan = "Desember"
+        }
+        return namaBulan
     }
 
     override fun showLoadingDialog() {

@@ -37,8 +37,6 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
     }
 
     fun getPemesananData(idPemesanan: Int) {
-//        val token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
-
         TPApiClient.TP_API_SERVICES.getPemesananDetail(idPemesanan).enqueue(object : Callback<GetPemesananDetailResponse> {
             override fun onResponse(
                 call: Call<GetPemesananDetailResponse>,

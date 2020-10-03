@@ -25,7 +25,12 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 if (response.isSuccessful && response.body()?.status == "OK") {
                     response.body()?.data?.let {
                         listener.showMainData(it)
-                        arraySpinner.add(it.berangkat)
+                        val berangkatTahun      = extractTahun(it.berangkat)
+                        val berangkatBulan      = extractBulan(it.berangkat)
+                        val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
+                        val berangkatTanggal    = extractTanggal(it.berangkat)
+                        arraySpinner.add( "$berangkatTanggal $namaBulanBerangkat $berangkatTahun") // from api still not a List.
+
                         listener.showSpinner(arraySpinner)
                     }
                 } else {
@@ -40,6 +45,37 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
             }
 
         })
+    }
+
+    fun extractTanggal(tanggal: String): String {
+        return tanggal.subSequence(8,10).toString()
+    }
+
+    fun extractBulan(bulan: String): String {
+        return bulan.subSequence(5,7).toString()
+    }
+
+    fun extractTahun(tahun: String): String {
+        return tahun.subSequence(0,4).toString()
+    }
+
+    fun changeBulan(bulan: String): String {
+        var namaBulan = ""
+        when (bulan) {
+            "01" -> namaBulan = "Januari"
+            "02" -> namaBulan = "Februari"
+            "03" -> namaBulan = "Maret"
+            "04" -> namaBulan = "April"
+            "05" -> namaBulan = "Mei"
+            "06" -> namaBulan = "Juni"
+            "07" -> namaBulan = "Juli"
+            "08" -> namaBulan = "Agustus"
+            "09" -> namaBulan = "September"
+            "10" -> namaBulan = "Oktober"
+            "11" -> namaBulan = "November"
+            "12" -> namaBulan = "Desember"
+        }
+        return namaBulan
     }
 
     fun fetchCicilanData(id: Int, jumlahOrang: Int) {

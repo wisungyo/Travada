@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/tv_detail_riwayat_item_expired"
-        android:text="Maaf, pengajuan rencana ditolak"
+        android:text="Maaf, pengajuan rencana ditolak."
         android:fontFamily="@font/roboto"
         android:textSize="14dp"
         android:textColor="#474747"
@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/tv_detail_riwayat_item_expired_reason"
-        android:text="Passpord kamu tidak memenuhi syarat"
+        android:text="Passport kamu tidak memenuhi syarat."
         android:fontFamily="@font/roboto"
         android:textSize="14dp"
         android:textColor="#474747"

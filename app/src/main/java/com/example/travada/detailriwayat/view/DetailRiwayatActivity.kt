@@ -15,6 +15,7 @@ import com.example.travada.features.rencana.pojo.GetPemesananDestinasiResponse
 import com.example.travada.features.rencana.pojo.GetPemesananDetailResponse
 import com.example.travada.sampeldata.DataRiwayat
 import kotlinx.android.synthetic.main.activity_detail_riwayat.*
+import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -92,14 +93,71 @@ class DetailRiwayatActivity : AppCompatActivity(), DetailRiwayatActivityPresente
             }
 
             tv_detail_riwayat_title.text = data.namaTrip
-            tv_detail_riwayat_date.text = "${data.berangkat} - ${data.pulang}"
+
+            val berangkatTahun      = extractTahun(data.berangkat)
+            val berangkatBulan      = extractBulan(data.berangkat)
+            val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
+            val berangkatTanggal    = extractTanggal(data.berangkat)
+
+            val pulangTahun         = extractTahun(data.pulang)
+            val pulangBulan         = extractBulan(data.pulang)
+            val namaBulanPulang:String     = changeBulan(pulangBulan)
+            val pulangTanggal       = extractTanggal(data.pulang)
+
+            if (namaBulanBerangkat == namaBulanPulang) {
+                tv_detail_riwayat_date.text =
+                    "$berangkatTanggal $namaBulanBerangkat - $pulangTanggal $namaBulanPulang $pulangTahun"
+            } else {
+                tv_detail_riwayat_date.text =
+                    "$berangkatTanggal $namaBulanBerangkat $berangkatTahun - $pulangTanggal $namaBulanPulang $pulangTahun"
+            }
+
             tv_detail_riwayat_booking_date.text = data.createdAt
         }
     }
 
+    fun extractTanggal(tanggal: String): String {
+        return tanggal.subSequence(8,10).toString()
+    }
+
+    fun extractBulan(bulan: String): String {
+        return bulan.subSequence(5,7).toString()
+    }
+
+    fun extractTahun(tahun: String): String {
+        return tahun.subSequence(0,4).toString()
+    }
+
+    fun changeBulan(bulan: String): String {
+        var namaBulan = ""
+        when (bulan) {
+            "01" -> namaBulan = "Januari"
+            "02" -> namaBulan = "Februari"
+            "03" -> namaBulan = "Maret"
+            "04" -> namaBulan = "April"
+            "05" -> namaBulan = "Mei"
+            "06" -> namaBulan = "Juni"
+            "07" -> namaBulan = "Juli"
+            "08" -> namaBulan = "Agustus"
+            "09" -> namaBulan = "September"
+            "10" -> namaBulan = "Oktober"
+            "11" -> namaBulan = "November"
+            "12" -> namaBulan = "Desember"
+        }
+        return namaBulan
+    }
+
     override fun showPemesananDataOnDestinasiData(data: GetPemesananDetailResponse.Data?) {
         if (data != null) {
-            tv_detail_riwayat_member.text = "Jumlah: ${data.pemesanan.orang} orang" // edit this later to TOTAL PEMESAN
+            tv_detail_riwayat_member.text = "Jumlah: ${data.pemesanan.orang} orang"
+
+            val dibuatTahun         = extractTahun(data.pemesanan.createdAt)
+            val dibuatBulan         = extractBulan(data.pemesanan.createdAt)
+            val namaBulanDibuat     = changeBulan(dibuatBulan)
+            val dibuatTanggal       = extractTanggal(data.pemesanan.createdAt)
+
+            tv_detail_riwayat_booking_date.text =
+                "$dibuatTanggal $namaBulanDibuat $dibuatTahun"
 
             tv_detail_riwayat_id.text = data.pemesanan.id.toString()
 

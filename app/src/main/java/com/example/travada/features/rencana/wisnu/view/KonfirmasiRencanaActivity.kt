@@ -33,6 +33,7 @@ import java.text.DecimalFormatSymbols
 import java.util.*
 import kotlin.collections.ArrayList
 import com.orhanobut.hawk.Hawk
+import kotlinx.android.synthetic.main.activity_detail_riwayat.*
 
 
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
@@ -124,10 +125,57 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         tv_konfirmasi_rencana_member.text = "Jumlah : ${intentJumlahOrang} orang"
         
         // get the schedule from API
-        tv_konfirmasi_rencana_date.text = "${data.berangkat} - ${data.pulang}"
+        val berangkatTahun      = extractTahun(data.berangkat)
+        val berangkatBulan      = extractBulan(data.berangkat)
+        val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
+        val berangkatTanggal    = extractTanggal(data.berangkat)
+
+        val pulangTahun         = extractTahun(data.pulang)
+        val pulangBulan         = extractBulan(data.pulang)
+        val namaBulanPulang:String     = changeBulan(pulangBulan)
+        val pulangTanggal       = extractTanggal(data.pulang)
+
+        if (namaBulanBerangkat == namaBulanPulang) {
+            tv_konfirmasi_rencana_date.text =
+                "$berangkatTanggal $namaBulanBerangkat - $pulangTanggal $namaBulanPulang $pulangTahun"
+        } else {
+            tv_konfirmasi_rencana_date.text =
+                "$berangkatTanggal $namaBulanBerangkat $berangkatTahun - $pulangTanggal $namaBulanPulang $pulangTahun"
+        }
 
         // get the total member
         tv_konfirmasi_rencana_jumlah_orang.text = "${jumlahOrang} orang"
+    }
+
+    fun extractTanggal(tanggal: String): String {
+        return tanggal.subSequence(8,10).toString()
+    }
+
+    fun extractBulan(bulan: String): String {
+        return bulan.subSequence(5,7).toString()
+    }
+
+    fun extractTahun(tahun: String): String {
+        return tahun.subSequence(0,4).toString()
+    }
+
+    fun changeBulan(bulan: String): String {
+        var namaBulan = ""
+        when (bulan) {
+            "01" -> namaBulan = "Januari"
+            "02" -> namaBulan = "Februari"
+            "03" -> namaBulan = "Maret"
+            "04" -> namaBulan = "April"
+            "05" -> namaBulan = "Mei"
+            "06" -> namaBulan = "Juni"
+            "07" -> namaBulan = "Juli"
+            "08" -> namaBulan = "Agustus"
+            "09" -> namaBulan = "September"
+            "10" -> namaBulan = "Oktober"
+            "11" -> namaBulan = "November"
+            "12" -> namaBulan = "Desember"
+        }
+        return namaBulan
     }
 
     override fun showDataCicilan(jumlahOrang: Int, jumlahBiaya: Int) {

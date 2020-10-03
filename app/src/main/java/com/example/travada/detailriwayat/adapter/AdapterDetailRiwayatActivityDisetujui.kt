@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
 import com.example.travada.detailriwayat.presenter.DetailRiwayatActivityPresenter
 import com.example.travada.features.rencana.pojo.GetPemesananDetailResponse
+import kotlinx.android.synthetic.main.activity_detail_riwayat.*
 import kotlinx.android.synthetic.main.detail_riwayat_item_dp_cicilan.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -47,7 +48,13 @@ class AdapterDetailRiwayatActivityDisetujui(
             df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
             holder.itemView.tv_detail_riwayat_item_jumlah.text = "Rp. ${df.format(abs(data[position].jumlah))}"
 
-            holder.itemView.tv_detail_riwayat_item_tempo.text = data[position].jatuhTempo
+            val tahun         = extractTahun(data[position].jatuhTempo)
+            val bulan         = extractBulan(data[position].jatuhTempo)
+            val namaBulan     = changeBulan(bulan)
+            val tanggal       = extractTanggal(data[position].jatuhTempo)
+
+            holder.itemView.tv_detail_riwayat_item_tempo.text =
+                "$tanggal $namaBulan $tahun"
 
             when (data[position].status) {
                 "expired" -> {
@@ -88,6 +95,37 @@ class AdapterDetailRiwayatActivityDisetujui(
                 presenter.goToBayarCicilan()
             }
         }
+    }
+
+    fun extractTanggal(tanggal: String): String {
+        return tanggal.subSequence(8,10).toString()
+    }
+
+    fun extractBulan(bulan: String): String {
+        return bulan.subSequence(5,7).toString()
+    }
+
+    fun extractTahun(tahun: String): String {
+        return tahun.subSequence(0,4).toString()
+    }
+
+    fun changeBulan(bulan: String): String {
+        var namaBulan = ""
+        when (bulan) {
+            "01" -> namaBulan = "Januari"
+            "02" -> namaBulan = "Februari"
+            "03" -> namaBulan = "Maret"
+            "04" -> namaBulan = "April"
+            "05" -> namaBulan = "Mei"
+            "06" -> namaBulan = "Juni"
+            "07" -> namaBulan = "Juli"
+            "08" -> namaBulan = "Agustus"
+            "09" -> namaBulan = "September"
+            "10" -> namaBulan = "Oktober"
+            "11" -> namaBulan = "November"
+            "12" -> namaBulan = "Desember"
+        }
+        return namaBulan
     }
 
     override fun getItemCount(): Int {
