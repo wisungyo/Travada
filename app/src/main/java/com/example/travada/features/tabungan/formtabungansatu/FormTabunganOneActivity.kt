@@ -26,6 +26,7 @@ import com.example.travada.features.tabungan.DataPermissions.Companion.GALLERY_R
 import com.example.travada.features.tabungan.DataPermissions.Companion.REQUEST_CODE
 import com.example.travada.features.tabungan.DataPermissions.Companion.arrayListPermission
 import com.example.travada.features.tabungan.formtabungandua.FormTabunganTwoActivity
+import com.example.travada.welcomepage.register.register2.Register2Activity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
 import java.io.File
@@ -38,6 +39,7 @@ import java.util.*
 class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Listener {
     private lateinit var presenter: FormTabunganOnePresenter
     lateinit var bitmapResult: Bitmap
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +74,7 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         // editText jumlah
         etJumlah.addTextChangedListener(object : TextWatcher {
             var processed = ""
+
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
                 val initial = count.toString()
@@ -142,15 +145,15 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         etJumlah.error = message
     }
 
-    // TODO : pengerjaan menunggu API
-//    override fun goToNextPage() {
-//        val intent = Intent(this, FormTabunganTwoActivity::class.java)
-//        val bundle = Bundle()
-//        bundle.putString("tujuan", etTujuan.text.toString())
-//        bundle.putString("jumlah",etJumlah .text.toString())
-//        intent.putExtras(bundle)
-//        startActivity(intent)
-//    }
+    override fun goToNextPage() {
+        val bundle = Bundle()
+        val intent = Intent(this, FormTabunganTwoActivity::class.java)
+        bundle.putString("namaTujuan", etTujuan.text.toString())
+        bundle.putString("jumlahDitabung", etJumlah.text.toString())
+        bundle.putString("uriGambar", uriGambar)
+        intent.putExtras(bundle)
+        startActivity(intent)
+    }
 
     // ijin permissions
     fun checkPermissions(): Boolean {

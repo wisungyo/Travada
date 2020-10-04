@@ -1,4 +1,7 @@
 package com.example.travada.features.tabungan.formtabungansatu
+
+import android.os.Bundle
+
 class FormTabunganOnePresenter(private val listener: Listener)  {
     fun checked(
         tujuan: String,
@@ -13,16 +16,15 @@ class FormTabunganOnePresenter(private val listener: Listener)  {
         }
     }
 
-    // TODO : pengerjaan menunggu API
-//    fun nextPage() {
-//        listener.goToNextPage()
-//    }
+    fun nextPage() {
+        listener.goToNextPage()
+    }
 
 
     interface Listener {
         fun btnActive()
         fun btnInactive()
-        //      fun goToNextPage()
+        fun goToNextPage()
         fun errTujuan(message: String?)
         fun errJumlah(message: String?)
         fun goToUploadGambar()

@@ -24,51 +24,35 @@ import com.example.travada.features.tabungan.helper.CalendarHelper
 import com.example.travada.features.tabungan.models.DataTabungBareng
 import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeActivity
 import com.example.travada.features.tabungan.formresulttabungan.DetailFormResultActivity
+import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
+import kotlinx.android.synthetic.main.activity_tabungan.*
 import java.util.*
 
-class FormTabunganTwoActivity : AppCompatActivity(),
-    FormTabunganTwoPresenter.Listener {
-
-    private val listTabungBareng = arrayListOf(
-        DataTabungBareng(
-            "Nanda Adi",
-            "1212131",
-            "AN"
-        ),
-        DataTabungBareng(
-            "Abigail",
-            "1212122",
-            "A"
-        ),
-        DataTabungBareng(
-            "Nicholas",
-            "3434343",
-            "N"
-        )
-    )
-
-    val adapterBarengTeman = BarengTemanAdapter(listTabungBareng)
-
+class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener {
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter
+    private lateinit var terimaBundle: Bundle
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_tabungan_two)
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-        presenter = FormTabunganTwoPresenter(this)
+        intent?.extras?.let { terimaBundle = it }
+        terimaBundle = Bundle()
 
-        val layoutManagerLinear = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvTabunganBarengTeman.layoutManager = layoutManagerLinear
-        rvTabunganBarengTeman.adapter = adapterBarengTeman
-        rvTabunganBarengTeman.overScrollMode = View.OVER_SCROLL_NEVER
+        presenter = FormTabunganTwoPresenter(this)
+        presenter.fetchTabungBarengData()
+        //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         btnTambahTeman.setOnClickListener {
             val goToFormTambahTeman = Intent(this, FormTabunganThreeActivity::class.java)
             startActivity(goToFormTambahTeman)
+        }
+
+        btnLanjutFormTwo.setOnClickListener {
+            presenter.goToNextPage(terimaBundle)
         }
 
         DateEditText = findViewById(R.id.etTanggal)
@@ -119,13 +103,14 @@ class FormTabunganTwoActivity : AppCompatActivity(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
                     etPeriodeTabungan.text.toString(),
-                    etJumlahTabungan.text.toString()
+                    etJumlahSetoran.text.toString()
                 )
             }
         })
 
         etSetoranAwal.addTextChangedListener(object : TextWatcher {
             var processed = ""
+
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
                 val initial = count.toString()
@@ -158,7 +143,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
                     etPeriodeTabungan.text.toString(),
-                    etJumlahTabungan.text.toString()
+                    etJumlahSetoran.text.toString()
                 )
             }
         })
@@ -174,7 +159,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
                     etPeriodeTabungan.text.toString(),
-                    etJumlahTabungan.text.toString()
+                    etJumlahSetoran.text.toString()
                 )
             }
         })
@@ -190,18 +175,17 @@ class FormTabunganTwoActivity : AppCompatActivity(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
                     etPeriodeTabungan.text.toString(),
-                    etJumlahTabungan.text.toString()
+                    etJumlahSetoran.text.toString()
                 )
             }
         })
 
-        etJumlahTabungan.addTextChangedListener(object : TextWatcher {
+        etJumlahSetoran.addTextChangedListener(object : TextWatcher {
             var processed = ""
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
                 val initial = count.toString()
-
-                if (etJumlahTabungan == null) return
+                if (etJumlahSetoran == null) return
                 if (initial.isEmpty()) return
 
                 val cleanString = initial.replace(".", "")
@@ -210,15 +194,15 @@ class FormTabunganTwoActivity : AppCompatActivity(),
 
                 var myNumber = cleanString.toDouble()
                 processed = nf.format(myNumber)
-                etJumlahTabungan.removeTextChangedListener(this)
-                etJumlahTabungan.setText(processed)
+                etJumlahSetoran.removeTextChangedListener(this)
+                etJumlahSetoran.setText(processed)
 
                 try {
-                    etJumlahTabungan.setSelection(processed.length)
+                    etJumlahSetoran.setSelection(processed.length)
                 } catch (e: NumberFormatException) {
                     e.printStackTrace()
                 }
-                etJumlahTabungan.addTextChangedListener(this)
+                etJumlahSetoran.addTextChangedListener(this)
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -229,7 +213,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
                     etPeriodeTabungan.text.toString(),
-                    etJumlahTabungan.text.toString()
+                    etJumlahSetoran.text.toString()
                 )
             }
         })
@@ -238,7 +222,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
     @RequiresApi(Build.VERSION_CODES.N)
     fun showDatePicker() {
         // DatePicker
-        DateEditText.setText(SimpleDateFormat("dd-MMM-yyyy").format(System.currentTimeMillis()))
+        DateEditText.setText(SimpleDateFormat("dd MMMM yyyy").format(System.currentTimeMillis()))
         var cal = Calendar.getInstance()
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
@@ -246,7 +230,7 @@ class FormTabunganTwoActivity : AppCompatActivity(),
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val myFormat = "dd MMM yyyy" // mention the format you need
+                val myFormat = "dd MMMM yyyy" // mention the format you need
                 val sdf = SimpleDateFormat(myFormat, Locale.US)
                 DateEditText.setText(sdf.format(cal.time))
             }
@@ -272,15 +256,32 @@ class FormTabunganTwoActivity : AppCompatActivity(),
         btnLanjutFormTwo.setTextColor(Color.parseColor("#ffffff"))
         btnLanjutFormTwo.setElevation(2f)
         btnLanjutFormTwo.isClickable = true
+    }
 
-        btnLanjutFormTwo.setOnClickListener {
-            val goToFormTabunganDetail = Intent(this, DetailFormResultActivity::class.java)
-            startActivity(goToFormTabunganDetail)
-        }
+
+
+    override fun goToNextPage(bundle:Bundle) {
+        val intent = Intent(this, DetailFormResultActivity::class.java)
+        bundle.putString("tanggalTarget", etTanggal.text.toString())
+        bundle.putString("setoranAwal", etSetoranAwal.text.toString())
+        bundle.putString("metodeTabungan", etMetodeTabungan.text.toString())
+        bundle.putString("periodeTabungan", etPeriodeTabungan.text.toString())
+        bundle.putString("jumlahSetoran", etJumlahSetoran.text.toString())
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
     override fun btnInactive() {
         btnLanjutFormTwo.setBackgroundResource(R.drawable.bg_inactive)
         btnLanjutFormTwo.isClickable = false
     }
+
+    override fun showDataTabungBareng(adapterTabungBareng: BarengTemanAdapter) {
+        val layoutManagerLinear =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvTabunganBarengTeman.layoutManager = layoutManagerLinear
+        rvTabunganBarengTeman.adapter = adapterTabungBareng
+        rvTabunganBarengTeman.overScrollMode = View.OVER_SCROLL_NEVER
+    }
+
 }

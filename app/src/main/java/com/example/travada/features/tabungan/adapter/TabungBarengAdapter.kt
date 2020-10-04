@@ -27,7 +27,7 @@ RecyclerView.Adapter<TabungBarengAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.tvNamaTemanGabung.setText(listTemanGabung[position].nama)
         holder.itemView.tvRekeningTemanGabung.setText(listTemanGabung[position].nomorRekening)
-        holder.itemView.imageTeman.setText(listTemanGabung[position].gambar)
+        holder.itemView.imageTeman.setText(listTemanGabung[position].inisial)
 
     }
 

@@ -109,7 +109,7 @@
                     android:src="@drawable/ic_baseline_brightness_1_24" />
 
                 <TextView
-                    android:id="@+id/tvNamaTempat"
+                    android:id="@+id/tvNamaTujuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|start"
@@ -120,13 +120,13 @@
                     android:textSize="@dimen/heading4" />
 
                 <TextView
-                    android:id="@+id/tvBiaya"
+                    android:id="@+id/tvJumlahDitabung"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|start"
                     android:layout_marginStart="96dp"
                     android:layout_marginTop="44dp"
-                    android:text="Rp. 10.000.000"
+                    android:text="biaya text"
                     android:textColor="@color/black"
                     android:textSize="@dimen/heading4" />
 
@@ -199,6 +199,7 @@
                     android:textSize="10sp" />
 
                 <TextView
+                    android:id="@+id/tvSetoranAwal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|end"
@@ -209,6 +210,7 @@
                     android:textSize="@dimen/heading3" />
 
                 <TextView
+                    android:id="@+id/tvTabunganBulanan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
@@ -266,7 +268,7 @@
                     android:textSize="@dimen/text" />
 
                 <TextView
-                    android:id="@+id/tvPerkiranTabungan"
+                    android:id="@+id/tvTanggalTarget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -278,30 +280,45 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/tvLabelTabungBareng"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Tabung Bareng"
-                android:textColor="@color/black"
-                android:textSize="@dimen/heading4"
-                app:layout_constraintStart_toStartOf="@id/gVertical1"
-                app:layout_constraintTop_toBottomOf="@id/cardView4" />
+            <!-- boundary -->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvDetail"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clTabungBareng"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:nestedScrollingEnabled="false"
-                android:orientation="vertical"
-                tools:listitem="@layout/list_tabung_bareng"
-                app:layout_constraintBottom_toBottomOf="@id/ghorizontal2"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="@id/gVertical1"
-                app:layout_constraintTop_toBottomOf="@id/tvLabelTabungBareng" />
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                android:background="@drawable/bg_tabung_bareng_card"
+                app:layout_constraintTop_toBottomOf="@+id/cardView4">
+
+                <TextView
+                    android:id="@+id/tvLabelTabungBareng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Tabung Bareng"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4"
+                    app:layout_constraintStart_toStartOf="@id/clTabungBareng"
+                    app:layout_constraintTop_toTopOf="@id/clTabungBareng" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="@id/clTabungBareng"
+                    app:layout_constraintEnd_toEndOf="@id/clTabungBareng"
+                    app:layout_constraintStart_toStartOf="@id/clTabungBareng"
+                    app:layout_constraintTop_toBottomOf="@id/tvLabelTabungBareng"
+                    tools:listitem="@layout/list_tabung_bareng" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -322,6 +339,7 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/bg_active"
         android:clickable="true"
@@ -329,7 +347,6 @@
         android:fontFamily="@font/roboto"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="Buat Sekarang"
-        android:layout_marginHorizontal="16dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/viewButton"

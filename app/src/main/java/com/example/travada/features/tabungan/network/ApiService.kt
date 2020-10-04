@@ -1,18 +1,24 @@
 package com.example.travada.features.tabungan.network
 
+import com.example.travada.welcomepage.pojo.*
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-//    @GET("persons")
-//    fun getAllPersons(): Call<GetPersonsResponse>
+//    //Method Post
+//    @POST("auth/login")
+//    fun Login(@Body body: PostLoginRequest): Call<PostLoginResponse>
 //
-//    @POST("persons")
-//    fun addPersons(@Body postPersonBody: PostPersonBody): Call<PostPersonResponse>
+//    @POST("auth/register/check")
+//    fun checkRegister1(@Body body: PostCheckRegister1Request): Call<PostCheckRegister1Response>
 //
-//    @PUT("person/{id}")
-//    fun updatePerson(@Path("id") id: Int, @Body putPersonBody: PostPersonBody): Call<PutPersonResponse>
+//    @POST("auth/register")
+//    fun registerfinal(@Body body: RequestBody): Call<PostRegisterResponse>
 //
-//    @DELETE("person/{id}")
-//    fun deletePerson(@Path("id") id: Int): Call<DeletePersonResponse>
+//    @POST("auth/confirm")
+//    fun confirm(@Body body: PostConfirmRequest): Call<PostConfirmResponse>
+//
+//    @POST("auth/resend")
+//    fun resend(@Body body: PostResendRequest): Call<PostResendResponse>
 }

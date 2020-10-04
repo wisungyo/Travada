@@ -25,10 +25,9 @@ class BarengTemanAdapter(val listBarengTeman: ArrayList<DataTabungBareng>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-
         holder.itemView.tvNamaGabung.setText(listBarengTeman[position].nama)
         holder.itemView.tvRekeningGabung.setText(listBarengTeman[position].nomorRekening)
-        holder.itemView.tvImageTeman.setText(listBarengTeman[position].gambar)
+        holder.itemView.tvImageTeman.setText(listBarengTeman[position].inisial)
 
     }
 }
