@@ -1,6 +1,7 @@
 package com.example.travada.features.tabungan.formtabungansatu
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -14,6 +15,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -26,9 +28,11 @@ import com.example.travada.features.tabungan.DataPermissions.Companion.GALLERY_R
 import com.example.travada.features.tabungan.DataPermissions.Companion.REQUEST_CODE
 import com.example.travada.features.tabungan.DataPermissions.Companion.arrayListPermission
 import com.example.travada.features.tabungan.formtabungandua.FormTabunganTwoActivity
+import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.example.travada.welcomepage.register.register2.Register2Activity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
+import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -47,22 +51,18 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         presenter = FormTabunganOnePresenter(this)
 
         ivFormOneBack.setOnClickListener {
-            finish()
+           finish()
         }
 
         // editText tujuan
         etTujuan.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(count: Editable?) {
-                if (count?.length!! > layoutEtTujuan.counterMaxLength) {
-                    layoutEtTujuan.error = "karakter lebih dari 25"
-                } else {
-                    layoutEtTujuan.error = null
-                }
-            }
+            override fun afterTextChanged(s: Editable?) {}
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
+                errTujuan(null)
+                presenter.checkTujuan(etTujuan.text.toString())
                 presenter.checked(
                     etTujuan.text.toString(),
                     etJumlah.text.toString(),
@@ -74,11 +74,13 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         // editText jumlah
         etJumlah.addTextChangedListener(object : TextWatcher {
             var processed = ""
-
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
-                val initial = count.toString()
+                if (count.toString().length == 1 && count.toString().startsWith("0")) {
+                    count?.clear();
+                }
 
+                val initial = count.toString()
                 if (etJumlah == null) return
                 if (initial.isEmpty()) return
 
@@ -102,6 +104,8 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                errJumlah(null)
+                presenter.checkJumlah(etJumlah.text.toString())
                 presenter.checked(
                     etTujuan.text.toString(),
                     etJumlah.text.toString(),
@@ -109,6 +113,7 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
                 )
             }
         })
+
 
         // upload image
         ivImageTabungan.setOnClickListener {
@@ -119,6 +124,10 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         ivEditImage.setOnClickListener {
             goToUpdateGambar()
         }
+
+        btnLanjutFormOne.setOnClickListener {
+            presenter.nextPage()
+        }
     }
 
     override fun btnActive() {
@@ -126,10 +135,10 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         btnLanjutFormOne.setTextColor(Color.parseColor("#ffffff"))
         btnLanjutFormOne.setElevation(2f)
         btnLanjutFormOne.isClickable = true
-        btnLanjutFormOne.setOnClickListener {
-            val goToFormTabunganTwo = Intent(this, FormTabunganTwoActivity::class.java)
-            startActivity(goToFormTabunganTwo)
-        }
+//        btnLanjutFormOne.setOnClickListener {
+////            val goToFormTabunganTwo = Intent(this, FormTabunganTwoActivity::class.java)
+////            startActivity(goToFormTabunganTwo)
+////        }
     }
 
     override fun btnInactive() {
@@ -138,11 +147,11 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
     }
 
     override fun errTujuan(message: String?) {
-        etTujuan.error = message
+        layoutEtTujuan.error = message
     }
 
     override fun errJumlah(message: String?) {
-        etJumlah.error = message
+        layoutEtJumlah.error = message
     }
 
     override fun goToNextPage() {
@@ -355,7 +364,6 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
     }
 
     companion object {
-        var isError: Boolean = false
         var uriGambar: String = ""
     }
 }

@@ -1,33 +1,33 @@
 package com.example.travada.features.tabungan.formtabungandua
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.icu.text.NumberFormat
 import android.icu.text.SimpleDateFormat
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
+import android.view.View.OnFocusChangeListener
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
-import com.example.travada.features.tabungan.helper.CalendarHelper
-import com.example.travada.features.tabungan.models.DataTabungBareng
-import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeActivity
 import com.example.travada.features.tabungan.formresulttabungan.DetailFormResultActivity
-import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
+import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeActivity
+import com.example.travada.features.tabungan.helper.CalendarHelper
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
-import kotlinx.android.synthetic.main.activity_tabungan.*
 import java.util.*
+
 
 class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener {
     lateinit var DateEditText: EditText
@@ -113,8 +113,11 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
 
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
-                val initial = count.toString()
+                if (count.toString().length == 1 && count.toString().startsWith("0")) {
+                    count?.clear();
+                }
 
+                val initial = count.toString()
                 if (etSetoranAwal == null) return
                 if (initial.isEmpty()) return
 
@@ -138,6 +141,8 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                errSetoranAwal(null)
+                presenter.checkSetoranAwal(etSetoranAwal.text.toString())
                 presenter.checked(
                     etTanggal.text.toString(),
                     etSetoranAwal.text.toString(),
@@ -164,6 +169,14 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             }
         })
 
+        etSetoranAwal.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                // code to execute when EditText loses focus
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+            }
+        })
+
         etPeriodeTabungan.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
 
@@ -184,6 +197,10 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             var processed = ""
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
+                if (count.toString().length == 1 && count.toString().startsWith("0")) {
+                    count?.clear();
+                }
+
                 val initial = count.toString()
                 if (etJumlahSetoran == null) return
                 if (initial.isEmpty()) return
@@ -258,8 +275,6 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         btnLanjutFormTwo.isClickable = true
     }
 
-
-
     override fun goToNextPage(bundle:Bundle) {
         val intent = Intent(this, DetailFormResultActivity::class.java)
         bundle.putString("tanggalTarget", etTanggal.text.toString())
@@ -274,6 +289,10 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
     override fun btnInactive() {
         btnLanjutFormTwo.setBackgroundResource(R.drawable.bg_inactive)
         btnLanjutFormTwo.isClickable = false
+    }
+
+    override fun errSetoranAwal(message: String?) {
+        layoutEtSetoranAwal.error = message
     }
 
     override fun showDataTabungBareng(adapterTabungBareng: BarengTemanAdapter) {

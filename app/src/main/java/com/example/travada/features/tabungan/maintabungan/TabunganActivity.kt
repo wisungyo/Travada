@@ -9,6 +9,7 @@ import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.ListWisataAdapter
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import com.example.travada.features.tabungan.models.DataWisata
+import com.example.travada.mainpage.MainPageActivity
 import kotlinx.android.synthetic.main.activity_tabungan.*
 
 class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
@@ -22,15 +23,16 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
         presenter = TabunganPresenter(this)
 
         btnBuatLiburan.setOnClickListener {
-            val goToFormTabunganOne = Intent(
-                this,
-                FormTabunganOneActivity::class.java
-            )
+            val goToFormTabunganOne = Intent(this, FormTabunganOneActivity::class.java)
+            goToFormTabunganOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(goToFormTabunganOne)
         }
 
+
+
         ivBackMainTabungan.setOnClickListener {
-            finish()
+            val intent = Intent(this,MainPageActivity::class.java)
+            startActivity(intent)
         }
         presenter.fetchWisataPilihanData()
     }

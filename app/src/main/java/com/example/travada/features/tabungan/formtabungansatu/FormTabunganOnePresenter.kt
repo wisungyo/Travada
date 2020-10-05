@@ -1,14 +1,7 @@
 package com.example.travada.features.tabungan.formtabungansatu
 
-import android.os.Bundle
-
-class FormTabunganOnePresenter(private val listener: Listener)  {
-    fun checked(
-        tujuan: String,
-        jumlah: String,
-        uriGambar: String
-    ) {
-
+class FormTabunganOnePresenter(private val listener: Listener) {
+    fun checked(tujuan: String, jumlah: String, uriGambar: String) {
         if (tujuan.isNotEmpty() && jumlah.isNotEmpty() && uriGambar.isNotEmpty()) {
             listener.btnActive()
         } else {
@@ -16,10 +9,29 @@ class FormTabunganOnePresenter(private val listener: Listener)  {
         }
     }
 
+    fun checkTujuan(text: String){
+        if(text.length<=25){
+            listener.errTujuan(null)
+            isError = false
+        } else {
+            listener.errTujuan("Tujuan minimal 25 karakter" )
+            isError = true
+        }
+    }
+
+    fun checkJumlah(jumlah: String){
+        if(jumlah.length < 7){
+            listener.errJumlah("minimal Rp.100.000")
+            isError = true
+        } else {
+            listener.errJumlah(null)
+            isError = false
+        }
+    }
+
     fun nextPage() {
         listener.goToNextPage()
     }
-
 
     interface Listener {
         fun btnActive()
@@ -29,5 +41,9 @@ class FormTabunganOnePresenter(private val listener: Listener)  {
         fun errJumlah(message: String?)
         fun goToUploadGambar()
         fun goToUpdateGambar()
+    }
+
+    companion object {
+        var isError: Boolean = false
     }
 }
