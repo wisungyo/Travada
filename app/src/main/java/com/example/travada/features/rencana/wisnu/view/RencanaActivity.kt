@@ -63,7 +63,7 @@ class RencanaActivity : AppCompatActivity(), RencanaActivityPresenter.Listener {
     override fun showDataError(localizedMessage: String?) {
         Toast.makeText(
             this,
-            "Error : ${localizedMessage}",
+            "Error : $localizedMessage",
             Toast.LENGTH_LONG
         ).show()
     }

@@ -174,4 +174,8 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
     override fun hideLoadingDialog() {
         MyFragment.dismiss()
     }
+
+    override fun checkLoadingDialog(): Boolean {
+        return MyFragment.isAdded && MyFragment.isVisible && MyFragment.userVisibleHint
+    }
 }

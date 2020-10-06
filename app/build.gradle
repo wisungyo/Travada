@@ -34,6 +34,12 @@ android {
         compile.exclude group: 'org.jetbrains' , module:'annotations'
     }
 
+    allprojects {
+        repositories {
+            // ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
 }
 
 dependencies {
@@ -129,5 +135,6 @@ dependencies {
     //Hawk penganti Shared Preferences
     compile "com.orhanobut:hawk:2.0.1"
 
-
+    // XML to PDF Generator
+    implementation 'com.github.Gkemon:XML-to-PDF-generator:1.0'
 }

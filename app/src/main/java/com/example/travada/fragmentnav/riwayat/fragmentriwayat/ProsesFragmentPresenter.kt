@@ -62,12 +62,10 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
                     return
                 }
                 listenerAdapter.showData(response.body()?.data, data, holder)
-                listenerAdapter.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
                 listener.showDataError(t.toString())
-                listenerAdapter.hideLoadingDialog()
             }
         })
     }
@@ -90,5 +88,6 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
         )
         fun showLoadingDialog()
         fun hideLoadingDialog()
+        fun checkLoadingDialog(): Boolean
     }
 }

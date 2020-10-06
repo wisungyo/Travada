@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.mutasi.view.ResultMutasiActivity">
+
+    <View
+        android:id="@+id/view_result_mutasi"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="#2A85F4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_result_mutasi_back"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/view_result_mutasi"
+        app:layout_constraintStart_toStartOf="@id/view_result_mutasi"
+        app:layout_constraintTop_toTopOf="@id/view_result_mutasi" />
+
+    <TextView
+        android:id="@+id/tv_result_mutasi_topbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Mutasi"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/view_result_mutasi"
+        app:layout_constraintStart_toEndOf="@id/iv_result_mutasi_back"
+        app:layout_constraintTop_toTopOf="@id/view_result_mutasi" />
+
+    <EditText
+        android:id="@+id/et_result_mutasi_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:padding="12dp"
+        android:paddingEnd="28dp"
+        android:background="@drawable/bg_rencana_pesan_jumlah_orang"
+        android:editable="false"
+        android:fontFamily="@font/roboto"
+        android:gravity="start"
+        android:text="20 Jun 2020"
+        android:textAlignment="textStart"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:textColor="#777777"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_result_mutasi"
+        app:layout_constraintEnd_toStartOf="@id/iv_result_mutasi_next"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_calendar"
+        app:layout_constraintEnd_toEndOf="@id/et_result_mutasi_start"
+        app:layout_constraintTop_toTopOf="@id/et_result_mutasi_start"
+        app:layout_constraintBottom_toBottomOf="@id/et_result_mutasi_start" />
+
+    <ImageView
+        android:id="@+id/iv_result_mutasi_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_next_grey"
+        app:layout_constraintTop_toTopOf="@id/et_result_mutasi_start"
+        app:layout_constraintBottom_toBottomOf="@id/et_result_mutasi_start"
+        app:layout_constraintStart_toStartOf="@id/gl_result_mutasi"
+        app:layout_constraintEnd_toEndOf="@id/gl_result_mutasi" />
+
+    <EditText
+        android:id="@+id/et_result_mutasi_end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="12dp"
+        android:paddingEnd="28dp"
+        android:background="@drawable/bg_rencana_pesan_jumlah_orang"
+        android:editable="false"
+        android:fontFamily="@font/roboto"
+        android:gravity="start"
+        android:text="20 Jun 2020"
+        android:textAlignment="textStart"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:textColor="#777777"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_result_mutasi_next"
+        app:layout_constraintTop_toBottomOf="@id/view_result_mutasi" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_calendar"
+        app:layout_constraintEnd_toEndOf="@id/et_result_mutasi_end"
+        app:layout_constraintTop_toTopOf="@id/et_result_mutasi_end"
+        app:layout_constraintBottom_toBottomOf="@id/et_result_mutasi_end" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_result_mutasi"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:clipChildren="false"
+        android:nestedScrollingEnabled="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_result_mutasi"
+        app:layout_constraintTop_toBottomOf="@id/et_result_mutasi_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/view_result_mutasi_bot_bar" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_result_mutasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <View
+        android:id="@+id/view_result_mutasi_bot_bar"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/btn_result_mutasi"
+        android:text="Simpan Dalam PDF"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:minHeight="0dp"
+        android:background="@drawable/bg_konfirmasi_rencana_btn"
+        android:paddingTop="8dp"
+        android:paddingBottom="11dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

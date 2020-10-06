@@ -158,4 +158,8 @@ class ProsesFragment : Fragment(), ProsesFragmentPresenter.Listener, ProsesFragm
     override fun hideLoadingDialog() {
         MyFragment.dismiss()
     }
+
+    override fun checkLoadingDialog(): Boolean {
+        return MyFragment.isAdded && MyFragment.isVisible && MyFragment.userVisibleHint
+    }
 }

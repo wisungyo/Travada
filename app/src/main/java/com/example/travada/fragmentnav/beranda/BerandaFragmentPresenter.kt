@@ -1,5 +1,6 @@
 package com.example.travada.fragmentnav.beranda
 
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
@@ -20,6 +21,7 @@ import retrofit2.Response
 class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
 
     fun fetchData() {
+        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getUserInfo(Hawk.get(util.SF_TOKEN, "")).enqueue(object : Callback<GetUserInfo> {
             override fun onResponse(call: Call<GetUserInfo>, response: Response<GetUserInfo>) {
                 if (!response.isSuccessful) {
@@ -48,11 +50,11 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         )
 
         val listInformasi = arrayListOf(
-            DataInformasi(R.drawable.informasi),
-            DataInformasi(R.drawable.informasi),
-            DataInformasi(R.drawable.informasi),
-            DataInformasi(R.drawable.informasi),
-            DataInformasi(R.drawable.informasi)
+            DataInformasi(R.drawable.ic_main_tabungan), // R.drawable.informasi ERROR
+            DataInformasi(R.drawable.ic_main_tabungan),
+            DataInformasi(R.drawable.ic_main_tabungan),
+            DataInformasi(R.drawable.ic_main_tabungan),
+            DataInformasi(R.drawable.ic_main_tabungan)
         )
 
         TPApiClient.TP_API_SERVICES.getPopulerDestination().enqueue(object : Callback<GetPopulerResponse> {
@@ -65,12 +67,12 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
                 } else {
                     listener.showDataError("Fetching data gagal")
                 }
-//                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetPopulerResponse>, t: Throwable) {
                 listener.showDataError(t.toString())
-//                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
         })
 
@@ -202,5 +204,8 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         fun showDetailBerita(itemBerita: DataBerita)
         fun showLihatSemuaBerita()
         fun showDataError(error: String)
+        fun showLoadingDialog()
+        fun hideLoadingDialog()
+        fun checkLoadingDialog(): Boolean
     }
 }

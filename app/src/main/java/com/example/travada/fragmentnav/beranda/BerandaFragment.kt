@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.berita.BeritaActivity
 import com.example.travada.berita.DetailBeritaActivity
+import com.example.travada.features.mutasi.view.MutasiActivity
 import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActivity
 import com.example.travada.features.rencana.searchpage.TPSearchPageActivity
 import com.example.travada.features.rencana.wisnu.view.RencanaActivity
@@ -22,6 +23,7 @@ import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTabungan
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTrip
 import com.example.travada.sampeldata.DataBerita
+import com.example.travada.util.loadingdialog.LoadingDialog
 import com.example.travada.util.util
 import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.fragment_beranda.*
@@ -31,8 +33,9 @@ import java.util.*
 
 class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     private lateinit var presenter: BerandaFragmentPresenter
+    val MyFragment = LoadingDialog()
     object status {
-        var saldo = false
+        var statusSaldo = false
     }
 
     override fun onCreateView(
@@ -52,13 +55,13 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
 
         // card button listeners
         iv_mainpage_card_eye.setOnClickListener {
-           if (status.saldo) {
-               status.saldo = false
+           if (status.statusSaldo) {
+               status.statusSaldo = false
                et_mainpage_card_saldo_jumlah.transformationMethod =
                    HideReturnsTransformationMethod.getInstance()
                iv_mainpage_card_eye.setBackgroundResource(R.drawable.ic_eye)
            } else {
-               status.saldo = true
+               status.statusSaldo = true
                et_mainpage_card_saldo_jumlah.transformationMethod =
                    PasswordTransformationMethod.getInstance()
                iv_mainpage_card_eye.setBackgroundResource(R.drawable.ic_eye_blind)
@@ -119,11 +122,8 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     }
 
     override fun showMutasi() {
-        Toast.makeText(
-            context,
-            "Mutasi under construction..",
-            Toast.LENGTH_SHORT
-        ).show()
+        val intentMutasi = Intent(context, MutasiActivity::class.java)
+        startActivity(intentMutasi)
     }
 
     override fun showTransfer() {
@@ -209,5 +209,19 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
             error,
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    override fun showLoadingDialog() {
+        val fm=fragmentManager
+        MyFragment.isCancelable = false
+        fm?.let { MyFragment.show(it, "Fragment") }
+    }
+
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
+    }
+
+    override fun checkLoadingDialog(): Boolean {
+        return MyFragment.isAdded && MyFragment.isVisible && MyFragment.userVisibleHint
     }
 }

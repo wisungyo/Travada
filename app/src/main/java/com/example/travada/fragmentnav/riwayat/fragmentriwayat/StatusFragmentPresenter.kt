@@ -62,12 +62,10 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
                     return
                 }
                 listenerAdapter.showData(response.body()?.data, data, holder)
-                listenerAdapter.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
                 listener.showDataError(t.toString())
-                listenerAdapter.hideLoadingDialog()
             }
         })
     }
@@ -90,5 +88,6 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
         )
         fun showLoadingDialog()
         fun hideLoadingDialog()
+        fun checkLoadingDialog(): Boolean
     }
 }
