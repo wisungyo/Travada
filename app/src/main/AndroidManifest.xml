@@ -47,7 +47,6 @@
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
         <activity android:name=".mainpage.MainPageActivity" >
-
         </activity>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" >
             <intent-filter>
