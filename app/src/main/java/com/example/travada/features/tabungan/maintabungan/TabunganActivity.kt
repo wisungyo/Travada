@@ -7,6 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.ListWisataAdapter
+import com.example.travada.features.tabungan.detailtabungan.DetailTabunganActivity
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import com.example.travada.features.tabungan.models.DataWisata
 import com.example.travada.mainpage.MainPageActivity
@@ -43,6 +44,12 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
         rvMainTabungan.layoutManager = layoutManagerLinear
         rvMainTabungan.adapter = adapterWisataPilihan
         rvMainTabungan.overScrollMode = View.OVER_SCROLL_NEVER
+    }
+
+    override fun showDetailTabunganWisata(dataWisata: DataWisata) {
+        val intent = Intent(this,DetailTabunganActivity::class.java)
+        intent.putExtra("detail",dataWisata)
+        startActivity(intent)
     }
 
 

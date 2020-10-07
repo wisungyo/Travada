@@ -30,7 +30,12 @@ class TabunganPresenter(val listener: Listener) {
         listener.showData(adapterWisataPilihan)
     }
 
+    fun goToDetailTabunganWisata(dataWisata: DataWisata){
+        listener.showDetailTabunganWisata(dataWisata)
+    }
+
     interface Listener {
         fun showData( adapterWisataPilihan: ListWisataAdapter)
+        fun showDetailTabunganWisata(dataWisata : DataWisata)
     }
 }
