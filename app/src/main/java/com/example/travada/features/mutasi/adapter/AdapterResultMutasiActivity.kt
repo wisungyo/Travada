@@ -50,9 +50,13 @@ class AdapterResultMutasiActivity(
             }
         }
 
-        val first = listItem[position].nama.split(" ").first()
-        val last = listItem[position].nama.split(" ").last()
-        holder.itemView.tv_item_result_mutasi_inisial.text = "${first.subSequence(0,1)}${last.subSequence(0,1)}"
+        if (!listItem[position].nama.contains(" ")) {
+            holder.itemView.tv_item_result_mutasi_inisial.text = listItem[position].nama.subSequence(0,1)
+        } else {
+            val first = listItem[position].nama.split(" ").first()
+            val last = listItem[position].nama.split(" ").last()
+            holder.itemView.tv_item_result_mutasi_inisial.text = "${first.subSequence(0,1)}${last.subSequence(0,1)}"
+        }
 
         holder.itemView.tv_item_result_mutasi_nama.text = listItem[position].nama
 

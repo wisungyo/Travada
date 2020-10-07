@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityDisetujui
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityDitolak
+import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityExpired
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityMenunggu
 import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
@@ -74,6 +75,9 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
                     "disetujui" -> {
                         response.body()?.data?.cicilan?.let { getAdapterDetailPemesananDisetujui(it) }
                     }
+                    "expired" -> {
+                        response.body()?.data?.let { getAdapterDetailPemesananExpired(it) }
+                    }
                 }
 
             }
@@ -106,6 +110,13 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
         listener.showData(adapterDetailRiwayat, linearLayoutDetailRiwayat)
     }
 
+    fun getAdapterDetailPemesananExpired(data: GetPemesananDetailResponse.Data) {
+        val adapterDetailRiwayat = AdapterDetailRiwayatActivityExpired(data, this)
+        val linearLayoutDetailRiwayat = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        listener.showData(adapterDetailRiwayat, linearLayoutDetailRiwayat)
+    }
+
     fun goToBayarCicilan() {
         listener.showBayarCicilan()
     }
@@ -119,6 +130,9 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
             linearLayoutDetailRiwayatActivity: LinearLayoutManager)
         fun showData(
             adapterDetailRiwayatActivity: AdapterDetailRiwayatActivityMenunggu,
+            linearLayoutDetailRiwayatActivity: LinearLayoutManager)
+        fun showData(
+            adapterDetailRiwayatActivity: AdapterDetailRiwayatActivityExpired,
             linearLayoutDetailRiwayatActivity: LinearLayoutManager)
         fun showDestinasiData(data: GetDestinasiResponse.Data?)
         fun showPemesananDataOnDestinasiData(data: GetPemesananDetailResponse.Data?)

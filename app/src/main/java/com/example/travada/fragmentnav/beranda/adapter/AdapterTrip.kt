@@ -45,7 +45,7 @@ class AdapterTrip(val listTrip: List<GetPopulerResponse.Data>, val presenter: Be
         df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
         holder.itemView.tv_mainpage_item_trip_money.text = "Rp. ${df.format(listTrip[position].hargaSatuan)}"
 
-        holder.itemView.tv_mainpage_item_trip_day.text = listTrip[position].durasi.toString()
+        holder.itemView.tv_mainpage_item_trip_day.text = "${listTrip[position].durasi} hari"
 
         if (position == listTrip.size-1) {
             // IDKW, 28 becomes 16dp in the result

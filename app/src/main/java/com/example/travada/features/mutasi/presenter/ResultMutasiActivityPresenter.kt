@@ -11,6 +11,132 @@ class ResultMutasiActivityPresenter (val listener: Listener): AppCompatActivity(
         val listMutasi = arrayListOf(
             DataMutasi(
                 "2020-01-20",
+                "Hanif",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-01-25",
+                "Nanda Adi Hanif",
+                "12345678900",
+                1000000,
+                "kredit"
+            ),
+            DataMutasi(
+                "2020-01-30",
+                "Hanif Tama",
+                "12345678900",
+                500000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-02-20",
+                "Hanif Tama",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-02-25",
+                "Hanif Tama",
+                "12345678900",
+                750000,
+                "kredit"
+            ),
+            DataMutasi(
+                "2020-03-20",
+                "Hanif Tama",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-01-20",
+                "Hanif Tama",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-01-25",
+                "Nanda Adi",
+                "12345678900",
+                1000000,
+                "kredit"
+            ),
+            DataMutasi(
+                "2020-01-30",
+                "Hanif Tama",
+                "12345678900",
+                500000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-02-20",
+                "Hanif Tama",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-02-25",
+                "Hanif Tama",
+                "12345678900",
+                750000,
+                "kredit"
+            ),
+            DataMutasi(
+                "2020-03-20",
+                "Hanif Tama",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-01-20",
+                "Hanif Tama",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-01-25",
+                "Nanda Adi",
+                "12345678900",
+                1000000,
+                "kredit"
+            ),
+            DataMutasi(
+                "2020-01-30",
+                "Hanif Tama",
+                "12345678900",
+                500000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-02-20",
+                "Hanif Tama",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-02-25",
+                "Hanif Tama",
+                "12345678900",
+                750000,
+                "kredit"
+            ),
+            DataMutasi(
+                "2020-03-20",
+                "Hanif Tama",
+                "12345678900",
+                1000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-01-20",
                 "Hanif Tama",
                 "12345678900",
                 1000000,

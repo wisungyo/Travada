@@ -9,6 +9,7 @@ import com.example.travada.R
 import com.example.travada.detailriwayat.presenter.DetailRiwayatActivityPresenter
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityDisetujui
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityDitolak
+import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityExpired
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityMenunggu
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.pojo.GetPemesananDestinasiResponse
@@ -68,6 +69,14 @@ class DetailRiwayatActivity : AppCompatActivity(), DetailRiwayatActivityPresente
 
     override fun showData(
         adapterDetailRiwayatActivity: AdapterDetailRiwayatActivityMenunggu,
+        linearLayoutDetailRiwayatActivity: LinearLayoutManager
+    ) {
+        rv_detail_riwayat.adapter = adapterDetailRiwayatActivity
+        rv_detail_riwayat.layoutManager = linearLayoutDetailRiwayatActivity
+    }
+
+    override fun showData(
+        adapterDetailRiwayatActivity: AdapterDetailRiwayatActivityExpired,
         linearLayoutDetailRiwayatActivity: LinearLayoutManager
     ) {
         rv_detail_riwayat.adapter = adapterDetailRiwayatActivity

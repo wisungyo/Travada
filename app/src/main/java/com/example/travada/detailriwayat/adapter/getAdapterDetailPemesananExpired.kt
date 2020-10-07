@@ -8,17 +8,17 @@ import com.example.travada.R
 import com.example.travada.detailriwayat.presenter.DetailRiwayatActivityPresenter
 import com.example.travada.features.rencana.pojo.GetPemesananDetailResponse
 
-class AdapterDetailRiwayatActivityDitolak(
+class AdapterDetailRiwayatActivityExpired(
     private val data: GetPemesananDetailResponse.Data?,
     val presenter: DetailRiwayatActivityPresenter
 ) :
-    RecyclerView.Adapter<AdapterDetailRiwayatActivityDitolak.ViewHolder>() {
+    RecyclerView.Adapter<AdapterDetailRiwayatActivityExpired.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(
-            R.layout.detail_riwayat_item_dp_cicilan_ditolak, parent, false
+            R.layout.detail_riwayat_item_dp_cicilan, parent, false
         )
 
         return ViewHolder(view)

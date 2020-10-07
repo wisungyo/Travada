@@ -37,8 +37,12 @@ class ResultMutasiActivity : AppCompatActivity(), ResultMutasiActivityPresenter.
         PdfGenerator.getBuilder()
             .setContext(this)
             .fromViewIDSource()
-            .fromViewID(this, R.id.rv_result_mutasi, R.id.rv_result_mutasi)
-            .setDefaultPageSize(PdfGenerator.PageSize.A4)
+            .fromViewID(this, R.id.cl_result_mutasi_nested_view)
+//            .setDefaultPageSize(PdfGenerator.PageSize.A4)
+            .setCustomPageSize(
+                cl_result_mutasi_nested_view.width,
+                cl_result_mutasi_nested_view.height
+            )
             .setFileName("Test-PDF")
             .setFolderName("Test-PDF-folder")
             .openPDFafterGeneration(true)
