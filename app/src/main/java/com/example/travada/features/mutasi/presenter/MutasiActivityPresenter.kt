@@ -42,15 +42,10 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
                     },
                     year, month, day
                 )
-            dialog.setButton(DatePickerDialog.BUTTON_POSITIVE, "Selesai", dialog)
+            dialog.setButton(DatePickerDialog.BUTTON_POSITIVE, "Atur", dialog)
             dialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Batal", null as DialogInterface.OnClickListener?)
             dialog.datePicker.maxDate = Date().time
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//            if (source == "start") {
-//                dialog.setTitle("Dari Tanggal")
-//            } else {
-//                dialog.setTitle("Sampai Tanggal")
-//            }
             dialog.show()
             orderDate(dialog, charArrayOf('d', 'm', 'y'))
         } else {
@@ -91,15 +86,10 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
                     },
                     year, month, day
                 )
-            dialog.setButton(DatePickerDialog.BUTTON_POSITIVE, "Selesai", dialog)
+            dialog.setButton(DatePickerDialog.BUTTON_POSITIVE, "Atur", dialog)
             dialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Batal", null as DialogInterface.OnClickListener?)
             dialog.datePicker.maxDate = Date().time
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//            if (source == "start") {
-//                dialog.setTitle("Dari Tanggal")
-//            } else {
-//                dialog.setTitle("Sampai Tanggal")
-//            }
             dialog.show()
             orderDate(dialog, charArrayOf('d', 'm', 'y'))
         }
