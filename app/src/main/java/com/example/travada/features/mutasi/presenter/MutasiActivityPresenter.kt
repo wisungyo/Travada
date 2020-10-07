@@ -3,10 +3,15 @@ package com.example.travada.features.mutasi.presenter
 import android.R
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.LinearLayout
+import android.widget.NumberPicker
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
@@ -37,25 +42,33 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
                     },
                     year, month, day
                 )
+            dialog.setButton(DatePickerDialog.BUTTON_POSITIVE, "Selesai", dialog)
+            dialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Batal", null as DialogInterface.OnClickListener?)
             dialog.datePicker.maxDate = Date().time
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//            if (source == "start") {
+//                dialog.setTitle("Dari Tanggal")
+//            } else {
+//                dialog.setTitle("Sampai Tanggal")
+//            }
             dialog.show()
+            orderDate(dialog, charArrayOf('d', 'm', 'y'))
         } else {
             val splitDate = date.split(" ").toMutableList()
             splitDate[1] =
                 when (splitDate[1]) {
-                "Jan" -> "0"
-                "Feb" -> "1"
-                "Mar" -> "2"
-                "Apr" -> "3"
-                "Mei" -> "4"
-                "Jun" -> "5"
-                "Jul" -> "6"
-                "Agu" -> "7"
-                "Sep" -> "8"
-                "Okt" -> "9"
-                "Nov" -> "10"
-                "Des" -> "11"
+                    "Jan" -> "0"
+                    "Feb" -> "1"
+                    "Mar" -> "2"
+                    "Apr" -> "3"
+                    "Mei" -> "4"
+                    "Jun" -> "5"
+                    "Jul" -> "6"
+                    "Agu" -> "7"
+                    "Sep" -> "8"
+                    "Okt" -> "9"
+                    "Nov" -> "10"
+                    "Des" -> "11"
                 else  -> ""
             }
 
@@ -78,10 +91,62 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
                     },
                     year, month, day
                 )
+            dialog.setButton(DatePickerDialog.BUTTON_POSITIVE, "Selesai", dialog)
+            dialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Batal", null as DialogInterface.OnClickListener?)
             dialog.datePicker.maxDate = Date().time
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//            if (source == "start") {
+//                dialog.setTitle("Dari Tanggal")
+//            } else {
+//                dialog.setTitle("Sampai Tanggal")
+//            }
             dialog.show()
+            orderDate(dialog, charArrayOf('d', 'm', 'y'))
         }
+    }
+
+    private val SPINNER_COUNT = 3
+    private fun orderDate(dialog: DatePickerDialog, ymdOrder: CharArray) {
+        check(dialog.isShowing) { "Dialog must be showing" }
+        val idYear = Resources.getSystem().getIdentifier("year", "id", "android")
+        val idMonth = Resources.getSystem().getIdentifier("month", "id", "android")
+        val idDay = Resources.getSystem().getIdentifier("day", "id", "android")
+        val idLayout = Resources.getSystem().getIdentifier("pickers", "id", "android")
+        val spinnerYear = dialog.findViewById<View>(idYear) as NumberPicker
+        val spinnerMonth = dialog.findViewById<View>(idMonth) as NumberPicker
+        val spinnerDay = dialog.findViewById<View>(idDay) as NumberPicker
+        val layout = dialog.findViewById<View>(idLayout) as LinearLayout
+        layout.removeAllViews()
+        for (i in 0 until SPINNER_COUNT) {
+            when (ymdOrder[i]) {
+                'y' -> {
+                    layout.addView(spinnerYear)
+                    setImeOptions(spinnerYear, i)
+                }
+                'm' -> {
+                    layout.addView(spinnerMonth)
+                    setImeOptions(spinnerMonth, i)
+                }
+                'd' -> {
+                    layout.addView(spinnerDay)
+                    setImeOptions(spinnerDay, i)
+                }
+                else -> throw IllegalArgumentException("Invalid char[] ymdOrder")
+            }
+        }
+    }
+
+    private fun setImeOptions(spinner: NumberPicker, spinnerIndex: Int) {
+        val imeOptions: Int =
+            if (spinnerIndex < SPINNER_COUNT - 1) {
+                EditorInfo.IME_ACTION_NEXT
+            } else {
+                EditorInfo.IME_ACTION_DONE
+            }
+        val idPickerInput =
+            Resources.getSystem().getIdentifier("numberpicker_input", "id", "android")
+        val input = spinner.findViewById<View>(idPickerInput) as TextView
+        input.imeOptions = imeOptions
     }
 
     interface Listener {
