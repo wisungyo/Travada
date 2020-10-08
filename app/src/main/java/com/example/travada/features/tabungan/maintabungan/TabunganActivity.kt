@@ -29,9 +29,7 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
             goToFormTabunganOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(goToFormTabunganOne)
         }
-
-
-
+        
         ivBackMainTabungan.setOnClickListener {
             val intent = Intent(this,MainPageActivity::class.java)
             startActivity(intent)
