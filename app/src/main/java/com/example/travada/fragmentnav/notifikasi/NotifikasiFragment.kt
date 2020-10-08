@@ -1,23 +1,102 @@
 package com.example.travada.fragmentnav.notifikasi
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.fragmentnav.notifikasi.adapter.NotifikasiAdapter
+import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
+import com.example.travada.mainpage.MainPageActivity
+import kotlinx.android.synthetic.main.fragment_notifikasi.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NotifikasiFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NotifikasiFragment : Fragment() {
+    private val notifikasi = arrayListOf(
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save selamat ya kamu jadi yang terbaik ",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        ),
+        DataNotifikasi(
+            "Persetujuan",
+            "Hanif telah menerima anda sebagai member dari Trava Save",
+            "12-12-2020 , 09:18"
+        )
+    )
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -36,6 +115,20 @@ class NotifikasiFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notifikasi, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        rvNotifikasi.apply { layoutManager = LinearLayoutManager(activity)
+            adapter = NotifikasiAdapter(notifikasi)
+        }
+        rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
+
+        btnBack.setOnClickListener {
+            var intent = Intent(context, MainPageActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     companion object {
