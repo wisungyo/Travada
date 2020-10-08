@@ -268,3 +268,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gVertical2" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>
