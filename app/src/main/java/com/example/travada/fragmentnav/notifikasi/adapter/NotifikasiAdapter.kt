@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.fragmentnav.notifikasi.NotifikasiFragmentPresenter
 import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
 import kotlinx.android.synthetic.main.list_notifikasi.view.*
 
-class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>) :
+class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>, val presenter : NotifikasiFragmentPresenter) :
     RecyclerView.Adapter<NotifikasiAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
@@ -40,7 +41,12 @@ class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>) :
             }
         }
 
-//      viewNotifikasi.setBackgroundResource(R.drawable.bg_white)
+        holder.itemView.listNotifikasi.setOnClickListener {
+            presenter.goToDetailNotifikasi(listNotifikasi[position])
+            holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white)
+        }
+
+
     }
 
 }

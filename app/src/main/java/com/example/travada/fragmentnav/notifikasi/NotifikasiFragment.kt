@@ -1,6 +1,5 @@
 package com.example.travada.fragmentnav.notifikasi
 
-import android.app.NotificationChannelGroup
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.fragmentnav.notifikasi.adapter.NotifikasiAdapter
 import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
-import com.example.travada.mainpage.MainPageActivity
 import kotlinx.android.synthetic.main.fragment_notifikasi.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,7 +20,7 @@ private const val ARG_PARAM2 = "param2"
 class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
 
     private lateinit var presenter : NotifikasiFragmentPresenter
-
+   // private lateinit var data : DataNotifikasi
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -47,24 +45,32 @@ class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        presenter = NotifikasiFragmentPresenter(this)
+        presenter.fetchDataNotifikasi()
+
         rvNotifikasi.apply { layoutManager = LinearLayoutManager(activity)
            // adapter = NotifikasiAdapter(notifikasi)
         }
         rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
-
-        btnBack.setOnClickListener {
-            var intent = Intent(context, MainPageActivity::class.java)
-            startActivity(intent)
-        }
     }
 
 
     override fun showData(notifikasiAdapter: NotifikasiAdapter) {
-
+        val layoutManagerLinear =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvNotifikasi.layoutManager = layoutManagerLinear
+        rvNotifikasi.adapter = notifikasiAdapter
+       // rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
     }
 
     override fun showDetaiNotifikasi(dataNotifikasi: DataNotifikasi) {
-        TODO("Not yet implemented")
+//        when(){
+//
+//        }
+
+        val DetailNotifikasi = Intent(context, DetailNotifikasiTravasave::class.java)
+        DetailNotifikasi.putExtra("notifikasi", dataNotifikasi)
+        startActivity(DetailNotifikasi)
     }
 
     companion object {

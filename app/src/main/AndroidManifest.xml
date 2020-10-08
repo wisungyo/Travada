@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".features.mutasi.view.ResultMutasiActivity"></activity>
+        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravaplan"></activity>
+        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravasave" />
+        <activity android:name=".features.mutasi.view.ResultMutasiActivity" />
         <activity android:name=".features.mutasi.view.MutasiActivity" />
         <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
         <activity android:name=".welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity" />

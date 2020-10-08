@@ -10,19 +10,19 @@ class NotifikasiFragmentPresenter(val listener: Listener) {
     fun fetchDataNotifikasi(){
          val notifikasi = arrayListOf(
             DataNotifikasi(
-                "Persetujuan",
+                "Pencairan Berhasil",
                 "Hanif telah menerima anda sebagai member dari Trava Save selamat ya kamu jadi yang terbaik ",
                 "travasave",
                 "12-12-2020 , 09:18"
             ),
             DataNotifikasi(
-                "Persetujuan",
+                "Cicilan Travaplan Selesai",
                 "Hanif telah menerima anda sebagai member dari Trava Save",
                 "travaplan",
                 "12-12-2020 , 09:18"
             ),
             DataNotifikasi(
-                "Persetujuan",
+                "Konfirmasi Pembayaran Cicilan",
                 "Hanif telah menerima anda sebagai member dari Trava Save",
                 "travaplan",
                 "12-12-2020 , 09:18"
@@ -47,13 +47,16 @@ class NotifikasiFragmentPresenter(val listener: Listener) {
             )
         )
 
-        val adapterNotifikasi = NotifikasiAdapter(notifikasi)
+        val adapterNotifikasi = NotifikasiAdapter(notifikasi,this)
         listener.showData(adapterNotifikasi)
+    }
+
+    fun goToDetailNotifikasi(dataNotifikasi: DataNotifikasi){
+        listener.showDetaiNotifikasi(dataNotifikasi)
     }
 
     interface Listener {
         fun showData(notifikasiAdapter: NotifikasiAdapter)
-
         fun showDetaiNotifikasi (dataNotifikasi : DataNotifikasi)
     }
 }
