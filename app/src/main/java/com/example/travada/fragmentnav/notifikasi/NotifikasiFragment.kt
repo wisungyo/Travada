@@ -48,7 +48,7 @@ class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
         super.onViewCreated(view, savedInstanceState)
 
         rvNotifikasi.apply { layoutManager = LinearLayoutManager(activity)
-            adapter = NotifikasiAdapter(notifikasi)
+           // adapter = NotifikasiAdapter(notifikasi)
         }
         rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
 
@@ -60,7 +60,7 @@ class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
 
 
     override fun showData(notifikasiAdapter: NotifikasiAdapter) {
-        
+
     }
 
     override fun showDetaiNotifikasi(dataNotifikasi: DataNotifikasi) {
