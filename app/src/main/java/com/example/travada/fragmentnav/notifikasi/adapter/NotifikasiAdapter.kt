@@ -14,7 +14,8 @@ class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_notifikasi, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.list_notifikasi, parent, false)
         return ViewHolder(
             view
         )
@@ -28,8 +29,18 @@ class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>) :
         holder.itemView.tvJudulNotifikasi.setText(listNotifikasi[position].judul)
         holder.itemView.tvPesanNotifikasi.setText(listNotifikasi[position].pesan)
         holder.itemView.tvTanggalNotifikasi.setText(listNotifikasi[position].tanggal)
+        holder.itemView.tvKategori.setText(listNotifikasi[position].kategori)
 
-//        viewNotifikasi.setBackgroundResource(R.drawable.bg_white)
+        when (listNotifikasi[position].kategori) {
+            "travasave" -> {
+                holder.itemView.ivImagePersonTransaksi.setBackgroundResource(R.drawable.ic_notif_tsave)
+            }
+            "travaplan" -> {
+                holder.itemView.ivImagePersonTransaksi.setBackgroundResource(R.drawable.ic_notif_tplan)
+            }
+        }
+
+//      viewNotifikasi.setBackgroundResource(R.drawable.bg_white)
     }
 
 }

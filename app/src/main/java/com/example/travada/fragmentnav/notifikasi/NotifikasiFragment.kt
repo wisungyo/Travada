@@ -1,5 +1,6 @@
 package com.example.travada.fragmentnav.notifikasi
 
+import android.app.NotificationChannelGroup
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,84 +19,10 @@ import kotlinx.android.synthetic.main.fragment_notifikasi.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class NotifikasiFragment : Fragment() {
-    private val notifikasi = arrayListOf(
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save selamat ya kamu jadi yang terbaik ",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        ),
-        DataNotifikasi(
-            "Persetujuan",
-            "Hanif telah menerima anda sebagai member dari Trava Save",
-            "12-12-2020 , 09:18"
-        )
-    )
+class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
+
+    private lateinit var presenter : NotifikasiFragmentPresenter
+
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -131,6 +58,15 @@ class NotifikasiFragment : Fragment() {
         }
     }
 
+
+    override fun showData(notifikasiAdapter: NotifikasiAdapter) {
+        
+    }
+
+    override fun showDetaiNotifikasi(dataNotifikasi: DataNotifikasi) {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -150,4 +86,6 @@ class NotifikasiFragment : Fragment() {
                 }
             }
     }
+
+
 }

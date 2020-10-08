@@ -1,4 +1,11 @@
 package com.example.travada.fragmentnav.notifikasi.model
 
-class DataNotifikasi(val judul: String, val pesan: String, var tanggal: String) {
-}
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class DataNotifikasi(
+    val judul: String,
+    val pesan: String,
+    val kategori :String,
+    var tanggal: String ) : Parcelable
