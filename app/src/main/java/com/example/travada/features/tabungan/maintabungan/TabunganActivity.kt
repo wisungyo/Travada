@@ -1,13 +1,14 @@
 package com.example.travada.features.tabungan.maintabungan
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.ListWisataAdapter
 import com.example.travada.features.tabungan.detailtabungan.DetailTabunganActivity
+import com.example.travada.features.tabungan.detailtabungan.DetailTabunganFragment
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import com.example.travada.features.tabungan.models.DataWisata
 import com.example.travada.mainpage.MainPageActivity
@@ -47,9 +48,14 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
     }
 
     override fun showDetailTabunganWisata(dataWisata: DataWisata) {
-        val intent = Intent(this,DetailTabunganActivity::class.java)
-        intent.putExtra("detail",dataWisata)
-        startActivity(intent)
+
+        val fragment = DetailTabunganFragment()
+        val bundle = Bundle()
+        bundle.putParcelable("detail", dataWisata)
+        fragment.setArguments(bundle)
+
+        getSupportFragmentManager().beginTransaction()
+            .add(R.id.frameDetailTabungan, fragment).commit();
     }
 
 

@@ -27,7 +27,11 @@
         <activity android:name=".features.rencana.wisnu.view.KonfirmasiRencanaActivity" />
         <activity android:name=".features.rencana.wisnu.view.PesanRencanaActivity" />
         <activity android:name=".features.rencana.wisnu.view.RencanaActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".features.rencana.searchpage.TPFilterPageActivity" />
         <activity android:name=".features.rencana.person.TPPersonActivity" />
@@ -49,11 +53,7 @@
         <activity android:name=".mainpage.MainPageActivity" >
         </activity>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".features.tabungan.formresulttabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />
