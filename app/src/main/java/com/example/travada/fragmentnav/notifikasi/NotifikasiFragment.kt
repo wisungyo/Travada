@@ -18,9 +18,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
-
     private lateinit var presenter : NotifikasiFragmentPresenter
-   // private lateinit var data : DataNotifikasi
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -64,13 +62,18 @@ class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
     }
 
     override fun showDetaiNotifikasi(dataNotifikasi: DataNotifikasi) {
-//        when(){
-//
-//        }
-
-        val DetailNotifikasi = Intent(context, DetailNotifikasiTravasave::class.java)
-        DetailNotifikasi.putExtra("notifikasi", dataNotifikasi)
-        startActivity(DetailNotifikasi)
+        when(dataNotifikasi.kategori){
+            "travasave" -> {
+                val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
+                DetailNotifikasiTravasave.putExtra("notifikasi", dataNotifikasi)
+                startActivity(DetailNotifikasiTravasave)
+            }
+            "travaplan" -> {
+                val DetailNotifikasiTravaplan = Intent(context, DetailNotifikasiTravaplan::class.java)
+                DetailNotifikasiTravaplan.putExtra("notifikasi", dataNotifikasi)
+                startActivity(DetailNotifikasiTravaplan)
+            }
+        }
     }
 
     companion object {

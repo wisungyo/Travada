@@ -7,6 +7,6 @@ import com.example.travada.R
 class DetailNotifikasiTravasave : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_notifikasi)
+        setContentView(R.layout.activity_detail_notifikasi_travasave)
     }
 }
