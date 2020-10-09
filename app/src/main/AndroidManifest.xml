@@ -37,7 +37,7 @@
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
         <activity android:name=".features.rencana.wisnu.view.KonfirmasiRencanaActivity" />
         <activity android:name=".features.rencana.wisnu.view.PesanRencanaActivity" />
-        <activity android:name=".features.rencana.wisnu.view.RencanaActivity" />
+        <activity android:name=".features.rencana.wisnu.view.RencanaActivity"/>
         <activity android:name=".features.rencana.searchpage.TPFilterPageActivity" />
         <activity android:name=".features.rencana.person.TPPersonActivity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
@@ -55,7 +55,7 @@
         <activity android:name=".detailriwayat.view.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity" />
+        <activity android:name=".mainpage.MainPageActivity" ></activity>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
         <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />

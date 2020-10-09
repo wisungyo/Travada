@@ -21,8 +21,7 @@ class FormTabunganThreeActivity : AppCompatActivity(),
         setContentView(R.layout.activity_form_tabungan_three)
 
         ivFormThreeBack.setOnClickListener {
-            val backToTabungan = Intent(this, FormTabunganTwoActivity::class.java)
-            startActivity(backToTabungan)
+          finish()
         }
 
         btnPeriksa.setOnClickListener {

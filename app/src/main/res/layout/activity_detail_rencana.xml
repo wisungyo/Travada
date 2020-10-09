@@ -44,7 +44,7 @@
         android:id="@+id/nestedView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/viewButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="0dp" />
-
 
             <FrameLayout
                 android:id="@+id/frameFragment"
@@ -210,48 +209,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
 
-            <TextView
-                android:id="@+id/tvMulai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto"
-                android:text="mulai"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/heading4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvOverviewKonten" />
-
-            <TextView
-                android:id="@+id/tvBiayaDetailRencana"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Rp 16.500.000"
-                android:textColor="@color/orange"
-                android:textSize="@dimen/heading4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMulai" />
-
-            <Button
-                android:id="@+id/btnPesanSekarangDetailRencana"
-                android:layout_width="154dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/bg_active"
-                android:fontFamily="@font/roboto"
-                android:text="Pesan Sekarang"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/heading3"
-                app:layout_constraintBottom_toBottomOf="@id/tvBiayaDetailRencana"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvMulai"
-                app:layout_constraintVertical_bias="1.0" />
-
             <View
                 android:id="@+id/vGaris2"
                 android:layout_width="0dp"
@@ -260,7 +217,7 @@
                 android:background="#ecf1f5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnPesanSekarangDetailRencana" />
+                app:layout_constraintTop_toBottomOf="@id/tvOverviewKonten" />
 
             <TextView
                 android:id="@+id/tvDeskripsi"
@@ -322,7 +279,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSelengkapnya" />
-
 
             <TextView
                 android:id="@+id/tvRencanaPerjalan"
@@ -419,7 +375,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
                 android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvFasilitas"
@@ -452,34 +408,85 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clExpandable"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvInfoTambahan">
 
-
-                    <ExpandableListView
-                        android:id="@+id/elInfoTambahan"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:divider="@android:color/background_light"
-                        android:dividerHeight="0.5dp"
-                        android:layoutDirection="rtl"
-                        android:scrollbars="none"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/clExpandable"
-                        android:orientation="vertical"
-                        tools:listitem="@layout/list_info_tambahan" />
-
+                <ExpandableListView
+                    android:id="@+id/elInfoTambahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@android:color/background_light"
+                    android:dividerHeight="0.5dp"
+                    android:layoutDirection="rtl"
+                    android:orientation="vertical"
+                    android:scrollbars="none"
+                    android:groupIndicator="@drawable/custom_expandable"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/clExpandable"
+                    tools:listitem="@layout/list_info_tambahan" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <!--view di bawah tombol lanjut -->
+    <View
+        android:id="@+id/viewButton"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--button lanjut -->
+    <TextView
+        android:id="@+id/tvMulai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="9dp"
+        android:fontFamily="@font/roboto"
+        android:text="mulai"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/heading4"
+        app:layout_constraintStart_toStartOf="@id/viewButton"
+        app:layout_constraintTop_toTopOf="@id/viewButton" />
+
+    <TextView
+        android:id="@+id/tvBiayaDetailRencana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Rp 16.500.000"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/heading4"
+        app:layout_constraintBottom_toBottomOf="@id/viewButton"
+        app:layout_constraintStart_toStartOf="@id/viewButton" />
+
+    <Button
+        android:id="@+id/btnPesanSekarangDetailRencana"
+        android:layout_width="154dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_active"
+        android:fontFamily="@font/roboto"
+        android:text="Pesan Sekarang"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintBottom_toBottomOf="@id/viewButton"
+        app:layout_constraintEnd_toEndOf="@id/viewButton"
+        app:layout_constraintTop_toTopOf="@id/viewButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

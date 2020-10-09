@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".features.tabungan.maintabungan.TabunganActivity">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.98" />
 
     <View
         android:id="@+id/barTabungan"
@@ -24,19 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/vBannerTabungan"
-        android:layout_width="0dp"
-        android:layout_height="167dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/banner_tabungan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barTabungan" />
-
     <ImageView
-        android:id="@+id/ivFormThreeBack"
+        android:id="@+id/ivBackMainTabungan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -53,77 +36,124 @@
         android:text="Trava Save"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
-        app:layout_constraintBottom_toBottomOf="@id/ivFormThreeBack"
-        app:layout_constraintStart_toEndOf="@id/ivFormThreeBack"
-        app:layout_constraintTop_toTopOf="@id/ivFormThreeBack" />
+        app:layout_constraintBottom_toBottomOf="@id/ivBackMainTabungan"
+        app:layout_constraintStart_toEndOf="@id/ivBackMainTabungan"
+        app:layout_constraintTop_toTopOf="@id/ivBackMainTabungan" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="11dp"
-        android:src="@drawable/ic_main_tabungan"
-        app:layout_constraintBottom_toBottomOf="@id/vBannerTabungan"
-        app:layout_constraintEnd_toEndOf="@id/vBannerTabungan"
-        app:layout_constraintTop_toTopOf="@id/vBannerTabungan" />
 
-    <TextView
-        android:id="@+id/tvTitleBannerTabungan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/title_banner_tabungan"
-        android:textColor="@color/white"
-        android:textSize="@dimen/heading3"
-        app:layout_constraintBottom_toBottomOf="@id/vBannerTabungan"
-        app:layout_constraintStart_toStartOf="@id/vBannerTabungan"
-        app:layout_constraintTop_toTopOf="@id/vBannerTabungan" />
-
-    <TextView
-        android:id="@+id/tvTitleMainTabungan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/title_tabungan"
-        android:textColor="@color/black"
-        android:textSize="@dimen/heading3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vBannerTabungan" />
-
-    <Button
-        android:id="@+id/btnBuatLiburan"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/bg_active"
-        android:clickable="true"
-        android:drawableLeft="@drawable/ic_baseline_add"
-        android:elevation="2dp"
-        android:focusable="true"
-        android:fontFamily="@font/roboto"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:paddingHorizontal="80dp"
-        android:text="@string/btn_buat_liburan"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/heading4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleMainTabungan" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMainTabungan"
-        android:layout_width="0dp"
+    <!--RecyclerView nested -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/gHorizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBuatLiburan"
-        tools:listitem="@layout/list_liburan_pilihan" />
+        app:layout_constraintTop_toBottomOf="@+id/barTabungan">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gHorizontal2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.98" />
+
+            <View
+                android:id="@+id/vBannerTabungan"
+                android:layout_width="0dp"
+                android:layout_height="167dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/banner_tabungan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gHorizontal2" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="11dp"
+                android:src="@drawable/ic_main_tabungan"
+                app:layout_constraintBottom_toBottomOf="@id/vBannerTabungan"
+                app:layout_constraintEnd_toEndOf="@id/vBannerTabungan"
+                app:layout_constraintTop_toTopOf="@id/vBannerTabungan" />
+
+            <TextView
+                android:id="@+id/tvTitleBannerTabungan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_banner_tabungan"
+                android:textColor="@color/white"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintBottom_toBottomOf="@id/vBannerTabungan"
+                app:layout_constraintStart_toStartOf="@id/vBannerTabungan"
+                app:layout_constraintTop_toTopOf="@id/vBannerTabungan" />
+
+            <TextView
+                android:id="@+id/tvTitleMainTabungan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/title_tabungan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vBannerTabungan" />
+
+            <Button
+                android:id="@+id/btnBuatLiburan"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_active"
+                android:clickable="true"
+                android:drawableLeft="@drawable/ic_baseline_add"
+                android:elevation="2dp"
+                android:focusable="true"
+                android:fontFamily="@font/roboto"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="80dp"
+                android:text="@string/btn_buat_liburan"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/heading4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleMainTabungan" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMainTabungan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/gHorizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnBuatLiburan"
+                tools:listitem="@layout/list_liburan_pilihan" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
