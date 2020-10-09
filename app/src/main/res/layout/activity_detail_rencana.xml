@@ -419,7 +419,7 @@
                 <ExpandableListView
                     android:id="@+id/elInfoTambahan"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="250dp"
                     android:divider="@android:color/background_light"
                     android:dividerHeight="0.5dp"
                     android:layoutDirection="rtl"
