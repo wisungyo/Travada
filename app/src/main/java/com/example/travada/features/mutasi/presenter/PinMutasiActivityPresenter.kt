@@ -1,4 +1,4 @@
-package com.example.travada.detailriwayat.presenter
+package com.example.travada.features.mutasi.presenter
 
 import com.example.travada.features.rencana.searchpage.room.DatabaseItem
 import com.example.travada.util.util
@@ -6,7 +6,7 @@ import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class PinBayarCicilanActivityPresenter(val listener: Listener) {
+class PinMutasiActivityPresenter(val listener: Listener) {
 
     fun pinView(nums: ArrayList<Int>) {
 

@@ -12,7 +12,9 @@ import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import android.widget.NumberPicker
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.travada.features.mutasi.view.MutasiActivity
 import java.util.*
 
 
@@ -23,11 +25,13 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
     }
 
     fun getTheDate(context: Context, source: String, date: String) {
+        /*
+        * SHOW DATEPICKER WHEN DATE IS NOT SET BEFORE */
         if (date == "Dari Tanggal" || date == "Sampai Tanggal") {
-            val cal: Calendar = Calendar.getInstance()
-            val year: Int = cal.get(Calendar.YEAR)
-            val month: Int = cal.get(Calendar.MONTH)
-            val day: Int = cal.get(Calendar.DAY_OF_MONTH)
+            val cal: Calendar   = Calendar.getInstance()
+            val year: Int       = cal.get(Calendar.YEAR)
+            val month: Int      = cal.get(Calendar.MONTH)
+            val day: Int        = cal.get(Calendar.DAY_OF_MONTH)
 
             val dialog =
                 DatePickerDialog(
@@ -49,6 +53,8 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
             dialog.show()
             orderDate(dialog, charArrayOf('d', 'm', 'y'))
         } else {
+            /*
+            * SHOW DATEPICKER WHEN DATE IS ALREADY SET BEFORE */
             val splitDate = date.split(" ").toMutableList()
             splitDate[1] =
                 when (splitDate[1]) {
@@ -67,11 +73,11 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
                 else  -> ""
             }
 
-            val cal: Calendar = Calendar.getInstance(Locale.ITALY)
+            val cal: Calendar   = Calendar.getInstance(Locale.ITALY)
             cal.set(splitDate[2].toInt(), splitDate[1].toInt(), splitDate[0].toInt())
-            val year: Int = cal.get(Calendar.YEAR)
-            val month: Int = cal.get(Calendar.MONTH)
-            val day: Int = cal.get(Calendar.DAY_OF_MONTH)
+            val year: Int       = cal.get(Calendar.YEAR)
+            val month: Int      = cal.get(Calendar.MONTH)
+            val day: Int        = cal.get(Calendar.DAY_OF_MONTH)
 
             val dialog =
                 DatePickerDialog(
@@ -87,8 +93,16 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
                     year, month, day
                 )
             dialog.setButton(DatePickerDialog.BUTTON_POSITIVE, "Atur", dialog)
-            dialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Batal", null as DialogInterface.OnClickListener?)
+            dialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Batal") { _: DialogInterface, _: Int ->
+                dialog.dismiss()
+                listener.checkNextButton()
+            }
             dialog.datePicker.maxDate = Date().time
+//            if (source == "start") {
+//                dialog.datePicker.maxDate =
+//            } else {
+//
+//            }
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
             orderDate(dialog, charArrayOf('d', 'm', 'y'))
@@ -98,14 +112,14 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
     private val SPINNER_COUNT = 3
     private fun orderDate(dialog: DatePickerDialog, ymdOrder: CharArray) {
         check(dialog.isShowing) { "Dialog must be showing" }
-        val idYear = Resources.getSystem().getIdentifier("year", "id", "android")
-        val idMonth = Resources.getSystem().getIdentifier("month", "id", "android")
-        val idDay = Resources.getSystem().getIdentifier("day", "id", "android")
-        val idLayout = Resources.getSystem().getIdentifier("pickers", "id", "android")
+        val idYear              = Resources.getSystem().getIdentifier("year", "id", "android")
+        val idMonth             = Resources.getSystem().getIdentifier("month", "id", "android")
+        val idDay               = Resources.getSystem().getIdentifier("day", "id", "android")
+        val idLayout            = Resources.getSystem().getIdentifier("pickers", "id", "android")
         val spinnerYear = dialog.findViewById<View>(idYear) as NumberPicker
-        val spinnerMonth = dialog.findViewById<View>(idMonth) as NumberPicker
-        val spinnerDay = dialog.findViewById<View>(idDay) as NumberPicker
-        val layout = dialog.findViewById<View>(idLayout) as LinearLayout
+        val spinnerMonth= dialog.findViewById<View>(idMonth) as NumberPicker
+        val spinnerDay  = dialog.findViewById<View>(idDay) as NumberPicker
+        val layout       = dialog.findViewById<View>(idLayout) as LinearLayout
         layout.removeAllViews()
         for (i in 0 until SPINNER_COUNT) {
             when (ymdOrder[i]) {
@@ -136,11 +150,15 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
         val idPickerInput =
             Resources.getSystem().getIdentifier("numberpicker_input", "id", "android")
         val input = spinner.findViewById<View>(idPickerInput) as TextView
-        input.imeOptions = imeOptions
+        input.imeOptions   = imeOptions
     }
 
+    /*
+    * LISTENERS */
     interface Listener {
         fun showResultMutasi()
         fun setTheDate(year: Int, month: Int, day: Int, source: String)
+        fun checkNextButton()
+        fun getContext(): Context
     }
 }

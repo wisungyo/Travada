@@ -50,17 +50,17 @@ class AdapterResultMutasiActivity(
             }
         }
 
-        if (!listItem[position].nama.contains(" ")) {
-            holder.itemView.tv_item_result_mutasi_inisial.text = listItem[position].nama.subSequence(0,1)
-        } else {
-            val first = listItem[position].nama.split(" ").first()
-            val last = listItem[position].nama.split(" ").last()
-            holder.itemView.tv_item_result_mutasi_inisial.text = "${first.subSequence(0,1)}${last.subSequence(0,1)}"
-        }
+//        if (!listItem[position].nama.contains(" ")) {
+//            holder.itemView.tv_item_result_mutasi_inisial.text = listItem[position].nama.subSequence(0,1)
+//        } else {
+//            val first = listItem[position].nama.split(" ").first()
+//            val last = listItem[position].nama.split(" ").last()
+//            holder.itemView.tv_item_result_mutasi_inisial.text = "${first.subSequence(0,1)}${last.subSequence(0,1)}"
+//        }
 
-        holder.itemView.tv_item_result_mutasi_nama.text = listItem[position].nama
+        holder.itemView.tv_item_result_mutasi_title.text = listItem[position].nama
 
-        holder.itemView.tv_item_result_mutasi_rekening.text = listItem[position].rekening
+        holder.itemView.tv_item_result_mutasi_source.text = listItem[position].source
 
         val df = DecimalFormat("#,###")
         df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)

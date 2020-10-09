@@ -11,177 +11,113 @@ class ResultMutasiActivityPresenter (val listener: Listener): AppCompatActivity(
         val listMutasi = arrayListOf(
             DataMutasi(
                 "2020-01-20",
-                "Hanif",
-                "12345678900",
+                "Transfer dari ENNO DESTIAS 12345678900",
+                "Transfer",
                 1000000,
                 "debet"
             ),
             DataMutasi(
-                "2020-01-25",
-                "Nanda Adi Hanif",
-                "12345678900",
+                "2020-01-21",
+                "Topup ke Pulau Komodo 2020",
+                "Travasave",
+                200000,
+                "kredit"
+            ),
+            DataMutasi(
+                "2020-01-23",
+                "Pembayaran DP #12345678900",
+                "Travaplan",
                 1000000,
+                "kredit"
+            ),
+            DataMutasi(
+                "2020-01-28",
+                "Transfer ke NOFA DWI ADELIA 12345678900",
+                "Transfer",
+                1500000,
                 "kredit"
             ),
             DataMutasi(
                 "2020-01-30",
-                "Hanif Tama",
-                "12345678900",
-                500000,
+                "Pencarian Dana Labuan Bajo 2021",
+                "Travasave",
+                2000000,
                 "debet"
             ),
             DataMutasi(
                 "2020-02-20",
-                "Hanif Tama",
-                "12345678900",
+                "Transfer dari ENNO DESTIAS 12345678900",
+                "Transfer",
                 1000000,
                 "debet"
             ),
             DataMutasi(
-                "2020-02-25",
-                "Hanif Tama",
-                "12345678900",
-                750000,
+                "2020-02-21",
+                "Topup ke Pulau Komodo 2020",
+                "Travasave",
+                200000,
                 "kredit"
             ),
             DataMutasi(
-                "2020-03-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-01-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-01-25",
-                "Nanda Adi",
-                "12345678900",
+                "2020-03-23",
+                "Pembayaran DP #12345678900",
+                "Travaplan",
                 1000000,
                 "kredit"
             ),
             DataMutasi(
-                "2020-01-30",
-                "Hanif Tama",
-                "12345678900",
-                500000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-02-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-02-25",
-                "Hanif Tama",
-                "12345678900",
-                750000,
+                "2020-03-28",
+                "Transfer ke NOFA DWI ADELIA 12345678900",
+                "Transfer",
+                1500000,
                 "kredit"
             ),
             DataMutasi(
-                "2020-03-20",
-                "Hanif Tama",
-                "12345678900",
+                "2020-03-30",
+                "Pencarian Dana Labuan Bajo 2021",
+                "Travasave",
+                2000000,
+                "debet"
+            ),
+            DataMutasi(
+                "2020-04-20",
+                "Transfer dari ENNO DESTIAS 12345678900",
+                "Transfer",
                 1000000,
                 "debet"
             ),
             DataMutasi(
-                "2020-01-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
-                "debet"
+                "2020-04-21",
+                "Topup ke Pulau Komodo 2020",
+                "Travasave",
+                200000,
+                "kredit"
             ),
             DataMutasi(
-                "2020-01-25",
-                "Nanda Adi",
-                "12345678900",
+                "2020-04-23",
+                "Pembayaran DP #12345678900",
+                "Travaplan",
                 1000000,
                 "kredit"
             ),
             DataMutasi(
-                "2020-01-30",
-                "Hanif Tama",
-                "12345678900",
-                500000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-02-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-02-25",
-                "Hanif Tama",
-                "12345678900",
-                750000,
+                "2020-04-28",
+                "Transfer ke NOFA DWI ADELIA 12345678900",
+                "Transfer",
+                1500000,
                 "kredit"
             ),
             DataMutasi(
-                "2020-03-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-01-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-01-25",
-                "Nanda Adi",
-                "12345678900",
-                1000000,
-                "kredit"
-            ),
-            DataMutasi(
-                "2020-01-30",
-                "Hanif Tama",
-                "12345678900",
-                500000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-02-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
-                "debet"
-            ),
-            DataMutasi(
-                "2020-02-25",
-                "Hanif Tama",
-                "12345678900",
-                750000,
-                "kredit"
-            ),
-            DataMutasi(
-                "2020-03-20",
-                "Hanif Tama",
-                "12345678900",
-                1000000,
+                "2020-04-30",
+                "Pencarian Dana Labuan Bajo 2021",
+                "Travasave",
+                2000000,
                 "debet"
             )
         )
 
         val adapter = AdapterResultMutasiActivity(listMutasi, this)
         val linearLayout = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
         listener.showData(adapter, linearLayout)
     }
 

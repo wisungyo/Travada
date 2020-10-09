@@ -1,47 +1,35 @@
 package com.example.travada.features.mutasi.view
 
-import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.os.Bundle
 import com.example.travada.R
-import com.example.travada.features.mutasi.adapter.AdapterResultMutasiActivity
-import com.example.travada.features.mutasi.presenter.ResultMutasiActivityPresenter
+import com.example.travada.features.mutasi.presenter.PDFMutasiActivityPresenter
 import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
 import kotlinx.android.synthetic.main.activity_result_mutasi.*
 
-
-class ResultMutasiActivity : AppCompatActivity(), ResultMutasiActivityPresenter.Listener {
-    lateinit var presenter: ResultMutasiActivityPresenter
+class PDFMutasiActivity : AppCompatActivity(), PDFMutasiActivityPresenter.Listener {
+    private lateinit var presenter: PDFMutasiActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result_mutasi)
-        presenter = ResultMutasiActivityPresenter(this)
+        setContentView(R.layout.activity_p_d_f_mutasi)
+        presenter = PDFMutasiActivityPresenter(this)
 
-        presenter.fetchData()
+//        presenter.setPDFLayout()
 
-        iv_result_mutasi_back.setOnClickListener {
-            finish()
-        }
-
-        btn_result_mutasi.setOnClickListener { 
-            presenter.doConvertPDF()
-
-//            val intentPDF = Intent(this, PDFMutasiActivity::class.java)
-//            startActivity(intentPDF)
+        tv_result_mutasi_topbar.setOnClickListener {
+            presenter.setPDFLayout()
         }
     }
 
-    override fun showData(adapter: AdapterResultMutasiActivity, linearLayout: LinearLayoutManager) {
-        rv_result_mutasi.adapter        = adapter
-        rv_result_mutasi.layoutManager  = linearLayout
+    override fun finishActivity() {
+        finish()
     }
 
-    override fun showConvertPDF() {
+    override fun showPDF() {
         PdfGenerator.getBuilder()
             .setContext(this)
             .fromViewIDSource()
@@ -51,7 +39,7 @@ class ResultMutasiActivity : AppCompatActivity(), ResultMutasiActivityPresenter.
                 cl_result_mutasi_nested_view.width,
                 cl_result_mutasi_nested_view.height
             )
-            .setFileName("Test-PDF")
+            .setFileName("Test-PDF-2")
             .setFolderName("Test-PDF-Folder")
             .openPDFafterGeneration(true)
             .build(object : PdfGeneratorListener() {

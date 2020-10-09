@@ -6,57 +6,52 @@
     android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.mutasi.view.ResultMutasiActivity">
-
-    <View
-        android:id="@+id/view_result_mutasi"
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:background="#2A85F4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_result_mutasi_back"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="@id/view_result_mutasi"
-        app:layout_constraintStart_toStartOf="@id/view_result_mutasi"
-        app:layout_constraintTop_toTopOf="@id/view_result_mutasi" />
-
-    <TextView
-        android:id="@+id/tv_result_mutasi_topbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="Mutasi"
-        android:textColor="#fff"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/view_result_mutasi"
-        app:layout_constraintStart_toEndOf="@id/iv_result_mutasi_back"
-        app:layout_constraintTop_toTopOf="@id/view_result_mutasi" />
+    tools:context=".features.mutasi.view.PDFMutasiActivity">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/sv_result_mutasi"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/view_result_mutasi"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/view_result_mutasi_bot_bar">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_result_mutasi_nested_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/view_result_mutasi"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:background="#2A85F4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/logo_travada"
+                app:layout_constraintTop_toTopOf="@id/view_result_mutasi"
+                app:layout_constraintStart_toStartOf="@id/view_result_mutasi"
+                app:layout_constraintBottom_toBottomOf="@id/view_result_mutasi" />
+
+            <TextView
+                android:id="@+id/tv_result_mutasi_topbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="Tanggal"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/view_result_mutasi"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/view_result_mutasi" />
 
             <View
                 android:id="@+id/view_result_mutasi_card"
@@ -66,7 +61,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_result_mutasi"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -172,34 +167,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <View
-        android:id="@+id/view_result_mutasi_bot_bar"
-        android:background="#fff"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <Button
-        android:id="@+id/btn_result_mutasi"
-        android:text="Simpan Dalam PDF"
-        android:fontFamily="@font/roboto"
-        android:textSize="16sp"
-        android:textColor="#fff"
-        android:textAllCaps="false"
-        android:minHeight="0dp"
-        android:background="@drawable/bg_konfirmasi_rencana_btn"
-        android:paddingTop="8dp"
-        android:paddingBottom="11dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
