@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.transfer.va.VAInputActivity"
+    android:background="@color/white"
+    >
+
+    <View
+        android:id="@+id/actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarHeight"
+        android:background="@drawable/bg_actionbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:background="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:fontFamily="@string/font"
+        android:text="Transfer Virtual Akun"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+    <View
+        android:id="@+id/bottombtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottombtn"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_btninactive"
+        android:clickable="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Lanjut"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/bottombtn"
+        app:layout_constraintStart_toStartOf="@id/bottombtn"
+        app:layout_constraintTop_toTopOf="@id/bottombtn" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/actionbar"
+        app:layout_constraintBottom_toTopOf="@id/bottombtn"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:id="@+id/tv_accountname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="Dari Rekening"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading4"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_et_accountname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:paddingStart="12dp"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/roboto"
+                android:text="Nama Pemilik Akun"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading4"
+                android:drawableStart="@drawable/ic_card_account"
+                android:background="@drawable/frame_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_accountname" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_vanumb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/transfermargintopform"
+                android:layout_marginStart="@dimen/transfermarginform"
+                android:layout_marginEnd="@dimen/transfermarginform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_et_accountname"
+                app:errorEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:endIconMode="clear_text"
+                >
+
+                <EditText
+                    android:id="@+id/et_vanumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan nomor virtual akun"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_tvnumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="Nomor Virtual Akun"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading4"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/transferetmargintopform"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_et_accountname" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

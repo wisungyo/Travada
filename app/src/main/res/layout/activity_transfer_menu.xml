@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".features.transfer.TransferMenuActivity"
+    >
+
+    <View
+        android:id="@+id/actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarHeight"
+        android:background="@drawable/bg_actionbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:background="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:fontFamily="@string/font"
+        android:text="Transfer"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+    <View
+        android:id="@+id/bottombtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottombtn"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_btninactive"
+        android:clickable="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Lanjutkan"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/bottombtn"
+        app:layout_constraintStart_toStartOf="@id/bottombtn"
+        app:layout_constraintTop_toTopOf="@id/bottombtn" />
+
+    <TextView
+        android:id="@+id/tv_transfer_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="Pilih Metode Transfer"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionbar" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_transfer_method">
+
+        <RadioButton
+            android:id="@+id/rb_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_rb_transfer"
+            android:drawableStart="@drawable/ic_bank"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto"
+            android:padding="16dp"
+            android:paddingStart="2dp"
+            android:text="Transfer Bank"
+            android:textSize="@dimen/heading4" />
+
+        <RadioButton
+            android:id="@+id/rb_va"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_rb_transfer"
+            android:padding="16dp"
+            android:drawableStart="@drawable/ic_credit_card_alt"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto"
+            android:paddingStart="2dp"
+            android:text="Transfer Virtual Akun"
+            android:textSize="@dimen/heading4" />
+
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

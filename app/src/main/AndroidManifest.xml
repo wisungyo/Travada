@@ -20,8 +20,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".features.transfer.va.VAInvoiceActivity"></activity>
+        <activity android:name=".features.transfer.va.VAPinActivity" />
+        <activity android:name=".features.transfer.va.VAConfirm2Activity" />
+        <activity android:name=".features.transfer.va.VAConfirm1Activity" />
+        <activity android:name=".features.transfer.transferbank.TransferInvoiceActivity" >
 
-        <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity"></activity>
+
+        </activity>
+        <activity android:name=".features.transfer.transferbank.TransferPinActivity" />
+        <activity android:name=".features.transfer.transferbank.TransferConfirmActivity" />
+        <activity android:name=".features.transfer.transferbank.TransferInputActivity" />
+        <activity android:name=".features.transfer.va.VAInputActivity" />
+        <activity android:name=".features.transfer.TransferMenuActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".fragmentnav.akun.changepass.AkunChangePassActivity" />
+        <activity android:name=".fragmentnav.akun.changepin.AkunConfirmNewPinActivity" />
+        <activity android:name=".fragmentnav.akun.changepin.AkunInputNewPinActivity" />
+        <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
         <activity android:name=".welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity" />
         <activity android:name=".features.rencana.wisnu.view.ResultRencanaActivity" />
         <activity android:name=".features.rencana.detailrencana.view.DetailRencanaActivity" />
@@ -48,9 +69,7 @@
         <activity android:name=".detailriwayat.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity">
-
-        </activity>
+        <activity android:name=".mainpage.MainPageActivity" />
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
         <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />
@@ -58,18 +77,25 @@
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
         <activity android:name=".features.tabungan.maintabungan.TabunganActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
-        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
     </application>
 
 </manifest>

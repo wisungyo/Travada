@@ -37,8 +37,11 @@ class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {
             .into(iv_image)
 
         numpad.setOnNumPadClickListener(NumPadClick(numPadClickListener { nums:ArrayList<Int> ->
+            if (nums.size <= 6) {
                 presenter.pinView(nums)
-
+            } else {
+                nums.removeAt(6)
+            }
         }))
 
         btn_logout.setOnClickListener {
@@ -57,10 +60,14 @@ class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {
     }
 
     override fun goToMainPageActivity() {
+        PinView.setTextColor(Color.parseColor(getString(R.color.greensuccess)))
         val intent = Intent(this, MainPageActivity::class.java)
         startActivity(intent)
         finish()
     }
+
+
+
 
     override fun goToForgetPinActivity() {
         val intent = Intent(this, ForgetpinInputCodeActivity::class.java)

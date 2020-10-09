@@ -12,6 +12,7 @@
     <color name="orange">#C8582B</color>
     <color name="blue">#2A85F4</color>
     <color name="green">#43AC43</color>
+    <color name="greensuccess">#19DA19</color>
     <color name="red">#FF5757</color>
     <color name="rederror">#F06550</color>
     <color name="colorBtnActive">#2A85F4</color>
@@ -20,4 +21,8 @@
     <color name="colorBtnDone">#EBF7FF</color>
     <color name="bluelink">#2A85F4</color>
     <color name="grayblue">#E5E5E5</color>
+    <color name="graysoft">#EDEDED</color>
+    <color name="transparent">#FFFFFFFF</color>
+
+    <color name="biru_muda">#F4F8FD</color>
 </resources>

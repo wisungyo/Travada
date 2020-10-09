@@ -9,4 +9,7 @@ object util {
     const val SF_ISLOGIN = "user_isLogin"
     const val SF_TOKEN = "user_token"
 
+    //Notification
+    const val NOTIF_CHANNEL1 = "channel1"
+
 }

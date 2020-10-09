@@ -68,7 +68,6 @@
         app:lineColor="@color/white"
         app:lineWidth="0dp"
         app:viewType="rectangle"
-        android:maxLength="6"
         />
 
     <TextView
