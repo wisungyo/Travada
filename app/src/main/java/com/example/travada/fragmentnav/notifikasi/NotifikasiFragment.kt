@@ -17,8 +17,8 @@ import kotlinx.android.synthetic.main.fragment_notifikasi.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
-    private lateinit var presenter : NotifikasiFragmentPresenter
+class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
+    private lateinit var presenter: NotifikasiFragmentPresenter
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -46,8 +46,9 @@ class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
         presenter = NotifikasiFragmentPresenter(this)
         presenter.fetchDataNotifikasi()
 
-        rvNotifikasi.apply { layoutManager = LinearLayoutManager(activity)
-           // adapter = NotifikasiAdapter(notifikasi)
+        rvNotifikasi.apply {
+            layoutManager = LinearLayoutManager(activity)
+            // adapter = NotifikasiAdapter(notifikasi)
         }
         rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
     }
@@ -58,23 +59,16 @@ class NotifikasiFragment : Fragment(),NotifikasiFragmentPresenter.Listener {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvNotifikasi.layoutManager = layoutManagerLinear
         rvNotifikasi.adapter = notifikasiAdapter
-       // rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
+        // rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
     }
 
     override fun showDetaiNotifikasi(dataNotifikasi: DataNotifikasi) {
-        when(dataNotifikasi.kategori){
-            "travasave" -> {
-                val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
-                DetailNotifikasiTravasave.putExtra("notifikasi", dataNotifikasi)
-                startActivity(DetailNotifikasiTravasave)
-            }
-            "travaplan" -> {
-                val DetailNotifikasiTravaplan = Intent(context, DetailNotifikasiTravaplan::class.java)
-                DetailNotifikasiTravaplan.putExtra("notifikasi", dataNotifikasi)
-                startActivity(DetailNotifikasiTravaplan)
-            }
-        }
+        val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
+        DetailNotifikasiTravasave.putExtra("notifikasi", dataNotifikasi)
+        startActivity(DetailNotifikasiTravasave)
+
     }
+
 
     companion object {
         /**

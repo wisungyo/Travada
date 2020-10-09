@@ -9,17 +9,15 @@ import com.example.travada.fragmentnav.notifikasi.NotifikasiFragmentPresenter
 import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
 import kotlinx.android.synthetic.main.list_notifikasi.view.*
 
-class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>, val presenter : NotifikasiFragmentPresenter) :
+class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>, val presenter: NotifikasiFragmentPresenter) :
     RecyclerView.Adapter<NotifikasiAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.list_notifikasi, parent, false)
-        return ViewHolder(
-            view
-        )
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -43,10 +41,7 @@ class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>, val prese
 
         holder.itemView.listNotifikasi.setOnClickListener {
             presenter.goToDetailNotifikasi(listNotifikasi[position])
-            holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white)
+//            holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white)
         }
-
-
     }
-
 }

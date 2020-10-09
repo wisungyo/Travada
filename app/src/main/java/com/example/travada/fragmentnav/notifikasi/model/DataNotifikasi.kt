@@ -8,4 +8,5 @@ class DataNotifikasi(
     val judul: String,
     val pesan: String,
     val kategori :String,
-    var tanggal: String ) : Parcelable
+    var tanggal: String
+): Parcelable
