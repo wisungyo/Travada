@@ -48,6 +48,7 @@ class DetailRencanaActivity : AppCompatActivity(),
             finish()
         }
 
+        
         tvSelengkapnya.setOnClickListener {
             btnSelengkapnyaDeskripsi()
         }
