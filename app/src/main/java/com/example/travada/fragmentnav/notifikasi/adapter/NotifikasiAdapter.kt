@@ -42,10 +42,9 @@ class NotifikasiAdapter(
             }
         }
 
-
-        holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white_notif)
         holder.itemView.viewNotifikasi.setOnClickListener {
             presenter.goToDetailNotifikasi(listNotifikasi[position])
+            holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white_notif)
         }
     }
 }
