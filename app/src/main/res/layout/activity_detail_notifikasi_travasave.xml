@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Trava Save"
+        android:text="Notifikasi"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
