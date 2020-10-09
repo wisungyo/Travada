@@ -9,7 +9,10 @@ import com.example.travada.fragmentnav.notifikasi.NotifikasiFragmentPresenter
 import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
 import kotlinx.android.synthetic.main.list_notifikasi.view.*
 
-class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>, val presenter: NotifikasiFragmentPresenter) :
+class NotifikasiAdapter(
+    val listNotifikasi: ArrayList<DataNotifikasi>,
+    val presenter: NotifikasiFragmentPresenter
+) :
     RecyclerView.Adapter<NotifikasiAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -39,9 +42,10 @@ class NotifikasiAdapter(val listNotifikasi: ArrayList<DataNotifikasi>, val prese
             }
         }
 
-        holder.itemView.listNotifikasi.setOnClickListener {
+
+        holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white_notif)
+        holder.itemView.viewNotifikasi.setOnClickListener {
             presenter.goToDetailNotifikasi(listNotifikasi[position])
-//            holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white)
         }
     }
 }

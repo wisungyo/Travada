@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_detail_notifikasi_travasave.*
 
 class DetailNotifikasiTravasave : AppCompatActivity(), DetailNotifikasiTravasavePresenter.Listener {
     private lateinit var presenter: DetailNotifikasiTravasavePresenter
-    private lateinit var data: DataNotifikasi
+    private lateinit var dataNotifikasi: DataNotifikasi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,13 +16,17 @@ class DetailNotifikasiTravasave : AppCompatActivity(), DetailNotifikasiTravasave
 
         presenter = DetailNotifikasiTravasavePresenter(this)
         intent.getParcelableExtra<DataNotifikasi>("notifikasi")?.let {
-            data = it
+            dataNotifikasi = it
         }
 
         fetchNotifikasiData()
+
+        btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun fetchNotifikasiData() {
-        tvDescNotifikasi.text = data.pesan
+        tvDescNotifikasi.text = dataNotifikasi.pesan
     }
 }

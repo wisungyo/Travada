@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class DataNotifikasi(
+data class DataNotifikasi(
     val judul: String,
     val pesan: String,
     val kategori :String,

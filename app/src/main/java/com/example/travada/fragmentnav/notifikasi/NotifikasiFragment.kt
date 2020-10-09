@@ -34,8 +34,7 @@ class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle? ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notifikasi, container, false)
     }
@@ -45,30 +44,33 @@ class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
 
         presenter = NotifikasiFragmentPresenter(this)
         presenter.fetchDataNotifikasi()
-
-        rvNotifikasi.apply {
-            layoutManager = LinearLayoutManager(activity)
-            // adapter = NotifikasiAdapter(notifikasi)
-        }
-        rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
     }
 
-
     override fun showData(notifikasiAdapter: NotifikasiAdapter) {
-        val layoutManagerLinear =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val layoutManagerLinear = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvNotifikasi.layoutManager = layoutManagerLinear
         rvNotifikasi.adapter = notifikasiAdapter
         // rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
     }
 
     override fun showDetaiNotifikasi(dataNotifikasi: DataNotifikasi) {
-        val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
-        DetailNotifikasiTravasave.putExtra("notifikasi", dataNotifikasi)
-        startActivity(DetailNotifikasiTravasave)
+
+        when(dataNotifikasi.kategori){
+            "travasave" -> {
+
+                val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
+                DetailNotifikasiTravasave.putExtra("notifikasi", dataNotifikasi)
+                startActivity(DetailNotifikasiTravasave)
+            }
+            "travaplan"-> {
+                val DetailNotifikasiTravaplan = Intent(context, DetailNotifikasiTravaplan::class.java)
+                DetailNotifikasiTravaplan.putExtra("notifikasi", dataNotifikasi)
+                startActivity(DetailNotifikasiTravaplan)
+            }
+        }
+
 
     }
-
 
     companion object {
         /**
