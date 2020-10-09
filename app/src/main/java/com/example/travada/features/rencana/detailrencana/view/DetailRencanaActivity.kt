@@ -43,7 +43,7 @@ class DetailRencanaActivity : AppCompatActivity(),
         presenter = DetailRencanaPresenter (this)
         presenter.getDetailRencana(intentId)
 
-        ivDetailRencana.setOnClickListener {
+        ivBackDetailRencana.setOnClickListener {
             finish()
         }
 
