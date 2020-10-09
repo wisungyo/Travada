@@ -35,9 +35,9 @@
         android:text="Tokyo &amp; Mount Fuji"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
-        app:layout_constraintBottom_toBottomOf="@id/ivDetailRencana"
-        app:layout_constraintStart_toEndOf="@id/ivDetailRencana"
-        app:layout_constraintTop_toTopOf="@id/ivDetailRencana" />
+        app:layout_constraintBottom_toBottomOf="@id/ivBackDetailRencana"
+        app:layout_constraintStart_toEndOf="@id/ivBackDetailRencana"
+        app:layout_constraintTop_toTopOf="@id/ivBackDetailRencana" />
 
     <!--RecyclerView nested-->
     <androidx.core.widget.NestedScrollView
