@@ -24,18 +24,30 @@ class TabunganPresenter(val listener: Listener) {
                 "1.000.000",
                 "4",
                 R.drawable.leicester
+            ),
+            DataWisata(
+                "Pantai Ancol",
+                "1.000.000",
+                "4",
+                R.drawable.leicester
+            ),
+            DataWisata(
+                "Pantai Ancol",
+                "1.000.000",
+                "4",
+                R.drawable.leicester
             )
         )
         val adapterWisataPilihan = ListWisataAdapter(listWisataPilihan)
         listener.showData(adapterWisataPilihan)
     }
 
-    fun goToDetailTabunganWisata(dataWisata: DataWisata){
+    fun goToDetailTabunganWisata(dataWisata: DataWisata) {
         listener.showDetailTabunganWisata(dataWisata)
     }
 
     interface Listener {
-        fun showData( adapterWisataPilihan: ListWisataAdapter)
-        fun showDetailTabunganWisata(dataWisata : DataWisata)
+        fun showData(adapterWisataPilihan: ListWisataAdapter)
+        fun showDetailTabunganWisata(dataWisata: DataWisata)
     }
 }
