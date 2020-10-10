@@ -18,6 +18,7 @@ import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActi
 import com.example.travada.features.rencana.searchpage.TPSearchPageActivity
 import com.example.travada.features.rencana.wisnu.view.RencanaActivity
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
+import com.example.travada.features.transfer.TransferMenuActivity
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
 import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTabungan
@@ -127,11 +128,8 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     }
 
     override fun showTransfer() {
-        Toast.makeText(
-            context,
-            "Transfer under construction..",
-            Toast.LENGTH_SHORT
-        ).show()
+        val intentMutasi = Intent(context, TransferMenuActivity::class.java)
+        startActivity(intentMutasi)
     }
 
     override fun showPembelian() {

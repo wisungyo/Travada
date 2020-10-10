@@ -20,39 +20,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".features.transfer.va.VAInvoiceActivity"></activity>
+        <activity android:name=".features.transfer.va.VAInvoiceActivity"/>
         <activity android:name=".features.transfer.va.VAPinActivity" />
         <activity android:name=".features.transfer.va.VAConfirm2Activity" />
         <activity android:name=".features.transfer.va.VAConfirm1Activity" />
-        <activity android:name=".features.transfer.transferbank.TransferInvoiceActivity" >
-
-
-        </activity>
+        <activity android:name=".features.transfer.transferbank.TransferInvoiceActivity"/>
         <activity android:name=".features.transfer.transferbank.TransferPinActivity" />
         <activity android:name=".features.transfer.transferbank.TransferConfirmActivity" />
         <activity android:name=".features.transfer.transferbank.TransferInputActivity" />
         <activity android:name=".features.transfer.va.VAInputActivity" />
-        <activity android:name=".features.transfer.TransferMenuActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".features.transfer.TransferMenuActivity"/>
         <activity android:name=".fragmentnav.akun.changepass.AkunChangePassActivity" />
         <activity android:name=".fragmentnav.akun.changepin.AkunConfirmNewPinActivity" />
         <activity android:name=".fragmentnav.akun.changepin.AkunInputNewPinActivity" />
         <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
-        <activity android:name=".features.mutasi.view.PDFMutasiActivity"></activity>
+        <activity android:name=".features.mutasi.view.PDFMutasiActivity"/>
         <activity
             android:name=".features.mutasi.view.PinMutasiActivity"
             android:noHistory="true" />
         <activity android:name=".features.mutasi.view.ResultMutasiActivity" />
-        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravasave"></activity>
+        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravasave"/>
         <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravaplan" />
-        <activity android:name=".features.mutasi.view.ResultMutasiActivity" />
         <activity android:name=".features.mutasi.view.MutasiActivity" />
-        <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
         <activity android:name=".welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity" />
         <activity android:name=".features.rencana.wisnu.view.ResultRencanaActivity" />
         <activity
