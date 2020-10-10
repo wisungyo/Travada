@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragmentnav.notifikasi.DetailNotifikasiTravaplan">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="17dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gVertical2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="17dp" />
+
+    <View
+        android:id="@+id/barTabungan"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/ic_baseline_arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/barTabungan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Notifikasi"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
+
+    <View
+        android:id="@+id/view_result_rencana_top_bg"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:background="#2A85F4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barTabungan" />
+
+    <View
+        android:id="@+id/view_result_rencana_card"
+        android:layout_width="match_parent"
+        android:layout_height="151dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_detail_riwayat_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_result_rencana_top_bg" />
+
+    <ImageView
+        android:id="@+id/iv_result_rencana"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/trip"
+        app:layout_constraintStart_toStartOf="@id/view_result_rencana_card"
+        app:layout_constraintTop_toTopOf="@id/view_result_rencana_card" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/roboto"
+        android:maxLines="1"
+        android:text="Tokyo &amp; Mount Fuji"
+        android:textColor="#2A85F4"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/iv_result_rencana"
+        app:layout_constraintTop_toTopOf="@id/view_result_rencana_card" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Jumlah: 2 orang"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_result_rencana"
+        app:layout_constraintStart_toStartOf="@id/tv_result_rencana_title" />
+
+    <ImageView
+        android:id="@+id/iv_result_rencana_clock"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="17dp"
+        android:src="@drawable/ic_clock_blue"
+        app:layout_constraintStart_toStartOf="@id/iv_result_rencana"
+        app:layout_constraintTop_toBottomOf="@id/iv_result_rencana" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="1 Oktober - 6 Oktober 2020"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/iv_result_rencana_clock"
+        app:layout_constraintTop_toBottomOf="@id/iv_result_rencana" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_booking_date_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Tanggal Booking"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/iv_result_rencana_clock"
+        app:layout_constraintTop_toBottomOf="@id/tv_result_rencana_date" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_booking_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="24 Juli 2020"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/view_result_rencana_card"
+        app:layout_constraintTop_toTopOf="@id/tv_result_rencana_booking_date_note" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_id_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Booking ID"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tv_result_rencana_booking_date_note"
+        app:layout_constraintTop_toBottomOf="@id/tv_result_rencana_booking_date_note" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="ABC123"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/view_result_rencana_card"
+        app:layout_constraintTop_toTopOf="@id/tv_result_rencana_id_note" />
+
+    <View
+        android:id="@+id/view_result_rencana_card_bottom"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_detail_riwayat_card"
+        app:layout_constraintEnd_toEndOf="@id/view_result_rencana_card"
+        app:layout_constraintStart_toStartOf="@id/view_result_rencana_card"
+        app:layout_constraintTop_toBottomOf="@id/view_result_rencana_card" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_pembayaran_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/roboto"
+        android:maxLines="1"
+        android:text="Total Pembayaran"
+        android:textColor="#474747"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/view_result_rencana_card_bottom"
+        app:layout_constraintStart_toStartOf="@id/view_result_rencana_card_bottom"
+        app:layout_constraintTop_toTopOf="@id/view_result_rencana_card_bottom" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_pembayaran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:maxLines="1"
+        android:text="Rp. 33,000,000"
+        android:textColor="#474747"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/view_result_rencana_card_bottom"
+        app:layout_constraintEnd_toEndOf="@id/view_result_rencana_card_bottom"
+        app:layout_constraintTop_toTopOf="@id/view_result_rencana_card_bottom" />
+
+    <View
+        android:id="@+id/view_result_rencana_detail"
+        android:background="@drawable/bg_detail_riwayat_item_card_menunggu"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        app:layout_constraintTop_toBottomOf="@id/view_result_rencana_top_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_detail_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Selamat pemesanan rencana trip kamu berhasil dibuat"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textColor="#474747"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="21dp"
+        app:layout_constraintTop_toTopOf="@id/view_result_rencana_detail"
+        app:layout_constraintStart_toStartOf="@id/view_result_rencana_detail"
+        app:layout_constraintEnd_toEndOf="@id/view_result_rencana_detail" />
+
+    <TextView
+        android:id="@+id/tv_result_rencana_detail_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Tunggu verifikasi dari Travada untuk melanjutkan ke pembayaran cicilan kamu"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="#777777"
+        android:gravity="start"
+        android:layout_marginTop="8sp"
+        android:layout_marginStart="21sp"
+        android:layout_marginEnd="21sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_result_rencana_detail_title"
+        app:layout_constraintStart_toStartOf="@id/view_result_rencana_detail"
+        app:layout_constraintEnd_toEndOf="@id/view_result_rencana_detail" />
+
+    <Button
+        android:id="@+id/btnTolak"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/bg_active_outline"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/roboto"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Tolak"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gVertical1" />
+
+    <Button
+        android:id="@+id/btnGabung"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/bg_active"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/roboto"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Setujui"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/gVertical2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

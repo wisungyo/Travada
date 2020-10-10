@@ -1,23 +1,25 @@
 package com.example.travada.fragmentnav.notifikasi
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.fragmentnav.notifikasi.adapter.NotifikasiAdapter
+import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
+import kotlinx.android.synthetic.main.fragment_notifikasi.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NotifikasiFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NotifikasiFragment : Fragment() {
+class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
+    private lateinit var presenter: NotifikasiFragmentPresenter
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -32,10 +34,42 @@ class NotifikasiFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle? ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notifikasi, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        presenter = NotifikasiFragmentPresenter(this)
+        presenter.fetchDataNotifikasi()
+    }
+
+    override fun showData(notifikasiAdapter: NotifikasiAdapter) {
+        val layoutManagerLinear = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvNotifikasi.layoutManager = layoutManagerLinear
+        rvNotifikasi.adapter = notifikasiAdapter
+        // rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
+    }
+
+    override fun showDetaiNotifikasi(dataNotifikasi: DataNotifikasi) {
+
+        when(dataNotifikasi.kategori){
+            "travasave" -> {
+
+                val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
+                DetailNotifikasiTravasave.putExtra("notifikasi", dataNotifikasi)
+                startActivity(DetailNotifikasiTravasave)
+            }
+            "travaplan"-> {
+                val DetailNotifikasiTravaplan = Intent(context, DetailNotifikasiTravaplan::class.java)
+                DetailNotifikasiTravaplan.putExtra("notifikasi", dataNotifikasi)
+                startActivity(DetailNotifikasiTravaplan)
+            }
+        }
+
+
     }
 
     companion object {
@@ -57,4 +91,6 @@ class NotifikasiFragment : Fragment() {
                 }
             }
     }
+
+
 }

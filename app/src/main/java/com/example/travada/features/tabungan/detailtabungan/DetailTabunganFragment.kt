@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.DetailTabunganAdapter
 import com.example.travada.features.tabungan.models.DataDetailTabungan
+import com.example.travada.features.tabungan.models.DataWisata
 import kotlinx.android.synthetic.main.fragment_detail_tabungan.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -16,39 +17,11 @@ import kotlinx.android.synthetic.main.fragment_detail_tabungan.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailTabunganFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class DetailTabunganFragment : Fragment() {
+class DetailTabunganFragment : Fragment(),DetailTabunganPresenter.Listener {
 
-    private val detailList = arrayListOf(
-        DataDetailTabungan(
-            "Enno bening",
-            "12000",
-            "73647364734",
-            "EB"
-        ),
-        DataDetailTabungan(
-            "Enno bening",
-            "12000",
-            "73647364734",
-            "EB"
-        ),
-        DataDetailTabungan(
-            "Enno bening",
-            "12000",
-            "73647364734",
-            "EB"
-        ),
-        DataDetailTabungan(
-            "Enno bening",
-            "12000",
-            "73647364734",
-            "EB"
-        )
-    )
+
+    private lateinit var presenter: DetailTabunganPresenter
+    private lateinit var result : DataWisata
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -73,13 +46,13 @@ class DetailTabunganFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-            rvDetailTabungan.apply {
-                layoutManager = LinearLayoutManager(activity)
-                adapter =
-                    DetailTabunganAdapter(
-                        detailList
-                    )
-            }
+        presenter = DetailTabunganPresenter(this)
+        presenter.fetchData()
+
+        arguments?.getParcelable<DataWisata>("detail")?.let {
+            result = it
+        }
+
     }
 
     companion object {
@@ -93,4 +66,12 @@ class DetailTabunganFragment : Fragment() {
                 }
             }
     }
+
+    override fun showData(
+        adapterDetailTabungan: DetailTabunganAdapter,
+        linearLayoutDetailTabungan: LinearLayoutManager) {
+        rvDetailTabungan.adapter = adapterDetailTabungan
+        rvDetailTabungan.layoutManager = linearLayoutDetailTabungan
+    }
+
 }

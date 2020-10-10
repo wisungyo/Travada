@@ -1,144 +1,170 @@
 package com.example.travada.features.tabungan.formtabungansatu
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.media.MediaScannerConnection
+import android.icu.text.NumberFormat
+import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.travada.R
-import com.example.travada.features.tabungan.DataPermissions.Companion.CAMERA_REQUEST
-import com.example.travada.features.tabungan.DataPermissions.Companion.GALLERY_REQUEST
+import com.example.travada.features.tabungan.DataPermissions.Companion.CAMERA_REQUEST_UPLOAD
+import com.example.travada.features.tabungan.DataPermissions.Companion.GALLERY_REQUEST_UPLOAD
 import com.example.travada.features.tabungan.DataPermissions.Companion.REQUEST_CODE
 import com.example.travada.features.tabungan.DataPermissions.Companion.arrayListPermission
 import com.example.travada.features.tabungan.formtabungandua.FormTabunganTwoActivity
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
+import com.example.travada.welcomepage.register.register2.Register2Activity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
-import java.io.ByteArrayOutputStream
+import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
+import java.math.BigDecimal
 import java.util.*
 
 
-class FormTabunganOneActivity : AppCompatActivity(),
-    FormTabunganOnePresenter.Listener {
-
+class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Listener {
     private lateinit var presenter: FormTabunganOnePresenter
     lateinit var bitmapResult: Bitmap
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_tabungan_one)
+        presenter = FormTabunganOnePresenter(this)
 
         ivFormOneBack.setOnClickListener {
-            val backToTabungan = Intent(this, TabunganActivity::class.java)
-            startActivity(backToTabungan)
+           finish()
         }
 
-        //TODO: btn image call button sheet
-        ivImageTabungan.setOnClickListener {
-            if (checkPermissions()) {
-                val dialog = BottomSheetDialog(this)
-                val view = layoutInflater.inflate(R.layout.camera_dialog_layout, null)
-                val close = view.findViewById<Button>(R.id.btnBatal)
-                val kamera = view.findViewById<TextView>(R.id.tvAmbilKamera)
-                val galeri = view.findViewById<TextView>(R.id.tvAmbilGaleri)
-                close.setOnClickListener {
-                    dialog.dismiss()
-                }
-
-                kamera.setOnClickListener {
-                    takePhotoFromCamera()
-                    dialog.dismiss()
-                }
-
-                galeri.setOnClickListener {
-                    choosePhotoFromGallery()
-                    dialog.dismiss()
-                }
-
-                dialog.setCancelable(true)
-                dialog.setContentView(view)
-                dialog.show()
-
-
-            } else {
-                requestRequiredPermissions()
-            }
-        }
-
-        ivEditImage.setOnClickListener {
-            if (checkPermissions()) {
-                val dialog = BottomSheetDialog(this)
-                val view = layoutInflater.inflate(R.layout.camera_dialog_layout, null)
-                val close = view.findViewById<Button>(R.id.btnBatal)
-                val kamera = view.findViewById<TextView>(R.id.tvAmbilKamera)
-                val galeri = view.findViewById<TextView>(R.id.tvAmbilGaleri)
-                close.setOnClickListener {
-                    dialog.dismiss()
-                }
-
-                kamera.setOnClickListener {
-                    takePhotoFromCamera()
-                    dialog.dismiss()
-                }
-
-                galeri.setOnClickListener {
-                    choosePhotoFromGallery()
-                    dialog.dismiss()
-                }
-
-                dialog.setCancelable(true)
-                dialog.setContentView(view)
-                dialog.show()
-            } else {
-                requestRequiredPermissions()
-            }
-        }
-
-        presenter = FormTabunganOnePresenter(this)
+        // editText tujuan
         etTujuan.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(count: Editable?) {
-                if (count?.length!! > layoutEtTujuan.counterMaxLength) {
-                    layoutEtTujuan.error = "karakter lebih dari 25"
-                } else {
-                    layoutEtTujuan.error = null
-                }
-            }
+            override fun afterTextChanged(s: Editable?) {}
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
-                presenter.checked(etTujuan.text.toString(), etJumlah.text.toString())
-
+                errTujuan(null)
+                presenter.checkTujuan(etTujuan.text.toString())
+                presenter.checked(
+                    etTujuan.text.toString(),
+                    etJumlah.text.toString(),
+                    uriGambar
+                )
             }
         })
 
-
+        // editText jumlah
         etJumlah.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(count: Editable?) {}
+            var processed = ""
+            @RequiresApi(Build.VERSION_CODES.N)
+            override fun afterTextChanged(count: Editable?) {
+                if (count.toString().length == 1 && count.toString().startsWith("0")) {
+                    count?.clear();
+                }
+
+                val initial = count.toString()
+                if (etJumlah == null) return
+                if (initial.isEmpty()) return
+
+                val cleanString = initial.replace(".", "")
+                val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
+                nf.setGroupingUsed(true);
+
+                var myNumber = cleanString.toDouble()
+                processed = nf.format(myNumber)
+                etJumlah.removeTextChangedListener(this)
+                etJumlah.setText(processed)
+
+                try {
+                    etJumlah.setSelection(processed.length)
+                } catch (e: NumberFormatException) {
+                    e.printStackTrace()
+                }
+                etJumlah.addTextChangedListener(this)
+            }
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.checked(etTujuan.text.toString(), etJumlah.text.toString())
+                errJumlah(null)
+                presenter.checkJumlah(etJumlah.text.toString())
+                presenter.checked(
+                    etTujuan.text.toString(),
+                    etJumlah.text.toString(),
+                    uriGambar
+                )
             }
         })
+
+
+        // upload image
+        ivImageTabungan.setOnClickListener {
+            goToUploadGambar()
+        }
+
+        // update image
+        ivEditImage.setOnClickListener {
+            goToUpdateGambar()
+        }
+
+        btnLanjutFormOne.setOnClickListener {
+            presenter.nextPage()
+        }
     }
 
-    //Mengecek semua permission yang dibutuhkan. Akan false jika setidaknya ada 1 permission yang belum mendapatkan izin.
+    override fun btnActive() {
+        btnLanjutFormOne.setBackgroundResource(R.drawable.bg_active)
+        btnLanjutFormOne.setTextColor(Color.parseColor("#ffffff"))
+        btnLanjutFormOne.setElevation(2f)
+        btnLanjutFormOne.isClickable = true
+//        btnLanjutFormOne.setOnClickListener {
+////            val goToFormTabunganTwo = Intent(this, FormTabunganTwoActivity::class.java)
+////            startActivity(goToFormTabunganTwo)
+////        }
+    }
+
+    override fun btnInactive() {
+        btnLanjutFormOne.setBackgroundResource(R.drawable.bg_inactive)
+        btnLanjutFormOne.isClickable = false
+    }
+
+    override fun errTujuan(message: String?) {
+        layoutEtTujuan.error = message
+    }
+
+    override fun errJumlah(message: String?) {
+        layoutEtJumlah.error = message
+    }
+
+    override fun goToNextPage() {
+        val bundle = Bundle()
+        val intent = Intent(this, FormTabunganTwoActivity::class.java)
+        bundle.putString("namaTujuan", etTujuan.text.toString())
+        bundle.putString("jumlahDitabung", etJumlah.text.toString())
+        bundle.putString("uriGambar", uriGambar)
+        intent.putExtras(bundle)
+        startActivity(intent)
+    }
+
+    // ijin permissions
     fun checkPermissions(): Boolean {
         return (
                 (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) &&
@@ -147,7 +173,7 @@ class FormTabunganOneActivity : AppCompatActivity(),
                 )
     }
 
-    //melakukan semua request permission yang dibutuhkan aplikasi
+    // melakukan semua request permission yang dibutuhkan aplikasi
     fun requestRequiredPermissions() {
         requestPermissions(arrayListPermission, REQUEST_CODE)
     }
@@ -159,7 +185,6 @@ class FormTabunganOneActivity : AppCompatActivity(),
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
         //Cek request codenya sama seperti request code ketika meminta permission.
         when (requestCode) {
             REQUEST_CODE -> {
@@ -183,92 +208,162 @@ class FormTabunganOneActivity : AppCompatActivity(),
         }
     }
 
-
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == GALLERY_REQUEST) {
-            //Cek data hasil responnya tidak null
+        if (requestCode == GALLERY_REQUEST_UPLOAD) {
             if (data != null) {
+                uriGambar = data.data.toString()
+
+                // uri untuk menampilkan thumbnail
                 val contentUri = data.data
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, contentUri)
-                Toast.makeText(this, "image loaded", Toast.LENGTH_SHORT).show()
-                ivImageTabungan.setImageBitmap(bitmap)
-                bitmapResult = bitmap
+                val thumbnailGalery = MediaStore.Images.Media.getBitmap(contentResolver, contentUri)
+                // Toast.makeText(this, "image loaded", Toast.LENGTH_SHORT).show()
+                ivImageTabungan.setImageBitmap(thumbnailGalery)
+                bitmapResult = thumbnailGalery
+
                 ivEditImage.visibility = View.VISIBLE
                 img_camera.visibility = View.GONE
                 ivImageTabungan.isClickable = false
                 tvImageMax.visibility = View.INVISIBLE
+
+                presenter.checked(
+                    etTujuan.text.toString(),
+                    etJumlah.text.toString(),
+                    uriGambar
+                )
             } else {
                 Toast.makeText(this, "Image Loading Failed", Toast.LENGTH_LONG).show()
             }
-        } else if (requestCode == CAMERA_REQUEST) {
-            val thumbnail = data?.extras?.get("data") as Bitmap
-            ivImageTabungan.setImageBitmap(thumbnail)
+        } else if (requestCode == CAMERA_REQUEST_UPLOAD) {
+            if (data != null) {
 
-            bitmapResult = thumbnail
-            ivEditImage.visibility = View.VISIBLE
-            img_camera.visibility = View.GONE
-            ivImageTabungan.isClickable = false
-            tvImageMax.visibility = View.INVISIBLE
+                val thumbnailCamera = data?.extras?.get("data") as Bitmap
+                ivImageTabungan.setImageBitmap(thumbnailCamera)
+                bitmapResult = thumbnailCamera
+
+                val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+                val imageFileName = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
+                    .format(System.currentTimeMillis())
+                    .toString()
+                val outputDirectory = getOutputDirectory()
+
+                val image: File = File(
+                    outputDirectory,
+                    imageFileName + ".jpg"
+                )
+
+                if (!image.exists()) {
+                    var fos: FileOutputStream? = null
+                    try {
+                        fos = FileOutputStream(image)
+                        thumbnailCamera.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                        fos.flush()
+                        fos.close()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+
+                // uri untuk disimpan
+                uriGambar = Uri.fromFile(image).toString()
+
+                ivEditImage.visibility = View.VISIBLE
+                img_camera.visibility = View.GONE
+                ivImageTabungan.isClickable = false
+                tvImageMax.visibility = View.INVISIBLE
+
+                presenter.checked(
+                    etTujuan.text.toString(),
+                    etJumlah.text.toString(),
+                    uriGambar
+                )
+            } else {
+                Toast.makeText(this, "Image Loading Failed", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
     fun choosePhotoFromGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, GALLERY_REQUEST)
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_UPLOAD)
     }
 
     fun takePhotoFromCamera() {
         val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intentCamera, CAMERA_REQUEST)
+        startActivityForResult(intentCamera, CAMERA_REQUEST_UPLOAD)
     }
 
-    fun saveImage(bitmap: Bitmap): String {
-        val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, bytes)
-
-        val directoryTarget =
-            File((Environment.getExternalStorageDirectory()).toString() + "/PICTURES")
-        Log.d("CH8", directoryTarget.toString())
-
-        if (!directoryTarget.exists()) {
-            directoryTarget.mkdirs()
+    private fun getOutputDirectory(): File {
+        val mediaDir = externalMediaDirs.firstOrNull()?.let {
+            File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
         }
-
-        val file = File(directoryTarget, ((Calendar.getInstance().timeInMillis).toString() + ".jpg"))
-
-        file.createNewFile()
-
-        val fileOutputStream = FileOutputStream(file)
-
-        fileOutputStream.write(bytes.toByteArray())
-
-        MediaScannerConnection.scanFile(this, arrayOf(file.path), arrayOf("images/jpg"), null)
-
-        fileOutputStream.close()
-        Log.d("CH8", "File saved in ${file.absolutePath}")
-
-        return file.absolutePath
+        return if (mediaDir != null && mediaDir.exists())
+            mediaDir else filesDir
     }
 
 
+    override fun goToUploadGambar() {
+        if (checkPermissions()) {
+            val dialog = BottomSheetDialog(this)
+            val view = layoutInflater.inflate(R.layout.camera_dialog_layout, null)
+            val close = view.findViewById<Button>(R.id.btnBatal)
+            val kamera = view.findViewById<TextView>(R.id.tvAmbilKamera)
+            val galeri = view.findViewById<TextView>(R.id.tvAmbilGaleri)
+            close.setOnClickListener {
+                dialog.dismiss()
+            }
 
-    override fun btnActive() {
-        btnLanjutFormOne.setBackgroundResource(R.drawable.bg_active)
-        btnLanjutFormOne.setTextColor(Color.parseColor("#ffffff"))
-        btnLanjutFormOne.setElevation(2f)
-        btnLanjutFormOne.isClickable = true
+            kamera.setOnClickListener {
+                takePhotoFromCamera()
+                dialog.dismiss()
+            }
 
-        btnLanjutFormOne.setOnClickListener {
-            val goToFormTabunganTwo = Intent(this, FormTabunganTwoActivity::class.java)
-            startActivity(goToFormTabunganTwo)
+            galeri.setOnClickListener {
+                choosePhotoFromGallery()
+                dialog.dismiss()
+            }
+
+            dialog.setCancelable(true)
+            dialog.setContentView(view)
+            dialog.show()
+
+        } else {
+            requestRequiredPermissions()
         }
     }
 
-    override fun btnInactive() {
-        btnLanjutFormOne.setBackgroundResource(R.drawable.bg_inactive)
-        btnLanjutFormOne.isClickable = false
+    override fun goToUpdateGambar() {
+        if (checkPermissions()) {
+            val dialog = BottomSheetDialog(this)
+            val view = layoutInflater.inflate(R.layout.camera_dialog_layout, null)
+            val close = view.findViewById<Button>(R.id.btnBatal)
+            val kamera = view.findViewById<TextView>(R.id.tvAmbilKamera)
+            val galeri = view.findViewById<TextView>(R.id.tvAmbilGaleri)
+
+            close.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            kamera.setOnClickListener {
+                takePhotoFromCamera()
+                dialog.dismiss()
+            }
+
+            galeri.setOnClickListener {
+                choosePhotoFromGallery()
+                dialog.dismiss()
+            }
+
+            dialog.setCancelable(true)
+            dialog.setContentView(view)
+            dialog.show()
+        } else {
+            requestRequiredPermissions()
+        }
+    }
+
+    companion object {
+        var uriGambar: String = ""
     }
 }

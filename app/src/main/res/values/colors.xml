@@ -25,4 +25,5 @@
     <color name="transparent">#FFFFFFFF</color>
 
     <color name="biru_muda">#F4F8FD</color>
+    <color name="colorTouch">#eaf7ff</color>
 </resources>
