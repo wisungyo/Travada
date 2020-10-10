@@ -1,18 +1,45 @@
 package com.example.travada.fragmentnav.beranda
 
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.features.rencana.network.TPApiClient
+import com.example.travada.features.rencana.pojo.GetPopulerResponse
+import com.example.travada.features.rencana.pojo.GetUserInfo
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
 import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTabungan
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTrip
 import com.example.travada.sampeldata.*
+import com.example.travada.util.util
+import com.orhanobut.hawk.Hawk
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
 
     fun fetchData() {
-        val dataUser = DataUser("Wisnu Agung Prasetyo", 10000000)
+        listener.showLoadingDialog()
+        TPApiClient.TP_API_SERVICES.getUserInfo(Hawk.get(util.SF_TOKEN, "")).enqueue(object : Callback<GetUserInfo> {
+            override fun onResponse(call: Call<GetUserInfo>, response: Response<GetUserInfo>) {
+                if (!response.isSuccessful) {
+                    listener.showDataError("Fetching data gagal")
+                    return
+                }
+
+                Hawk.put(util.SF_ID, response.body()?.data?.id)
+                Hawk.put(util.SF_USERNAME, response.body()?.data?.namaLengkap)
+
+                listener.showSaldo(response.body()?.data?.balance)
+            }
+
+            override fun onFailure(call: Call<GetUserInfo>, t: Throwable) {
+                listener.showDataError(t.toString())
+            }
+
+        })
 
         val listTabungan = arrayListOf(
             DataTabungan(R.drawable.tabungan, "Pulau Komodo", 80),
@@ -23,45 +50,31 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         )
 
         val listInformasi = arrayListOf(
-            DataInformasi(R.drawable.informasi),
-            DataInformasi(R.drawable.informasi),
-            DataInformasi(R.drawable.informasi),
-            DataInformasi(R.drawable.informasi),
-            DataInformasi(R.drawable.informasi)
+            DataInformasi(R.drawable.ic_main_tabungan), // R.drawable.informasi ERROR
+            DataInformasi(R.drawable.ic_main_tabungan),
+            DataInformasi(R.drawable.ic_main_tabungan),
+            DataInformasi(R.drawable.ic_main_tabungan),
+            DataInformasi(R.drawable.ic_main_tabungan)
         )
 
-        val listTrip = arrayListOf(
-            DataTrip(
-                R.drawable.trip,
-                "Tokyo & Mount Fuji 1",
-                "Rp. 11,000,000",
-                "1 hari"
-            ),
-            DataTrip(
-                R.drawable.trip,
-                "Tokyo & Mount Fuji 2",
-                "Rp. 22,000,000",
-                "2 hari"
-            ),
-            DataTrip(
-                R.drawable.trip,
-                "Tokyo & Mount Fuji 3",
-                "Rp. 33,000,000",
-                "3 hari"
-            ),
-            DataTrip(
-                R.drawable.trip,
-                "Tokyo & Mount Fuji 4",
-                "Rp. 44,000,000",
-                "4 hari"
-            ),
-            DataTrip(
-                R.drawable.trip,
-                "Tokyo & Mount Fuji 5",
-                "Rp. 55,000,000",
-                "5 hari"
-            )
-        )
+        TPApiClient.TP_API_SERVICES.getPopulerDestination().enqueue(object : Callback<GetPopulerResponse> {
+            override fun onResponse(
+                call: Call<GetPopulerResponse>,
+                response: Response<GetPopulerResponse>
+            ) {
+                if (response.isSuccessful && response.body()?.status == "OK") {
+                    response.body()?.data?.let { getAdapterTripPopuler(it) }
+                } else {
+                    listener.showDataError("Fetching data gagal")
+                }
+                listener.hideLoadingDialog()
+            }
+
+            override fun onFailure(call: Call<GetPopulerResponse>, t: Throwable) {
+                listener.showDataError(t.toString())
+                listener.hideLoadingDialog()
+            }
+        })
 
         val listBerita = arrayListOf(
             DataBerita(
@@ -88,25 +101,29 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
                 "Berlaku sampai 31 Agustus 2025")
         )
 
-        val adapterTabungan = AdapterTabungan(listTabungan)
-        val adapterInformasi = AdapterInformasi(listInformasi)
-        val adapterTrip = AdapterTrip(listTrip)
+        val adapterTabungan = AdapterTabungan(listTabungan, this)
+        val adapterInformasi = AdapterInformasi(listInformasi, this)
         val adapterBerita = AdapterBerita(listBerita, this)
         val linearLayoutTabungan = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val linearLayoutInformasi = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val linearLayoutTrip = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val linearLayoutBerita = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         listener.showData(
-            dataUser,
             adapterTabungan,
             adapterInformasi,
-            adapterTrip,
             adapterBerita,
             linearLayoutTabungan,
             linearLayoutInformasi,
-            linearLayoutTrip,
             linearLayoutBerita
+        )
+    }
+
+    fun getAdapterTripPopuler(it: List<GetPopulerResponse.Data>) {
+        val adapterTrip = AdapterTrip(it, this)
+        val linearLayoutTrip = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        listener.showTripPopuler(
+            adapterTrip,
+            linearLayoutTrip
         )
     }
 
@@ -134,7 +151,26 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         listener.showRencana()
     }
 
-    // go to detail berita
+    fun doLihatSemuaLiburan() {
+        listener.showLihatSemuaLiburan()
+    }
+
+    fun doLihatSemuaTrip() {
+        listener.showLihatSemuaTrip()
+    }
+
+    fun tripItemClicked(id: Int) {
+        listener.showTripItemClicked(id)
+    }
+
+    fun tabunganItemClicked() {
+        listener.showTabunganItemClicked()
+    }
+
+    fun informasiItemClicked() {
+        listener.showInformasiItemClicked()
+    }
+
     fun goToDetailBerita(itemBerita: DataBerita) {
         listener.showDetailBerita(itemBerita)
     }
@@ -144,24 +180,32 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
     }
 
     interface Listener {
+        fun showSaldo(balance: Int?)
         fun showData(
-            dataUser: DataUser,
             adapterTabungan: AdapterTabungan,
             adapterInformasi: AdapterInformasi,
-            adapterTrip: AdapterTrip,
             adapterBerita: AdapterBerita,
             linearLayoutTabungan: LinearLayoutManager,
             linearLayoutInformasi: LinearLayoutManager,
-            linearLayoutTrip: LinearLayoutManager,
             linearLayoutBerita: LinearLayoutManager
         )
+        fun showTripPopuler(adapterTrip: AdapterTrip, linearLayoutTrip: LinearLayoutManager)
         fun showMutasi()
         fun showTransfer()
         fun showPembelian()
         fun showEwallet()
         fun showTabungan()
         fun showRencana()
+        fun showLihatSemuaLiburan()
+        fun showLihatSemuaTrip()
+        fun showTripItemClicked(id: Int)
+        fun showTabunganItemClicked()
+        fun showInformasiItemClicked()
         fun showDetailBerita(itemBerita: DataBerita)
         fun showLihatSemuaBerita()
+        fun showDataError(error: String)
+        fun showLoadingDialog()
+        fun hideLoadingDialog()
+        fun checkLoadingDialog(): Boolean
     }
 }

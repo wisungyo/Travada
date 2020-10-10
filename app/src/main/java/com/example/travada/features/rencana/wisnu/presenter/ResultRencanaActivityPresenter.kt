@@ -10,6 +10,7 @@ import retrofit2.Response
 class ResultRencanaActivityPresenter (val listener: Listener): AppCompatActivity() {
 
     fun fetchData(idDestinasi: Int) {
+        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getDestination(idDestinasi).enqueue(object :
             Callback<GetDestinasiResponse> {
             override fun onResponse(
@@ -21,19 +22,22 @@ class ResultRencanaActivityPresenter (val listener: Listener): AppCompatActivity
                         listener.showMainData(it)
                     }
                 } else {
-//                    getDataError("Mohon maaf. Ada kesalahan.")
+                    listener.showDataError("Mohon maaf. Ada kesalahan.")
                 }
-//                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
-//                getDataError(t.localizedMessage)
-//                listener.dismissProgressDialog()
+                listener.showDataError(t.localizedMessage)
+                listener.hideLoadingDialog()
             }
         })
     }
 
     interface Listener {
         fun showMainData(data: GetDestinasiResponse.Data)
+        fun showDataError(error: String)
+        fun showLoadingDialog()
+        fun hideLoadingDialog()
     }
 }

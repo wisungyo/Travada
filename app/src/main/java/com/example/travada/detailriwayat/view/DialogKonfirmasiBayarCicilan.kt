@@ -1,26 +1,26 @@
-package com.example.travada.features.rencana.wisnu.view
+package com.example.travada.detailriwayat.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.DialogFragment
 import com.example.travada.R
 import kotlinx.android.synthetic.main.fragment_dialog_konfirmasi_rencana.view.*
 
-class DialogKonfirmasi: DialogFragment() {
+class DialogKonfirmasiBayarCicilan: DialogFragment() {
 
     companion object {
         const val TAG = "DialogKonfirmasi"
         private const val KEY_TITLE = "KEY_TITLE"
+        private const val KEY_SUBTITLE = "KEY_SUBTITLE"
 
-        fun newInstance(title: String): DialogKonfirmasi {
+        fun newInstance(title: String, subtitle: String): DialogKonfirmasiBayarCicilan {
             val args = Bundle()
             args.putString(KEY_TITLE, title)
-            val fragment = DialogKonfirmasi()
+            args.putString(KEY_SUBTITLE, subtitle)
+            val fragment = DialogKonfirmasiBayarCicilan()
             fragment.arguments = args
             return fragment
         }
@@ -51,12 +51,13 @@ class DialogKonfirmasi: DialogFragment() {
 
     private fun setupView(view: View) {
         view.tv_dialog_konfirmasi_title.text = arguments?.getString(KEY_TITLE)
+        view.tv_dialog_konfirmasi_subtitle.text = arguments?.getString(KEY_SUBTITLE)
     }
 
     private fun setupClickListeners(view: View) {
         view.btn_dialog_konfirmasi_btn_yes.setOnClickListener {
             dismiss()
-            (activity as KonfirmasiRencanaActivity).showKonfirmasiYes()
+            (activity as BayarCicilanActivity).showPinKonfirmasi()
         }
         view.btn_dialog_konfirmasi_btn_no.setOnClickListener {
             // TODO: Do some task here

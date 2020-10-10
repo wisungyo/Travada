@@ -34,6 +34,12 @@ android {
         compile.exclude group: 'org.jetbrains' , module:'annotations'
     }
 
+    allprojects {
+        repositories {
+            // ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
 }
 
 dependencies {
@@ -137,4 +143,6 @@ dependencies {
     //Cekrek
     implementation 'id.zelory:cekrek:1.0.0'
 
+    // XML to PDF Generator
+    implementation 'com.github.Gkemon:XML-to-PDF-generator:1.0'
 }

@@ -7,6 +7,7 @@ import com.example.travada.welcomepage.pojo.PostResendRequest
 import com.example.travada.welcomepage.pojo.PostResendResponse
 import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.*
 
 interface TPApiServices {
@@ -24,8 +25,8 @@ interface TPApiServices {
     fun getFilteredDestination(@Query("termurah") termurah: String?, @Query("termahal") termahal: String?, @Query("benua") benua: String?): Call<GetDestinasiAllResponse>
 
     /*
-    WISNU'S HERE
-    ------------------------- */
+    WISNU'S HERE */
+
     @GET("destinasi/populer")
     fun getPopulerDestination() : Call<GetPopulerResponse>
 
@@ -53,4 +54,13 @@ interface TPApiServices {
         @Header ("Authorization") token: String,
         @Path ("idDestinasi") id: Int
     ) : Call<GetPemesananDestinasiResponse>
+
+    @GET ("pemesanan/detail/{idPemesanan}")
+    fun getPemesananDetail(
+        @Path ("idPemesanan") idPemesanan: Int
+    ) : Call<GetPemesananDetailResponse>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("auth/user/me")
+    fun getUserInfo(@Header("Authorization") token: String) : Call<GetUserInfo>
 }

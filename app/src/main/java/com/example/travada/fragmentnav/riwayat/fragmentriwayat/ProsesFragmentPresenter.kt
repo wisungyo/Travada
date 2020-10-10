@@ -6,14 +6,17 @@ import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatProses
 import com.example.travada.fragmentnav.riwayat.network.ApiClientRiwayat
 import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
+import com.example.travada.util.util
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.orhanobut.hawk.Hawk
 
 class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: ListenerAdapter): AppCompatActivity() {
 
     fun fetchDataRiwayat() {
-        val token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
+        listenerAdapter.showLoadingDialog()
+        val token = Hawk.get(util.SF_TOKEN, "")
         ApiClientRiwayat.API_SERVICE_RIWAYAT.getPemesanan(token).enqueue(object :
             Callback<GetPemesananRiwayatResponse> {
             override fun onResponse(
@@ -34,10 +37,12 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
                     }
                     listener.showData(listPemesanan)
                 }
+                listenerAdapter.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetPemesananRiwayatResponse>, t: Throwable) {
                 listener.showDataError(t.toString())
+                listenerAdapter.hideLoadingDialog()
             }
         })
     }
@@ -65,13 +70,13 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
         })
     }
 
-    fun goToDetailRiwayat(idDestinasi: Int) {
-        listener.showDetailRiwayat(idDestinasi)
+    fun goToDetailRiwayat(idDestinasi: Int, idPemesanan: Int) {
+        listener.showDetailRiwayat(idDestinasi, idPemesanan)
     }
 
     interface Listener {
         fun showData(list: List<GetPemesananRiwayatResponse.Data>)
-        fun showDetailRiwayat(idDestinasi: Int)
+        fun showDetailRiwayat(idDestinasi: Int, idPemesanan: Int)
         fun showDataError(error: String)
     }
 
@@ -81,5 +86,8 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
             dataPemesananRiwayatResponse: GetPemesananRiwayatResponse.Data,
             holder: AdapterRiwayatProses.ViewHolder
         )
+        fun showLoadingDialog()
+        fun hideLoadingDialog()
+        fun checkLoadingDialog(): Boolean
     }
 }

@@ -118,6 +118,7 @@
                 android:layout_width="40dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="8dp"
+                android:editable="false"
                 android:background="@drawable/bg_rencana_pesan_jumlah_orang"
                 app:layout_constraintBottom_toBottomOf="@id/iv_rencana_pesan_add"
                 app:layout_constraintEnd_toStartOf="@id/iv_rencana_pesan_add"
@@ -247,14 +248,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.3333" />
+                        app:layout_constraintGuide_percent="0.26" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/gl_rencana_pesan_card_right"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.6666" />
+                        app:layout_constraintGuide_percent="0.64" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

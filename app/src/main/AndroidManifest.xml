@@ -43,8 +43,19 @@
         <activity android:name=".fragmentnav.akun.changepin.AkunConfirmNewPinActivity" />
         <activity android:name=".fragmentnav.akun.changepin.AkunInputNewPinActivity" />
         <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
+        <activity android:name=".features.mutasi.view.PDFMutasiActivity"></activity>
+        <activity
+            android:name=".features.mutasi.view.PinMutasiActivity"
+            android:noHistory="true" />
+        <activity android:name=".features.mutasi.view.ResultMutasiActivity" />
+        <activity android:name=".features.mutasi.view.MutasiActivity" />
+        <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
         <activity android:name=".welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity" />
         <activity android:name=".features.rencana.wisnu.view.ResultRencanaActivity" />
+        <activity
+            android:name=".detailriwayat.view.BayarCicilanActivity"
+            android:noHistory="true" />
+        <activity android:name=".detailriwayat.view.PinBayarCicilanActivity" />
         <activity android:name=".features.rencana.detailrencana.view.DetailRencanaActivity" />
         <activity android:name=".features.rencana.searchpage.TPSearchPageActivity" />
         <activity android:name=".welcomepage.register.registerverifcode.RegisterVerifCodeActivity" />
@@ -66,7 +77,7 @@
         <activity android:name=".welcomepage.loginpin.LoginPinActivity" />
         <activity android:name=".welcomepage.login.LoginActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingEndActivity" />
-        <activity android:name=".detailriwayat.DetailRiwayatActivity" />
+        <activity android:name=".detailriwayat.view.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
         <activity android:name=".mainpage.MainPageActivity" />
@@ -77,8 +88,12 @@
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
         <activity android:name=".features.tabungan.maintabungan.TabunganActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
-        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
+        <activity android:name=".welcomepage.splashscreen.SplashScreenActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
 

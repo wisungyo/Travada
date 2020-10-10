@@ -1,7 +1,6 @@
 package com.example.travada.features.rencana.wisnu.view
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -9,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64   /*  NEED TO IMPORT IT MANUALLY. DAMN !!  */
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +21,8 @@ import com.example.travada.features.rencana.pojo.PostPemesananResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterKonfirmasiRencanaActivity
 import com.example.travada.features.rencana.wisnu.presenter.KonfirmasiRencanaActivityPresenter
 import com.example.travada.sampeldata.DataCicilanUser
-import com.google.gson.JsonObject
+import com.example.travada.util.loadingdialog.LoadingDialog
+import com.example.travada.util.util
 import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,20 +32,20 @@ import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 import kotlin.collections.ArrayList
+import com.orhanobut.hawk.Hawk
+import kotlinx.android.synthetic.main.activity_detail_riwayat.*
 
 
 class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivityPresenter.Listener {
     private lateinit var presenter: KonfirmasiRencanaActivityPresenter
-    private lateinit var progressDialog: ProgressDialog
     private val SECOND_ACTIVITY_REQUEST_CODE = 1
-//    val MyFragment= LoadingDialog()
+    val MyFragment= LoadingDialog()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_konfirmasi_rencana)
         presenter = KonfirmasiRencanaActivityPresenter(this)
-        progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Mohon tunggu...")
 
         val intentIdDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
         val intentJumlahOrang = intent.getIntExtra("JUMLAH_ORANG", 1)
@@ -93,8 +92,6 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                         uriKTP,
                         uriPassport
                     )
-                    Toast.makeText(this, "Add Success", Toast.LENGTH_LONG).show()
-                    Log.d("ALAMATIMG", "$uriKTP & $uriPassport")
                 }
 
                 presenter.fetchDetailPemesananLayout()
@@ -128,10 +125,57 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         tv_konfirmasi_rencana_member.text = "Jumlah : ${intentJumlahOrang} orang"
         
         // get the schedule from API
-        tv_konfirmasi_rencana_date.text = "${data.berangkat} - ${data.pulang}"
+        val berangkatTahun      = extractTahun(data.berangkat)
+        val berangkatBulan      = extractBulan(data.berangkat)
+        val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
+        val berangkatTanggal    = extractTanggal(data.berangkat)
+
+        val pulangTahun         = extractTahun(data.pulang)
+        val pulangBulan         = extractBulan(data.pulang)
+        val namaBulanPulang:String     = changeBulan(pulangBulan)
+        val pulangTanggal       = extractTanggal(data.pulang)
+
+        if (namaBulanBerangkat == namaBulanPulang) {
+            tv_konfirmasi_rencana_date.text =
+                "$berangkatTanggal $namaBulanBerangkat - $pulangTanggal $namaBulanPulang $pulangTahun"
+        } else {
+            tv_konfirmasi_rencana_date.text =
+                "$berangkatTanggal $namaBulanBerangkat $berangkatTahun - $pulangTanggal $namaBulanPulang $pulangTahun"
+        }
 
         // get the total member
         tv_konfirmasi_rencana_jumlah_orang.text = "${jumlahOrang} orang"
+    }
+
+    fun extractTanggal(tanggal: String): String {
+        return tanggal.subSequence(8,10).toString()
+    }
+
+    fun extractBulan(bulan: String): String {
+        return bulan.subSequence(5,7).toString()
+    }
+
+    fun extractTahun(tahun: String): String {
+        return tahun.subSequence(0,4).toString()
+    }
+
+    fun changeBulan(bulan: String): String {
+        var namaBulan = ""
+        when (bulan) {
+            "01" -> namaBulan = "Januari"
+            "02" -> namaBulan = "Februari"
+            "03" -> namaBulan = "Maret"
+            "04" -> namaBulan = "April"
+            "05" -> namaBulan = "Mei"
+            "06" -> namaBulan = "Juni"
+            "07" -> namaBulan = "Juli"
+            "08" -> namaBulan = "Agustus"
+            "09" -> namaBulan = "September"
+            "10" -> namaBulan = "Oktober"
+            "11" -> namaBulan = "November"
+            "12" -> namaBulan = "Desember"
+        }
+        return namaBulan
     }
 
     override fun showDataCicilan(jumlahOrang: Int, jumlahBiaya: Int) {
@@ -170,8 +214,8 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         }
     }
 
-    override fun showNextButtonClicked(title: String) {
-        DialogKonfirmasi.newInstance(title).show(supportFragmentManager, DialogKonfirmasi.TAG)
+    override fun showNextButtonClicked(title: String, subtitle: String) {
+        DialogKonfirmasiPemesanan.newInstance(title, subtitle).show(supportFragmentManager, DialogKonfirmasiPemesanan.TAG)
     }
 
     override fun showResultRencana(data: PostPemesananResponse.Data) {
@@ -188,9 +232,6 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
     }
 
     override fun doPostPemesanan(listUser: ArrayList<DataCicilanUser>) {
-        /*
-        STATIC ID_USER */
-        val idUser = 5
         val idDestinasi = intent.getIntExtra("DESTINASI_ID", 3)
         val listNama = ArrayList<String>()
         val listEmail = ArrayList<String>()
@@ -240,9 +281,11 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         )
 
         /*
-        STATIC TOKEN  */
-        val token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjAxMTA1MTY1LCJleHAiOjE2MDE3MDk5NjV9.3Yaxr1CgyZ47rEj2npIVKbfCT0dzzYh9FylLuqx_xt_aGFDcCvAICDNFUHaYZJhj838M8pJPZZBRplCg7sogyw"
-        progressDialog.show()
+        DINAMIC TOKEN & ID_USER */
+        val token = Hawk.get(util.SF_TOKEN, "")
+        val idUser = Hawk.get(util.SF_ID, 0)
+
+        showLoadingDialog()
         TPApiClient.TP_API_SERVICES.postPemesanan(token, idUser, postPemesanan).enqueue(object :
             Callback<PostPemesananResponse> {
             override fun onResponse(
@@ -255,12 +298,12 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
                 }
 
                 response.body()?.data?.let { showResultRencana(it) }
-                progressDialog.dismiss()
+                hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<PostPemesananResponse>, t: Throwable) {
                 showDataError(t.message.toString())
-                progressDialog.dismiss()
+                hideLoadingDialog()
             }
 
         })
@@ -269,7 +312,7 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
     override fun showDataError(localizedMessage: String?) {
         Toast.makeText(
             this,
-            "Error : ${localizedMessage}",
+            "Error : $localizedMessage",
             Toast.LENGTH_LONG
         ).show()
     }
@@ -278,16 +321,13 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         finish()
     }
 
-    override fun showProgressDialog() {
-        progressDialog.show()
-//        val fm=supportFragmentManager
-//        MyFragment.isCancelable = false
-//        MyFragment.show(fm, "Fragment")
+    override fun showLoadingDialog() {
+        val fm=supportFragmentManager
+        MyFragment.isCancelable = false
+        MyFragment.show(fm, "Fragment")
     }
 
-    override fun dismissProgressDialog() {
-        progressDialog.dismiss()
-//        MyFragment.dismiss()
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
     }
-
 }

@@ -43,6 +43,10 @@ class DetailRencanaActivity : AppCompatActivity(),
         presenter = DetailRencanaPresenter (this)
         presenter.getDetailRencana(intentId)
 
+        ivDetailRencana.setOnClickListener {
+            finish()
+        }
+
         tvSelengkapnya.setOnClickListener {
             btnSelengkapnyaDeskripsi()
         }

@@ -16,7 +16,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
 
     fun fetchMainData(id: Int) {
         val arraySpinner = ArrayList<String>()
-        listener.showProgressDialog()
+        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getDestination(id).enqueue(object : Callback<GetDestinasiResponse> {
             override fun onResponse(
                 call: Call<GetDestinasiResponse>,
@@ -25,25 +25,61 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 if (response.isSuccessful && response.body()?.status == "OK") {
                     response.body()?.data?.let {
                         listener.showMainData(it)
-                        arraySpinner.add(it.berangkat)
+                        val berangkatTahun      = extractTahun(it.berangkat)
+                        val berangkatBulan      = extractBulan(it.berangkat)
+                        val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
+                        val berangkatTanggal    = extractTanggal(it.berangkat)
+                        arraySpinner.add( "$berangkatTanggal $namaBulanBerangkat $berangkatTahun") // from api still not a List.
+
                         listener.showSpinner(arraySpinner)
                     }
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
-                listener.dismissProgressDialog()
+//                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
-//                listener.dismissProgressDialog()
-                listener.dismissProgressDialog()
+//                listener.hideLoadingDialog()
             }
 
         })
     }
 
+    fun extractTanggal(tanggal: String): String {
+        return tanggal.subSequence(8,10).toString()
+    }
+
+    fun extractBulan(bulan: String): String {
+        return bulan.subSequence(5,7).toString()
+    }
+
+    fun extractTahun(tahun: String): String {
+        return tahun.subSequence(0,4).toString()
+    }
+
+    fun changeBulan(bulan: String): String {
+        var namaBulan = ""
+        when (bulan) {
+            "01" -> namaBulan = "Januari"
+            "02" -> namaBulan = "Februari"
+            "03" -> namaBulan = "Maret"
+            "04" -> namaBulan = "April"
+            "05" -> namaBulan = "Mei"
+            "06" -> namaBulan = "Juni"
+            "07" -> namaBulan = "Juli"
+            "08" -> namaBulan = "Agustus"
+            "09" -> namaBulan = "September"
+            "10" -> namaBulan = "Oktober"
+            "11" -> namaBulan = "November"
+            "12" -> namaBulan = "Desember"
+        }
+        return namaBulan
+    }
+
     fun fetchCicilanData(id: Int, jumlahOrang: Int) {
+//        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getCicilan(id, jumlahOrang).enqueue(object : Callback<GetCicilanResponse> {
             override fun onResponse(
                 call: Call<GetCicilanResponse>,
@@ -62,11 +98,12 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
+                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetCicilanResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
-//                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
         })
 
@@ -89,10 +126,6 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
 
     fun doBack() {
         listener.showBack()
-    }
-
-    fun addBiaya(addBiaya: Int) {
-        listener.addBiaya(addBiaya)
     }
 
     fun addOrang(jumlahOrang: Int) {
@@ -119,12 +152,11 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
         fun showCicilanData(adapter: AdapterPesanRencanaActivity, layout: LinearLayoutManager)
         fun showDataError(localizedMessage: String?)
         fun showBack()
-        fun addBiaya(addBiaya: Int)
         fun showAddOrang(addOrang: Int)
         fun showMinOrang(addOrang: Int)
         fun showKonfirmasi(intentPosition: Int)
         fun showJumlahBiaya(jumlahBiaya: Int)
-        fun showProgressDialog()
-        fun dismissProgressDialog()
+        fun showLoadingDialog()
+        fun hideLoadingDialog()
     }
 }

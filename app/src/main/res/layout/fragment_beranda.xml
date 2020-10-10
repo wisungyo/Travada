@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Wisnu Prasetyo"
+            android:text="Username"
             android:textColor="#fff"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
@@ -88,16 +88,33 @@
                     android:id="@+id/tv_mainpage_card_saldo"
                     android:fontFamily="@font/roboto"
                     android:gravity="left"
-                    android:text="Rp. 2.500.000"
+                    android:text="Rp. "
                     android:textColor="#474747"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_marginTop="4dp"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_title" />
+
+                <EditText
+                    android:id="@+id/et_mainpage_card_saldo_jumlah"
+                    android:text="Saldo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#474747"
+                    android:inputType="text"
+                    android:background="#ffffff"
+                    android:editable="false"
+                    android:enabled="false"
+                    app:layout_constraintTop_toTopOf="@id/tv_mainpage_card_saldo"
+                    app:layout_constraintStart_toEndOf="@id/tv_mainpage_card_saldo"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mainpage_card_saldo"
+                    app:layout_constraintEnd_toStartOf="@id/iv_mainpage_card_eye"/>
 
                 <ImageView
                     android:id="@+id/iv_mainpage_card_eye"
@@ -236,7 +253,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto"
-                    android:text="Tabungan"
+                    android:text="Trava Save"
                     android:textColor="#474747"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_tabungan"
@@ -261,7 +278,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto"
-                    android:text="Rencana"
+                    android:text="Trava Plan"
                     android:textColor="#474747"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_rencana"
@@ -283,6 +300,17 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/card_mainpage" />
+
+        <TextView
+            android:id="@+id/tv_mainpage_trip_lihat_semua_liburan_kamu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="Lihat semua"
+            android:textColor="#2A85F4"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/gl_vertical_right"
+            app:layout_constraintBottom_toBottomOf="@id/tv_mainpage_tabungan" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mainpage_tabungan"
@@ -363,7 +391,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_mainpage_trip" />
 
         <TextView
-            android:id="@+id/tv_mainpage_trip_lihat_semua"
+            android:id="@+id/tv_mainpage_trip_lihat_semua_trip_pilihan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"

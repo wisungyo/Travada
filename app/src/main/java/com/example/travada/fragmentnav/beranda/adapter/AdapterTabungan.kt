@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
+import com.example.travada.fragmentnav.beranda.BerandaFragmentPresenter
 import com.example.travada.sampeldata.DataTabungan
 import kotlinx.android.synthetic.main.main_page_item_tabungan.view.*
 
-class AdapterTabungan (val listTabungan: ArrayList<DataTabungan>):
+class AdapterTabungan (val listTabungan: ArrayList<DataTabungan>, val presenter: BerandaFragmentPresenter):
     RecyclerView.Adapter<AdapterTabungan.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
@@ -29,6 +30,10 @@ class AdapterTabungan (val listTabungan: ArrayList<DataTabungan>):
         if (position == listTabungan.size-1) {
             // IDKW, 28 becomes 16dp in the result
             holder.itemView.cl_mainpage_item_tabungan.setPadding(0, 0, 28, 14)
+        }
+
+        holder.itemView.cv_mainpage_item_tabungan.setOnClickListener {
+            presenter.tabunganItemClicked()
         }
     }
 

@@ -1,6 +1,5 @@
 package com.example.travada.features.rencana.wisnu.view
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -24,22 +23,18 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     private lateinit var presenter: PesanRencanaActivityPresenter
     var jumlahBiaya by Delegates.notNull<Int>()
     var jumlahOrang by Delegates.notNull<Int>()
-    private lateinit var progressDialog: ProgressDialog
-//    val MyFragment= LoadingDialog()
+    val MyFragment= LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesan_rencana)
 
         presenter = PesanRencanaActivityPresenter(this)
-        progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Mohon tunggu...")
         val intentId = intent.getIntExtra("DESTINASI_ID", 3)
         jumlahBiaya = 0
         jumlahOrang = 1
 
         presenter.fetchMainData(intentId)
-//        presenter.fetchSpinnerData()
         presenter.fetchCicilanData(intentId, jumlahOrang)
 
         spinner_rencana_pesan.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -113,13 +108,6 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         finish()
     }
 
-    override fun addBiaya(addBiaya: Int) {
-//        jumlahBiaya+=addBiaya
-//        val df = DecimalFormat("#,###")
-//        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-//        tv_rencana_pesan_total.text = "Rp. ${df.format(jumlahBiaya)}"
-    }
-
     override fun showAddOrang(addOrang: Int) {
         jumlahOrang = addOrang
         et_rencana_pesan_jumlah_orang.setText(jumlahOrang.toString())
@@ -155,15 +143,13 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         tv_rencana_pesan_total.text = "Rp. ${df.format(this.jumlahBiaya)}"
     }
 
-    override fun showProgressDialog() {
-        progressDialog.show()
-//        val fm=supportFragmentManager
-//        MyFragment.isCancelable = false
-//        MyFragment.show(fm, "Fragment")
+    override fun showLoadingDialog() {
+        val fm=supportFragmentManager
+        MyFragment.isCancelable = false
+        MyFragment.show(fm, "Fragment")
     }
 
-    override fun dismissProgressDialog() {
-        progressDialog.dismiss()
-//        MyFragment.dismiss()
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
     }
 }

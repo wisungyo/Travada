@@ -2,6 +2,8 @@ package com.example.travada.fragmentnav.beranda
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.berita.BeritaActivity
 import com.example.travada.berita.DetailBeritaActivity
+import com.example.travada.features.mutasi.view.MutasiActivity
+import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActivity
+import com.example.travada.features.rencana.searchpage.TPSearchPageActivity
 import com.example.travada.features.rencana.wisnu.view.RencanaActivity
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
@@ -18,7 +23,9 @@ import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTabungan
 import com.example.travada.fragmentnav.beranda.adapter.AdapterTrip
 import com.example.travada.sampeldata.DataBerita
-import com.example.travada.sampeldata.DataUser
+import com.example.travada.util.loadingdialog.LoadingDialog
+import com.example.travada.util.util
+import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.fragment_beranda.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -26,6 +33,10 @@ import java.util.*
 
 class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     private lateinit var presenter: BerandaFragmentPresenter
+    val MyFragment = LoadingDialog()
+    object status {
+        var statusSaldo = false
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +54,20 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         presenter.fetchData()
 
         // card button listeners
+        iv_mainpage_card_eye.setOnClickListener {
+           if (status.statusSaldo) {
+               status.statusSaldo = false
+               et_mainpage_card_saldo_jumlah.transformationMethod =
+                   HideReturnsTransformationMethod.getInstance()
+               iv_mainpage_card_eye.setBackgroundResource(R.drawable.ic_eye)
+           } else {
+               status.statusSaldo = true
+               et_mainpage_card_saldo_jumlah.transformationMethod =
+                   PasswordTransformationMethod.getInstance()
+               iv_mainpage_card_eye.setBackgroundResource(R.drawable.ic_eye_blind)
+           }
+        }
+
         iv_mainpage_card_mutasi.setOnClickListener { presenter.doMutasi() }
         iv_mainpage_card_transfer.setOnClickListener { presenter.doTransfer() }
         iv_mainpage_card_pembelian.setOnClickListener { presenter.doPembelian() }
@@ -52,49 +77,53 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         }
         iv_mainpage_card_rencana.setOnClickListener { presenter.doRencana() }
 
-        // lihat semua berita
+        tv_mainpage_trip_lihat_semua_liburan_kamu.setOnClickListener {
+            presenter.doLihatSemuaLiburan()
+        }
+
+        tv_mainpage_trip_lihat_semua_trip_pilihan.setOnClickListener {
+            presenter.doLihatSemuaTrip()
+        }
+
         tv_mainpage_berita_lihat_semua.setOnClickListener {
             presenter.doLihatSemuaBerita()
         }
     }
 
+    override fun showSaldo(balance: Int?) {
+        val df = DecimalFormat("#,###")
+        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+
+        balance?.let { et_mainpage_card_saldo_jumlah.setText(df.format(it)) }
+        tv_mainpage_username.text = Hawk.get(util.SF_USERNAME, "")
+    }
+
     override fun showData(
-        dataUser: DataUser,
         adapterTabungan: AdapterTabungan,
         adapterInformasi: AdapterInformasi,
-        adapterTrip: AdapterTrip,
         adapterBerita: AdapterBerita,
         linearLayoutTabungan: LinearLayoutManager,
         linearLayoutInformasi: LinearLayoutManager,
-        linearLayoutTrip: LinearLayoutManager,
         linearLayoutBerita: LinearLayoutManager
     ) {
-//        val formatter: NumberFormat = DecimalFormat("#,###")
-//        val formattedSaldo: String = formatter.format(dataUser.saldo)
-//        tv_mainpage_username.text = dataUser.name
-//        tv_mainpage_card_saldo.text = "Rp. $formattedSaldo"
-
-        val df = DecimalFormat("#,###")
-        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-        tv_mainpage_card_saldo.text = "Rp. ${df.format(dataUser.saldo)}"
 
         rv_mainpage_tabungan.adapter = adapterTabungan
         rv_mainpage_informasi.adapter = adapterInformasi
-        rv_mainpage_trip.adapter = adapterTrip
         rv_mainpage_berita.adapter = adapterBerita
 
         rv_mainpage_informasi.layoutManager = linearLayoutInformasi
-        rv_mainpage_trip.layoutManager = linearLayoutTrip
         rv_mainpage_tabungan.layoutManager = linearLayoutTabungan
         rv_mainpage_berita.layoutManager = linearLayoutBerita
     }
 
+    override fun showTripPopuler(adapterTrip: AdapterTrip, linearLayoutTrip: LinearLayoutManager) {
+        rv_mainpage_trip.adapter = adapterTrip
+        rv_mainpage_trip.layoutManager = linearLayoutTrip
+    }
+
     override fun showMutasi() {
-        Toast.makeText(
-            context,
-            "Mutasi under construction..",
-            Toast.LENGTH_SHORT
-        ).show()
+        val intentMutasi = Intent(context, MutasiActivity::class.java)
+        startActivity(intentMutasi)
     }
 
     override fun showTransfer() {
@@ -131,6 +160,38 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         startActivity(intentRencana)
     }
 
+    override fun showLihatSemuaLiburan() {
+        val goToNextActivity = Intent(context, TabunganActivity::class.java)
+        startActivity(goToNextActivity)
+    }
+
+    override fun showLihatSemuaTrip() {
+        val intentToSemuaTrip = Intent(context, TPSearchPageActivity::class.java)
+        startActivity(intentToSemuaTrip)
+    }
+
+    override fun showTripItemClicked(id: Int) {
+        val intentItemClicked = Intent(context, DetailRencanaActivity::class.java)
+        intentItemClicked.putExtra("DESTINASI_ID", id)
+        startActivity(intentItemClicked)
+    }
+
+    override fun showTabunganItemClicked() {
+        Toast.makeText(
+            context,
+            "Under construction..",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun showInformasiItemClicked() {
+        Toast.makeText(
+            context,
+            "Under construction..",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
     override fun showDetailBerita(itemBerita: DataBerita) {
         val intentToDetailBerita = Intent(context, DetailBeritaActivity::class.java)
         intentToDetailBerita.putExtra("DATA", itemBerita)
@@ -140,5 +201,27 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     override fun showLihatSemuaBerita() {
         val intentSemuaBerita = Intent(context, BeritaActivity::class.java)
         startActivity(intentSemuaBerita)
+    }
+
+    override fun showDataError(error: String) {
+        Toast.makeText(
+            context,
+            error,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun showLoadingDialog() {
+        val fm=fragmentManager
+        MyFragment.isCancelable = false
+        fm?.let { MyFragment.show(it, "Fragment") }
+    }
+
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
+    }
+
+    override fun checkLoadingDialog(): Boolean {
+        return MyFragment.isAdded && MyFragment.isVisible && MyFragment.userVisibleHint
     }
 }

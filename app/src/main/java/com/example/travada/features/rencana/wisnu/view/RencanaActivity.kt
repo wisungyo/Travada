@@ -1,6 +1,5 @@
 package com.example.travada.features.rencana.wisnu.view
 
-import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,14 +16,11 @@ import kotlinx.android.synthetic.main.activity_rencana.*
 
 class RencanaActivity : AppCompatActivity(), RencanaActivityPresenter.Listener {
     private lateinit var presenter: RencanaActivityPresenter
-    private lateinit var progressDialog: ProgressDialog
-//    val MyFragment = LoadingDialog()
+    val MyFragment= LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rencana)
-        progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Mohon tunggu...")
         presenter = RencanaActivityPresenter(this)
         presenter.fetchData()
 
@@ -67,20 +63,18 @@ class RencanaActivity : AppCompatActivity(), RencanaActivityPresenter.Listener {
     override fun showDataError(localizedMessage: String?) {
         Toast.makeText(
             this,
-            "Error : ${localizedMessage}",
+            "Error : $localizedMessage",
             Toast.LENGTH_LONG
         ).show()
     }
 
-    override fun showProgressDialog() {
-        progressDialog.show()
-//        val fm=supportFragmentManager
-//        MyFragment.isCancelable = false
-//        MyFragment.show(fm, "Fragment")
+    override fun showLoadingDialog() {
+        val fm=supportFragmentManager
+        MyFragment.isCancelable = false
+        MyFragment.show(fm, "Fragment")
     }
 
-    override fun dismissProgressDialog() {
-        progressDialog.dismiss()
-//        MyFragment.dismiss()
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
     }
 }

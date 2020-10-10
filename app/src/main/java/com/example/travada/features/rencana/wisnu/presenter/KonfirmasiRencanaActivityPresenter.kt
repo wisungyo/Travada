@@ -15,29 +15,25 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
     private lateinit var listUser: ArrayList<DataCicilanUser>
 
     fun fetchMainData(idDestinasi: Int, jumlahOrang: Int) {
-        listener.showProgressDialog()
+        listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getDestination(idDestinasi).enqueue(object : Callback<GetDestinasiResponse> {
             override fun onResponse(
                 call: Call<GetDestinasiResponse>,
                 response: Response<GetDestinasiResponse>
             ) {
-//                response.body()?.data?.let {
-//                    listener.showMainData(it, jumlahOrang)
-//                }
                 if (response.isSuccessful && response.body()?.status == "OK") {
                     response.body()?.data?.let {
                         listener.showMainData(it, jumlahOrang)
-
                     }
                 } else {
                     getDataError("Mohon maaf. Ada kesalahan.")
                 }
-                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
 
             override fun onFailure(call: Call<GetDestinasiResponse>, t: Throwable) {
                 getDataError(t.localizedMessage)
-                listener.dismissProgressDialog()
+                listener.hideLoadingDialog()
             }
         })
     }
@@ -97,7 +93,7 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
     }
 
     fun nextButtonClicked() {
-        listener.showNextButtonClicked("Detail pemesanan sudah benar?")
+        listener.showNextButtonClicked("Konfirmasi Pemesanan", "Detail pemesanan sudah benar?")
     }
 
     fun postPemesananData() {
@@ -120,12 +116,12 @@ class KonfirmasiRencanaActivityPresenter (val listener: Listener): AppCompatActi
             linearLayoutManager: LinearLayoutManager
         )
         fun showNextButtonCondition(condition: Boolean)
-        fun showNextButtonClicked(title: String)
+        fun showNextButtonClicked(title: String, subtitle: String)
         fun showResultRencana(data: PostPemesananResponse.Data)
         fun doPostPemesanan(listUser: ArrayList<DataCicilanUser>)
         fun showDataError(localizedMessage: String?)
         fun showBack()
-        fun showProgressDialog()
-        fun dismissProgressDialog()
+        fun showLoadingDialog()
+        fun hideLoadingDialog()
     }
 }
