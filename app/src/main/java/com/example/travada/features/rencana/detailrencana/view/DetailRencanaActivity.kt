@@ -32,6 +32,7 @@ class DetailRencanaActivity : AppCompatActivity(),
 
     val header: MutableList<String> = ArrayList()
     val body: MutableList<MutableList<String>> = ArrayList()
+
     private lateinit var presenter: DetailRencanaPresenter
     val MyFragment= LoadingDialog()
 

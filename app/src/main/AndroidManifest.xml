@@ -20,26 +20,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".features.transfer.va.VAInvoiceActivity"/>
+        <activity android:name=".features.tabungan.PinSetorManualActivity"></activity>
+        <activity android:name=".features.transfer.va.VAInvoiceActivity" />
         <activity android:name=".features.transfer.va.VAPinActivity" />
         <activity android:name=".features.transfer.va.VAConfirm2Activity" />
         <activity android:name=".features.transfer.va.VAConfirm1Activity" />
-        <activity android:name=".features.transfer.transferbank.TransferInvoiceActivity"/>
+        <activity android:name=".features.transfer.transferbank.TransferInvoiceActivity" />
         <activity android:name=".features.transfer.transferbank.TransferPinActivity" />
         <activity android:name=".features.transfer.transferbank.TransferConfirmActivity" />
         <activity android:name=".features.transfer.transferbank.TransferInputActivity" />
         <activity android:name=".features.transfer.va.VAInputActivity" />
-        <activity android:name=".features.transfer.TransferMenuActivity"/>
+        <activity android:name=".features.transfer.TransferMenuActivity" />
         <activity android:name=".fragmentnav.akun.changepass.AkunChangePassActivity" />
         <activity android:name=".fragmentnav.akun.changepin.AkunConfirmNewPinActivity" />
         <activity android:name=".fragmentnav.akun.changepin.AkunInputNewPinActivity" />
         <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
-        <activity android:name=".features.mutasi.view.PDFMutasiActivity"/>
+        <activity android:name=".features.mutasi.view.PDFMutasiActivity" />
         <activity
             android:name=".features.mutasi.view.PinMutasiActivity"
             android:noHistory="true" />
         <activity android:name=".features.mutasi.view.ResultMutasiActivity" />
-        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravasave"/>
+        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravasave" />
         <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravaplan" />
         <activity android:name=".features.mutasi.view.MutasiActivity" />
         <activity android:name=".welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity" />
@@ -54,7 +55,13 @@
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
         <activity android:name=".features.rencana.wisnu.view.KonfirmasiRencanaActivity" />
         <activity android:name=".features.rencana.wisnu.view.PesanRencanaActivity" />
-        <activity android:name=".features.rencana.wisnu.view.RencanaActivity"/>
+        <activity android:name=".features.rencana.wisnu.view.RencanaActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".features.rencana.searchpage.TPFilterPageActivity" />
         <activity android:name=".features.rencana.person.TPPersonActivity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
@@ -81,11 +88,7 @@
         <activity android:name=".features.tabungan.maintabungan.TabunganActivity" />
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
         <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
 
@@ -102,7 +105,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
     </application>
 
 </manifest>
