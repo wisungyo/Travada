@@ -374,7 +374,7 @@
                 android:id="@+id/rvFasilitasPerjalan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="10dp"
                 android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -419,7 +419,7 @@
                 <ExpandableListView
                     android:id="@+id/elInfoTambahan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="120dp"
                     android:divider="@android:color/background_light"
                     android:dividerHeight="0.5dp"
                     android:groupIndicator="@drawable/custom_expandable"
@@ -434,6 +434,13 @@
     </androidx.core.widget.NestedScrollView>
 
     <!--view di bawah tombol lanjut -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/bn_shadow"
+        app:layout_constraintBottom_toTopOf="@id/viewButton" />
+
     <View
         android:id="@+id/viewButton"
         android:layout_width="match_parent"
@@ -476,6 +483,8 @@
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_active"
+        android:clickable="true"
+        android:focusable="true"
         android:fontFamily="@font/roboto"
         android:text="Pesan Sekarang"
         android:textAllCaps="false"

@@ -3,11 +3,11 @@ package com.example.travada.features.rencana.detailrencana.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ExpandableListAdapter
+import android.widget.ExpandableListView
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.Constraints
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -27,28 +27,28 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class DetailRencanaActivity : AppCompatActivity(),
-    DetailRencanaPresenter.Listener {
+class DetailRencanaActivity : AppCompatActivity(), DetailRencanaPresenter.Listener {
 
     val header: MutableList<String> = ArrayList()
     val body: MutableList<MutableList<String>> = ArrayList()
 
     private lateinit var presenter: DetailRencanaPresenter
-    val MyFragment= LoadingDialog()
+    val MyFragment = LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_rencana)
         // nestedView.overScrollMode = View.OVER_SCROLL_NEVER
+
+        val expListView = elInfoTambahan as ExpandableListView
         val intentId = intent.getIntExtra("DESTINASI_ID", 3)
 
-        presenter = DetailRencanaPresenter (this)
+        presenter = DetailRencanaPresenter(this)
         presenter.getDetailRencana(intentId)
 
         ivBackDetailRencana.setOnClickListener {
             finish()
         }
-
 
         tvSelengkapnya.setOnClickListener {
             btnSelengkapnyaDeskripsi()
@@ -63,6 +63,16 @@ class DetailRencanaActivity : AppCompatActivity(),
             intentPesanRencana.putExtra("DESTINASI_ID", intentId)
             startActivity(intentPesanRencana)
         }
+
+//        val param = expListView.getLayoutParams() as LinearLayout.LayoutParams
+//        param.height = LinearLayout.LayoutParams.WRAP_CONTENT
+//        expListView.setLayoutParams(param)
+//        expListView.refreshDrawableState()
+
+        expListView.setOnGroupClickListener(ExpandableListView.OnGroupClickListener { parent, v, groupPosition, id ->
+            setListViewHeight(parent, groupPosition)
+            false
+        })
 
     }
 
@@ -113,8 +123,8 @@ class DetailRencanaActivity : AppCompatActivity(),
     override fun showInfoWaktuCuaca(waktuCuaca: String) {
         val infoWaktuCuaca: MutableList<String> = ArrayList()
         infoWaktuCuaca.add(waktuCuaca)
-        header.add("Waktu & Cuaca")
         body.add(infoWaktuCuaca)
+        header.add("Waktu & Cuaca")
     }
 
     override fun showListGambar(gambarList: List<String>) {
@@ -155,12 +165,15 @@ class DetailRencanaActivity : AppCompatActivity(),
     override fun btnSelengkapnyaPerjalanan() {
         tvSelengkapnya2.visibility = View.GONE
         vGradient2.visibility = View.GONE
-        val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+        val lp = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
         rvRencanaPerjalan.setLayoutParams(lp)
     }
 
     override fun showLoadingDialog() {
-        val fm=supportFragmentManager
+        val fm = supportFragmentManager
         MyFragment.isCancelable = false
         MyFragment.show(fm, "Fragment")
     }
@@ -170,6 +183,36 @@ class DetailRencanaActivity : AppCompatActivity(),
     }
 
     override fun implementDetailRencanaFailure(errMessage: String) {
-        Toast.makeText(this,"Error : $errMessage", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Error : $errMessage", Toast.LENGTH_LONG).show()
+    }
+
+    private fun setListViewHeight(expendalbeInfo: ExpandableListView, group: Int) {
+        val listAdapter = expendalbeInfo.expandableListAdapter as ExpandableListAdapter
+        var totalHeight = 0
+        val desiredWidth = View.MeasureSpec.makeMeasureSpec(
+            expendalbeInfo.width,
+            View.MeasureSpec.EXACTLY
+        )
+        for (i in 0 until listAdapter.groupCount) {
+            val groupItem = listAdapter.getGroupView(i, false, null, expendalbeInfo)
+            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
+            totalHeight += groupItem.measuredHeight
+            if (expendalbeInfo.isGroupExpanded(i) && i != group || !expendalbeInfo.isGroupExpanded(i) && i == group) {
+                for (j in 0 until listAdapter.getChildrenCount(i)) {
+                    val listItem = listAdapter.getChildView(
+                        i, j, false, null,
+                        expendalbeInfo
+                    )
+                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
+                    totalHeight += listItem.measuredHeight
+                }
+            }
+        }
+        val params = expendalbeInfo.layoutParams
+        var height = (totalHeight + expendalbeInfo.dividerHeight * (listAdapter.groupCount - 1))
+        if (height < 10) height = 200
+        params.height = height
+        expendalbeInfo.layoutParams = params
+        expendalbeInfo.requestLayout()
     }
 }
