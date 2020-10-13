@@ -20,8 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".features.tabungan.PinSetorManualActivity"></activity>
-        <activity android:name=".features.transfer.va.VAInvoiceActivity" />
+        <activity android:name=".features.transfer.va.VAInvoiceActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".features.transfer.va.VAPinActivity" />
         <activity android:name=".features.transfer.va.VAConfirm2Activity" />
         <activity android:name=".features.transfer.va.VAConfirm1Activity" />
@@ -55,7 +60,7 @@
         <activity android:name=".welcomepage.register.register4.VerifRegister4Activity" />
         <activity android:name=".features.rencana.wisnu.view.KonfirmasiRencanaActivity" />
         <activity android:name=".features.rencana.wisnu.view.PesanRencanaActivity" />
-        <activity android:name=".features.rencana.wisnu.view.RencanaActivity" ></activity>
+        <activity android:name=".features.rencana.wisnu.view.RencanaActivity"></activity>
         <activity android:name=".features.rencana.searchpage.TPFilterPageActivity" />
         <activity android:name=".features.rencana.person.TPPersonActivity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
@@ -73,13 +78,10 @@
         <activity android:name=".detailriwayat.view.DetailRiwayatActivity" />
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".mainpage.MainPageActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <activity android:name=".features.tabungan.PinSetorManualActivity"/>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
         <activity android:name=".features.tabungan.formresulttabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />

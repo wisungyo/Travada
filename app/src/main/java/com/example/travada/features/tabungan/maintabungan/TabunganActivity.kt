@@ -26,7 +26,6 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
 
         btnBuatLiburan.setOnClickListener {
             val goToFormTabunganOne = Intent(this, FormTabunganOneActivity::class.java)
-            goToFormTabunganOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(goToFormTabunganOne)
         }
 

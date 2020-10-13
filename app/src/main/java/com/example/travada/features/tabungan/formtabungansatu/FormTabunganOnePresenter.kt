@@ -2,7 +2,7 @@ package com.example.travada.features.tabungan.formtabungansatu
 
 class FormTabunganOnePresenter(private val listener: Listener) {
     fun checked(tujuan: String, jumlah: String, uriGambar: String) {
-        if (tujuan.isNotEmpty() && jumlah.isNotEmpty() && uriGambar.isNotEmpty()) {
+        if ((tujuan.isNotEmpty() && tujuan.length <=25) && (jumlah.isNotEmpty()&& jumlah.length >= 7) && uriGambar.isNotEmpty()) {
             listener.btnActive()
         } else {
             listener.btnInactive()
@@ -15,14 +15,14 @@ class FormTabunganOnePresenter(private val listener: Listener) {
             isError = false
         } else {
             listener.errTujuan("Tujuan minimal 25 karakter" )
-            isError = true
+            listener.btnInactive()
         }
     }
 
     fun checkJumlah(jumlah: String){
         if(jumlah.length < 7){
-            listener.errJumlah("minimal Rp.100.000")
-            isError = true
+            listener.errJumlah("minimal Rp. 100.000")
+            listener.btnInactive()
         } else {
             listener.errJumlah(null)
             isError = false

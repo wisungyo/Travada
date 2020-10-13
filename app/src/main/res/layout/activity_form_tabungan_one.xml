@@ -2,34 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusableInTouchMode="true"
+    android:background="@color/white"
     tools:context=".features.tabungan.formtabungansatu.FormTabunganOneActivity">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gVertical1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gVertical2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
 
     <View
         android:id="@+id/barTabungan"
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:background="@color/blue"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -52,131 +36,178 @@
         android:textSize="@dimen/heading3"
         app:layout_constraintBottom_toBottomOf="@id/ivFormOneBack"
         app:layout_constraintStart_toEndOf="@id/ivFormOneBack"
-        app:layout_constraintTop_toTopOf="@id/ivFormOneBack"/>
+        app:layout_constraintTop_toTopOf="@id/ivFormOneBack" />
 
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="167dp"
-        app:cardCornerRadius="10dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/barTabungan"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2">
-
-
-        <ImageView
-            android:id="@+id/ivImageTabungan"
-            android:layout_width="match_parent"
-            android:layout_height="167dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/banner_tabungan" />
-
-        <View
-            android:id="@+id/img_camera"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_camera_10"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:id="@+id/tvImageMax"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Max file 1MB"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text"
-            android:layout_marginBottom="36dp"
-            android:layout_gravity="center|bottom"
-            />
-
-        <ImageView
-            android:id="@+id/ivEditImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_circle"
-            android:padding="7dp"
-            android:visibility="invisible"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_edit_image"
-            android:layout_gravity="end|bottom" />
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/tvTitleMainTabungan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/title_tambah_tabungan"
-        android:textColor="@color/black"
-        android:textSize="@dimen/heading4"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintTop_toBottomOf="@id/cardView" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutEtTujuan"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="25"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleMainTabungan"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/viewButton"
+        app:layout_constraintTop_toBottomOf="@id/barTabungan">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTujuan"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:clickable="true"
+            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/hint_tujuan"
-            android:inputType="text|textNoSuggestions" />
+            android:layout_height="match_parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gVertical1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutEtJumlah"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gVertical2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="167dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <ImageView
+                    android:id="@+id/ivImageTabungan"
+                    android:layout_width="match_parent"
+                    android:layout_height="167dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/banner_tabungan" />
+
+                <View
+                    android:id="@+id/img_camera"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_camera_10" />
+
+                <TextView
+                    android:id="@+id/tvImageMax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="36dp"
+                    android:text="Max file 1MB"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text" />
+
+                <ImageView
+                    android:id="@+id/ivEditImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_circle"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_edit_image"
+                    android:visibility="invisible" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvTitleMainTabungan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_tambah_tabungan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading4"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/cardView" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEtTujuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="25"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleMainTabungan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTujuan"
+                    android:nextFocusDown="@+id/etJumlah"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/hint_tujuan"
+                    android:inputType="text|textNoSuggestions" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEtJumlah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/layoutEtTujuan"
+                app:prefixText="Rp. ">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etJumlah"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/hint_jumlah"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+
+    <View
+        android:id="@+id/viewButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
-        app:prefixText="Rp. "
-        app:errorEnabled="true"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintTop_toBottomOf="@id/layoutEtTujuan"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etJumlah"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/hint_jumlah"
-            android:inputType="number" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="77dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnLanjutFormOne"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/bg_inactive"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginHorizontal="16dp"
+        android:focusableInTouchMode="true"
         android:fontFamily="@font/roboto"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="Lanjut"
         android:textAllCaps="false"
         android:textColor="@color/gray"
-        android:layout_marginBottom="26dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="@id/gVertical2"
-        app:layout_constraintStart_toStartOf="@id/gVertical1"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/viewButton"
+        app:layout_constraintEnd_toEndOf="@id/viewButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/viewButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

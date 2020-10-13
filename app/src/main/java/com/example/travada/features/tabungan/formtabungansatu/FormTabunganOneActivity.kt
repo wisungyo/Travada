@@ -22,6 +22,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.tabungan.DataPermissions.Companion.CAMERA_REQUEST_UPLOAD
 import com.example.travada.features.tabungan.DataPermissions.Companion.GALLERY_REQUEST_UPLOAD
@@ -44,14 +45,13 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
     private lateinit var presenter: FormTabunganOnePresenter
     lateinit var bitmapResult: Bitmap
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_tabungan_one)
         presenter = FormTabunganOnePresenter(this)
 
         ivFormOneBack.setOnClickListener {
-           finish()
+            finish()
         }
 
         // editText tujuan
@@ -74,8 +74,15 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         // editText jumlah
         etJumlah.addTextChangedListener(object : TextWatcher {
             var processed = ""
+
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
+                if (etJumlah == count) {
+                    etJumlah.clearFocus()
+                    // etJumlah.requestFocus()
+                    etJumlah.isCursorVisible
+                }
+
                 if (count.toString().length == 1 && count.toString().startsWith("0")) {
                     count?.clear();
                 }
@@ -114,6 +121,15 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
             }
         })
 
+        etJumlah.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                // code to execute when EditText loses focus
+                val imm: InputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+            }
+        })
+
 
         // upload image
         ivImageTabungan.setOnClickListener {
@@ -128,6 +144,16 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         btnLanjutFormOne.setOnClickListener {
             presenter.nextPage()
         }
+
+//        btnLanjutFormOne.setOnClickListener {
+//            presenter.checked(
+//                etTujuan.text.toString(),
+//                etJumlahSetoran.text.toString(),
+//                uriGambar
+//            )
+//        }
+
+        btnInactive()
     }
 
     override fun btnActive() {
@@ -135,10 +161,6 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         btnLanjutFormOne.setTextColor(Color.parseColor("#ffffff"))
         btnLanjutFormOne.setElevation(2f)
         btnLanjutFormOne.isClickable = true
-//        btnLanjutFormOne.setOnClickListener {
-////            val goToFormTabunganTwo = Intent(this, FormTabunganTwoActivity::class.java)
-////            startActivity(goToFormTabunganTwo)
-////        }
     }
 
     override fun btnInactive() {
@@ -219,7 +241,11 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
                 val contentUri = data.data
                 val thumbnailGalery = MediaStore.Images.Media.getBitmap(contentResolver, contentUri)
                 // Toast.makeText(this, "image loaded", Toast.LENGTH_SHORT).show()
-                ivImageTabungan.setImageBitmap(thumbnailGalery)
+                Glide.with(this)
+                    .asBitmap()
+                    .load(thumbnailGalery)
+                    .into(ivImageTabungan)
+                //ivImageTabungan.setImageBitmap(thumbnailGalery)
                 bitmapResult = thumbnailGalery
 
                 ivEditImage.visibility = View.VISIBLE
@@ -239,7 +265,11 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
             if (data != null) {
 
                 val thumbnailCamera = data?.extras?.get("data") as Bitmap
-                ivImageTabungan.setImageBitmap(thumbnailCamera)
+                Glide.with(this)
+                    .asBitmap()
+                    .load(thumbnailCamera)
+                    .into(ivImageTabungan)
+                // ivImageTabungan.setImageBitmap(thumbnailCamera)
                 bitmapResult = thumbnailCamera
 
                 val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"

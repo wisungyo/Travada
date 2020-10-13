@@ -46,7 +46,7 @@ class FormTabunganTwoPresenter(private val listener: Listener) {
     }
 
     fun checkSetoranAwal(setoranAwal: String){
-        if(setoranAwal.length < 1){
+        if(setoranAwal.length < 1 || setoranAwal.isEmpty() ){
             listener.errSetoranAwal("minimal Rp.1")
             FormTabunganOnePresenter.isError = true
         } else {

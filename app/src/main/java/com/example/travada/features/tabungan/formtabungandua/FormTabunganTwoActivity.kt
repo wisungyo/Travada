@@ -109,10 +109,16 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         })
 
         etSetoranAwal.addTextChangedListener(object : TextWatcher {
-            var processed = ""
 
+            var processed = ""
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
+                if(etSetoranAwal==count){
+                    etSetoranAwal.clearFocus()
+                   // etSetoranAwal.requestFocus()
+                    etSetoranAwal.isCursorVisible
+                }
+
                 if (count.toString().length == 1 && count.toString().startsWith("0")) {
                     count?.clear();
                 }
@@ -138,7 +144,9 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                 etSetoranAwal.addTextChangedListener(this)
             }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 errSetoranAwal(null)
@@ -234,6 +242,16 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                 )
             }
         })
+
+        etJumlahSetoran.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                // code to execute when EditText loses focus
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+            }
+        })
+
+        btnInactive()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
