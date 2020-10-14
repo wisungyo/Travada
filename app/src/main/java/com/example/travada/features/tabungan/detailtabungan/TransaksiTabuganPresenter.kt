@@ -9,26 +9,26 @@ class TransaksiTabuganPresenter (val listener : Listener){
 
     fun fetchData(){
         val transaksiBulanJuni = arrayListOf(
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020")
+            DataTransaksi("AA","Simpanan","Tabungan","Rp 100.000","3 Juni 2020"),
+            DataTransaksi("BB","Simpanan","Tabungan","Rp 100.000","4 Juni 2020")
         )
 
         val transaksiBulanJuli = arrayListOf(
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020")
+            DataTransaksi("CC","Simpanan","Tabungan","Rp 100.000","3 Juli 2020"),
+            DataTransaksi("DD","Simpanan","Tabungan","Rp 100.000","4 Juli 2020"),
+            DataTransaksi("EE","Simpanan","Tabungan","Rp 100.000","5 Juli 2020")
         )
 
         val transaksiBulanAgustus = arrayListOf(
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020")
+            DataTransaksi("FF","Simpanan","Tabungan","Rp 100.000","3 Agustus 2020"),
+            DataTransaksi("GG","Simpanan","Tabungan","Rp 100.000","4 Agustus 2020"),
+            DataTransaksi("HH","Simpanan","Tabungan","Rp 100.000","5 Agustus 2020")
         )
 
         val transaksiBulanSeptember = arrayListOf(
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-            DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020")
+            DataTransaksi("OO","Simpanan","Tabungan","Rp 100.000","3 September 2020"),
+            DataTransaksi("FF","Simpanan","Tabungan","Rp 100.000","4 September 2020"),
+            DataTransaksi("AA","Simpanan","Tabungan","Rp 100.000","7 September 2020")
         )
 
         val listBulan = arrayListOf(

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
     android:theme="@style/Theme.MaterialComponents.Light"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -14,10 +13,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:text="Juni 2020 "
+            android:textColor="@color/black"
             android:fontFamily="@font/roboto"
-            android:textSize="@dimen/heading3"
+            android:textSize="@dimen/heading4"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -26,9 +26,9 @@
             android:id="@+id/rvBulanTransaksi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="4dp"
             tools:listitem="@layout/list_transaksi"
             app:layout_constraintTop_toBottomOf="@id/tvBulan"/>
 
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
