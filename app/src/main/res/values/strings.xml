@@ -13,6 +13,7 @@
     <string name="title_tambah_tabungan"> Rencanakan tabunganmu untuk mewujudkan liburan \nimpian dengan mudah</string>
     <string name="hint_tujuan"> Tulis tujuanmu disini</string>
     <string name="hint_jumlah"> Jumlah yang akan kamu tabung</string>
+    <string name="hint_topUpTabungan"> Nominal Top Up Tabungan</string>
     <string name="label_tanggal_pencapaian"> Tanggal pencapaian</string>
     <string name="label_setoran_awal"> Setoran Awal</string>
     <string name="label_metode_tabungan"> Metode tabungan</string>

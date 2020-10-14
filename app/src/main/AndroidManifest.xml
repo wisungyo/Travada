@@ -21,11 +21,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".features.transfer.va.VAInvoiceActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".features.transfer.va.VAPinActivity" />
         <activity android:name=".features.transfer.va.VAConfirm2Activity" />
@@ -79,9 +75,13 @@
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
         <activity android:name=".mainpage.MainPageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".features.tabungan.PinSetorManualActivity"/>
+        <activity android:name=".features.tabungan.detailtabungan.PinSetorManualActivity"/>
         <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
         <activity android:name=".features.tabungan.formresulttabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />

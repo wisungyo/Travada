@@ -34,6 +34,7 @@ class InfoTambahanAdapter (var context: Context,
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.group_info_tambahan,null)
         }
+        
         val title = convertView?.findViewById<TextView>(R.id.tvGroupInfoTambahan)
         title?.text = getGroup(groupPosition)
         title?.setOnClickListener {

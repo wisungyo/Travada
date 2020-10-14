@@ -27,8 +27,7 @@ class FormTabunganThreeActivity : AppCompatActivity(),
         btnPeriksa.setOnClickListener {
             Log.d("Main", "button pressed")
             val fm  = supportFragmentManager
-            PeriksaRekeningDialog()
-                .show(fm, "AddMemo Fragment")
+            PeriksaRekeningDialog().show(fm, "AddMemo Fragment")
         }
 
         presenter = FormTabunganThreePresenter(this)

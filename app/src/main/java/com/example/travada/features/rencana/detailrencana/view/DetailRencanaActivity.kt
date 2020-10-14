@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
+import android.widget.ExpandableListView.OnGroupClickListener
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -73,6 +74,10 @@ class DetailRencanaActivity : AppCompatActivity(), DetailRencanaPresenter.Listen
             setListViewHeight(parent, groupPosition)
             false
         })
+
+//        expListView.setOnGroupClickListener(OnGroupClickListener { parent, v, groupPosition, id ->
+//            true // This way the expander cannot be collapsed
+//        })
 
     }
 
