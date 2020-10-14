@@ -10,6 +10,7 @@ import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.BulanAdapter
 import com.example.travada.features.tabungan.models.DataBulan
 import com.example.travada.features.tabungan.models.DataTransaksi
+import kotlinx.android.synthetic.main.fragment_detail_tabungan.*
 import kotlinx.android.synthetic.main.fragment_transaksi_tabungan.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -17,45 +18,10 @@ import kotlinx.android.synthetic.main.fragment_transaksi_tabungan.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class TransaksiTabunganFragment : Fragment() {
-    val transaksiBulanJuni = arrayListOf(
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020")
-    )
+class TransaksiTabunganFragment : Fragment(), TransaksiTabuganPresenter.Listener {
 
-    val transaksiBulanJuli = arrayListOf(
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020")
-    )
+    lateinit var presenter: TransaksiTabuganPresenter
 
-    val transaksiBulanAgustus = arrayListOf(
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020")
-    )
-
-    val transaksiBulanSeptember = arrayListOf(
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020"),
-        DataTransaksi("AA ","Simpanan","Tabungan","100.000","3 juni 2020")
-    )
-
-    val listBulan = arrayListOf(
-        DataBulan("Juni 2020",transaksiBulanJuni),
-        DataBulan("Juli 2020",transaksiBulanJuli),
-        DataBulan("Agustus 2020",transaksiBulanAgustus),
-        DataBulan("September 2020",transaksiBulanSeptember)
-    )
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -80,10 +46,9 @@ class TransaksiTabunganFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rvTransaksi.apply { layoutManager = LinearLayoutManager(activity)
-            adapter = BulanAdapter(listBulan)
-        }
-        rvTransaksi.overScrollMode = View.OVER_SCROLL_NEVER
+        presenter = TransaksiTabuganPresenter(this)
+        presenter.fetchData()
+        
     }
 
     companion object {
@@ -96,5 +61,12 @@ class TransaksiTabunganFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun showData(adapterTransaksi: BulanAdapter) {
+        val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvTransaksi.adapter = adapterTransaksi
+        rvTransaksi.layoutManager = linearLayout
+        rvTransaksi.overScrollMode = View.OVER_SCROLL_NEVER
     }
 }

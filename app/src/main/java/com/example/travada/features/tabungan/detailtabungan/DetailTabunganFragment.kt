@@ -19,7 +19,6 @@ private const val ARG_PARAM2 = "param2"
 
 class DetailTabunganFragment : Fragment(),DetailTabunganPresenter.Listener {
 
-
     private lateinit var presenter: DetailTabunganPresenter
     private lateinit var result : DataWisata
 
@@ -52,8 +51,16 @@ class DetailTabunganFragment : Fragment(),DetailTabunganPresenter.Listener {
         arguments?.getParcelable<DataWisata>("detail")?.let {
             result = it
         }
+    }
+
+    override fun showData(adapterDetailTabungan: DetailTabunganAdapter) {
+
+        val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvDetailTabungan.adapter = adapterDetailTabungan
+        rvDetailTabungan.layoutManager = linearLayout
 
     }
+
 
     companion object {
         // TODO: Rename and change types and number of parameters
@@ -67,11 +74,6 @@ class DetailTabunganFragment : Fragment(),DetailTabunganPresenter.Listener {
             }
     }
 
-    override fun showData(
-        adapterDetailTabungan: DetailTabunganAdapter,
-        linearLayoutDetailTabungan: LinearLayoutManager) {
-        rvDetailTabungan.adapter = adapterDetailTabungan
-        rvDetailTabungan.layoutManager = linearLayoutDetailTabungan
-    }
+
 
 }

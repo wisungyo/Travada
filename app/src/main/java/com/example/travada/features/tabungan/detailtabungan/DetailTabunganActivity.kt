@@ -11,10 +11,8 @@ class DetailTabunganActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_tabungan)
 
-        viewPagerMain.adapter =
-            PageAdapter(
-                supportFragmentManager
-            )
+        viewPagerMain.adapter = PageAdapter(supportFragmentManager)
         tabMain.setupWithViewPager(viewPagerMain)
+
     }
 }
