@@ -78,7 +78,6 @@ class DetailRencanaActivity : AppCompatActivity(), DetailRencanaPresenter.Listen
 //        expListView.setOnGroupClickListener(OnGroupClickListener { parent, v, groupPosition, id ->
 //            true // This way the expander cannot be collapsed
 //        })
-
     }
 
     override fun implementDetailDestinasi(getDestinasi: GetDestinasiDetailResponse.Data) {
