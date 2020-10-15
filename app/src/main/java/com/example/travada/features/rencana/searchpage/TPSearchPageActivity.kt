@@ -36,6 +36,13 @@ class TPSearchPageActivity : AppCompatActivity(), TPSearchPagePresenter.Listener
 
 
         btn_back.setOnClickListener {
+            isSearch = false
+            isFilter = false
+            searchQuery = ""
+            minValue = 0
+            maxValue = 5000000
+            benua = ""
+
             finish()
         }
 
@@ -91,10 +98,12 @@ class TPSearchPageActivity : AppCompatActivity(), TPSearchPagePresenter.Listener
         if (isSearch == false && isFilter == true) {
             extended_fab.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.inactiveblue)
             search_dummy.hint = null
+            search.setQuery(null, false)
         } else {
             extended_fab.backgroundTintList = AppCompatResources.getColorStateList(this, R.color.white)
             if (searchQuery.isNotEmpty()) {
                 search_dummy.hint = searchQuery
+                search.setQuery(searchQuery, false)
             }
         }
 

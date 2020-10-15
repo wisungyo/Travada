@@ -13,10 +13,14 @@ import com.example.travada.welcomepage.register.register2.Register2Activity
 import kotlinx.android.synthetic.main.activity_onboarding_end.*
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
-class OnboardingEndActivity : AppCompatActivity() {
+class OnboardingEndActivity : AppCompatActivity(), OnboardingEndPresenter.Listener {
+    private lateinit var presenter:OnboardingEndPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding_end)
+
+        presenter = OnboardingEndPresenter(this)
 
         Glide
             .with(this)
@@ -24,20 +28,28 @@ class OnboardingEndActivity : AppCompatActivity() {
             .into(iv_image)
 
         btn_login.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            presenter.goToLoginPage()
         }
 
         btn_register.setOnClickListener {
-            val intent = Intent(this, Register1Activity::class.java)
-            startActivity(intent)
+            presenter.goToRegisterPage()
         }
 
-        iv_image.setOnClickListener {
+//        iv_image.setOnClickListener {
+//
+//                val intent = Intent(this, LoginPinActivity::class.java)
+//                startActivity(intent)
+//
+//        }
+    }
 
-                val intent = Intent(this, LoginPinActivity::class.java)
-                startActivity(intent)
+    override fun goToLoginPage() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
 
-        }
+    override fun goToRegisterPage() {
+        val intent = Intent(this, Register1Activity::class.java)
+        startActivity(intent)
     }
 }

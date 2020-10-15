@@ -36,7 +36,6 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
 //            Context.MODE_PRIVATE
 //        )
 
-
         Glide
             .with(this)
             .load(R.drawable.image_login)
@@ -74,6 +73,9 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
             presenter.loginCheck(et_username.text.toString(), et_password.text.toString())
         }
 
+        btn_back.setOnClickListener { finish() }
+
+        btnInactive()
     }
 
 

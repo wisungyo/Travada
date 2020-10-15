@@ -65,6 +65,8 @@ class Register3Activity : AppCompatActivity(), Register3Presenter.Listener {
             presenter.goToNextPage(bundle)
         }
 
+        btnInactive()
+
     }
 
     override fun btnActive() {

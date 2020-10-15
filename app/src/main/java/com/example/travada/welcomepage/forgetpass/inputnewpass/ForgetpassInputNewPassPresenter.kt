@@ -1,8 +1,9 @@
-package com.example.travada.fragmentnav.akun.changepass
+package com.example.travada.welcomepage.forgetpass.inputnewpass
 
 import android.os.Bundle
 
-class AkunChangePassPresenter(val listener: Listener) {
+class ForgetpassInputNewPassPresenter(val listener:Listener) {
+
 
     interface Listener {
         fun btnActive()

@@ -2,6 +2,8 @@ package com.example.travada.features.rencana.searchpage
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -90,12 +92,21 @@ class TpSearchResultFragment : Fragment(), TPSearchResultPresenter.Listener {
     }
 
     override fun showLoadingDialog() {
-        LoadingDialog.isCancelable = false
-        fragmentManager?.let { LoadingDialog.show(it, "Fragment") }
+//        LoadingDialog.isCancelable = false
+//        fragmentManager?.let { LoadingDialog.show(it, "Fragment") }
+
+            shimmer_view_container.visibility = VISIBLE
+            shimmer_view_container.startShimmerAnimation()
+
+
     }
 
     override fun hideLoadingDialog() {
-        LoadingDialog.dismiss()
+//        LoadingDialog.dismiss()
+            shimmer_view_container.visibility = INVISIBLE
+            shimmer_view_container.stopShimmerAnimation()
+
+
     }
 
     override fun showToast(text: String) {

@@ -67,6 +67,10 @@ class TPFilterPageActivity : AppCompatActivity(), TPFilterPagePresenter.Listener
 
         var result =  listBenua.toString().substringAfter("[").substringBefore(']')
 
+        if (result.isEmpty()){
+            result = "Asia,Amerika,Australia,Afrika,Eropa"
+        }
+
         val returnIntent = Intent()
         returnIntent.putExtra("benua", result)
         returnIntent.putExtra("maxFilter", filterValueMax)

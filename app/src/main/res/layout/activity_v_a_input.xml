@@ -114,14 +114,14 @@
                 android:id="@+id/til_vanumb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/transfermargintopform"
+                android:layout_marginTop="40dp"
                 android:layout_marginStart="@dimen/transfermarginform"
                 android:layout_marginEnd="@dimen/transfermarginform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_et_accountname"
                 app:errorEnabled="true"
-                app:hintAnimationEnabled="true"
+                app:hintEnabled="false"
                 app:endIconMode="clear_text"
                 >
 
@@ -130,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Masukkan nomor virtual akun"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textColor="@color/black"
                     />
 
@@ -146,9 +146,9 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/heading4"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/transferetmargintopform"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_et_accountname" />
+                app:layout_constraintBottom_toTopOf="@id/til_vanumb"
+                />
 
 
 

@@ -76,6 +76,8 @@ class RegisterVerifCodeActivity : AppCompatActivity(), RegisterVerifCodePresente
             }
         })
 
+        btnInactive()
+
     }
 
     override fun btnActive() {

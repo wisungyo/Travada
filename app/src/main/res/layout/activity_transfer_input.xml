@@ -149,15 +149,15 @@
                 android:id="@+id/til_accountnumb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/transfermargintopform"
+                android:layout_marginTop="40dp"
                 android:layout_marginStart="@dimen/transfermarginform"
                 android:layout_marginEnd="@dimen/transfermarginform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_et_bank"
                 app:errorEnabled="true"
-                app:hintAnimationEnabled="false"
                 app:endIconMode="clear_text"
+                app:hintEnabled="false"
                 >
 
                 <EditText
@@ -165,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Masukkan nomor rekening"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textColor="@color/black"
                     />
 
@@ -181,9 +181,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/heading4"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/transferetmargintopform"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_et_bank" />
+                app:layout_constraintBottom_toTopOf="@id/til_accountnumb" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_transfer_nominal"
@@ -204,7 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Masukkan nomimal transfer"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textColor="@color/black"
                     />
 
@@ -220,9 +219,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/heading4"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/transferetmargintopform2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_accountnumb" />
+                app:layout_constraintBottom_toTopOf="@id/til_transfer_nominal" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_note"
@@ -235,9 +233,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_transfer_nominal"
                 app:errorEnabled="true"
-                app:hintAnimationEnabled="true"
                 app:counterEnabled="true"
                 app:counterMaxLength="25"
+                app:hintEnabled="false"
                 >
 
                 <EditText
@@ -261,9 +259,9 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/heading4"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/transferetmargintopform2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_transfer_nominal" />
+                app:layout_constraintBottom_toTopOf="@id/til_note"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

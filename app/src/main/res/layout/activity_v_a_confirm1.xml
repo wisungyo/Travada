@@ -192,14 +192,14 @@
                 android:id="@+id/til_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="@dimen/transfermargintopform"
                 android:layout_marginStart="@dimen/transfermarginform"
                 android:layout_marginEnd="@dimen/transfermarginform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_va_nominal"
                 app:errorEnabled="true"
-                app:hintAnimationEnabled="true"
+                app:hintEnabled="false"
                 app:counterEnabled="true"
                 app:counterMaxLength="25"
                 >
@@ -224,9 +224,8 @@
                 android:text="Catatan(optional)"
                 android:textColor="@color/black"
                 android:textSize="@dimen/heading4"
-                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_va_nominal" />
+                app:layout_constraintBottom_toTopOf="@id/til_note" />
 
 
 

@@ -20,9 +20,9 @@
     <dimen name="dialog_radius">100dp</dimen>
 
     <dimen name="transfermarginform">16dp</dimen>
-    <dimen name="transfermargintopform">26dp</dimen>
+    <dimen name="transfermargintopform">32dp</dimen>
     <dimen name="transferetmargintopform">20dp</dimen>
-    <dimen name="transfermargintopform2">18dp</dimen>
+    <dimen name="transfermargintopform2">28dp</dimen>
     <dimen name="transferetmargintopform2">12dp</dimen>
 
     <dimen name="akunmargintopform">18dp</dimen>

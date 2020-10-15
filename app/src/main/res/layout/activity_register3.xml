@@ -113,7 +113,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@string/font"
-                android:text="Password yang digunakan minimal terdiri dari 6 karakter huruf besar, huruf kecil, dan angka."
+                android:text="Password yang digunakan minimal terdiri dari 8 karakter huruf besar, huruf kecil, dan angka."
                 android:textColor="@color/gray"
                 android:textSize="@dimen/text"
                 app:layout_constraintEnd_toEndOf="parent"

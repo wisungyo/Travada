@@ -2,10 +2,12 @@ package com.example.travada.features.transfer.transferbank
 
 import android.icu.text.DecimalFormat
 import android.icu.text.NumberFormat
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travada.R
 import kotlinx.android.synthetic.main.activity_transfer_input.*
@@ -23,28 +25,18 @@ class TransferInputActivity : AppCompatActivity(), TransferInputPresenter.Listen
         et_transfer_nominal.addTextChangedListener(object : TextWatcher {
             var processed = ""
 
+            @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(p0: Editable?) {
                 val initial = p0.toString()
                 if (et_transfer_nominal == null) return
                 if (initial.isEmpty()) return
-
                 val cleanString = initial.replace(".", "")
-//                val cleanString1 = initial.replace("Rp ", "")
-//                val localeID = Locale("in", "ID")
-                val myFormatter = DecimalFormat("#.###")
-//                val nf = myFormatter.format(cleanString)
                 val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
-//                val nf = NumberFormat.getCurrencyInstance(localeID)
                 nf.setGroupingUsed(true);
-
-                var myNumber = cleanString.toLong()
+                val myNumber = cleanString.toLong()
                 processed = nf.format(myNumber)
                 et_transfer_nominal.removeTextChangedListener(this)
                 et_transfer_nominal.setText(processed)
-                Log.d("nan", "$p0")
-                Log.d("nan", "${cleanString}")
-                Log.d("nan", "${cleanString}")
-                Log.d("nan", "----------------")
 
                 try {
                     et_transfer_nominal.setSelection(processed.length)
@@ -61,6 +53,9 @@ class TransferInputActivity : AppCompatActivity(), TransferInputPresenter.Listen
 
             }
         })
+
+        til_accountnumb.error = "Coba Error"
+
     }
 
 }

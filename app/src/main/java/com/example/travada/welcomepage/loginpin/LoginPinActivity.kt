@@ -67,8 +67,6 @@ class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {
     }
 
 
-
-
     override fun goToForgetPinActivity() {
         val intent = Intent(this, ForgetpinInputCodeActivity::class.java)
         startActivity(intent)

@@ -126,6 +126,8 @@ class Register2Activity : AppCompatActivity(), Register2Presenter.Listener {
                 )
             }
         })
+
+        btnInactive()
     }
 
 
