@@ -10,8 +10,6 @@ import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.wisnu.presenter.ResultRencanaActivityPresenter
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
-import kotlinx.android.synthetic.main.activity_detail_riwayat.*
-import kotlinx.android.synthetic.main.activity_konfirmasi_rencana.*
 import kotlinx.android.synthetic.main.activity_result_rencana.*
 import kotlinx.android.synthetic.main.activity_result_rencana.btn_konfirmas_rencana
 import java.text.DecimalFormat
@@ -59,15 +57,15 @@ class ResultRencanaActivity : AppCompatActivity(), ResultRencanaActivityPresente
         tv_result_rencana_title.text = data.namaTrip
         tv_result_rencana_member.text = "Jumlah: ${orang} orang"
 
-        val berangkatTahun      = extractTahun(data.berangkat)
-        val berangkatBulan      = extractBulan(data.berangkat)
+        val berangkatTahun      = extractTahun(data.berangkat[0].toString())
+        val berangkatBulan      = extractBulan(data.berangkat[0].toString())
         val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
-        val berangkatTanggal    = extractTanggal(data.berangkat)
+        val berangkatTanggal    = extractTanggal(data.berangkat[0].toString())
 
-        val pulangTahun         = extractTahun(data.pulang)
-        val pulangBulan         = extractBulan(data.pulang)
+        val pulangTahun         = extractTahun(data.pulang[0].toString())
+        val pulangBulan         = extractBulan(data.pulang[0].toString())
         val namaBulanPulang:String     = changeBulan(pulangBulan)
-        val pulangTanggal       = extractTanggal(data.pulang)
+        val pulangTanggal       = extractTanggal(data.pulang[0].toString())
 
         if (namaBulanBerangkat == namaBulanPulang) {
             tv_result_rencana_date.text =

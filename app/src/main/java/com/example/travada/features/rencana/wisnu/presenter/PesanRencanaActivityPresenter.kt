@@ -9,7 +9,6 @@ import com.example.travada.features.rencana.wisnu.adapter.AdapterPesanRencanaAct
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Math.abs
 
 
 class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity() {
@@ -25,11 +24,13 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 if (response.isSuccessful && response.body()?.status == "OK") {
                     response.body()?.data?.let {
                         listener.showMainData(it)
-                        val berangkatTahun      = extractTahun(it.berangkat)
-                        val berangkatBulan      = extractBulan(it.berangkat)
-                        val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
-                        val berangkatTanggal    = extractTanggal(it.berangkat)
-                        arraySpinner.add( "$berangkatTanggal $namaBulanBerangkat $berangkatTahun") // from api still not a List.
+                        for (i in 0..it.berangkat.size-1) {
+                            val berangkatTahun      = extractTahun(it.berangkat[i].toString())
+                            val berangkatBulan      = extractBulan(it.berangkat[i].toString())
+                            val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
+                            val berangkatTanggal    = extractTanggal(it.berangkat[i].toString())
+                            arraySpinner.add( "$berangkatTanggal $namaBulanBerangkat $berangkatTahun") // from api still not a List.
+                        }
 
                         listener.showSpinner(arraySpinner)
                     }

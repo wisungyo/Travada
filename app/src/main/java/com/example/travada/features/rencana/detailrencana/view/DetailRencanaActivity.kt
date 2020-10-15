@@ -17,9 +17,11 @@ import com.example.travada.features.rencana.detailrencana.adapter.InfoTambahanAd
 import com.example.travada.features.rencana.detailrencana.adapter.RencanaPerjalananAdapter
 import com.example.travada.features.rencana.detailrencana.presenter.DetailRencanaPresenter
 import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
+import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.features.rencana.wisnu.view.PesanRencanaActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_detail_rencana.*
+import kotlinx.android.synthetic.main.list_gambar_wisata.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -63,7 +65,7 @@ class DetailRencanaActivity : AppCompatActivity(),
 
     }
 
-    override fun implementDetailDestinasi(getDestinasi: GetDestinasiDetailResponse.Data) {
+    override fun implementDetailDestinasi(getDestinasi: GetDestinasiResponse.Data) {
         val df = DecimalFormat("#,###")
         df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
 
@@ -76,7 +78,21 @@ class DetailRencanaActivity : AppCompatActivity(),
         tvDeskripsiKonten.text = getDestinasi.deskripsi
         tvBiayaDetailRencana.text = "Rp. ${df.format(getDestinasi.hargaSatuan)}"
 
-        Glide.with(this).load(getDestinasi.gambarList[0]).into(ivDetailGambar)
+//        Glide.with(this).load(getDestinasi.gambarList[0]).into(ivDetailGambar)
+
+        if (getDestinasi.gambarList.isNotEmpty()) {
+            Glide
+                .with(this)
+                .load(getDestinasi.gambarList[0])
+                .centerCrop()
+                .into(ivDetailGambar)
+        } else {
+            Glide
+                .with(this)
+                .load("https://cdn.thegeekdiary.com/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png")
+                .centerCrop()
+                .into(ivDetailGambar)
+        }
 
         showListGambar(getDestinasi.gambarList)
         showListPerjalanan(getDestinasi.rencanaList)

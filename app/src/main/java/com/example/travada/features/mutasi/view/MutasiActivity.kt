@@ -44,7 +44,7 @@ class MutasiActivity : AppCompatActivity(), MutasiActivityPresenter.Listener {
         tv_mutasi_minggu_ini.setOnClickListener {
             resetNextButton()
             resetBackgroundButtons()
-            resetDateCondition()
+            resetDateCondition()  
             resetButtonCondition()
             tv_mutasi_minggu_ini.setBackgroundColor(Color.parseColor("#EAF7FF"))
             mingguIni = true

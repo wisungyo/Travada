@@ -12,11 +12,8 @@ import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityDit
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityExpired
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityMenunggu
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
-import com.example.travada.features.rencana.pojo.GetPemesananDestinasiResponse
 import com.example.travada.features.rencana.pojo.GetPemesananDetailResponse
-import com.example.travada.sampeldata.DataRiwayat
 import kotlinx.android.synthetic.main.activity_detail_riwayat.*
-import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -103,15 +100,15 @@ class DetailRiwayatActivity : AppCompatActivity(), DetailRiwayatActivityPresente
 
             tv_detail_riwayat_title.text = data.namaTrip
 
-            val berangkatTahun      = extractTahun(data.berangkat)
-            val berangkatBulan      = extractBulan(data.berangkat)
+            val berangkatTahun      = extractTahun(data.berangkat[0].toString())
+            val berangkatBulan      = extractBulan(data.berangkat[0].toString())
             val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
-            val berangkatTanggal    = extractTanggal(data.berangkat)
+            val berangkatTanggal    = extractTanggal(data.berangkat[0].toString())
 
-            val pulangTahun         = extractTahun(data.pulang)
-            val pulangBulan         = extractBulan(data.pulang)
+            val pulangTahun         = extractTahun(data.pulang[0].toString())
+            val pulangBulan         = extractBulan(data.pulang[0].toString())
             val namaBulanPulang:String     = changeBulan(pulangBulan)
-            val pulangTanggal       = extractTanggal(data.pulang)
+            val pulangTanggal       = extractTanggal(data.pulang[0].toString())
 
             if (namaBulanBerangkat == namaBulanPulang) {
                 tv_detail_riwayat_date.text =

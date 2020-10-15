@@ -15,7 +15,7 @@ data class GetDestinasiResponse(
         @SerializedName("benua")
         val benua: String, // Asia
         @SerializedName("berangkat")
-        val berangkat: String, // 2020-12-12
+        val berangkat: List<Any>,
         @SerializedName("createdAt")
         val createdAt: String, // 2020-09-18T05:45:14.502+00:00
         @SerializedName("deskripsi")
@@ -37,7 +37,7 @@ data class GetDestinasiResponse(
         @SerializedName("kapasitas")
         val kapasitas: Int, // 25
         @SerializedName("kapasitas_terisi")
-        val kapasitasTerisi: Int, // 0
+        val kapasitasTerisi: Int, // 2
         @SerializedName("lokal")
         val lokal: Boolean, // false
         @SerializedName("nama_trip")
@@ -45,14 +45,14 @@ data class GetDestinasiResponse(
         @SerializedName("overview")
         val overview: String, // Jalan ke Jakarta Cuy! Ada Covid
         @SerializedName("popularitas")
-        val popularitas: Int, // 26
+        val popularitas: Int, // 4047
         @SerializedName("pulang")
-        val pulang: String, // 2020-12-19
+        val pulang: List<String>,
         @SerializedName("rencana_list")
-        val rencanaList: List<Any>,
+        val rencanaList: List<String>,
         @SerializedName("syarat_ketentuan")
         val syaratKetentuan: Any, // null
         @SerializedName("updatedAt")
-        val updatedAt: String // 2020-09-22T20:58:54.530+00:00
+        val updatedAt: String // 2020-10-15T03:42:43.854+00:00
     )
 }

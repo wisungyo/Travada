@@ -18,8 +18,7 @@ import kotlin.math.abs
 class AdapterDetailRiwayatActivityDisetujui(
     private val data: List<GetPemesananDetailResponse.Data.Cicilan>,
     val presenter: DetailRiwayatActivityPresenter
-) :
-        RecyclerView.Adapter<AdapterDetailRiwayatActivityDisetujui.ViewHolder>() {
+) : RecyclerView.Adapter<AdapterDetailRiwayatActivityDisetujui.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 

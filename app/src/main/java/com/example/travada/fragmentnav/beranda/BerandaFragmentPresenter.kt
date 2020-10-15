@@ -1,6 +1,5 @@
 package com.example.travada.fragmentnav.beranda
 
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R

@@ -76,7 +76,7 @@ class ProsesFragment : Fragment(), ProsesFragmentPresenter.Listener, ProsesFragm
                     .into(holder.itemView.iv_riwayat_item)
             } else {
                 Glide
-                    .with(this)
+                    .with(holder.itemView.context)
                     .load("https://cdn.thegeekdiary.com/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png")
                     .centerCrop()
                     .into(holder.itemView.iv_riwayat_item)
@@ -84,15 +84,15 @@ class ProsesFragment : Fragment(), ProsesFragmentPresenter.Listener, ProsesFragm
 
             holder.itemView.tv_riwayat_item_title.text = dataInfo.namaTrip
 
-            val berangkatTahun      = extractTahun(dataInfo.berangkat)
-            val berangkatBulan      = extractBulan(dataInfo.berangkat)
+            val berangkatTahun      = extractTahun(dataInfo.berangkat[0].toString())
+            val berangkatBulan      = extractBulan(dataInfo.berangkat[0].toString())
             val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
-            val berangkatTanggal    = extractTanggal(dataInfo.berangkat)
+            val berangkatTanggal    = extractTanggal(dataInfo.berangkat[0].toString())
 
-            val pulangTahun         = extractTahun(dataInfo.pulang)
-            val pulangBulan         = extractBulan(dataInfo.pulang)
+            val pulangTahun         = extractTahun(dataInfo.pulang[0].toString())
+            val pulangBulan         = extractBulan(dataInfo.pulang[0].toString())
             val namaBulanPulang:String     = changeBulan(pulangBulan)
-            val pulangTanggal       = extractTanggal(dataInfo.pulang)
+            val pulangTanggal       = extractTanggal(dataInfo.pulang[0].toString())
 
             if (namaBulanBerangkat == namaBulanPulang) {
                 holder.itemView.tv_riwayat_item_date.text =

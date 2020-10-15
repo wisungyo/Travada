@@ -5,19 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.travada.R
 import com.example.travada.features.rencana.pojo.GetPopulerResponse
 import com.example.travada.features.rencana.wisnu.presenter.RencanaActivityPresenter
-import com.example.travada.sampeldata.DataTrip
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
-import kotlinx.android.synthetic.main.fragment_beranda.*
 import kotlinx.android.synthetic.main.main_page_item_trip.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 
-class AdapterTripPopulerRencanaActivity (private val listTrip: List<GetPopulerResponse.Data>, val presenter: RencanaActivityPresenter):
+class AdapterTripPopulerRencanaActivity(private val list: List<GetPopulerResponse.Data>, val presenter: RencanaActivityPresenter):
     RecyclerView.Adapter<AdapterTripPopulerRencanaActivity.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -30,10 +26,10 @@ class AdapterTripPopulerRencanaActivity (private val listTrip: List<GetPopulerRe
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // get image from API
-        if (listTrip[position].gambarList.isNotEmpty()) {
+        if (list[position].gambarList.isNotEmpty()) {
             Glide
                 .with(holder.itemView.context)
-                .load( listTrip[position].gambarList[0])
+                .load( list[position].gambarList[0])
                 .centerCrop()
                 .into(holder.itemView.iv_mainpage_item_trip)
         } else {
@@ -45,28 +41,28 @@ class AdapterTripPopulerRencanaActivity (private val listTrip: List<GetPopulerRe
         }
 
         // get title from API
-        holder.itemView.tv_mainpage_item_trip_title.text = listTrip[position].namaTrip
+        holder.itemView.tv_mainpage_item_trip_title.text = list[position].namaTrip
 
         // get money from API
         val df = DecimalFormat("#,###")
         df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-        holder.itemView.tv_mainpage_item_trip_money.text = "Rp. ${df.format(listTrip[position].hargaSatuan)}"
+        holder.itemView.tv_mainpage_item_trip_money.text = "Rp. ${df.format(list[position].hargaSatuan)}"
 
         // get trip long (days) from API
-        holder.itemView.tv_mainpage_item_trip_day.text = "${listTrip[position].durasi} hari"
+        holder.itemView.tv_mainpage_item_trip_day.text = "${list[position].durasi} hari"
 
-        if (position == listTrip.size-1) {
+        if (position == list.size-1) {
             // IDKW, 28 becomes 16dp in the result
             holder.itemView.cl_mainpage_item_trip.setPadding(0, 0, 28, 14)
         }
 
         holder.itemView.cv_mainpage_item_trip.setOnClickListener {
-            presenter.itemClicked(listTrip[position].id)
+            presenter.itemClicked(list[position].id)
         }
     }
 
     override fun getItemCount(): Int {
-        return listTrip.size
+        return list.size
     }
 
 

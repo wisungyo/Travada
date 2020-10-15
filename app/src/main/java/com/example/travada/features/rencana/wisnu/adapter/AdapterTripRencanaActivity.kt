@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.rencana.pojo.GetPilihanResponse
 import com.example.travada.features.rencana.wisnu.presenter.RencanaActivityPresenter
-import com.example.travada.sampeldata.DataTrip
 import kotlinx.android.synthetic.main.main_page_item_trip.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols

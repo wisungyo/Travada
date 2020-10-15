@@ -2,14 +2,11 @@ package com.example.travada.features.rencana.wisnu.presenter
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.travada.R
 import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.pojo.GetPilihanResponse
 import com.example.travada.features.rencana.pojo.GetPopulerResponse
 import com.example.travada.features.rencana.wisnu.adapter.AdapterTripPopulerRencanaActivity
 import com.example.travada.features.rencana.wisnu.adapter.AdapterTripRencanaActivity
-import com.example.travada.features.rencana.wisnu.view.RencanaActivity
-import com.example.travada.sampeldata.DataTrip
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

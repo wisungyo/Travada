@@ -15,44 +15,44 @@ data class GetPilihanResponse(
         @SerializedName("benua")
         val benua: String, // Asia
         @SerializedName("berangkat")
-        val berangkat: String, // 2020-12-12
+        val berangkat: List<Any>,
         @SerializedName("createdAt")
-        val createdAt: String, // 2020-09-18T05:45:14.502+00:00
+        val createdAt: String, // 2020-09-28T05:59:54.285+00:00
         @SerializedName("deskripsi")
-        val deskripsi: String, // Jakarta indah Jakarta menyenangkan Katanya
+        val deskripsi: String, // Hsjsjsjsnvsmsk
         @SerializedName("durasi")
-        val durasi: Int, // 7
+        val durasi: Int, // 4
         @SerializedName("fasilitas")
         val fasilitas: List<String>,
         @SerializedName("gambar_list")
         val gambarList: List<String>,
         @SerializedName("harga_satuan")
-        val hargaSatuan: Int, // 14500000
+        val hargaSatuan: Int, // 10000000
         @SerializedName("id")
-        val id: Int, // 3
+        val id: Int, // 159
         @SerializedName("info_persiapan")
-        val infoPersiapan: String, // bawa masker
+        val infoPersiapan: String, // Mental anda
         @SerializedName("info_waktu_cuaca")
-        val infoWaktuCuaca: String, // panas-panas neraka
+        val infoWaktuCuaca: String, // 1 jam lebih cepat dari jakarta
         @SerializedName("kapasitas")
         val kapasitas: Int, // 25
         @SerializedName("kapasitas_terisi")
-        val kapasitasTerisi: Int, // 0
+        val kapasitasTerisi: Int, // 1
         @SerializedName("lokal")
-        val lokal: Boolean, // false
+        val lokal: Boolean, // true
         @SerializedName("nama_trip")
-        val namaTrip: String, // Tokyo & Mount Fuji
+        val namaTrip: String, // Labuan Bajo
         @SerializedName("overview")
-        val overview: String, // Jalan ke Jakarta Cuy! Ada Covid
+        val overview: String, // Lorem ipsumhsjsjbavaksn 
         @SerializedName("popularitas")
-        val popularitas: Int, // 25
+        val popularitas: Int, // 85
         @SerializedName("pulang")
-        val pulang: String, // 2020-12-19
+        val pulang: List<Any>,
         @SerializedName("rencana_list")
         val rencanaList: List<String>,
         @SerializedName("syarat_ketentuan")
-        val syaratKetentuan: Any, // null
+        val syaratKetentuan: String, // No refund
         @SerializedName("updatedAt")
-        val updatedAt: String // 2020-09-22T06:50:41.116+00:00
+        val updatedAt: String // 2020-10-14T11:00:01.166+00:00
     )
 }
