@@ -1,5 +1,6 @@
 package com.example.travada.features.rencana.wisnu.presenter
 
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.features.rencana.network.TPApiClient
@@ -35,7 +36,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                         listener.showSpinner(arraySpinner)
                     }
                 } else {
-                    getDataError("Mohon maaf. Ada kesalahan.")
+                    getDataError("Mohon maaf. Ada kesalahan (1).")
                 }
 //                listener.hideLoadingDialog()
             }
@@ -79,9 +80,43 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
         return namaBulan
     }
 
-    fun fetchCicilanData(id: Int, jumlahOrang: Int) {
+    fun convertBulanToNumber(bulan: String): String {
+        var angkaBulan = ""
+        when (bulan) {
+            "Januari"   -> angkaBulan = "01"
+            "Februari"  -> angkaBulan = "02"
+            "Maret"     -> angkaBulan = "03"
+            "April"     -> angkaBulan = "04"
+            "Mei"       -> angkaBulan = "05"
+            "Juni"      -> angkaBulan = "06"
+            "Juli"      -> angkaBulan = "07"
+            "Agustus"   -> angkaBulan = "08"
+            "September" -> angkaBulan = "09"
+            "Oktober"   -> angkaBulan = "10"
+            "November"  -> angkaBulan = "11"
+            "Desember"  -> angkaBulan = "12"
+        }
+        return angkaBulan
+    }
+
+    fun fetchCicilanData(id: Int, jumlahOrang: Int, tglBerangkat: String) {
 //        listener.showLoadingDialog()
-        TPApiClient.TP_API_SERVICES.getCicilan(id, jumlahOrang).enqueue(object : Callback<GetCicilanResponse> {
+        var tglBerangkatFix = ""
+
+        if (tglBerangkat.length == 10) {
+            tglBerangkatFix = tglBerangkat
+            Log.d("CICILAN", "${tglBerangkat.length}")
+        } else {
+            val tgl     = tglBerangkat.subSequence(0,2)
+            val bulan   = tglBerangkat.subSequence(3, tglBerangkat.length-5)
+            val bulanAngka    = convertBulanToNumber(bulan as String)
+            val tahun   = tglBerangkat.subSequence(tglBerangkat.length-4, tglBerangkat.length)
+            Log.d("CICILAN", "-$tahun-$bulanAngka-$tgl-")
+            tglBerangkatFix = "$tahun-$bulanAngka-$tgl"
+            Log.d("CICILAN", "${tglBerangkat.length}")
+        }
+
+        TPApiClient.TP_API_SERVICES.getCicilan(id, jumlahOrang, tglBerangkatFix).enqueue(object : Callback<GetCicilanResponse> {
             override fun onResponse(
                 call: Call<GetCicilanResponse>,
                 response: Response<GetCicilanResponse>
@@ -97,7 +132,7 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                         listener.showJumlahBiaya(jumlahBiaya)
                     }
                 } else {
-                    getDataError("Mohon maaf. Ada kesalahan.")
+                    getDataError("Mohon maaf. Ada kesalahan (2).")
                 }
                 listener.hideLoadingDialog()
             }

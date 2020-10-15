@@ -2,6 +2,7 @@ package com.example.travada.features.rencana.wisnu.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,6 +15,7 @@ import com.example.travada.features.rencana.wisnu.adapter.AdapterPesanRencanaAct
 import com.example.travada.features.rencana.wisnu.presenter.PesanRencanaActivityPresenter
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_pesan_rencana.*
+import kotlinx.android.synthetic.main.custon_spinner_item.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -23,6 +25,7 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
     private lateinit var presenter: PesanRencanaActivityPresenter
     var jumlahBiaya by Delegates.notNull<Int>()
     var jumlahOrang by Delegates.notNull<Int>()
+    var tanggalBerangkat = ""
     val MyFragment= LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,16 +38,23 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         jumlahOrang = 1
 
         presenter.fetchMainData(intentId)
-        presenter.fetchCicilanData(intentId, jumlahOrang)
+
 
         spinner_rencana_pesan.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                /*
-                    DO SOMETHING HERE
-                 */
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val intentId = intent.getIntExtra("DESTINASI_ID", 3)
+                tanggalBerangkat = parent?.getItemAtPosition(position).toString()
+
+                val tgl     = tanggalBerangkat.subSequence(0,2)
+                val bulan   = tanggalBerangkat.subSequence(3, tanggalBerangkat.length-5)
+                val bulanAngka    = presenter.convertBulanToNumber(bulan as String)
+                val tahun   = tanggalBerangkat.subSequence(tanggalBerangkat.length-4, tanggalBerangkat.length)
+                Log.d("CICILAN", "+$tahun-$bulanAngka-$tgl+")
+
+                presenter.fetchCicilanData(intentId, jumlahOrang, "$tahun-$bulanAngka-$tgl")
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
                 /*
                     DO SOMETHING HERE
                 */
@@ -86,6 +96,9 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         adapter.setDropDownViewResource(R.layout.rencana_pesan_spinner_item)
 
         spinner_rencana_pesan.adapter = adapter
+
+        val intentId = intent.getIntExtra("DESTINASI_ID", 3)
+        presenter.fetchCicilanData(intentId, jumlahOrang, arraySpinner[0])
     }
 
     override fun showCicilanData(
@@ -115,7 +128,14 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         // refresh table view
         presenter = PesanRencanaActivityPresenter(this)
         val intentId = intent.getIntExtra("DESTINASI_ID", 3)
-        presenter.fetchCicilanData(intentId, jumlahOrang)
+
+        val tgl     = tanggalBerangkat.subSequence(0,2)
+        val bulan   = tanggalBerangkat.subSequence(3, tanggalBerangkat.length-5)
+        val bulanAngka    = presenter.convertBulanToNumber(bulan as String)
+        val tahun   = tanggalBerangkat.subSequence(tanggalBerangkat.length-4, tanggalBerangkat.length)
+        Log.d("CICILAN", "=$tahun-$bulanAngka-$tgl=")
+
+        presenter.fetchCicilanData(intentId, jumlahOrang, "$tahun-$bulanAngka-$tgl")
     }
 
     override fun showMinOrang(addOrang: Int) {
@@ -125,7 +145,7 @@ class PesanRencanaActivity : AppCompatActivity(), PesanRencanaActivityPresenter.
         // refresh table view
         presenter = PesanRencanaActivityPresenter(this)
         val intentId = intent.getIntExtra("DESTINASI_ID", 3)
-        presenter.fetchCicilanData(intentId, jumlahOrang)
+        presenter.fetchCicilanData(intentId, jumlahOrang, spinner_rencana_pesan.text.toString())
     }
 
     override fun showKonfirmasi(intentPosition: Int) {

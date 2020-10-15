@@ -32,10 +32,10 @@ interface TPApiServices {
     @GET("destinasi/{id}")
     fun getDestination(@Path("id") id: Int) : Call<GetDestinasiResponse>
 
-    @GET("cicilan/{idDestinasi}/{jumlahOrang}?berangkat={tanggal}")
+    @GET("cicilan/{idDestinasi}/{jumlahOrang}?")
     fun getCicilan(@Path("idDestinasi") idDestinasi: Int,
                    @Path("jumlahOrang") jumlahOrang: Int,
-                   @Path("tanggal") tanggal: String) : Call<GetCicilanResponse>
+                   @Query("berangkat") berangkat: String) : Call<GetCicilanResponse>
 
     @Headers("Content-Type: application/json;charset=UTF-8")
     @POST("pemesanan/base64/{idUser}")
