@@ -30,7 +30,7 @@ class DetailNotifikasiTravaplan : AppCompatActivity(),DetailNotifikasiTravaplanP
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_notifikasi_travaplan)
-        val intentId = intent.getIntExtra("ID_Notifikasi", 3)
+        val intentId = intent.getIntExtra("ID_Notifikasi", 0)
 
         presenter = DetailNotifikasiTravaplanPresenter(this)
         presenter.fetchDestinasiData(intentId)
@@ -40,40 +40,68 @@ class DetailNotifikasiTravaplan : AppCompatActivity(),DetailNotifikasiTravaplanP
         }
     }
 
-    override fun implementDestinasi(getDestinasi: GetDetailNotifikasiResponse.Data.Destinasi) {
-        tv_result_notif_title.text = getDestinasi.namaTrip
+    override fun implementDestinasi(getDestinasi: GetDetailNotifikasiResponse.Data.Destinasi?) {
+        getDestinasi?.let {
+            tv_result_notif_title.text = getDestinasi.namaTrip
 
-        val berangkatTahun      = extractTahun(getDestinasi.berangkat[0].toString())
-        val berangkatBulan      = extractBulan(getDestinasi.berangkat[0].toString())
-        val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
-        val berangkatTanggal    = extractTanggal(getDestinasi.berangkat[0].toString())
+            val berangkatTahun      = extractTahun(getDestinasi.berangkat[0].toString())
+            val berangkatBulan      = extractBulan(getDestinasi.berangkat[0].toString())
+            val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
+            val berangkatTanggal    = extractTanggal(getDestinasi.berangkat[0].toString())
 
-        val pulangTahun         = extractTahun(getDestinasi.pulang[0].toString())
-        val pulangBulan         = extractBulan(getDestinasi.pulang[0].toString())
-        val namaBulanPulang:String     = changeBulan(pulangBulan)
-        val pulangTanggal       = extractTanggal(getDestinasi.pulang[0].toString())
+            val pulangTahun         = extractTahun(getDestinasi.pulang[0].toString())
+            val pulangBulan         = extractBulan(getDestinasi.pulang[0].toString())
+            val namaBulanPulang:String      = changeBulan(pulangBulan)
+            val pulangTanggal       = extractTanggal(getDestinasi.pulang[0].toString())
 
-        if (namaBulanBerangkat == namaBulanPulang) {
-            tv_result_rencana_date.text =
-                "$berangkatTanggal $namaBulanBerangkat - $pulangTanggal $namaBulanPulang $pulangTahun"
-        } else {
-            tv_result_rencana_date.text =
-                "$berangkatTanggal $namaBulanBerangkat $berangkatTahun - $pulangTanggal $namaBulanPulang $pulangTahun"
+            if (namaBulanBerangkat == namaBulanPulang) {
+                tv_result_rencana_date_notif.text =
+                    "$berangkatTanggal $namaBulanBerangkat - $pulangTanggal $namaBulanPulang $pulangTahun"
+            } else {
+                tv_result_rencana_date_notif.text =
+                    "$berangkatTanggal $namaBulanBerangkat $berangkatTahun - $pulangTanggal $namaBulanPulang $pulangTahun"
+            }
+
+            if (getDestinasi.gambarList.isNotEmpty()) {
+                Glide
+                    .with(this)
+                    .load(getDestinasi.gambarList[0])
+                    .centerCrop()
+                    .into(iv_result_rencana)
+            } else {
+                Glide
+                    .with(this)
+                    .load( "https://cdn.thegeekdiary.com/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png")
+                    .centerCrop()
+                    .into(iv_result_rencana)
+            }
         }
 
-        if (getDestinasi.gambarList.isNotEmpty()) {
-            Glide
-                .with(this)
-                .load(getDestinasi.gambarList[0])
-                .centerCrop()
-                .into(iv_result_rencana)
-        } else {
-            Glide
-                .with(this)
-                .load( "https://cdn.thegeekdiary.com/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png")
-                .centerCrop()
-                .into(iv_result_rencana)
+
+
+    }
+
+    override fun implementPemesanan(getPemesanan: GetDetailNotifikasiResponse.Data.Pemesanan?) {
+        getPemesanan?.let {
+            val df = DecimalFormat("#,###")
+            df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+
+            tv_result_rencana_pembayaran_notif.text = "Rp. ${df.format(getPemesanan.total)}"
+            tv_result_rencana_member.text = "Jumlah : ${getPemesanan.orang} orang"
+
+            tv_result_rencana_booking_date.text = getPemesanan.createdAt
+
+            val dibuatTahun         =  extractTahun(getPemesanan.createdAt)
+            val dibuatBulan         = extractBulan(getPemesanan.createdAt)
+            val namaBulanDibuat     = changeBulan(dibuatBulan)
+            val dibuatTanggal       =  extractTanggal(getPemesanan.createdAt)
+
+            tv_result_rencana_booking_date.text =
+                "$dibuatTanggal $namaBulanDibuat $dibuatTahun"
+
+            tv_result_rencana_id.text = getPemesanan.id.toString()
         }
+
 
     }
 
@@ -83,26 +111,6 @@ class DetailNotifikasiTravaplan : AppCompatActivity(),DetailNotifikasiTravaplanP
 
     override fun showDialogTolak(titleTolak: String, subtitleTolak: String) {
         DialogKonfirmasiNotifikasiTolak.newInstance(titleTolak, subtitleTolak).show(supportFragmentManager, DialogKonfirmasiNotifikasiTolak.TAG)
-    }
-
-    override fun implementPemesanan(getPemesanan: GetDetailNotifikasiResponse.Data.Pemesanan) {
-        val df = DecimalFormat("#,###")
-        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-
-        tv_result_rencana_pembayaran_notif.text = "Rp. ${df.format(getPemesanan.total)}"
-        tv_result_rencana_member.text = "Jumlah : ${getPemesanan.orang} orang"
-
-        tv_result_rencana_booking_date.text = getPemesanan.createdAt
-
-        val dibuatTahun         =  extractTahun(getPemesanan.createdAt)
-        val dibuatBulan         = extractBulan(getPemesanan.createdAt)
-        val namaBulanDibuat     = changeBulan(dibuatBulan)
-        val dibuatTanggal       =  extractTanggal(getPemesanan.createdAt)
-
-        tv_result_rencana_booking_date.text =
-            "$dibuatTanggal $namaBulanDibuat $dibuatTahun"
-
-        tv_result_rencana_id.text = getPemesanan.id.toString()
     }
 
     override fun showLoadingDialog() {

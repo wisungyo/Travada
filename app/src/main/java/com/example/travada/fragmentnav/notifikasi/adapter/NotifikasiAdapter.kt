@@ -1,5 +1,6 @@
 package com.example.travada.fragmentnav.notifikasi.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +48,9 @@ class NotifikasiAdapter(
         }
 
         holder.itemView.viewNotifikasi.setOnClickListener {
-            presenter.goToDetailNotifikasi(listNotifikasi[position].id)
+            val idNotif = listNotifikasi[position].id
+            presenter.goToDetailNotifikasi(idNotif)
+            Log.d("checkerr","${idNotif}")
             // holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white_notif)
         }
     }

@@ -16,7 +16,9 @@ interface ApiServiceNotifikasi {
         @Header("Authorization") token: String
     ): Call<GetNotifikasiResponse>
 
+//    @GET("notif/detail/{id}")
+//    fun getDetailNotifikasi(@Path("id")id: Int) : Call<GetDetailNotifikasiResponse>
 
     @GET("notif/detail/{id}")
-    fun getDetailNotifikasi(@Path("id")id: Int) : Call<GetDetailNotifikasiResponse>
+    fun getDetailNotifikasi(@Header("Authorization") authHeader: String?, @Path("id")id:Int): Call<GetDetailNotifikasiResponse>
 }
