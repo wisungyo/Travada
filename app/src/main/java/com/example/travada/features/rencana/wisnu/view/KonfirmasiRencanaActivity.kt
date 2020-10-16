@@ -125,15 +125,15 @@ class KonfirmasiRencanaActivity : AppCompatActivity(), KonfirmasiRencanaActivity
         tv_konfirmasi_rencana_member.text = "Jumlah : ${intentJumlahOrang} orang"
         
         // get the schedule from API
-        val berangkatTahun      = extractTahun(data.berangkat)
-        val berangkatBulan      = extractBulan(data.berangkat)
+        val berangkatTahun      = extractTahun(data.berangkat[0].toString())
+        val berangkatBulan      = extractBulan(data.berangkat[0].toString())
         val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
-        val berangkatTanggal    = extractTanggal(data.berangkat)
+        val berangkatTanggal    = extractTanggal(data.berangkat[0].toString())
 
-        val pulangTahun         = extractTahun(data.pulang)
-        val pulangBulan         = extractBulan(data.pulang)
+        val pulangTahun         = extractTahun(data.pulang[0].toString())
+        val pulangBulan         = extractBulan(data.pulang[0].toString())
         val namaBulanPulang:String     = changeBulan(pulangBulan)
-        val pulangTanggal       = extractTanggal(data.pulang)
+        val pulangTanggal       = extractTanggal(data.pulang[0].toString())
 
         if (namaBulanBerangkat == namaBulanPulang) {
             tv_konfirmasi_rencana_date.text =

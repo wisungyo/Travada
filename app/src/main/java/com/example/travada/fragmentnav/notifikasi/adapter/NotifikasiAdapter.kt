@@ -7,19 +7,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
 import com.example.travada.fragmentnav.notifikasi.NotifikasiFragmentPresenter
 import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
+import com.example.travada.fragmentnav.notifikasi.pojo.GetNotifikasiResponse
+import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
 import kotlinx.android.synthetic.main.list_notifikasi.view.*
 
 class NotifikasiAdapter(
-    val listNotifikasi: ArrayList<DataNotifikasi>,
+    val listNotifikasi: List<GetNotifikasiResponse.Data>,
     val presenter: NotifikasiFragmentPresenter
-) :
-    RecyclerView.Adapter<NotifikasiAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<NotifikasiAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_notifikasi, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_notifikasi, parent, false)
         return ViewHolder(view)
     }
 
@@ -30,21 +30,27 @@ class NotifikasiAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.tvJudulNotifikasi.setText(listNotifikasi[position].judul)
         holder.itemView.tvPesanNotifikasi.setText(listNotifikasi[position].pesan)
-        holder.itemView.tvTanggalNotifikasi.setText(listNotifikasi[position].tanggal)
-        holder.itemView.tvKategori.setText(listNotifikasi[position].kategori)
+        holder.itemView.tvTanggalNotifikasi.setText(listNotifikasi[position].createdAt)
+        holder.itemView.tvKategori.setText(listNotifikasi[position].jenis)
 
-        when (listNotifikasi[position].kategori) {
-            "travasave" -> {
+        when (listNotifikasi[position].jenis) {
+            "Travasave" -> {
                 holder.itemView.ivImagePersonTransaksi.setBackgroundResource(R.drawable.ic_notif_tsave)
             }
-            "travaplan" -> {
+            "Travaplan" -> {
                 holder.itemView.ivImagePersonTransaksi.setBackgroundResource(R.drawable.ic_notif_tplan)
             }
         }
 
+        when(listNotifikasi[position].terbaca){
+            true -> {
+                holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white_notif)
+            }
+        }
+
         holder.itemView.viewNotifikasi.setOnClickListener {
-            presenter.goToDetailNotifikasi(listNotifikasi[position])
-            holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white_notif)
+            presenter.goToDetailNotifikasi(listNotifikasi[position].id)
+            // holder.itemView.viewNotifikasi.setBackgroundResource(R.drawable.bg_white_notif)
         }
     }
 }

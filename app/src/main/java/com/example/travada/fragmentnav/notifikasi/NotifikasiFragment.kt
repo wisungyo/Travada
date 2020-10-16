@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.fragmentnav.notifikasi.adapter.NotifikasiAdapter
-import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
+import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_notifikasi.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +20,7 @@ private const val ARG_PARAM2 = "param2"
 
 class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
     private lateinit var presenter: NotifikasiFragmentPresenter
+    val MyFragment= LoadingDialog()
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -46,30 +48,37 @@ class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
         presenter.fetchDataNotifikasi()
     }
 
-    override fun showData(notifikasiAdapter: NotifikasiAdapter) {
-        val layoutManagerLinear = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rvNotifikasi.layoutManager = layoutManagerLinear
-        rvNotifikasi.adapter = notifikasiAdapter
-        // rvNotifikasi.overScrollMode = View.OVER_SCROLL_NEVER
+    override fun showDetaiNotifikasi(id: Int) {
+                val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
+                DetailNotifikasiTravasave.putExtra("notifikasi_id", id)
+                startActivity(DetailNotifikasiTravasave)
+
     }
 
-    override fun showDetaiNotifikasi(dataNotifikasi: DataNotifikasi) {
+    override fun showDataError(error: String?) {
+        Toast.makeText(
+            context,
+            "Error : $error",
+            Toast.LENGTH_LONG
+        ).show()
+    }
 
-        when(dataNotifikasi.kategori){
-            "travasave" -> {
+    override fun showDataNotifikasi(
+        notifikasiAdapter: NotifikasiAdapter,
+        linearLayoutNotifikasi: LinearLayoutManager
+    ) {
+        rvNotifikasi.adapter = notifikasiAdapter
+        rvNotifikasi.layoutManager = linearLayoutNotifikasi
+    }
 
-                val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
-                DetailNotifikasiTravasave.putExtra("notifikasi", dataNotifikasi)
-                startActivity(DetailNotifikasiTravasave)
-            }
-            "travaplan"-> {
-                val DetailNotifikasiTravaplan = Intent(context, DetailNotifikasiTravaplan::class.java)
-                DetailNotifikasiTravaplan.putExtra("notifikasi", dataNotifikasi)
-                startActivity(DetailNotifikasiTravaplan)
-            }
-        }
+    override fun showLoadingDialog() {
+        val fm=fragmentManager
+        MyFragment.isCancelable = false
+        fm?.let { MyFragment.show(it, "Fragment") }
+    }
 
-
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
     }
 
     companion object {
