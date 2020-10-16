@@ -196,13 +196,15 @@
                 app:layout_constraintTop_toBottomOf="@id/til_accountnumb"
                 app:errorEnabled="true"
                 app:hintEnabled="false"
+                app:prefixText="Rp "
+                app:prefixTextAppearance="@style/TextAppearance.AppCompat.Medium"
                 >
 
                 <EditText
                     android:id="@+id/et_transfer_nominal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Masukkan nomimal transfer"
+                    android:hint="Masukkan nominal transfer"
                     android:inputType="number"
                     android:textColor="@color/black"
                     />

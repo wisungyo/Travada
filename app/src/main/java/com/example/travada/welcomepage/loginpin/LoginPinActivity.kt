@@ -14,6 +14,7 @@ import com.example.travada.features.rencana.searchpage.TPSearchSuggestPresenter
 import com.example.travada.features.rencana.searchpage.room.DatabaseItem
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity
+import com.example.travada.welcomepage.login.LoginActivity
 import com.example.travada.welcomepage.onboarding.OnboardingActivity
 import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
 import com.example.travada.welcomepage.splashscreen.SplashScreenPresenter
@@ -50,6 +51,10 @@ class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {
             }
         }
 
+        btn_forgotpin.setOnClickListener{
+            goToForgetPinActivity()
+        }
+
 
     }
 
@@ -68,7 +73,7 @@ class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {
 
 
     override fun goToForgetPinActivity() {
-        val intent = Intent(this, ForgetpinInputCodeActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

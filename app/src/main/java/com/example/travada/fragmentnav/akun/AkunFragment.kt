@@ -2,6 +2,7 @@ package com.example.travada.fragmentnav.akun
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,18 @@ import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActi
 import com.example.travada.features.rencana.searchpage.room.DatabaseItem
 import com.example.travada.fragmentnav.akun.changepass.AkunChangePassActivity
 import com.example.travada.fragmentnav.akun.changepin.AkunInputNewPinActivity
+import com.example.travada.fragmentnav.akun.network.AkunApiClient
+import com.example.travada.fragmentnav.akun.pojo.GetUserMeResponse
+import com.example.travada.fragmentnav.akun.pojo.coba
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
+import com.example.travada.util.util
 import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
+import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.fragment_akun.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,6 +77,35 @@ class AkunFragment : Fragment(), AkunFragmentPresenter.Listener {
                 presenter.logout(it)
             }
         }
+
+//        var token = Hawk.get(util.SF_TOKEN, "0")
+//
+//
+//        AkunApiClient.AKUN_API_SERVICES.getcoba(token, 18)
+//            .enqueue(object : Callback<coba> {
+//                override fun onFailure(call: Call<coba>, t: Throwable) {
+//                    showToast(t.message.toString())
+//                    Log.d(
+//                        "checkerr", "error ${t.message.toString()}"
+//                    )
+//                }
+//
+//                override fun onResponse(call: Call<coba>, response: Response<coba>) {
+//                    response.body()?.data?.let {
+//                        Log.d(
+//                            "checkerr", "berhasil ${it.pemesanan.id}"
+//                        )
+//                        Log.d(
+//                            "checkerr", "berhasil ${it.destinasi.id}"
+//                        )
+//                        showToast(it.toString())
+//
+//                    }
+//
+//                }
+//
+//            })
+
     }
 
     companion object {

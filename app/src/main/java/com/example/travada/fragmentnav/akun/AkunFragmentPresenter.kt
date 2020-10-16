@@ -31,11 +31,14 @@ class AkunFragmentPresenter(val listener: Listener) {
                     response.body()?.data?.let {
                         var accoutnumb = it.noRekening
                         var accountname = it.namaLengkap
-                        accoutnumb = StringBuilder(accoutnumb).insert(4, ' ').insert(9, ' ').insert(14, ' ').toString()
+                        accoutnumb =
+                            StringBuilder(accoutnumb).insert(4, ' ').insert(9, ' ').insert(14, ' ')
+                                .toString()
                         listener.setResponse(accountname, accoutnumb)
                     }
                     listener.hideLoadingDialog()
                 }
+
             })
     }
 

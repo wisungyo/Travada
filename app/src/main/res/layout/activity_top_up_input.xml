@@ -176,6 +176,7 @@
                     android:hint="Masukkan nominal top up"
                     android:inputType="number"
                     android:textColor="@color/black"
+                    android:maxLength="9"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>

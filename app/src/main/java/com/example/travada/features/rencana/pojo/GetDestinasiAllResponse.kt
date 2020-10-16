@@ -15,7 +15,7 @@ data class GetDestinasiAllResponse(
         @SerializedName("benua")
         val benua: String,
         @SerializedName("berangkat")
-        val berangkat: String,
+        val berangkat: List<String>,
         @SerializedName("createdAt")
         val createdAt: String,
         @SerializedName("deskripsi")
@@ -49,7 +49,7 @@ data class GetDestinasiAllResponse(
         @SerializedName("popularitas")
         val popularitas: Int,
         @SerializedName("pulang")
-        val pulang: String,
+        val pulang: List<String>,
         @SerializedName("rencana_list")
         val rencanaList: List<Any>,
         @SerializedName("updatedAt")
