@@ -1,20 +1,12 @@
-package com.example.travada.fragmentnav.notifikasi
+package com.example.travada.fragmentnav.notifikasi.presenter
 
-import android.graphics.Canvas
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.travada.features.rencana.network.TPApiClient
-import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.fragmentnav.notifikasi.adapter.NotifikasiAdapter
-import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
 import com.example.travada.fragmentnav.notifikasi.network.ApiClientNotifikasi
 import com.example.travada.fragmentnav.notifikasi.pojo.GetNotifikasiResponse
-import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatProses
-import com.example.travada.fragmentnav.riwayat.fragmentriwayat.ProsesFragmentPresenter
-import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
 import com.example.travada.util.util
 import com.orhanobut.hawk.Hawk
-import kotlinx.android.synthetic.main.list_notifikasi.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,8 +46,8 @@ class NotifikasiFragmentPresenter(val listener: Listener) : AppCompatActivity() 
         listener.showDataError(errorMessage)
     }
 
-    fun goToDetailNotifikasi(id: Int) {
-        listener.showDetaiNotifikasi(id)
+    fun goToDetailNotifikasi(idNotifikasi: Int) {
+        listener.showDetaiNotifikasi(idNotifikasi)
     }
 
     interface Listener {
@@ -63,7 +55,7 @@ class NotifikasiFragmentPresenter(val listener: Listener) : AppCompatActivity() 
             notifikasiAdapter: NotifikasiAdapter,
             linearLayoutNotifikasi: LinearLayoutManager
         )
-        fun showDetaiNotifikasi(id: Int)
+        fun showDetaiNotifikasi(idNotifikasi: Int)
         fun showDataError(error: String?)
         fun showLoadingDialog()
         fun hideLoadingDialog()

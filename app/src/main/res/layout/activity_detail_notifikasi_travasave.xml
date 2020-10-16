@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".fragmentnav.notifikasi.DetailNotifikasiTravasave">
+    tools:context=".fragmentnav.notifikasi.view.DetailNotifikasiTravasave">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gVertical1"

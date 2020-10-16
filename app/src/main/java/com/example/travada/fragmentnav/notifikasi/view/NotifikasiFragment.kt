@@ -1,4 +1,4 @@
-package com.example.travada.fragmentnav.notifikasi
+package com.example.travada.fragmentnav.notifikasi.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.fragmentnav.notifikasi.adapter.NotifikasiAdapter
+import com.example.travada.fragmentnav.notifikasi.presenter.NotifikasiFragmentPresenter
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_notifikasi.*
 
@@ -20,7 +21,7 @@ private const val ARG_PARAM2 = "param2"
 
 class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
     private lateinit var presenter: NotifikasiFragmentPresenter
-    val MyFragment= LoadingDialog()
+    val MyFragment = LoadingDialog()
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -36,7 +37,8 @@ class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle? ): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notifikasi, container, false)
     }
@@ -44,14 +46,17 @@ class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = NotifikasiFragmentPresenter(this)
+        presenter =
+            NotifikasiFragmentPresenter(
+                this
+            )
         presenter.fetchDataNotifikasi()
     }
 
-    override fun showDetaiNotifikasi(id: Int) {
-                val DetailNotifikasiTravasave = Intent(context, DetailNotifikasiTravasave::class.java)
-                DetailNotifikasiTravasave.putExtra("notifikasi_id", id)
-                startActivity(DetailNotifikasiTravasave)
+    override fun showDetaiNotifikasi(idNotifikasi: Int) {
+        val DetailNotifikasiTravaplan = Intent(context, DetailNotifikasiTravaplan::class.java)
+        DetailNotifikasiTravaplan.putExtra("ID_Notifikasi", idNotifikasi)
+        startActivity(DetailNotifikasiTravaplan)
 
     }
 
@@ -72,7 +77,7 @@ class NotifikasiFragment : Fragment(), NotifikasiFragmentPresenter.Listener {
     }
 
     override fun showLoadingDialog() {
-        val fm=fragmentManager
+        val fm = fragmentManager
         MyFragment.isCancelable = false
         fm?.let { MyFragment.show(it, "Fragment") }
     }

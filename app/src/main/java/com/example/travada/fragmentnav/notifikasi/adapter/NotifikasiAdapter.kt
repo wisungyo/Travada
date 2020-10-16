@@ -5,10 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
-import com.example.travada.fragmentnav.notifikasi.NotifikasiFragmentPresenter
-import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
 import com.example.travada.fragmentnav.notifikasi.pojo.GetNotifikasiResponse
-import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
+import com.example.travada.fragmentnav.notifikasi.presenter.NotifikasiFragmentPresenter
 import kotlinx.android.synthetic.main.list_notifikasi.view.*
 
 class NotifikasiAdapter(

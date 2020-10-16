@@ -3,9 +3,9 @@ package com.example.travada.fragmentnav.notifikasi.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class GetNotifikasiResponse(
+data class GetDetailNotifikasiResponse(
     @SerializedName("data")
-    val `data`: List<Data>,
+    val `data`: Data,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")
@@ -75,6 +75,7 @@ data class GetNotifikasiResponse(
             @SerializedName("updatedAt")
             val updatedAt: String
         )
+
         data class Pemesanan(
             @SerializedName("berangkat")
             val berangkat: String,

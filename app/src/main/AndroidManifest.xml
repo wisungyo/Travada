@@ -41,8 +41,8 @@
             android:name=".features.mutasi.view.PinMutasiActivity"
             android:noHistory="true" />
         <activity android:name=".features.mutasi.view.ResultMutasiActivity" />
-        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravasave" />
-        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravaplan" />
+        <activity android:name=".fragmentnav.notifikasi.view.DetailNotifikasiTravasave" />
+        <activity android:name=".fragmentnav.notifikasi.view.DetailNotifikasiTravaplan" />
         <activity android:name=".features.mutasi.view.MutasiActivity" />
         <activity android:name=".welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity" />
         <activity android:name=".features.rencana.wisnu.view.ResultRencanaActivity" />

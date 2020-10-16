@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentnav.notifikasi.DetailNotifikasiTravaplan">
+    tools:context=".fragmentnav.notifikasi.view.DetailNotifikasiTravaplan">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gVertical1"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toTopOf="@id/view_result_rencana_card" />
 
     <TextView
-        android:id="@+id/tv_result_rencana_title"
+        android:id="@+id/tv_result_notif_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -106,7 +106,7 @@
         android:textColor="#777777"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_result_rencana"
-        app:layout_constraintStart_toStartOf="@id/tv_result_rencana_title" />
+        app:layout_constraintStart_toStartOf="@id/tv_result_notif_title" />
 
     <ImageView
         android:id="@+id/iv_result_rencana_clock"
@@ -118,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_result_rencana" />
 
     <TextView
-        android:id="@+id/tv_result_rencana_date"
+        android:id="@+id/tv_result_rencana_date_notif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -140,7 +140,7 @@
         android:textColor="#777777"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/iv_result_rencana_clock"
-        app:layout_constraintTop_toBottomOf="@id/tv_result_rencana_date" />
+        app:layout_constraintTop_toBottomOf="@id/tv_result_rencana_date_notif" />
 
     <TextView
         android:id="@+id/tv_result_rencana_booking_date"
@@ -203,7 +203,7 @@
         app:layout_constraintTop_toTopOf="@id/view_result_rencana_card_bottom" />
 
     <TextView
-        android:id="@+id/tv_result_rencana_pembayaran"
+        android:id="@+id/tv_result_rencana_pembayaran_notif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
