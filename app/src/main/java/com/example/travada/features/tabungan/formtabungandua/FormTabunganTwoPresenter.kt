@@ -2,7 +2,6 @@ package com.example.travada.features.tabungan.formtabungandua
 
 import android.os.Bundle
 import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
-import com.example.travada.features.tabungan.adapter.ListWisataAdapter
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOnePresenter
 import com.example.travada.features.tabungan.models.DataTabungBareng
 

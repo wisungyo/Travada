@@ -3,7 +3,7 @@ package com.example.travada.features.tabungan.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class PostTabunganRequest(
+data class PostTabunganBody(
     @SerializedName("foto")
     val foto: String,
     @SerializedName("tabungan")

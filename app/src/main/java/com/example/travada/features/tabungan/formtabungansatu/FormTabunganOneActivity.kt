@@ -30,7 +30,6 @@ import com.example.travada.features.tabungan.DataPermissions.Companion.REQUEST_C
 import com.example.travada.features.tabungan.DataPermissions.Companion.arrayListPermission
 import com.example.travada.features.tabungan.formtabungandua.FormTabunganTwoActivity
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
-import com.example.travada.welcomepage.register.register2.Register2Activity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_form_tabungan_one.*
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
@@ -129,7 +128,6 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
                 imm.hideSoftInputFromWindow(v.windowToken, 0)
             }
         })
-
 
         // upload image
         ivImageTabungan.setOnClickListener {
