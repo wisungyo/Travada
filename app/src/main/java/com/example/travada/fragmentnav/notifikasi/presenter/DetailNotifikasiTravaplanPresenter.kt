@@ -1,15 +1,6 @@
 package com.example.travada.fragmentnav.notifikasi.presenter
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityDisetujui
-import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityDitolak
-import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityExpired
-import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityMenunggu
-import com.example.travada.features.rencana.network.TPApiClient
-import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
-import com.example.travada.features.rencana.pojo.GetDestinasiResponse
-import com.example.travada.features.rencana.pojo.GetPemesananDetailResponse
 import com.example.travada.fragmentnav.notifikasi.network.ApiClientNotifikasi
 import com.example.travada.fragmentnav.notifikasi.pojo.GetDetailNotifikasiResponse
 import com.example.travada.fragmentnav.notifikasi.pojo.GetNotifikasiResponse
@@ -39,7 +30,6 @@ class DetailNotifikasiTravaplanPresenter(val listener: Listener) : AppCompatActi
 
                 listener.hideLoadingDialog()
             }
-
             override fun onFailure(call: Call<GetDetailNotifikasiResponse>, t: Throwable) {
                 t.message?.let {
                     listener.implementDetailRencanaFailure(it)
