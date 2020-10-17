@@ -49,7 +49,7 @@ data class GetDestinasiResponse(
         @SerializedName("pulang")
         val pulang:  List<Any>, // 2020-12-19
         @SerializedName("rencana_list")
-        val rencanaList: List<Any>,
+        val rencanaList: List<String>,
         @SerializedName("syarat_ketentuan")
         val syaratKetentuan: Any, // null
         @SerializedName("updatedAt")

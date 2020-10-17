@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.example.travada.R
-import com.example.travada.features.rencana.wisnu.view.DialogKonfirmasiPemesanan
-import com.example.travada.features.rencana.wisnu.view.KonfirmasiRencanaActivity
 import kotlinx.android.synthetic.main.fragment_dialog_konfirmasi_notifikasi_gabung.view.*
 import kotlinx.android.synthetic.main.fragment_dialog_konfirmasi_rencana.view.*
 

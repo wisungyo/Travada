@@ -1,5 +1,6 @@
 package com.example.travada.fragmentnav.akun
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.finishAffinity
 import com.example.travada.R
 import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActivity
 import com.example.travada.features.rencana.searchpage.room.DatabaseItem
@@ -71,9 +73,9 @@ class AkunFragment : Fragment(), AkunFragmentPresenter.Listener {
         }
 
         btn_changepin.setOnClickListener {
-//            goToChangePin()
-            val intentActivity = Intent(activity, TopUpInputActivity::class.java)
-            startActivity(intentActivity)
+            goToChangePin()
+//            val intentActivity = Intent(activity, TopUpInputActivity::class.java)
+//            startActivity(intentActivity)
         }
 
         btn_logout.setOnClickListener {
@@ -133,8 +135,13 @@ class AkunFragment : Fragment(), AkunFragmentPresenter.Listener {
     }
 
     override fun goToChangePassword() {
-        val intentActivity = Intent(activity, AkunChangePassActivity::class.java)
-        startActivity(intentActivity)
+//        val intentActivity = Intent(activity, AkunChangePassActivity::class.java)
+//        startActivity(intentActivity)
+        Toast.makeText(
+            context,
+            "Under construction..",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun goToChangePin() {
@@ -148,13 +155,14 @@ class AkunFragment : Fragment(), AkunFragmentPresenter.Listener {
     }
 
     override fun goToMenuLogin() {
-//        val intentActivity = Intent(activity, OnboardingEndActivity::class.java)
-//        startActivity(intentActivity)
-        Toast.makeText(
-            context,
-            "Under construction..",
-            Toast.LENGTH_SHORT
-        ).show()
+        val intentActivity = Intent(activity, OnboardingEndActivity::class.java)
+        startActivity(intentActivity)
+        finishAffinity(Activity())
+//        Toast.makeText(
+//            context,
+//            "Under construction..",
+//            Toast.LENGTH_SHORT
+//        ).show()
     }
 
     override fun showLoadingDialog() {

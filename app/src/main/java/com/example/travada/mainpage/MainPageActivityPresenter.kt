@@ -7,7 +7,7 @@ import com.example.travada.R
 import com.example.travada.fragmentnav.akun.AkunFragment
 import com.example.travada.fragmentnav.beranda.BerandaFragment
 import com.example.travada.fragmentnav.notifikasi.view.NotifikasiFragment
-import com.example.travada.fragmentnav.riwayat.RiwayatFragment
+import com.example.travada.fragmentnav.riwayat.main.RiwayatFragment
 
 class MainPageActivityPresenter (val listener: Listener): AppCompatActivity() {
 

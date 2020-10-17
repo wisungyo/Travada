@@ -28,9 +28,6 @@
 
         </activity>
         <activity android:name=".features.transfer.va.VAInvoiceActivity" />
-        <activity android:name=".features.transfer.va.VAInvoiceActivity" >
-
-        </activity>
         <activity android:name=".features.transfer.va.VAPinActivity" />
         <activity android:name=".features.transfer.va.VAConfirm2Activity" />
         <activity android:name=".features.transfer.va.VAConfirm1Activity" />
@@ -49,8 +46,6 @@
             android:name=".features.mutasi.view.PinMutasiActivity"
             android:noHistory="true" />
         <activity android:name=".features.mutasi.view.ResultMutasiActivity" />
-        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravasave" />
-        <activity android:name=".fragmentnav.notifikasi.DetailNotifikasiTravaplan" />
         <activity android:name=".fragmentnav.notifikasi.view.DetailNotifikasiTravasave" />
         <activity android:name=".fragmentnav.notifikasi.view.DetailNotifikasiTravaplan" />
         <activity android:name=".features.mutasi.view.MutasiActivity" />
@@ -67,10 +62,6 @@
         <activity android:name=".features.rencana.konfirmasi.KonfirmasiRencanaActivity" />
         <activity android:name=".features.rencana.pesan.PesanRencanaActivity" />
         <activity android:name=".features.rencana.main.RencanaActivity" />
-        <activity android:name=".features.rencana.wisnu.view.KonfirmasiRencanaActivity" />
-        <activity android:name=".features.rencana.wisnu.view.PesanRencanaActivity" />
-        <activity android:name=".features.rencana.wisnu.view.RencanaActivity"></activity>
-        <activity android:name=".features.rencana.wisnu.view.RencanaActivity" />
         <activity android:name=".features.rencana.searchpage.TPFilterPageActivity" />
         <activity android:name=".features.rencana.person.TPPersonActivity" />
         <activity android:name=".welcomepage.register.takepicSelfieKTP.TakePicSelfieKTPActivity" />
@@ -88,18 +79,8 @@
         <activity android:name=".detailriwayat.view.DetailRiwayatActivity" />
         <activity android:name=".berita.view.DetailBeritaActivity" />
         <activity android:name=".berita.view.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity" />
-        <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
-        <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
-        <activity android:name=".berita.DetailBeritaActivity" />
-        <activity android:name=".berita.BeritaActivity" />
-
         <activity android:name=".mainpage.MainPageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".features.tabungan.detailtabungan.view.PinSetorManualActivity"/>
@@ -115,7 +96,11 @@
         </activity>
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
         <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
 

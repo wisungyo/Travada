@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
-import com.example.travada.features.rencana.wisnu.view.DialogKonfirmasiPemesanan
+
 import com.example.travada.fragmentnav.notifikasi.pojo.GetDetailNotifikasiResponse
 import com.example.travada.fragmentnav.notifikasi.presenter.DetailNotifikasiTravaplanPresenter
 import com.example.travada.util.loadingdialog.LoadingDialog
