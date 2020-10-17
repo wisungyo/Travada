@@ -20,14 +20,16 @@ data class GetTabunganDetailResponse(
         val gambarTabungan: String,
         @SerializedName("id")
         val id: Int,
-        @SerializedName("jumlah_orang")
-        val jumlahOrang: Int,
         @SerializedName("jumlah_setoran")
         val jumlahSetoran: Int,
         @SerializedName("jumlah_tabungan")
         val jumlahTabungan: Int,
+        @SerializedName("nama")
+        val nama: List<String>,
         @SerializedName("periode")
         val periode: String,
+        @SerializedName("rekening")
+        val rekening: List<String>,
         @SerializedName("setoran_awal")
         val setoranAwal: Int,
         @SerializedName("target")

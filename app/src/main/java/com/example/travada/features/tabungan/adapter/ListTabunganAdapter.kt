@@ -7,11 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.tabungan.maintabungan.TabunganPresenter
-import com.example.travada.features.tabungan.models.DataWisata
 import com.example.travada.features.tabungan.pojo.GetAllTabunganResponse
-import kotlinx.android.synthetic.main.detail_riwayat_item_dp_cicilan.view.*
 import kotlinx.android.synthetic.main.list_liburan_pilihan.view.*
-import kotlinx.android.synthetic.main.main_page_item_trip.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*

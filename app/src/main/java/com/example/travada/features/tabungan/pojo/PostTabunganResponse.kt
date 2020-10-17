@@ -1,6 +1,4 @@
 package com.example.travada.features.tabungan.pojo
-
-
 import com.google.gson.annotations.SerializedName
 
 data class PostTabunganResponse(

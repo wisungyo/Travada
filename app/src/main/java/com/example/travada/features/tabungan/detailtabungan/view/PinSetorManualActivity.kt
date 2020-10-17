@@ -24,10 +24,7 @@ class PinSetorManualActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pin_setor_manual)
 
-        presenter =
-            PinSetorManualPresenter(
-                this
-            )
+        presenter = PinSetorManualPresenter(this)
 
         Glide
             .with(this)

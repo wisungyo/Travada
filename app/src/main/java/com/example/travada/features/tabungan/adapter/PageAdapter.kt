@@ -1,16 +1,18 @@
 package com.example.travada.features.tabungan.adapter
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganFragment
 import com.example.travada.features.tabungan.detailtabungan.view.TransaksiTabunganFragment
 
-class PageAdapter (fm: FragmentManager): FragmentPagerAdapter(fm) {
+class PageAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
 
     private val pages = listOf(
         DetailTabunganFragment(),
         TransaksiTabunganFragment()
+
     )
 
     override fun getItem(position: Int): Fragment {

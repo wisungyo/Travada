@@ -38,6 +38,7 @@ class TabunganPresenter(val listener: Listener) {
 
     interface Listener {
 
+
         fun showItemClicked(idTabungan: Int)
 
         fun hideLoadingDialog()

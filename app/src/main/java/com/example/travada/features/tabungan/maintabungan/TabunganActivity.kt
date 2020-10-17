@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.features.rencana.wisnu.view.PesanRencanaActivity
 import com.example.travada.features.tabungan.adapter.ListTabunganAdapter
 import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganActivity
 import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganFragment
@@ -17,6 +16,7 @@ import com.example.travada.features.tabungan.pojo.GetAllTabunganResponse
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_tabungan.*
+
 
 class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
 
@@ -45,10 +45,15 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
         val intentDetailTabungan = Intent(this, DetailTabunganActivity::class.java)
         intentDetailTabungan.putExtra("TABUNGAN_ID", idTabungan)
         startActivity(intentDetailTabungan)
+
     }
 
     override fun hideLoadingDialog() {
         MyFragment.dismiss()
+    }
+
+    override fun implementAllTabungan(getTabungan: MutableList<GetAllTabunganResponse.Data>) {
+        setUpRecyclerView(getTabungan)
     }
 
     fun setUpRecyclerView(listTabungan : List<GetAllTabunganResponse.Data>){
@@ -56,9 +61,6 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
         rvMainTabungan.adapter = ListTabunganAdapter(listTabungan, presenter)
     }
 
-    override fun implementAllTabungan(getTabungan: MutableList<GetAllTabunganResponse.Data>) {
-        setUpRecyclerView(getTabungan)
-    }
 
 
     override fun implementAllTabunganFailure(errMessage: String) {

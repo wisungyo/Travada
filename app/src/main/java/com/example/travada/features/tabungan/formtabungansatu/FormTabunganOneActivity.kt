@@ -71,8 +71,10 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         })
 
         // editText jumlah
+
         etJumlah.addTextChangedListener(object : TextWatcher {
             var processed = ""
+
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
                 if (etJumlah == count) {
@@ -93,6 +95,8 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
                 nf.setGroupingUsed(true);
 
                 var myNumber = cleanString.toLong()
+                nominal = cleanString.toLong()
+
                 processed = nf.format(myNumber)
                 etJumlah.removeTextChangedListener(this)
                 etJumlah.setText(processed)
@@ -109,7 +113,7 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 errJumlah(null)
-               // presenter.checkJumlah(etJumlah.text.toString().toInt())
+                presenter.checkJumlah(etJumlah.text.toString())
                 presenter.checked(
                     etTujuan.text.toString(),
                     etJumlah.text.toString(),
@@ -176,7 +180,7 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         val bundle = Bundle()
         val intent = Intent(this, FormTabunganTwoActivity::class.java)
         bundle.putString("namaTujuan", etTujuan.text.toString())
-        bundle.putString("jumlahDitabung", etJumlah.text.toString())
+        bundle.putString("jumlahDitabung", nominal.toString())
         bundle.putString("uriGambar", uriGambar)
         intent.putExtras(bundle)
         startActivity(intent)
@@ -192,7 +196,9 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
     }
 
     // melakukan semua request permission yang dibutuhkan aplikasi
-    fun requestRequiredPermissions() { requestPermissions(arrayListPermission, REQUEST_CODE) }
+    fun requestRequiredPermissions() {
+        requestPermissions(arrayListPermission, REQUEST_CODE)
+    }
 
     //Callback / respon dari konfirmasi permission (pilihan allow / deny)
     override fun onRequestPermissionsResult(
@@ -388,6 +394,7 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
     }
 
     companion object {
+        var nominal = 0L
         var uriGambar: String = ""
     }
 }

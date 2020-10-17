@@ -1,5 +1,6 @@
 package com.example.travada.features.tabungan.formtabungandua
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -25,14 +26,17 @@ import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
 import com.example.travada.features.tabungan.formresulttabungan.DetailFormResultActivity
 import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeActivity
 import com.example.travada.features.tabungan.helper.CalendarHelper
+import com.example.travada.features.tabungan.models.DataTabungBareng
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener {
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter
     private lateinit var terimaBundle: Bundle
+    lateinit var listTabungBareng: ArrayList<DataTabungBareng>
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +44,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         setContentView(R.layout.activity_form_tabungan_two)
 
         intent?.extras?.let { terimaBundle = it }
+
         terimaBundle = Bundle()
 
         presenter = FormTabunganTwoPresenter(this)
@@ -47,8 +52,10 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         btnTambahTeman.setOnClickListener {
-            val goToFormTambahTeman = Intent(this, FormTabunganThreeActivity::class.java)
-            startActivity(goToFormTambahTeman)
+//            val goToFormTambahTeman = Intent(this, FormTabunganThreeActivity::class.java)
+//            startActivity(goToFormTambahTeman)
+            val intent = Intent(this, FormTabunganThreeActivity::class.java)
+            this.startActivityForResult(intent, 12)
         }
 
         btnLanjutFormTwo.setOnClickListener {
@@ -64,7 +71,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
 
         var metodeTabungan = etMetodeTabungan as AutoCompleteTextView
         fun dataMetodeTabungan() {
-            var list = listOf("Auto debet", "Manual")
+            var list = listOf("Auto debet")
             var adapter =
                 ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list)
             metodeTabungan.setAdapter(adapter)
@@ -109,13 +116,13 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         })
 
         etSetoranAwal.addTextChangedListener(object : TextWatcher {
-
             var processed = ""
+
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
-                if(etSetoranAwal==count){
+                if (etSetoranAwal == count) {
                     etSetoranAwal.clearFocus()
-                   // etSetoranAwal.requestFocus()
+                    // etSetoranAwal.requestFocus()
                     etSetoranAwal.isCursorVisible
                 }
 
@@ -131,7 +138,8 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                 val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
                 nf.setGroupingUsed(true);
 
-                var myNumber = cleanString.toDouble()
+                var myNumber = cleanString.toLong()
+                setoranAwal - cleanString.toLong()
                 processed = nf.format(myNumber)
                 etSetoranAwal.removeTextChangedListener(this)
                 etSetoranAwal.setText(processed)
@@ -144,9 +152,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                 etSetoranAwal.addTextChangedListener(this)
             }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 errSetoranAwal(null)
@@ -180,7 +186,8 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         etSetoranAwal.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
                 // code to execute when EditText loses focus
-                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm: InputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(v.windowToken, 0)
             }
         })
@@ -203,6 +210,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
 
         etJumlahSetoran.addTextChangedListener(object : TextWatcher {
             var processed = ""
+
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
                 if (count.toString().length == 1 && count.toString().startsWith("0")) {
@@ -217,7 +225,8 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                 val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
                 nf.setGroupingUsed(true);
 
-                var myNumber = cleanString.toDouble()
+                var myNumber = cleanString.toLong()
+                jumlahSetoran = cleanString.toLong()
                 processed = nf.format(myNumber)
                 etJumlahSetoran.removeTextChangedListener(this)
                 etJumlahSetoran.setText(processed)
@@ -246,7 +255,8 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         etJumlahSetoran.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
                 // code to execute when EditText loses focus
-                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm: InputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(v.windowToken, 0)
             }
         })
@@ -254,10 +264,33 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         btnInactive()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 12) {
+            if (resultCode == Activity.RESULT_OK) {
+                data?.let {
+                    val body = DataTabungBareng(
+                        it.getStringExtra(FormTabunganThreeActivity.namaRekening).toString(),
+                        it.getStringExtra(FormTabunganThreeActivity.nomorRekening).toString(),
+                        it.getStringExtra(FormTabunganThreeActivity.namaRekening)!!.subSequence(0,1).toString())
+
+                    listTabungBareng.add(body)
+                }
+                val adapterTabungBareng = BarengTemanAdapter(listTabungBareng)
+                showDataTabungBareng(adapterTabungBareng)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter
+    }
+
     @RequiresApi(Build.VERSION_CODES.N)
     fun showDatePicker() {
         // DatePicker
-        DateEditText.setText(SimpleDateFormat("dd MMMM yyyy").format(System.currentTimeMillis()))
+        DateEditText.setText(SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()))
         var cal = Calendar.getInstance()
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
@@ -265,7 +298,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val myFormat = "dd MMMM yyyy" // mention the format you need
+                val myFormat = "dd-MM-yyyy" // mention the format you need
                 val sdf = SimpleDateFormat(myFormat, Locale.US)
                 DateEditText.setText(sdf.format(cal.time))
             }
@@ -293,7 +326,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         btnLanjutFormTwo.isClickable = true
     }
 
-    override fun goToNextPage(bundle:Bundle) {
+    override fun goToNextPage(bundle: Bundle) {
         val intent = Intent(this, DetailFormResultActivity::class.java)
         bundle.putString("tanggalTarget", etTanggal.text.toString())
         bundle.putString("setoranAwal", etSetoranAwal.text.toString())
@@ -319,6 +352,11 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         rvTabunganBarengTeman.layoutManager = layoutManagerLinear
         rvTabunganBarengTeman.adapter = adapterTabungBareng
         rvTabunganBarengTeman.overScrollMode = View.OVER_SCROLL_NEVER
+    }
+
+    companion object {
+        var jumlahSetoran = 0L
+        var setoranAwal = 0L
     }
 
 }

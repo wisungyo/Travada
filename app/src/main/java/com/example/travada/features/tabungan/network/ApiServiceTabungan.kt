@@ -1,18 +1,25 @@
 package com.example.travada.features.tabungan.network
 
-import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
 import com.example.travada.features.tabungan.pojo.GetAllTabunganResponse
 import com.example.travada.features.tabungan.pojo.GetTabunganDetailResponse
-import com.example.travada.features.tabungan.pojo.PostTabunganBody
+import com.example.travada.features.tabungan.pojo.GetRekeningTemanResponse
+import com.example.travada.features.tabungan.pojo.PostTabunganResponse
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiServiceTabungan {
-
-    // POST
+    @Headers("Content-Type: application/json;charset=UTF-8")
     @POST("tabungan")
-    fun createTabungan(@Body body: RequestBody): Call<PostTabunganBody>
+    fun createTabungan(
+        @Header("Authorization") token: String,
+        @Body body: RequestBody): Call<PostTabunganResponse>
+
+
+//    @POST("tabungan")
+//    fun createTabungan(@Body body: RequestBody): Call<>
+
+
 
     // GET
     @GET("tabungan/all")
@@ -20,5 +27,10 @@ interface ApiServiceTabungan {
 
     @GET("tabungan/{id}")
     fun getDetailTabungan(@Path("id")id: Int) : Call<GetTabunganDetailResponse>
+
+    @GET("tabungan/teman?")
+    fun getRekeningTeman(
+        @Query("rekening") rekening: String
+    ): Call<GetRekeningTemanResponse>
 
 }

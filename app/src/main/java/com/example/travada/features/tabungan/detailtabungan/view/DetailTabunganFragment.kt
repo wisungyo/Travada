@@ -1,23 +1,25 @@
 package com.example.travada.features.tabungan.detailtabungan.view
 
+import android.R.attr.defaultValue
+import android.R.attr.key
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.DetailTabunganAdapter
 import com.example.travada.features.tabungan.detailtabungan.presenter.DetailTabunganFragmentPresenter
-import com.example.travada.features.tabungan.models.DataWisata
 import com.example.travada.features.tabungan.pojo.GetTabunganDetailResponse
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_detail_tabungan.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +30,7 @@ class DetailTabunganFragment : Fragment(),
     DetailTabunganFragmentPresenter.Listener {
 
     private lateinit var presenter: DetailTabunganFragmentPresenter
-    private lateinit var result : DataWisata
+    // private lateinit var result:
 
     val MyFragment = LoadingDialog()
 
@@ -55,13 +57,40 @@ class DetailTabunganFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val idDetail = 1
+        presenter = DetailTabunganFragmentPresenter(this)
 
-        presenter =
-            DetailTabunganFragmentPresenter(
-                this
-            )
-        presenter.getDetailTabungan(idDetail)
+//        val args = getArguments();
+//        val side = args?.getInt("ID_DETAILTABUNGAN")
+//        side?.let { presenter.getDetailTabungan(it) }
+
+        // val myInt = bundle.getInt("ID_DETAILTABUNGAN")
+
+//        val strtext = arguments!!.getInt("TABUNGAN")
+//        Log.d("TOLONGGG","$strtext")
+//        presenter.getDetailTabungan(strtext)
+
+
+//        arguments?.getInt("TABUNGAN")?.let {
+//
+//            Log.d("TOLONGGG","${id}")
+//        }
+
+        val bundle = arguments
+        val myValue = bundle!!.getInt("TABUNGAN")
+        presenter.getDetailTabungan(myValue)
+
+        // myValue.let { presenter.getDetailTabungan(it) }
+//        val bundle = this.arguments
+//        if (bundle != null) {
+//            val myInt = bundle.getInt("ID_DETAILTABUNGAN")
+//            presenter.getDetailTabungan(myInt)
+//        }
+
+
+//        val message = arguments!!.getInt("ID_DETAILTABUNGAN")
+//        Log.d("TABUNG","$message")
+//        presenter.getDetailTabungan(message)
+
 
 //        arguments?.getParcelable<DataWisata>("detail")?.let {
 //            result = it
@@ -70,7 +99,7 @@ class DetailTabunganFragment : Fragment(),
     }
 
     override fun showLoadingDialog() {
-        val fm=fragmentManager
+        val fm = fragmentManager
         MyFragment.isCancelable = false
         fm?.let { MyFragment.show(it, "Fragment") }
     }
@@ -86,7 +115,6 @@ class DetailTabunganFragment : Fragment(),
     }
 
     override fun implementDetailTabungan(getTabungan: GetTabunganDetailResponse.Data) {
-
         if (getTabungan.gambarTabungan.isNotEmpty()) {
             Glide.with(this)
                 .load(getTabungan.gambarTabungan)
@@ -95,7 +123,7 @@ class DetailTabunganFragment : Fragment(),
         } else {
             Glide
                 .with(this)
-                .load( "https://cdn.thegeekdiary.com/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png")
+                .load("https://cdn.thegeekdiary.com/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png")
                 .circleCrop()
                 .into(imageWisata)
         }
@@ -108,10 +136,10 @@ class DetailTabunganFragment : Fragment(),
         tvJumlahTabunngan.text = "dari Rp. ${df.format(getTabungan.jumlahTabungan)}"
 
 
-        val tahunTarget         =  extractTahun(getTabungan.target)
-        val bulanTarget         = extractBulan(getTabungan.target)
-        val namaBulanDibuat     = changeBulan(bulanTarget)
-        val tanggaltarget       =  extractTanggal(getTabungan.target)
+        val tahunTarget = extractTahun(getTabungan.target)
+        val bulanTarget = extractBulan(getTabungan.target)
+        val namaBulanDibuat = changeBulan(bulanTarget)
+        val tanggaltarget = extractTanggal(getTabungan.target)
 
         tvTanggalPencapaian.text = "$tanggaltarget $namaBulanDibuat $tahunTarget"
 
@@ -119,20 +147,21 @@ class DetailTabunganFragment : Fragment(),
         tvJumlahTabunngan.text = "dari Rp. ${df.format(getTabungan.setoranAwal)}"
     }
 
+
     override fun implementDetailTabunganFailure(errMessage: String) {
         Toast.makeText(context, "Error : $errMessage", Toast.LENGTH_LONG).show()
     }
 
     fun extractTanggal(tanggal: String): String {
-        return tanggal.subSequence(8,10).toString()
+        return tanggal.subSequence(8, 10).toString()
     }
 
     fun extractBulan(bulan: String): String {
-        return bulan.subSequence(5,7).toString()
+        return bulan.subSequence(5, 7).toString()
     }
 
     fun extractTahun(tahun: String): String {
-        return tahun.subSequence(0,4).toString()
+        return tahun.subSequence(0, 4).toString()
     }
 
     fun changeBulan(bulan: String): String {

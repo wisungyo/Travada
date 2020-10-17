@@ -27,7 +27,6 @@ class FormTabunganTwoPresenter(private val listener: Listener) {
         )
         val adapterTabungBareng = BarengTemanAdapter(listTabungBareng)
         listener.showDataTabungBareng(adapterTabungBareng)
-
     }
 
     fun checked(
@@ -59,6 +58,7 @@ class FormTabunganTwoPresenter(private val listener: Listener) {
     }
 
     interface Listener {
+
         fun btnActive()
         fun goToNextPage(bundle: Bundle)
         fun btnInactive()

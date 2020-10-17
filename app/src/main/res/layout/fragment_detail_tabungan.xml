@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical|top"
                     android:layout_marginTop="122dp"
-                    android:text="dari Rp. 000 000 000"
+                    android:text="dari 000 000 000"
                     android:textColor="@color/black"
                     android:textSize="@dimen/heading4" />
 
@@ -162,7 +162,7 @@
                     android:layout_gravity="top|end"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
-                    android:text="20 Juni 2020"
+                    android:text="00 Juni 0000"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/heading4" />
 
@@ -173,7 +173,7 @@
                     android:layout_gravity="bottom|end"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Rp. 2.000.000"
+                    android:text="Rp. 000 000 000"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/heading4" />
 

@@ -75,7 +75,13 @@
         <activity android:name=".berita.DetailBeritaActivity" />
         <activity android:name=".berita.BeritaActivity" />
 
-        <activity android:name=".mainpage.MainPageActivity"></activity>
+        <activity android:name=".mainpage.MainPageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".features.tabungan.detailtabungan.view.PinSetorManualActivity"/>
         <activity android:name=".features.tabungan.detailtabungan.view.DetailTabunganActivity" >
@@ -86,11 +92,7 @@
         <activity android:name=".features.tabungan.formtabungandua.FormTabunganTwoActivity" />
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
         <activity android:name=".features.tabungan.maintabungan.TabunganActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
         <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
