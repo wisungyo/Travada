@@ -9,10 +9,10 @@ class DataPermissions {
         const val REQUEST_CODE = 201
 
         //Digunakan jika user memilih Ambil gambar dari Camera
-        const val CAMERA_REQUEST = 1001
+        const val CAMERA_REQUEST_UPLOAD = 1001
 
         //RequestDigunakan jika user memilih Pilih Gambar dari Gallery
-        const val GALLERY_REQUEST = 1002
+        const val GALLERY_REQUEST_UPLOAD = 1002
 
         //Daftar permission yang akan dipinta
         val arrayListPermission = arrayOf(

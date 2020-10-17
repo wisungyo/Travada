@@ -20,7 +20,6 @@ class DetailTabunganAdapter(val listDetail: ArrayList<DataDetailTabungan>) :
         )
     }
 
-
     override fun getItemCount(): Int {
         return listDetail.size
     }

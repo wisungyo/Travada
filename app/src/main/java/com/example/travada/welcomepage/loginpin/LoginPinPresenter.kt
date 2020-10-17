@@ -10,8 +10,6 @@ import kotlinx.coroutines.launch
 class LoginPinPresenter(val listener: Listener) {
 
     fun pinView(nums: ArrayList<Int>) {
-
-
         val sb = StringBuilder()
         for (i in 0 until nums.size) {
             val num = nums[i]

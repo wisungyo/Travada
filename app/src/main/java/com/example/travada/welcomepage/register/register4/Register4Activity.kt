@@ -47,6 +47,8 @@ class Register4Activity : AppCompatActivity(), Register4Presenter.Listener {
         btn_back.setOnClickListener {
             finish()
         }
+
+        btnInactive()
     }
 
     override fun btnActive() {

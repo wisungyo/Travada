@@ -117,6 +117,8 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
         btn_next.setOnClickListener {
             presenter.nextPage()
         }
+
+        btnInactive()
     }
 
     override fun btnActive() {

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
-import com.example.travada.features.tabungan.formdetailtabungan.DataTabungBareng
+import com.example.travada.features.tabungan.models.DataTabungBareng
 import kotlinx.android.synthetic.main.list_tabung_bareng.view.*
 
 class TabungBarengAdapter(val listTemanGabung: ArrayList<DataTabungBareng>) :
@@ -27,7 +27,7 @@ RecyclerView.Adapter<TabungBarengAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.tvNamaTemanGabung.setText(listTemanGabung[position].nama)
         holder.itemView.tvRekeningTemanGabung.setText(listTemanGabung[position].nomorRekening)
-        holder.itemView.imageTeman.setText(listTemanGabung[position].gambar)
+        holder.itemView.imageTeman.setText(listTemanGabung[position].inisial)
 
     }
 

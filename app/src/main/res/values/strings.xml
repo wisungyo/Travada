@@ -13,6 +13,7 @@
     <string name="title_tambah_tabungan"> Rencanakan tabunganmu untuk mewujudkan liburan \nimpian dengan mudah</string>
     <string name="hint_tujuan"> Tulis tujuanmu disini</string>
     <string name="hint_jumlah"> Jumlah yang akan kamu tabung</string>
+    <string name="hint_topUpTabungan"> Nominal Top Up Tabungan</string>
     <string name="label_tanggal_pencapaian"> Tanggal pencapaian</string>
     <string name="label_setoran_awal"> Setoran Awal</string>
     <string name="label_metode_tabungan"> Metode tabungan</string>
@@ -25,7 +26,7 @@
     <string name="deskripsi_content">Trip Highlights: \n\n Shibuya, "Hachiko-mae Hiroba" adalah salah satu lokasi di Shibuya yang terkenal sebagai tempat untuk pertemuan, sedangkan "Persimpangan Scramble" adalah persimpangan yang paling banyak dilewati kendaraan di seluruh dunia. Ginza, kawasan ini dikenal sebagai kawasan mewah di Tokyo. Di tempat ini terdapat berbagai toko serba ada, butik, restoran dan kafe. Ginza dikenal sebagai salah satu pusat perbelanjaan paling mewah di dunia. Toko-toko utama dari merek busana elite berada di sini, Chanel, Dior, Abercrombie &amp; Fitch, Gucci, dan Louis Vuitton. Di sini juga terdapat ruang pamer Sony dan Apple Store Ginza.</string>
     <string name="overview_content">onnichiwa! Welcome to Japan, selamat datang di Jepang, negara dengan empat musim yang selalu menawan untuk dikunjungi kapan saja. Mulai dari musim semi yang menyajikan keindahan sakura, musim panas dengan langit biru cerah dan awan yang menggantung manja, musim gugur dengan dedaunan berwarna-warni, dan musim dingin yang akan membiusmu dengan semilir salju yang turun dari langit. \n\nKami akan membawamu menikmati nuansa modern di Tokyo hingga menyaksikan megahnya Gunung Fuji langsung di depan mata. Bersama, kita akan menjelajah Jepang yang tidak akan pernah mengecewakanmu.</string>
 
-    <string name="desc_detail_tabungan">Kamu bisa menyesuaikan tabunganbukanan dengan \nmenambah uang e saldo tabunganmu</string>
+    <string name="desc_detail_tabungan">Kamu bisa menyesuaikan tabungan bulanan dengan \nmenambah uang e saldo tabunganmu</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

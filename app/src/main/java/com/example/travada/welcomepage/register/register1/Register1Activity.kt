@@ -25,6 +25,7 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
         setContentView(R.layout.activity_register1)
 
 
+
         presenter = Register1Presenter(this)
 
         Glide
@@ -144,6 +145,8 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
         btn_back.setOnClickListener {
             finish()
         }
+
+        btnInactive()
     }
 
     override fun btnActive() {
@@ -204,7 +207,7 @@ class Register1Activity : AppCompatActivity(), Register1Presenter.Listener {
         MyFragment.dismiss()
     }
 
-    override fun showToast(text:String) {
+    override fun showToast(text: String) {
         Toast.makeText(
             this@Register1Activity, text,
             Toast.LENGTH_LONG

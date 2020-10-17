@@ -74,6 +74,8 @@ class VerifRegister4Activity : AppCompatActivity(), VerifRegister4Presenter.List
         btn_back.setOnClickListener {
             finish()
         }
+
+        btnInactive()
     }
 
     override fun btnActive() {

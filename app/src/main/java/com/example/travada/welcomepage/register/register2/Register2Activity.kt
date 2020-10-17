@@ -126,8 +126,9 @@ class Register2Activity : AppCompatActivity(), Register2Presenter.Listener {
                 )
             }
         })
-    }
 
+        btnInactive()
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

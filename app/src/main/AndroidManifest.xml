@@ -20,13 +20,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".features.mutasi.view.PDFMutasiActivity"></activity>
+        <activity android:name=".features.topup.TopUpInvoiceActivity"></activity>
+        <activity android:name=".features.topup.TopUpInputPinActivity" >
+
+        </activity>
+        <activity android:name=".features.topup.TopUpInputActivity" >
+
+        </activity>
+        <activity android:name=".features.transfer.va.VAInvoiceActivity" />
+        <activity android:name=".features.transfer.va.VAPinActivity" />
+        <activity android:name=".features.transfer.va.VAConfirm2Activity" />
+        <activity android:name=".features.transfer.va.VAConfirm1Activity" />
+        <activity android:name=".features.transfer.transferbank.TransferInvoiceActivity" />
+        <activity android:name=".features.transfer.transferbank.TransferPinActivity" />
+        <activity android:name=".features.transfer.transferbank.TransferConfirmActivity" />
+        <activity android:name=".features.transfer.transferbank.TransferInputActivity" />
+        <activity android:name=".features.transfer.va.VAInputActivity" />
+        <activity android:name=".features.transfer.TransferMenuActivity" />
+        <activity android:name=".fragmentnav.akun.changepass.AkunChangePassActivity" />
+        <activity android:name=".fragmentnav.akun.changepin.AkunConfirmNewPinActivity" />
+        <activity android:name=".fragmentnav.akun.changepin.AkunInputNewPinActivity" />
+        <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
+        <activity android:name=".features.mutasi.view.PDFMutasiActivity" />
         <activity
             android:name=".features.mutasi.view.PinMutasiActivity"
             android:noHistory="true" />
         <activity android:name=".features.mutasi.view.ResultMutasiActivity" />
+        <activity android:name=".fragmentnav.notifikasi.view.DetailNotifikasiTravasave" />
+        <activity android:name=".fragmentnav.notifikasi.view.DetailNotifikasiTravaplan" />
         <activity android:name=".features.mutasi.view.MutasiActivity" />
-        <activity android:name=".welcomepage.forgetpin.inputnewpin.ForgetpinInputNewPinActivity" />
         <activity android:name=".welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity" />
         <activity android:name=".features.rencana.result.ResultRencanaActivity" />
         <activity
@@ -57,13 +79,21 @@
         <activity android:name=".detailriwayat.view.DetailRiwayatActivity" />
         <activity android:name=".berita.view.DetailBeritaActivity" />
         <activity android:name=".berita.view.BeritaActivity" />
-        <activity android:name=".mainpage.MainPageActivity" />
-        <activity android:name=".features.tabungan.detailtabungan.DetailTabunganActivity" />
-        <activity android:name=".features.tabungan.formdetailtabungan.DetailFormResultActivity" />
+        <activity android:name=".mainpage.MainPageActivity">
+
+        </activity>
+
+        <activity android:name=".features.tabungan.detailtabungan.view.PinSetorManualActivity"/>
+        <activity android:name=".features.tabungan.detailtabungan.view.DetailTabunganActivity" >
+
+        </activity>
+        <activity android:name=".features.tabungan.formresulttabungan.DetailFormResultActivity" />
         <activity android:name=".features.tabungan.formtabungantiga.FormTabunganThreeActivity" />
         <activity android:name=".features.tabungan.formtabungandua.FormTabunganTwoActivity" />
         <activity android:name=".features.tabungan.formtabungansatu.FormTabunganOneActivity" />
-        <activity android:name=".features.tabungan.maintabungan.TabunganActivity" />
+        <activity android:name=".features.tabungan.maintabungan.TabunganActivity" >
+
+        </activity>
         <activity android:name=".welcomepage.onboarding.OnboardingActivity" />
         <activity android:name=".welcomepage.splashscreen.SplashScreenActivity">
             <intent-filter>
@@ -77,6 +107,16 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

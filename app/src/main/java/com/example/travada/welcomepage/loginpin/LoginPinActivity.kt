@@ -10,13 +10,16 @@ import com.bumptech.glide.Glide
 import com.example.numpad.NumPadClick
 import com.example.numpad.numPadClickListener
 import com.example.travada.R
+import com.example.travada.features.rencana.searchpage.TPSearchSuggestPresenter
 import com.example.travada.features.rencana.searchpage.room.DatabaseItem
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity
+import com.example.travada.welcomepage.login.LoginActivity
+import com.example.travada.welcomepage.onboarding.OnboardingActivity
 import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
+import com.example.travada.welcomepage.splashscreen.SplashScreenPresenter
 import kotlinx.android.synthetic.main.activity_login_pin.*
-import kotlinx.android.synthetic.main.activity_login_pin.PinView
-import kotlinx.android.synthetic.main.activity_login_pin.tv_err
+
 
 
 class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {
@@ -33,14 +36,21 @@ class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {
             .into(iv_image)
 
         numpad.setOnNumPadClickListener(NumPadClick(numPadClickListener { nums:ArrayList<Int> ->
+            if (nums.size <= 6) {
                 presenter.pinView(nums)
-
+            } else {
+                nums.removeAt(6)
+            }
         }))
 
         btn_logout.setOnClickListener {
             DatabaseItem.getInstance(this)?.let {
                 presenter.logout(it)
             }
+        }
+
+        btn_forgotpin.setOnClickListener{
+            goToForgetPinActivity()
         }
 
 
@@ -53,13 +63,15 @@ class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {
     }
 
     override fun goToMainPageActivity() {
+        PinView.setTextColor(Color.parseColor(getString(R.color.greensuccess)))
         val intent = Intent(this, MainPageActivity::class.java)
         startActivity(intent)
         finish()
     }
 
+
     override fun goToForgetPinActivity() {
-        val intent = Intent(this, ForgetpinInputCodeActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

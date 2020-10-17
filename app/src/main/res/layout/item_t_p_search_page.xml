@@ -9,23 +9,22 @@
         android:id="@+id/SearchResult_Item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:paddingBottom="16dp"
-        android:background="@color/white"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
             android:id="@+id/iv_image"
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:src="@drawable/ic_baseline_cancel_presentation_24"
             android:scaleType="fitXY"
-            />
+            android:src="@drawable/ic_baseline_cancel_presentation_24" />
 
         <TextView
             android:id="@+id/tv_place"

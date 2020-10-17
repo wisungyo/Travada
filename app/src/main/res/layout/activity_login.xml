@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:background="@drawable/bg_btninactive"
-        android:clickable="true"
+        android:clickable="false"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="Masuk"
