@@ -2,7 +2,6 @@ package com.example.travada.features.tabungan.formtabungandua
 
 import android.os.Bundle
 import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
-import com.example.travada.features.tabungan.adapter.ListWisataAdapter
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOnePresenter
 import com.example.travada.features.tabungan.models.DataTabungBareng
 
@@ -28,7 +27,6 @@ class FormTabunganTwoPresenter(private val listener: Listener) {
         )
         val adapterTabungBareng = BarengTemanAdapter(listTabungBareng)
         listener.showDataTabungBareng(adapterTabungBareng)
-
     }
 
     fun checked(
@@ -46,7 +44,7 @@ class FormTabunganTwoPresenter(private val listener: Listener) {
     }
 
     fun checkSetoranAwal(setoranAwal: String){
-        if(setoranAwal.length < 1){
+        if(setoranAwal.length < 1 || setoranAwal.isEmpty() ){
             listener.errSetoranAwal("minimal Rp.1")
             FormTabunganOnePresenter.isError = true
         } else {
@@ -60,6 +58,7 @@ class FormTabunganTwoPresenter(private val listener: Listener) {
     }
 
     interface Listener {
+
         fun btnActive()
         fun goToNextPage(bundle: Bundle)
         fun btnInactive()

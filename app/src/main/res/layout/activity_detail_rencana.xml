@@ -44,6 +44,7 @@
         android:id="@+id/nestedView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/viewButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -83,6 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="43dp"
                 android:layout_marginTop="3dp"
+                android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -373,7 +375,8 @@
                 android:id="@+id/rvFasilitasPerjalan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -404,40 +407,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vGaris5" />
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clExpandable"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvInfoTambahan">
 
                 <ExpandableListView
                     android:id="@+id/elInfoTambahan"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="120dp"
                     android:divider="@android:color/background_light"
                     android:dividerHeight="0.5dp"
+                    android:groupIndicator="@drawable/custom_expandable"
                     android:layoutDirection="rtl"
                     android:orientation="vertical"
                     android:scrollbars="none"
-                    android:groupIndicator="@drawable/custom_expandable"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/clExpandable"
                     tools:listitem="@layout/list_info_tambahan" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
     <!--view di bawah tombol lanjut -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/bn_shadow"
+        app:layout_constraintBottom_toTopOf="@id/viewButton" />
+
     <View
         android:id="@+id/viewButton"
         android:layout_width="match_parent"
@@ -480,6 +484,8 @@
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_active"
+        android:clickable="true"
+        android:focusable="true"
         android:fontFamily="@font/roboto"
         android:text="Pesan Sekarang"
         android:textAllCaps="false"

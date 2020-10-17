@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/frameDetailTabungan"
     android:background="@color/white"
-    tools:context=".features.tabungan.detailtabungan.DetailTabunganFragment">
+    tools:context=".features.tabungan.detailtabungan.view.DetailTabunganFragment">
 
     <!--RecyclerView nested -->
     <androidx.core.widget.NestedScrollView
@@ -73,6 +73,15 @@
                 tools:ignore="MissingConstraints">
 
                 <ImageView
+                    android:id="@+id/ivMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_baseline_more_horiz" />
+
+                <ImageView
                     android:id="@+id/imageWisata"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -96,17 +105,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical|top"
                     android:layout_marginTop="102dp"
-                    android:text="Rp. 10.000.000"
+                    android:text="Rp. 000 000 000"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/heading4" />
+                    android:textSize="@dimen/heading4"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvBiaya2"
+                    android:id="@+id/tvJumlahTabunngan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical|top"
                     android:layout_marginTop="122dp"
-                    android:text="dari Rp. 10.000.000"
+                    android:text="dari 000 000 000"
                     android:textColor="@color/black"
                     android:textSize="@dimen/heading4" />
 
@@ -146,22 +156,24 @@
 
 
                 <TextView
+                    android:id="@+id/tvTanggalPencapaian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|end"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Rp. 2.000.000"
+                    android:text="00 Juni 0000"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/heading4" />
 
                 <TextView
+                    android:id="@+id/tvTabunganBulanan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="Rp. 2.000.000"
+                    android:layout_marginBottom="16dp"
+                    android:text="Rp. 000 000 000"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/heading4" />
 
@@ -170,8 +182,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginStart="16dp"
-                    android:layout_marginBottom="21dp"
-                    android:text="Mulai bulan depan"
+                    android:layout_marginBottom="16dp"
+                    android:text="Tabungan Bulanan"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 
@@ -196,7 +208,7 @@
                 android:layout_marginTop="10dp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="@id/ghorizontal2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/gVertical2"
                 app:layout_constraintStart_toStartOf="@id/gVertical1"
                 app:layout_constraintTop_toBottomOf="@id/tvTitleGabungTabungan"
@@ -208,36 +220,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <View
-        android:id="@+id/viewButton"
-        android:layout_width="match_parent"
-        android:layout_height="77dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-
-    <Button
-        android:id="@+id/btnBuatSekarang"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/bg_active"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/roboto"
-        android:paddingStart="130dp"
-        android:paddingEnd="110dp"
-        android:drawableStart="@drawable/ic_top_up"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Top Up"
-        android:layout_marginHorizontal="16dp"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/viewButton"
-        app:layout_constraintEnd_toEndOf="@id/viewButton"
-        app:layout_constraintStart_toStartOf="@id/viewButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

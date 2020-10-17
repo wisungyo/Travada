@@ -3,20 +3,25 @@ package com.example.travada.features.tabungan.maintabungan
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.features.tabungan.adapter.ListWisataAdapter
-import com.example.travada.features.tabungan.detailtabungan.DetailTabunganActivity
-import com.example.travada.features.tabungan.detailtabungan.DetailTabunganFragment
+import com.example.travada.features.tabungan.adapter.ListTabunganAdapter
+import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganActivity
+import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganFragment
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import com.example.travada.features.tabungan.models.DataWisata
+import com.example.travada.features.tabungan.pojo.GetAllTabunganResponse
 import com.example.travada.mainpage.MainPageActivity
+import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_tabungan.*
+
 
 class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
 
     private lateinit var presenter: TabunganPresenter
+    val MyFragment = LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +31,6 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
 
         btnBuatLiburan.setOnClickListener {
             val goToFormTabunganOne = Intent(this, FormTabunganOneActivity::class.java)
-            goToFormTabunganOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(goToFormTabunganOne)
         }
 
@@ -34,10 +38,42 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
             val intent = Intent(this,MainPageActivity::class.java)
             startActivity(intent)
         }
-        presenter.fetchWisataPilihanData()
+        presenter.dataTabunganList()
     }
 
-    override fun showData(adapterWisataPilihan: ListWisataAdapter) {
+    override fun showItemClicked(idTabungan: Int) {
+        val intentDetailTabungan = Intent(this, DetailTabunganActivity::class.java)
+        intentDetailTabungan.putExtra("TABUNGAN_ID", idTabungan)
+        startActivity(intentDetailTabungan)
+
+    }
+
+    override fun hideLoadingDialog() {
+        MyFragment.dismiss()
+    }
+
+    override fun implementAllTabungan(getTabungan: MutableList<GetAllTabunganResponse.Data>) {
+        setUpRecyclerView(getTabungan)
+    }
+
+    fun setUpRecyclerView(listTabungan : List<GetAllTabunganResponse.Data>){
+        rvMainTabungan.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        rvMainTabungan.adapter = ListTabunganAdapter(listTabungan, presenter)
+    }
+
+
+
+    override fun implementAllTabunganFailure(errMessage: String) {
+        Toast.makeText(this, "Error : $errMessage", Toast.LENGTH_LONG).show()
+    }
+
+    override fun showLoadingDialog() {
+        val fm = supportFragmentManager
+        MyFragment.isCancelable = false
+        MyFragment.show(fm, "Fragment")
+    }
+
+    override fun showData(adapterWisataPilihan: ListTabunganAdapter) {
         val layoutManagerLinear =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMainTabungan.layoutManager = layoutManagerLinear
@@ -47,7 +83,8 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
 
     override fun showDetailTabunganWisata(dataWisata: DataWisata) {
 
-        val fragment = DetailTabunganFragment()
+        val fragment =
+            DetailTabunganFragment()
         val bundle = Bundle()
         bundle.putParcelable("detail", dataWisata)
         fragment.setArguments(bundle)

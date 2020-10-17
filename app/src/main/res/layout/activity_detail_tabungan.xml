@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.tabungan.detailtabungan.DetailTabunganActivity">
+    tools:context=".features.tabungan.detailtabungan.view.DetailTabunganActivity">
 
     <View
         android:id="@+id/barTabungan"
@@ -27,11 +27,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvTitleTabunganDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Pulau Komodo 2020"
+        android:text="title"
         android:textColor="@color/white"
         android:textSize="@dimen/heading3"
         app:layout_constraintBottom_toBottomOf="@id/ivFormResultBack"
@@ -55,7 +56,7 @@
             android:layout_height="46dp"
             android:layout_gravity="top"
             android:background="@color/white"
-            android:elevation="8dp"
+            android:elevation="4dp"
             android:textAllCaps="false"
             app:tabIndicatorHeight="3dp"
             app:tabSelectedTextColor="@color/blue"

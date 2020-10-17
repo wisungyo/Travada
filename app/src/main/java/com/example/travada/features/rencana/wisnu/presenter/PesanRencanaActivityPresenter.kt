@@ -25,10 +25,10 @@ class PesanRencanaActivityPresenter(val listener: Listener): AppCompatActivity()
                 if (response.isSuccessful && response.body()?.status == "OK") {
                     response.body()?.data?.let {
                         listener.showMainData(it)
-                        val berangkatTahun      = extractTahun(it.berangkat)
-                        val berangkatBulan      = extractBulan(it.berangkat)
+                        val berangkatTahun      = extractTahun(it.berangkat[0].toString())
+                        val berangkatBulan      = extractBulan(it.berangkat[0].toString())
                         val namaBulanBerangkat:String  = changeBulan(berangkatBulan)
-                        val berangkatTanggal    = extractTanggal(it.berangkat)
+                        val berangkatTanggal    = extractTanggal(it.berangkat[0].toString())
                         arraySpinner.add( "$berangkatTanggal $namaBulanBerangkat $berangkatTahun") // from api still not a List.
 
                         listener.showSpinner(arraySpinner)

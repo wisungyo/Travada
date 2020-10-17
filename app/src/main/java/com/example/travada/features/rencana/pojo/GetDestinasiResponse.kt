@@ -15,7 +15,7 @@ data class GetDestinasiResponse(
         @SerializedName("benua")
         val benua: String, // Asia
         @SerializedName("berangkat")
-        val berangkat: String, // 2020-12-12
+        val berangkat: List<Any>, // 2020-12-12
         @SerializedName("createdAt")
         val createdAt: String, // 2020-09-18T05:45:14.502+00:00
         @SerializedName("deskripsi")
@@ -47,7 +47,7 @@ data class GetDestinasiResponse(
         @SerializedName("popularitas")
         val popularitas: Int, // 26
         @SerializedName("pulang")
-        val pulang: String, // 2020-12-19
+        val pulang:  List<Any>, // 2020-12-19
         @SerializedName("rencana_list")
         val rencanaList: List<Any>,
         @SerializedName("syarat_ketentuan")

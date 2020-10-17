@@ -26,7 +26,7 @@ class AdapterTripRencanaActivity (val listTrip: List<GetPilihanResponse.Data>, v
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // get image from API
+
         if (listTrip[position].gambarList.isNotEmpty()) {
             Glide
                 .with(holder.itemView.context)

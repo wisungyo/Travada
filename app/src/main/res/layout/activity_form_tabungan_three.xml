@@ -96,12 +96,53 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/btn_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cek"
+        android:background="@drawable/bg_active"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/white"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutEtJumlahTabungan" />
+
+
+    <TextView
+        android:id="@+id/tvNamaTeman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:visibility="invisible"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        android:text="nama teman"
+        app:layout_constraintTop_toBottomOf="@id/btn_check"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <TextView
+        android:id="@+id/tvRekenigTeman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        android:visibility="invisible"
+        android:fontFamily="@font/roboto"
+        android:text="rekening teman"
+        app:layout_constraintTop_toBottomOf="@id/tvNamaTeman"
+        app:layout_constraintStart_toStartOf="@id/gVertical1"/>
+
+    <Button
         android:id="@+id/btnPeriksa"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/bg_inactive"
         android:fontFamily="@font/roboto"
-        android:text="Periksa"
+        android:text="Terima"
         android:textAllCaps="false"
         android:textColor="@color/gray"
         android:layout_marginBottom="26dp"

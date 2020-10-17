@@ -7,7 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiClient {
+object ApiClientTabungan {
     private const val BASE_URL = util.BASE_URL
 
     private val logging: HttpLoggingInterceptor
@@ -24,13 +24,13 @@ object ApiClient {
         .writeTimeout(90, java.util.concurrent.TimeUnit.SECONDS)
         .build()
 
-    val TP_API_SERVICES : TPApiServices by lazy {
+    val TP_API_SERVICES : ApiServiceTabungan by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
 
-        retrofit.create(TPApiServices::class.java)
+        retrofit.create(ApiServiceTabungan::class.java)
     }
 }

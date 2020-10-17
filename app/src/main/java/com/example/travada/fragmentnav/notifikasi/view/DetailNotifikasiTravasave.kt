@@ -1,9 +1,10 @@
-package com.example.travada.fragmentnav.notifikasi
+package com.example.travada.fragmentnav.notifikasi.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.travada.R
 import com.example.travada.fragmentnav.notifikasi.model.DataNotifikasi
+import com.example.travada.fragmentnav.notifikasi.presenter.DetailNotifikasiTravasavePresenter
 import kotlinx.android.synthetic.main.activity_detail_notifikasi_travasave.*
 
 class DetailNotifikasiTravasave : AppCompatActivity(), DetailNotifikasiTravasavePresenter.Listener {
@@ -14,7 +15,10 @@ class DetailNotifikasiTravasave : AppCompatActivity(), DetailNotifikasiTravasave
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_notifikasi_travasave)
 
-        presenter = DetailNotifikasiTravasavePresenter(this)
+        presenter =
+            DetailNotifikasiTravasavePresenter(
+                this
+            )
         intent.getParcelableExtra<DataNotifikasi>("notifikasi")?.let {
             dataNotifikasi = it
         }
