@@ -124,27 +124,32 @@ class MutasiActivity : AppCompatActivity(), MutasiActivityPresenter.Listener {
     }
 
     override fun showResultMutasi() {
+        val intentResultMutasi = Intent(this, ResultMutasiActivity::class.java)
         when {
             mingguIni -> {
                 Toast.makeText(this, "Minggu Ini Activated", Toast.LENGTH_LONG).show()
+                intentResultMutasi.putExtra("MUTASI", "minggu")
             }
             bulanIni -> {
                 Toast.makeText(this, "Bulan Ini Activated", Toast.LENGTH_LONG).show()
+                intentResultMutasi.putExtra("MUTASI", "bulan")
             }
             tahunIni -> {
                 Toast.makeText(this, "Tahun Ini Activated", Toast.LENGTH_LONG).show()
+                intentResultMutasi.putExtra("MUTASI", "tahun")
             }
             date -> {
                 Toast.makeText(this, "Date Activated", Toast.LENGTH_LONG).show()
+                intentResultMutasi.putExtra("MUTASI", "tanggal")
+                intentResultMutasi.putExtra("TGL_AWAL", tv_mutasi_start.text.toString())
+                intentResultMutasi.putExtra("TGL_AKHIR", tv_mutasi_end.text.toString())
             }
             else -> {
                 Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
             }
         }
 
-        val intentResultMutasi = Intent(this, PinMutasiActivity::class.java)
         startActivity(intentResultMutasi)
-
     }
 
     override fun setTheDate(year: Int, month: Int, day: Int, source: String) {

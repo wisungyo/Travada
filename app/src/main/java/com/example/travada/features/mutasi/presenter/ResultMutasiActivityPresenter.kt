@@ -121,6 +121,22 @@ class ResultMutasiActivityPresenter (val listener: Listener): AppCompatActivity(
         listener.showData(adapter, linearLayout)
     }
 
+    fun fetchDataMinggu() {
+
+    }
+
+    fun fetchDataBulan() {
+
+    }
+
+    fun fetchDataTahun() {
+
+    }
+
+    fun fetchDataTanggal(tglAwal: String?, tglAkhir: String?) {
+
+    }
+
     fun doConvertPDF() {
         listener.showConvertPDF()
     }
