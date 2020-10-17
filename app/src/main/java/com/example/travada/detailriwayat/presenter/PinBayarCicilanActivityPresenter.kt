@@ -1,10 +1,17 @@
 package com.example.travada.detailriwayat.presenter
 
+import android.util.Log
+import com.example.travada.features.rencana.network.TPApiClient
+import com.example.travada.features.rencana.pojo.PutBayarCicilan
+import com.example.travada.features.rencana.pojo.PutCicilan
 import com.example.travada.features.rencana.searchpage.room.DatabaseItem
 import com.example.travada.util.util
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PinBayarCicilanActivityPresenter(val listener: Listener) {
 
@@ -34,6 +41,49 @@ class PinBayarCicilanActivityPresenter(val listener: Listener) {
         }
     }
 
+    fun bayarCicilan(id: Int) {
+        Log.d("CICILAN", "$id")
+        TPApiClient.TP_API_SERVICES.putCicilan(id, "Dibayar").enqueue(object : Callback<PutCicilan> {
+            override fun onResponse(call: Call<PutCicilan>, response: Response<PutCicilan>) {
+                if (!response.isSuccessful) {
+//                    listener.showDataError("Fetching data gagal")
+                    return
+                }
+
+                bayarCicilanPotongSaldo(id)
+            }
+
+            override fun onFailure(call: Call<PutCicilan>, t: Throwable) {
+
+            }
+
+        })
+
+
+    }
+
+    fun bayarCicilanPotongSaldo(id: Int) {
+        Log.d("CICILAN", "$id")
+        TPApiClient.TP_API_SERVICES.putBayarCicilan(Hawk.get(util.SF_TOKEN, ""), id).enqueue(object : Callback<PutBayarCicilan> {
+            override fun onResponse(
+                call: Call<PutBayarCicilan>,
+                response: Response<PutBayarCicilan>
+            ) {
+                if (!response.isSuccessful) {
+//                    listener.showDataError("Fetching data gagal")
+                    return
+                }
+
+                listener.finishPin()
+            }
+
+            override fun onFailure(call: Call<PutBayarCicilan>, t: Throwable) {
+
+            }
+
+        })
+    }
+
     fun logout(db: DatabaseItem){
         Hawk.deleteAll()
         GlobalScope.launch {
@@ -49,5 +99,6 @@ class PinBayarCicilanActivityPresenter(val listener: Listener) {
         fun showErrorMessage(text: String)
         fun hideErrorMessage()
         fun setPinView(numb: String)
+        fun finishPin()
     }
 }

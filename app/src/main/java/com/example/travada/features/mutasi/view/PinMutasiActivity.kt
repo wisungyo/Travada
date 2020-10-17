@@ -14,13 +14,19 @@ import com.example.travada.features.rencana.searchpage.room.DatabaseItem
 import com.example.travada.welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity
 import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
 import kotlinx.android.synthetic.main.activity_login_pin.*
+import kotlinx.android.synthetic.main.activity_login_pin.PinView
+import kotlinx.android.synthetic.main.activity_login_pin.btn_logout
+import kotlinx.android.synthetic.main.activity_login_pin.iv_image
+import kotlinx.android.synthetic.main.activity_login_pin.numpad
+import kotlinx.android.synthetic.main.activity_login_pin.tv_err
+import kotlinx.android.synthetic.main.activity_regular_pin.*
 
 class PinMutasiActivity : AppCompatActivity(), PinMutasiActivityPresenter.Listener {
     private lateinit var presenter: PinMutasiActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_pin)
+        setContentView(R.layout.activity_regular_pin)
         presenter = PinMutasiActivityPresenter(this)
 
         Glide
@@ -43,7 +49,9 @@ class PinMutasiActivity : AppCompatActivity(), PinMutasiActivityPresenter.Listen
             }
         }
 
-
+        iv_back.setOnClickListener {
+            finish()
+        }
     }
 
     override fun goToOnboardingEndActivity() {

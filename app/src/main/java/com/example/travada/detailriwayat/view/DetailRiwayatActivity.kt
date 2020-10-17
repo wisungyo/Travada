@@ -173,8 +173,10 @@ class DetailRiwayatActivity : AppCompatActivity(), DetailRiwayatActivityPresente
         }
     }
 
-    override fun showBayarCicilan() {
+    override fun showBayarCicilan(id: Int, jumlah: Int) {
         val intentBayarCicilan = Intent(this, BayarCicilanActivity::class.java)
+        intentBayarCicilan.putExtra("ID_CICILAN", id)
+        intentBayarCicilan.putExtra("JUMLAH", jumlah)
         startActivity(intentBayarCicilan)
     }
 }

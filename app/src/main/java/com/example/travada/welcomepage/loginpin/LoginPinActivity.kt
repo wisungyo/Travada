@@ -10,17 +10,13 @@ import com.bumptech.glide.Glide
 import com.example.numpad.NumPadClick
 import com.example.numpad.numPadClickListener
 import com.example.travada.R
-import com.example.travada.features.rencana.searchpage.TPSearchSuggestPresenter
 import com.example.travada.features.rencana.searchpage.room.DatabaseItem
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity
-import com.example.travada.welcomepage.onboarding.OnboardingActivity
 import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
-import com.example.travada.welcomepage.splashscreen.SplashScreenPresenter
 import kotlinx.android.synthetic.main.activity_login_pin.*
 import kotlinx.android.synthetic.main.activity_login_pin.PinView
 import kotlinx.android.synthetic.main.activity_login_pin.tv_err
-import kotlinx.android.synthetic.main.activity_verif_register4.*
 
 
 class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {

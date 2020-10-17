@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.travada.R
 import com.example.travada.features.mutasi.presenter.MutasiActivityPresenter
+import com.example.travada.features.rencana.pojo.GetNasabah
 import kotlinx.android.synthetic.main.activity_mutasi.*
 import java.util.*
 
@@ -22,6 +23,8 @@ class MutasiActivity : AppCompatActivity(), MutasiActivityPresenter.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mutasi)
         presenter = MutasiActivityPresenter(this)
+
+        presenter.fetchData()
 
         iv_mutasi_back.setOnClickListener {
             finish()
@@ -177,5 +180,10 @@ class MutasiActivity : AppCompatActivity(), MutasiActivityPresenter.Listener {
 
     override fun getContext(): Context {
         return this
+    }
+
+    override fun showUserData(data: GetNasabah.Data) {
+        tv_mutasi_username.text = data.namaLengkap
+        tv_mutasi_rekening.text = data.noRekening
     }
 }

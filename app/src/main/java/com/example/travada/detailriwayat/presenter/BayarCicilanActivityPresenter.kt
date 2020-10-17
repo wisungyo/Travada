@@ -1,29 +1,48 @@
 package com.example.travada.detailriwayat.presenter
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.travada.detailriwayat.adapter.AdapterSpinnerBayarCicilan
-import com.example.travada.sampeldata.DataSpinnerCicilan
+import com.example.travada.features.rencana.network.TPApiClient
+import com.example.travada.features.rencana.pojo.GetUserInfo
+import com.example.travada.sampeldata.SaldoSpinnerData
+import com.example.travada.util.util
+import com.orhanobut.hawk.Hawk
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BayarCicilanActivityPresenter (val listener: Listener): AppCompatActivity() {
 
-    fun fetchData() {
-        val listSpinner = arrayListOf(
-            DataSpinnerCicilan("Saldo", "Saldo", 50000000),
-            DataSpinnerCicilan("Trava Save", "Labuan Bajo 2020", 5000000),
-            DataSpinnerCicilan("Trava Save", "Tokyo 2020", 10000000)
-        )
+    fun fetchData(id: Int) {
+        var modelList = ArrayList<SaldoSpinnerData>()
 
-//        listener.showSpinner(listSpinner)
-        val adapterSpinner  = AdapterSpinnerBayarCicilan(listSpinner, this)
-        val linearLayout    = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        listener.showLoadingDialog()
+        TPApiClient.TP_API_SERVICES.getUserInfo(Hawk.get(util.SF_TOKEN, "")).enqueue(object :
+            Callback<GetUserInfo> {
+            override fun onResponse(call: Call<GetUserInfo>, response: Response<GetUserInfo>) {
+                if (!response.isSuccessful) {
+//                    listener.showDataError("Fetching data gagal")
+                    return
+                }
 
-        listener.showSpinner(adapterSpinner, linearLayout)
+                response.body()?.data?.balance.let {
+                    modelList.add(
+                        SaldoSpinnerData("Saldo Aktif", it, "Saldo")
+                    )
+                }
+
+                listener.showSpinner(modelList)
+//                listener.showSaldo(response.body()?.data?.balance)
+            }
+
+            override fun onFailure(call: Call<GetUserInfo>, t: Throwable) {
+//                listener.showDataError(t.toString())
+            }
+
+        })
+
     }
 
-
-
-    fun doKonfirmasi() {
+    fun doKonfirmasi(idCicilan: Int) {
         listener.showDialogKonfirmasi(
             "Konfirmasi Pembayaran",
             "Tagihan akan diambil dari saldo kamu"
@@ -31,10 +50,12 @@ class BayarCicilanActivityPresenter (val listener: Listener): AppCompatActivity(
     }
 
     interface Listener {
-        fun showSpinner(
-            adapterSpinner: AdapterSpinnerBayarCicilan,
-            linearLayout: LinearLayoutManager
-        )
+//        fun showSpinner(
+//            adapterSpinner: AdapterSpinnerBayarCicilan,
+//            linearLayout: LinearLayoutManager
+//        )
+        fun readFromAsset(): List<SaldoSpinnerData>
+        fun showSpinner(list: List<SaldoSpinnerData>)
         fun showDialogKonfirmasi(title: String, subtitle: String)
     }
 }

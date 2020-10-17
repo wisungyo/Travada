@@ -6,8 +6,6 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.Constraints
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
@@ -16,12 +14,10 @@ import com.example.travada.features.rencana.detailrencana.adapter.GambarWisataAd
 import com.example.travada.features.rencana.detailrencana.adapter.InfoTambahanAdapter
 import com.example.travada.features.rencana.detailrencana.adapter.RencanaPerjalananAdapter
 import com.example.travada.features.rencana.detailrencana.presenter.DetailRencanaPresenter
-import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
-import com.example.travada.features.rencana.wisnu.view.PesanRencanaActivity
+import com.example.travada.features.rencana.pesan.PesanRencanaActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_detail_rencana.*
-import kotlinx.android.synthetic.main.list_gambar_wisata.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*

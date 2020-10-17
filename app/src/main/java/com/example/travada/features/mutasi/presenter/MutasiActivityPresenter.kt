@@ -7,18 +7,40 @@ import android.content.DialogInterface
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import android.widget.NumberPicker
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.travada.features.mutasi.view.MutasiActivity
+import com.example.travada.features.rencana.network.TPApiClient
+import com.example.travada.features.rencana.pojo.GetNasabah
+import com.example.travada.util.util
+import com.orhanobut.hawk.Hawk
+import retrofit2.Call
+import retrofit2.Response
 import java.util.*
 
 
 class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
+
+    fun fetchData() {
+        TPApiClient.TP_API_SERVICES.getNasabah(Hawk.get(util.SF_ID, 0)).enqueue(object : retrofit2.Callback<GetNasabah> {
+            override fun onResponse(call: Call<GetNasabah>, response: Response<GetNasabah>) {
+                if (!response.isSuccessful) {
+//                    listener.showDataError("Fetching data gagal")
+                    return
+                }
+                response.body()?.data?.let { listener.showUserData(it) }
+            }
+
+            override fun onFailure(call: Call<GetNasabah>, t: Throwable) {
+//                TODO("Not yet implemented")
+            }
+
+        })
+    }
 
     fun goToResultMutasi() {
         listener.showResultMutasi()
@@ -160,5 +182,6 @@ class MutasiActivityPresenter(val listener: Listener): AppCompatActivity() {
         fun setTheDate(year: Int, month: Int, day: Int, source: String)
         fun checkNextButton()
         fun getContext(): Context
+        fun showUserData(data: GetNasabah.Data)
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.rencana.wisnu.view.RencanaActivity">
+    tools:context=".features.rencana.main.RencanaActivity">
 
     <View
         android:id="@+id/view_rencana"
@@ -35,7 +35,7 @@
         android:fontFamily="@font/roboto"
         android:text="Trava Plan"
         android:textColor="#fff"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/view_rencana"
         app:layout_constraintStart_toEndOf="@id/iv_rencana_back"
         app:layout_constraintTop_toTopOf="@id/view_rencana" />
@@ -55,7 +55,7 @@
             <ImageView
                 android:id="@+id/view_rencana_card"
                 android:layout_width="match_parent"
-                android:layout_height="185dp"
+                android:layout_height="175dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -69,7 +69,7 @@
                 android:layout_width="150dp"
                 android:layout_height="110dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/ic_main_tabungan"
+                android:background="@drawable/informasi"
                 app:layout_constraintBottom_toBottomOf="@id/view_rencana_card"
                 app:layout_constraintEnd_toEndOf="@id/view_rencana_card"
                 app:layout_constraintTop_toTopOf="@id/view_rencana_card" />
@@ -83,7 +83,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="Wujudkan dan percepat liburanmu dengan rekomendasi paket liburan lengkap dengan sistem cicilan"
                 android:textColor="#fff"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:lineSpacingExtra="3dp"
                 app:layout_constraintBottom_toBottomOf="@id/view_rencana_card"
                 app:layout_constraintEnd_toStartOf="@id/iv_rencana_card_img"
@@ -97,7 +97,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
                 android:text="Trip Populer"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/view_rencana_card"
                 app:layout_constraintTop_toBottomOf="@id/view_rencana_card" />
@@ -121,7 +121,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
                 android:text="Trip Pilihan di Seluruh Dunia"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/view_rencana_card"
                 app:layout_constraintTop_toBottomOf="@id/rv_rencana_trip_populer" />
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:text="Pesan sekarang buat nanti"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/view_rencana_card"
                 app:layout_constraintTop_toBottomOf="@id/tv_rencana_trip" />
 
@@ -143,7 +143,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="Lihat semua"
                 android:textColor="#2A85F4"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@id/view_rencana_card"
                 app:layout_constraintTop_toBottomOf="@id/tv_rencana_trip" />
 

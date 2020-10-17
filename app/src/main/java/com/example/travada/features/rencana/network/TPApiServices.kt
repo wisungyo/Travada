@@ -37,6 +37,19 @@ interface TPApiServices {
                    @Path("jumlahOrang") jumlahOrang: Int,
                    @Query("berangkat") berangkat: String) : Call<GetCicilanResponse>
 
+    @PUT("cicilan/{idCicilan}?")
+    fun putCicilan(
+        @Path("idCicilan") idCicilan: Int,
+        @Query("status") status: String
+    ): Call<PutCicilan>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @PUT("cicilan/bayar/{idCicilan}")
+    fun putBayarCicilan(
+        @Header ("Authorization") token: String,
+        @Path("idCicilan") idCicilan: Int
+    ): Call<PutBayarCicilan>
+
     @Headers("Content-Type: application/json;charset=UTF-8")
     @POST("pemesanan/base64/{idUser}")
     fun postPemesanan(
@@ -60,4 +73,15 @@ interface TPApiServices {
     @Headers("Content-Type: application/json;charset=UTF-8")
     @GET("auth/user/me")
     fun getUserInfo(@Header("Authorization") token: String) : Call<GetUserInfo>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("/tabungan/user/all")
+    fun getTabunganUserAll(
+        @Header("Authorization") token: String
+    ) : Call<GetTabunganUserAll>
+
+    @GET("/nasabah/{idUser}")
+    fun getNasabah(
+        @Path("idUser") id: Int
+    ) : Call<GetNasabah>
 }

@@ -36,8 +36,8 @@ class CustomDropDownAdapter(val context: Context, var dataSource: List<SaldoSpin
         return view
     }
 
-    override fun getItem(position: Int): Any? {
-        return dataSource[position]
+    override fun getItem(position: Int): Int? {
+        return dataSource[position].jumlah
     }
 
     override fun getCount(): Int {

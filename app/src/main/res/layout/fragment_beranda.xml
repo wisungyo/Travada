@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragmentnav.beranda.BerandaFragment">
+    android:background="#ffffff"
+    tools:context=".navfragment.beranda.BerandaFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
             android:fontFamily="@font/roboto"
             android:text="Hello,"
             android:textColor="#fff"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/logo_travada_mainpage" />
 
@@ -49,7 +50,7 @@
             android:fontFamily="@font/roboto"
             android:text="Username"
             android:textColor="#fff"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/tv_mainpage_hello" />
 
@@ -80,7 +81,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="Saldo aktif"
                     android:textColor="#777777"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +91,7 @@
                     android:gravity="left"
                     android:text="Rp. "
                     android:textColor="#474747"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginTop="4dp"
                     android:layout_width="wrap_content"
@@ -104,7 +105,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#474747"
                     android:inputType="text"
@@ -136,41 +137,91 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_saldo" />
 
                 <ImageView
-                    android:id="@+id/iv_mainpage_card_mutasi"
+                    android:id="@+id/iv_mainpage_card_topup"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_mainpage_icon"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_topup_new"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_mainpage_card" />
+
+                <TextView
+                    android:id="@+id/tv_mainpage_card_topup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Top Up"
+                    android:textColor="#474747"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_topup"
+                    app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_topup"
+                    app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_topup" />
+
+                <ImageView
+                    android:id="@+id/iv_mainpage_card_travasave"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_mainpage_icon"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_tabungan"
+                    app:layout_constraintEnd_toStartOf="@id/iv_mainpage_card_travaplan"
+                    app:layout_constraintStart_toEndOf="@id/iv_mainpage_card_topup"
+                    app:layout_constraintTop_toBottomOf="@id/view_mainpage_card" />
+
+                <TextView
+                    android:id="@+id/tv_mainpage_card_travasave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Trava Save"
+                    android:textColor="#474747"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_travasave"
+                    app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_travasave"
+                    app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_travasave" />
+
+                <ImageView
+                    android:id="@+id/iv_mainpage_card_travaplan"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/bg_mainpage_icon"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_rencana"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_mainpage_card" />
+
+                <TextView
+                    android:id="@+id/tv_mainpage_card_travaplan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Trava Plan"
+                    android:textColor="#474747"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_travaplan"
+                    app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_travaplan"
+                    app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_travaplan" />
+
+                <ImageView
+                    android:id="@+id/iv_mainpage_card_transfer"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/bg_mainpage_icon"
                     android:padding="10dp"
-                    android:src="@drawable/ic_mutasi"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_mainpage_card" />
-
-                <TextView
-                    android:id="@+id/tv_mainpage_card_mutasi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="Mutasi"
-                    android:textColor="#474747"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_mutasi"
-                    app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_mutasi"
-                    app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_mutasi" />
-
-                <ImageView
-                    android:id="@+id/iv_mainpage_card_transfer"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_mainpage_icon"
-                    android:padding="10dp"
                     android:src="@drawable/ic_transfer"
-                    app:layout_constraintEnd_toStartOf="@id/iv_mainpage_card_pembelian"
-                    app:layout_constraintStart_toEndOf="@id/iv_mainpage_card_mutasi"
-                    app:layout_constraintTop_toBottomOf="@id/view_mainpage_card" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_topup" />
 
                 <TextView
                     android:id="@+id/tv_mainpage_card_transfer"
@@ -180,10 +231,35 @@
                     android:fontFamily="@font/roboto"
                     android:text="Transfer"
                     android:textColor="#474747"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_transfer"
                     app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_transfer"
                     app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_transfer" />
+
+                <ImageView
+                    android:id="@+id/iv_mainpage_card_mutasi"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_mainpage_icon"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_mutasi"
+                    app:layout_constraintEnd_toStartOf="@id/iv_mainpage_card_travaplan"
+                    app:layout_constraintStart_toEndOf="@id/iv_mainpage_card_transfer"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_travasave" />
+
+                <TextView
+                    android:id="@+id/tv_mainpage_card_mutasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Mutasi"
+                    android:textColor="#474747"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_mutasi"
+                    app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_mutasi"
+                    app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_mutasi" />
 
                 <ImageView
                     android:id="@+id/iv_mainpage_card_pembelian"
@@ -195,7 +271,7 @@
                     android:padding="10dp"
                     android:src="@drawable/ic_pembelian"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_mainpage_card" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_travaplan" />
 
                 <TextView
                     android:id="@+id/tv_mainpage_card_pembelian"
@@ -205,85 +281,10 @@
                     android:fontFamily="@font/roboto"
                     android:text="Pembelian"
                     android:textColor="#474747"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_pembelian"
                     app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_pembelian"
                     app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_pembelian" />
-
-                <ImageView
-                    android:id="@+id/iv_mainpage_card_ewallet"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_mainpage_icon"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_ewallet"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_mutasi" />
-
-                <TextView
-                    android:id="@+id/tv_mainpage_card_ewallet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="e-Wallet"
-                    android:textColor="#474747"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_ewallet"
-                    app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_ewallet"
-                    app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_ewallet" />
-
-                <ImageView
-                    android:id="@+id/iv_mainpage_card_tabungan"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_mainpage_icon"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_tabungan"
-                    app:layout_constraintEnd_toStartOf="@id/iv_mainpage_card_rencana"
-                    app:layout_constraintStart_toEndOf="@id/iv_mainpage_card_ewallet"
-                    app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_transfer" />
-
-                <TextView
-                    android:id="@+id/tv_mainpage_card_tabungan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="Trava Save"
-                    android:textColor="#474747"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_tabungan"
-                    app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_tabungan"
-                    app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_tabungan" />
-
-                <ImageView
-                    android:id="@+id/iv_mainpage_card_rencana"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@drawable/bg_mainpage_icon"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_rencana"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_mainpage_card_pembelian" />
-
-                <TextView
-                    android:id="@+id/tv_mainpage_card_rencana"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="Trava Plan"
-                    android:textColor="#474747"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/iv_mainpage_card_rencana"
-                    app:layout_constraintStart_toStartOf="@id/iv_mainpage_card_rencana"
-                    app:layout_constraintTop_toBottomOf="@id/iv_mainpage_card_rencana" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -296,7 +297,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
             android:text="Tabungan Liburan Kamu"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/card_mainpage" />
@@ -308,7 +309,7 @@
             android:fontFamily="@font/roboto"
             android:text="Lihat semua"
             android:textColor="#2A85F4"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@id/gl_vertical_right"
             app:layout_constraintBottom_toBottomOf="@id/tv_mainpage_tabungan" />
 
@@ -340,7 +341,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
             android:text="Informasi"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/view_top_informasi" />
@@ -375,7 +376,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
             android:text="Trip Pilihan di Seluruh Dunia"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/view_top_trip" />
@@ -386,7 +387,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:text="Pesan sekarang buat nanti"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/tv_mainpage_trip" />
 
@@ -397,7 +398,7 @@
             android:fontFamily="@font/roboto"
             android:text="Lihat semua"
             android:textColor="#2A85F4"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@id/gl_vertical_right"
             app:layout_constraintTop_toBottomOf="@id/tv_mainpage_trip" />
 
@@ -430,7 +431,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
             android:text="Berita"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/gl_vertical_left"
             app:layout_constraintTop_toBottomOf="@id/view_top_berita" />
@@ -442,7 +443,7 @@
             android:fontFamily="@font/roboto"
             android:text="Lihat semua"
             android:textColor="#2A85F4"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_mainpage_berita"
             app:layout_constraintEnd_toEndOf="@id/gl_vertical_right"
             app:layout_constraintTop_toTopOf="@+id/tv_mainpage_berita" />
