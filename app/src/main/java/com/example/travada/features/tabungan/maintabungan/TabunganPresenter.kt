@@ -32,7 +32,13 @@ class TabunganPresenter(val listener: Listener) {
         listener.showDetailTabunganWisata(dataWisata)
     }
 
+    fun itemClicked(idTabungan: Int) {
+        listener.showItemClicked(idTabungan)
+    }
+
     interface Listener {
+
+        fun showItemClicked(idTabungan: Int)
 
         fun hideLoadingDialog()
 

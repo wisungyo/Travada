@@ -3,8 +3,8 @@ package com.example.travada.features.tabungan.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.travada.features.tabungan.detailtabungan.DetailTabunganFragment
-import com.example.travada.features.tabungan.detailtabungan.TransaksiTabunganFragment
+import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganFragment
+import com.example.travada.features.tabungan.detailtabungan.view.TransaksiTabunganFragment
 
 class PageAdapter (fm: FragmentManager): FragmentPagerAdapter(fm) {
 

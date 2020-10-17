@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.detailtabungan
+package com.example.travada.features.tabungan.detailtabungan.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,20 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.features.tabungan.adapter.DetailTabunganAdapter
-import com.example.travada.features.tabungan.models.DataDetailTabungan
-import com.example.travada.features.tabungan.models.DataWisata
-import kotlinx.android.synthetic.main.fragment_detail_tabungan.*
+import com.example.travada.features.tabungan.adapter.BulanAdapter
+import com.example.travada.features.tabungan.detailtabungan.presenter.TransaksiTabuganPresenter
+import kotlinx.android.synthetic.main.fragment_transaksi_tabungan.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class DetailTabunganFragment : Fragment(),DetailTabunganPresenter.Listener {
+class TransaksiTabunganFragment : Fragment(), TransaksiTabuganPresenter.Listener {
 
-    private lateinit var presenter: DetailTabunganPresenter
-    private lateinit var result : DataWisata
+    lateinit var presenter: TransaksiTabuganPresenter
+
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -39,34 +38,25 @@ class DetailTabunganFragment : Fragment(),DetailTabunganPresenter.Listener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_tabungan, container, false)
+        return inflater.inflate(R.layout.fragment_transaksi_tabungan, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = DetailTabunganPresenter(this)
+        presenter =
+            TransaksiTabuganPresenter(
+                this
+            )
         presenter.fetchData()
 
-        arguments?.getParcelable<DataWisata>("detail")?.let {
-            result = it
-        }
     }
-
-    override fun showData(adapterDetailTabungan: DetailTabunganAdapter) {
-
-        val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rvDetailTabungan.adapter = adapterDetailTabungan
-        rvDetailTabungan.layoutManager = linearLayout
-
-    }
-
 
     companion object {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailTabunganFragment().apply {
+        fun newInstance(param1: String, param2: String) = TransaksiTabunganFragment()
+            .apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
@@ -74,6 +64,10 @@ class DetailTabunganFragment : Fragment(),DetailTabunganPresenter.Listener {
             }
     }
 
-
-
+    override fun showData(adapterTransaksi: BulanAdapter) {
+        val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvTransaksi.adapter = adapterTransaksi
+        rvTransaksi.layoutManager = linearLayout
+        rvTransaksi.overScrollMode = View.OVER_SCROLL_NEVER
+    }
 }

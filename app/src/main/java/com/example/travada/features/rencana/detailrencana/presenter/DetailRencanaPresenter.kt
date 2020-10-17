@@ -11,7 +11,6 @@ class DetailRencanaPresenter(val listener: Listener) {
     fun getDetailRencana(id : Int){
         listener.showLoadingDialog()
         TPApiClient.TP_API_SERVICES.getDetailDestination(id).enqueue(object : Callback<GetDestinasiDetailResponse> {
-
             override fun onResponse(call: Call<GetDestinasiDetailResponse>, response: Response<GetDestinasiDetailResponse>) {
                 response.body()?.data?.let {
                     listener.implementDetailDestinasi(it)

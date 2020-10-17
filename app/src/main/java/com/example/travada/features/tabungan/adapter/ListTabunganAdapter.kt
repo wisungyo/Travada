@@ -59,5 +59,9 @@ class ListTabunganAdapter(
                 .into(holder.itemView.ivFotoWisata)
         }
 
+        holder.itemView.clTabuganList.setOnClickListener {
+            presenter.itemClicked(listTabungan[position].id)
+        }
+
     }
 }

@@ -1,9 +1,9 @@
-package com.example.travada.features.tabungan.detailtabungan
+package com.example.travada.features.tabungan.detailtabungan.presenter
 
 import com.example.travada.util.util
 import com.orhanobut.hawk.Hawk
 
-class PinSetorManualPresenter(val listener :Listener) {
+class PinSetorManualPresenter(val listener : Listener) {
     fun pinView(nums: ArrayList<Int>) {
         val sb = StringBuilder()
         for (i in 0 until nums.size) {

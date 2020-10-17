@@ -1,7 +1,6 @@
-package com.example.travada.features.tabungan.detailtabungan
+package com.example.travada.features.tabungan.detailtabungan.presenter
 
 import com.example.travada.features.tabungan.adapter.BulanAdapter
-import com.example.travada.features.tabungan.adapter.DetailTabunganAdapter
 import com.example.travada.features.tabungan.models.DataBulan
 import com.example.travada.features.tabungan.models.DataTransaksi
 

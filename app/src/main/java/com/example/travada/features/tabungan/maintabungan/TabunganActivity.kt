@@ -7,8 +7,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
+import com.example.travada.features.rencana.wisnu.view.PesanRencanaActivity
 import com.example.travada.features.tabungan.adapter.ListTabunganAdapter
-import com.example.travada.features.tabungan.detailtabungan.DetailTabunganFragment
+import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganActivity
+import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganFragment
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import com.example.travada.features.tabungan.models.DataWisata
 import com.example.travada.features.tabungan.pojo.GetAllTabunganResponse
@@ -37,6 +39,12 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
             startActivity(intent)
         }
         presenter.dataTabunganList()
+    }
+
+    override fun showItemClicked(idTabungan: Int) {
+        val intentDetailTabungan = Intent(this, DetailTabunganActivity::class.java)
+        intentDetailTabungan.putExtra("TABUNGAN_ID", idTabungan)
+        startActivity(intentDetailTabungan)
     }
 
     override fun hideLoadingDialog() {
@@ -73,7 +81,8 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
 
     override fun showDetailTabunganWisata(dataWisata: DataWisata) {
 
-        val fragment = DetailTabunganFragment()
+        val fragment =
+            DetailTabunganFragment()
         val bundle = Bundle()
         bundle.putParcelable("detail", dataWisata)
         fragment.setArguments(bundle)

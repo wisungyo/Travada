@@ -156,10 +156,11 @@
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 app:errorEnabled="true"
+                app:prefixTextAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="@id/gVertical2"
                 app:layout_constraintStart_toStartOf="@id/gVertical1"
                 app:layout_constraintTop_toBottomOf="@id/layoutEtTujuan"
-                app:prefixText="Rp. ">
+                app:prefixText="Rp ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etJumlah"

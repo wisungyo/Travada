@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.detailtabungan
+package com.example.travada.features.tabungan.detailtabungan.presenter
 
 class TopUpTabunganPresenter(val listener : Listener) {
 

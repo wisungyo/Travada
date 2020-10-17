@@ -73,7 +73,6 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
         // editText jumlah
         etJumlah.addTextChangedListener(object : TextWatcher {
             var processed = ""
-
             @RequiresApi(Build.VERSION_CODES.N)
             override fun afterTextChanged(count: Editable?) {
                 if (etJumlah == count) {
@@ -81,7 +80,6 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
                     // etJumlah.requestFocus()
                     etJumlah.isCursorVisible
                 }
-
                 if (count.toString().length == 1 && count.toString().startsWith("0")) {
                     count?.clear();
                 }
@@ -94,7 +92,7 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
                 val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
                 nf.setGroupingUsed(true);
 
-                var myNumber = cleanString.toDouble()
+                var myNumber = cleanString.toLong()
                 processed = nf.format(myNumber)
                 etJumlah.removeTextChangedListener(this)
                 etJumlah.setText(processed)
@@ -111,7 +109,7 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 errJumlah(null)
-                presenter.checkJumlah(etJumlah.text.toString())
+               // presenter.checkJumlah(etJumlah.text.toString().toInt())
                 presenter.checked(
                     etTujuan.text.toString(),
                     etJumlah.text.toString(),
@@ -194,9 +192,7 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
     }
 
     // melakukan semua request permission yang dibutuhkan aplikasi
-    fun requestRequiredPermissions() {
-        requestPermissions(arrayListPermission, REQUEST_CODE)
-    }
+    fun requestRequiredPermissions() { requestPermissions(arrayListPermission, REQUEST_CODE) }
 
     //Callback / respon dari konfirmasi permission (pilihan allow / deny)
     override fun onRequestPermissionsResult(
@@ -211,17 +207,17 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
                 //Loop semua permission apakah diizinkan atau tidak.
                 for (i in permissions.indices) {
                     if ((permissions[i] == arrayListPermission[i]) && (grantResults[i] == PackageManager.PERMISSION_GRANTED)) {
-                        Toast.makeText(
-                            this,
-                            "Permission ${permissions[i]} Diizinkan",
-                            Toast.LENGTH_LONG
-                        ).show()
+//                        Toast.makeText(
+//                            this,
+//                            "Permission ${permissions[i]} Diizinkan",
+//                            Toast.LENGTH_LONG
+//                        ).show()
                     } else {
-                        Toast.makeText(
-                            this,
-                            "Permission ${permissions[i]} Ditolak",
-                            Toast.LENGTH_LONG
-                        ).show()
+//                        Toast.makeText(
+//                            this,
+//                            "Permission ${permissions[i]} Ditolak",
+//                            Toast.LENGTH_LONG
+//                        ).show()
                     }
                 }
             }

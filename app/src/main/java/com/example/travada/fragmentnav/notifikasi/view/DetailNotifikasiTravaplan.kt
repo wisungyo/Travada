@@ -76,9 +76,6 @@ class DetailNotifikasiTravaplan : AppCompatActivity(),DetailNotifikasiTravaplanP
                     .into(iv_result_rencana)
             }
         }
-
-
-
     }
 
     override fun implementPemesanan(getPemesanan: GetDetailNotifikasiResponse.Data.Pemesanan?) {
@@ -96,8 +93,7 @@ class DetailNotifikasiTravaplan : AppCompatActivity(),DetailNotifikasiTravaplanP
             val namaBulanDibuat     = changeBulan(dibuatBulan)
             val dibuatTanggal       =  extractTanggal(getPemesanan.createdAt)
 
-            tv_result_rencana_booking_date.text =
-                "$dibuatTanggal $namaBulanDibuat $dibuatTahun"
+            tv_result_rencana_booking_date.text = "$dibuatTanggal $namaBulanDibuat $dibuatTahun"
 
             tv_result_rencana_id.text = getPemesanan.id.toString()
         }
@@ -165,8 +161,4 @@ class DetailNotifikasiTravaplan : AppCompatActivity(),DetailNotifikasiTravaplanP
         }
         return namaBulan
     }
-
-
-
-
 }

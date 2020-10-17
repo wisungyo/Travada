@@ -1,4 +1,4 @@
-package com.example.travada.features.tabungan.detailtabungan
+package com.example.travada.features.tabungan.detailtabungan.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,19 +10,24 @@ import com.bumptech.glide.Glide
 import com.example.numpad.NumPadClick
 import com.example.numpad.numPadClickListener
 import com.example.travada.R
+import com.example.travada.features.tabungan.detailtabungan.presenter.PinSetorManualPresenter
 import kotlinx.android.synthetic.main.activity_login_pin.PinView
 import kotlinx.android.synthetic.main.activity_login_pin.iv_image
 import kotlinx.android.synthetic.main.activity_login_pin.numpad
 import kotlinx.android.synthetic.main.activity_login_pin.tv_err
 import kotlinx.android.synthetic.main.activity_transfer_pin.*
 
-class PinSetorManualActivity : AppCompatActivity(), PinSetorManualPresenter.Listener {
+class PinSetorManualActivity : AppCompatActivity(),
+    PinSetorManualPresenter.Listener {
     lateinit var presenter: PinSetorManualPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pin_setor_manual)
 
-        presenter = PinSetorManualPresenter(this)
+        presenter =
+            PinSetorManualPresenter(
+                this
+            )
 
         Glide
             .with(this)
