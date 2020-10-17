@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
 import com.example.travada.fragmentnav.riwayat.fragmentriwayat.StatusFragmentPresenter
-import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
+import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananResponse
 import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 
-class AdapterRiwayatStatus(val listDataRiwayat: List<GetPemesananRiwayatResponse.Data>, val presenter: StatusFragmentPresenter, val listener: StatusFragmentPresenter.ListenerAdapter):
+class AdapterRiwayatStatus(val listDataRiwayat: ArrayList<GetPemesananResponse.Data>, val presenter: StatusFragmentPresenter, val listener: StatusFragmentPresenter.ListenerAdapter):
     RecyclerView.Adapter<AdapterRiwayatStatus.ViewHolder>(){
     lateinit var holder: ViewHolder
     class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView)

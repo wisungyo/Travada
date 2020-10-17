@@ -5,7 +5,7 @@ import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatProses
 import com.example.travada.fragmentnav.riwayat.network.ApiClientRiwayat
-import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
+import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananResponse
 import com.example.travada.util.util
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,11 +17,11 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
     fun fetchDataRiwayat() {
         listenerAdapter.showLoadingDialog()
         val token = Hawk.get(util.SF_TOKEN, "")
-        ApiClientRiwayat.API_SERVICE_RIWAYAT.getPemesanan(token).enqueue(object :
-            Callback<GetPemesananRiwayatResponse> {
+        ApiClientRiwayat.API_SERVICE_RIWAYAT.getPemesananNew(token).enqueue(object :
+            Callback<GetPemesananResponse> {
             override fun onResponse(
-                call: Call<GetPemesananRiwayatResponse>,
-                response: Response<GetPemesananRiwayatResponse>
+                call: Call<GetPemesananResponse>,
+                response: Response<GetPemesananResponse>
             ) {
                 if (!response.isSuccessful) {
                     listener.showDataError(response.code().toString())
@@ -29,9 +29,9 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
                 }
 
                 response.body()?.data?.let {
-                    val listPemesanan = ArrayList<GetPemesananRiwayatResponse.Data>()
+                    val listPemesanan = ArrayList<GetPemesananResponse.Data>()
                     for (i in 0..it.size-1) {
-                        if (it[i].pemesanan.status == "menunggu") {
+                        if (it[i].pemesanan.status == "Pending") {
                             listPemesanan.add(it[i])
                         }
                     }
@@ -40,7 +40,7 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
                 listenerAdapter.hideLoadingDialog()
             }
 
-            override fun onFailure(call: Call<GetPemesananRiwayatResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetPemesananResponse>, t: Throwable) {
                 listener.showDataError(t.toString())
                 listenerAdapter.hideLoadingDialog()
             }
@@ -48,7 +48,7 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
     }
 
     fun getDestinasiInfo(
-        data: GetPemesananRiwayatResponse.Data,
+        data: GetPemesananResponse.Data,
         holder: AdapterRiwayatProses.ViewHolder
     ){
         TPApiClient.TP_API_SERVICES.getDestination(data.idDestinasi).enqueue(object :
@@ -75,7 +75,7 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
     }
 
     interface Listener {
-        fun showData(list: List<GetPemesananRiwayatResponse.Data>)
+        fun showData(list: ArrayList<GetPemesananResponse.Data>)
         fun showDetailRiwayat(idDestinasi: Int, idPemesanan: Int)
         fun showDataError(error: String)
     }
@@ -83,7 +83,7 @@ class ProsesFragmentPresenter(val listener: Listener, val listenerAdapter: Liste
     interface ListenerAdapter {
         fun showData(
             dataInfo: GetDestinasiResponse.Data?,
-            dataPemesananRiwayatResponse: GetPemesananRiwayatResponse.Data,
+            dataPemesananRiwayatResponse: GetPemesananResponse.Data,
             holder: AdapterRiwayatProses.ViewHolder
         )
         fun showLoadingDialog()

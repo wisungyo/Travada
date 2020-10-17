@@ -3,11 +3,7 @@ package com.example.travada.features.rencana.network
 import com.example.travada.features.rencana.pojo.GetDestinasiAllResponse
 import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
 import com.example.travada.features.rencana.pojo.*
-import com.example.travada.welcomepage.pojo.PostResendRequest
-import com.example.travada.welcomepage.pojo.PostResendResponse
-import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.*
 
 interface TPApiServices {
@@ -36,9 +32,23 @@ interface TPApiServices {
     @GET("destinasi/{id}")
     fun getDestination(@Path("id") id: Int) : Call<GetDestinasiResponse>
 
-    @GET("cicilan/{idDestinasi}/{jumlahOrang}")
+    @GET("cicilan/{idDestinasi}/{jumlahOrang}?")
     fun getCicilan(@Path("idDestinasi") idDestinasi: Int,
-                   @Path("jumlahOrang") jumlahOrang: Int) : Call<GetCicilanResponse>
+                   @Path("jumlahOrang") jumlahOrang: Int,
+                   @Query("berangkat") berangkat: String) : Call<GetCicilanResponse>
+
+    @PUT("cicilan/{idCicilan}?")
+    fun putCicilan(
+        @Path("idCicilan") idCicilan: Int,
+        @Query("status") status: String
+    ): Call<PutCicilan>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @PUT("cicilan/bayar/{idCicilan}")
+    fun putBayarCicilan(
+        @Header ("Authorization") token: String,
+        @Path("idCicilan") idCicilan: Int
+    ): Call<PutBayarCicilan>
 
     @Headers("Content-Type: application/json;charset=UTF-8")
     @POST("pemesanan/base64/{idUser}")
@@ -63,4 +73,15 @@ interface TPApiServices {
     @Headers("Content-Type: application/json;charset=UTF-8")
     @GET("auth/user/me")
     fun getUserInfo(@Header("Authorization") token: String) : Call<GetUserInfo>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("/tabungan/user/all")
+    fun getTabunganUserAll(
+        @Header("Authorization") token: String
+    ) : Call<GetTabunganUserAll>
+
+    @GET("/nasabah/{idUser}")
+    fun getNasabah(
+        @Path("idUser") id: Int
+    ) : Call<GetNasabah>
 }

@@ -13,13 +13,14 @@ import com.example.travada.R
 import com.example.travada.detailriwayat.view.DetailRiwayatActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatProses
-import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
+import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananResponse
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 import kotlinx.android.synthetic.main.fragment_riwayat_proses.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ProsesFragment : Fragment(), ProsesFragmentPresenter.Listener, ProsesFragmentPresenter.ListenerAdapter {
     private lateinit var presenter: ProsesFragmentPresenter
@@ -43,7 +44,7 @@ class ProsesFragment : Fragment(), ProsesFragmentPresenter.Listener, ProsesFragm
         presenter.fetchDataRiwayat()
     }
 
-    override fun showData(list: List<GetPemesananRiwayatResponse.Data>) {
+    override fun showData(list: ArrayList<GetPemesananResponse.Data>) {
         val adapterRiwayatProses = AdapterRiwayatProses(list, presenter, this)
         val linearLayoutRiwayatProses = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         rv_riwayat_proses.adapter = adapterRiwayatProses
@@ -63,7 +64,7 @@ class ProsesFragment : Fragment(), ProsesFragmentPresenter.Listener, ProsesFragm
 
     override fun showData(
         dataInfo: GetDestinasiResponse.Data?,
-        dataPemesananRiwayatResponse: GetPemesananRiwayatResponse.Data,
+        dataPemesananRiwayatResponse: GetPemesananResponse.Data,
         holder: AdapterRiwayatProses.ViewHolder
     ) {
         // change the img
@@ -76,7 +77,7 @@ class ProsesFragment : Fragment(), ProsesFragmentPresenter.Listener, ProsesFragm
                     .into(holder.itemView.iv_riwayat_item)
             } else {
                 Glide
-                    .with(this)
+                    .with(holder.itemView.context)
                     .load("https://cdn.thegeekdiary.com/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png")
                     .centerCrop()
                     .into(holder.itemView.iv_riwayat_item)

@@ -19,9 +19,7 @@ import com.example.travada.welcomepage.onboarding.OnboardingActivity
 import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
 import com.example.travada.welcomepage.splashscreen.SplashScreenPresenter
 import kotlinx.android.synthetic.main.activity_login_pin.*
-import kotlinx.android.synthetic.main.activity_login_pin.PinView
-import kotlinx.android.synthetic.main.activity_login_pin.tv_err
-import kotlinx.android.synthetic.main.activity_verif_register4.*
+
 
 
 class LoginPinActivity : AppCompatActivity(), LoginPinPresenter.Listener {

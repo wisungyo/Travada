@@ -1,11 +1,11 @@
 package com.example.travada.fragmentnav.beranda
 
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
 import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.pojo.GetPopulerResponse
+import com.example.travada.features.rencana.pojo.GetTabunganUserAll
 import com.example.travada.features.rencana.pojo.GetUserInfo
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
 import com.example.travada.fragmentnav.beranda.adapter.AdapterInformasi
@@ -41,6 +41,25 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
 
         })
 
+        TPApiClient.TP_API_SERVICES.getTabunganUserAll(Hawk.get(util.SF_TOKEN, "")).enqueue(object : Callback<GetTabunganUserAll> {
+            override fun onResponse(
+                call: Call<GetTabunganUserAll>,
+                response: Response<GetTabunganUserAll>
+            ) {
+                if (!response.isSuccessful) {
+                    listener.showDataError("Fetching data gagal")
+                    return
+                }
+                response.body()?.data?.let { getAdapterTabungan(it) }
+            }
+
+            override fun onFailure(call: Call<GetTabunganUserAll>, t: Throwable) {
+                listener.showDataError(t.toString())
+                listener.hideLoadingDialog()
+            }
+
+        })
+
         val listTabungan = arrayListOf(
             DataTabungan(R.drawable.tabungan, "Pulau Komodo", 80),
             DataTabungan(R.drawable.tabungan, "Gunung Bromo", 60),
@@ -50,11 +69,8 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         )
 
         val listInformasi = arrayListOf(
-            DataInformasi(R.drawable.ic_main_tabungan), // R.drawable.informasi ERROR
-            DataInformasi(R.drawable.ic_main_tabungan),
-            DataInformasi(R.drawable.ic_main_tabungan),
-            DataInformasi(R.drawable.ic_main_tabungan),
-            DataInformasi(R.drawable.ic_main_tabungan)
+            DataInformasi("Wujudkan Impian Liburanmu", "Rencanakan dengan mudah, cepat, dan aman", R.drawable.informasi),
+            DataInformasi("Tabung Bareng Teman Lebih Mudah", "Tabungan bersama mudah, dan super aman", R.drawable.ic_main_tabungan)
         )
 
         TPApiClient.TP_API_SERVICES.getPopulerDestination().enqueue(object : Callback<GetPopulerResponse> {
@@ -78,30 +94,26 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
 
         val listBerita = arrayListOf(
             DataBerita(
-                R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada 1",
-                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2021"),
+                R.drawable.berita_isi_saldo,
+                "Isi Saldo Rekening Travada",
+                "Ada Cashback Rp 6.500 buat kamu yang isi saldo rekening Travada minimum Rp 500.000 dari Bank Binar",
+                "31 Agustus 2020"),
             DataBerita(
-                R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada 2",
-                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2022"),
-            DataBerita(R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada 3",
-                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2023"),
-            DataBerita(R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada 4",
-                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2024"),
-            DataBerita(R.drawable.berita,
-                "Cashback Isi Saldo Rekening Travada 5",
-                "Ada Cashback Rp. 6.500 buat kamu yg isi saldo rekening Travada minimum Rp. 500.000 dari Bank Binar.",
-                "Berlaku sampai 31 Agustus 2025")
+                R.drawable.berita_paket_data,
+                "Beli Paket Data",
+                "Ada Cashback Rp 6.500 buat kamu yang beli paket data ke semua operator",
+                "30 Oktober 2020"),
+            DataBerita(R.drawable.berita_bayar_pln,
+                "Beli Token PLN",
+                "Ada Cashback Rp 6.500 buat kamu yang beli token PLN melalui Travada",
+                "31 Desember  2020"),
+            DataBerita(R.drawable.berita_beli_token,
+                "Bayar Tagihan PLN",
+                "Ada Cashback Rp 6.500 buat kamu yang bayar tagihan PLN melalui Travada",
+                "31 Desember  2020")
         )
 
-        val adapterTabungan = AdapterTabungan(listTabungan, this)
+//        val adapterTabungan = AdapterTabungan(listTabungan, this)
         val adapterInformasi = AdapterInformasi(listInformasi, this)
         val adapterBerita = AdapterBerita(listBerita, this)
         val linearLayoutTabungan = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -109,7 +121,7 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         val linearLayoutBerita = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         listener.showData(
-            adapterTabungan,
+//            adapterTabungan,
             adapterInformasi,
             adapterBerita,
             linearLayoutTabungan,
@@ -119,12 +131,18 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
     }
 
     fun getAdapterTripPopuler(it: List<GetPopulerResponse.Data>) {
-        val adapterTrip = AdapterTrip(it, this)
-        val linearLayoutTrip = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val adapterTrip             = AdapterTrip(it, this)
+        val linearLayoutTrip        = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         listener.showTripPopuler(
             adapterTrip,
             linearLayoutTrip
         )
+    }
+
+    fun getAdapterTabungan(data: List<GetTabunganUserAll.Data>) {
+        val adapterTabungan         = AdapterTabungan(data, this)
+        val linearLayoutTabungan    = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        listener.showAdapterTabungan(adapterTabungan, linearLayoutTabungan)
     }
 
     fun doMutasi() {
@@ -139,8 +157,8 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         listener.showPembelian()
     }
 
-    fun doEwallet() {
-        listener.showEwallet()
+    fun doTopup() {
+        listener.showTopup()
     }
 
     fun doTabungan() {
@@ -182,7 +200,7 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
     interface Listener {
         fun showSaldo(balance: Int?)
         fun showData(
-            adapterTabungan: AdapterTabungan,
+//            adapterTabungan: AdapterTabungan,
             adapterInformasi: AdapterInformasi,
             adapterBerita: AdapterBerita,
             linearLayoutTabungan: LinearLayoutManager,
@@ -193,7 +211,7 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         fun showMutasi()
         fun showTransfer()
         fun showPembelian()
-        fun showEwallet()
+        fun showTopup()
         fun showTabungan()
         fun showRencana()
         fun showLihatSemuaLiburan()
@@ -207,5 +225,9 @@ class BerandaFragmentPresenter(val listener: Listener): AppCompatActivity() {
         fun showLoadingDialog()
         fun hideLoadingDialog()
         fun checkLoadingDialog(): Boolean
+        fun showAdapterTabungan(
+            adapterTabungan: AdapterTabungan,
+            linearLayoutTabungan: LinearLayoutManager
+        )
     }
 }

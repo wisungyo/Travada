@@ -8,6 +8,9 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.travada.R
 import com.example.travada.sampeldata.SaldoSpinnerData
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
 
 class CustomDropDownAdapter(val context: Context, var dataSource: List<SaldoSpinnerData>) : BaseAdapter() {
 
@@ -17,21 +20,24 @@ class CustomDropDownAdapter(val context: Context, var dataSource: List<SaldoSpin
         val view: View
         val vh: ItemHolder
         if (convertView == null) {
-            view = inflater.inflate(R.layout.custon_spinner_item, parent, false)
+            view = inflater.inflate(R.layout.cicilan_spinner_item, parent, false)
             vh = ItemHolder(view)
             view?.tag = vh
         } else {
             view = convertView
             vh = view.tag as ItemHolder
         }
-        vh.label.text = "Rp. ${dataSource[position].name}"
-        vh.img.text = dataSource[position].url
+        val df = DecimalFormat("#,###")
+        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+        vh.jumlah.text = "Rp. ${df.format(dataSource[position].jumlah)}"
+        vh.title.text = dataSource[position].title
+        vh.source.text = dataSource[position].source
 
         return view
     }
 
-    override fun getItem(position: Int): Any? {
-        return dataSource[position]
+    override fun getItem(position: Int): Int? {
+        return dataSource[position].jumlah
     }
 
     override fun getCount(): Int {
@@ -43,8 +49,9 @@ class CustomDropDownAdapter(val context: Context, var dataSource: List<SaldoSpin
     }
 
     private class ItemHolder(row: View?) {
-        val label: TextView = row?.findViewById(R.id.text) as TextView
-        val img: TextView = row?.findViewById(R.id.img) as TextView
+        val title: TextView = row?.findViewById(R.id.tv_spinner_cicilan_title) as TextView
+        val jumlah: TextView = row?.findViewById(R.id.tv_spinner_cicilan_jumlah) as TextView
+        val source: TextView = row?.findViewById(R.id.tv_spinner_cicilan_source) as TextView
     }
 
 }

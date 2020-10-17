@@ -1,7 +1,5 @@
 package com.example.travada.welcomepage.login
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -13,10 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
-import com.example.travada.util.util
 import com.example.travada.welcomepage.forgetpass.inputemail.ForgetpassInputEmailActivity
-import com.google.gson.Gson
-import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.activity_login.*
 
 

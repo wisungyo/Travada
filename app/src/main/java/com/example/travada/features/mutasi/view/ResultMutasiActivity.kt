@@ -22,7 +22,25 @@ class ResultMutasiActivity : AppCompatActivity(), ResultMutasiActivityPresenter.
         setContentView(R.layout.activity_result_mutasi)
         presenter = ResultMutasiActivityPresenter(this)
 
+        val mutasi = intent.getStringExtra("MUTASI")
+        val tglAwal = intent.getStringExtra("TGL_AWAL")
+        val tglAkhir = intent.getStringExtra("TGL_AKHIR")
+
         presenter.fetchData()
+//        when (mutasi) {
+//            "minggu" -> {
+//                presenter.fetchDataMinggu()
+//            }
+//            "bulan" -> {
+//                presenter.fetchDataBulan()
+//            }
+//            "tahun" -> {
+//                presenter.fetchDataTahun()
+//            }
+//            "tanggal" -> {
+//                presenter.fetchDataTanggal(tglAwal, tglAkhir)
+//            }
+//        }
 
         iv_result_mutasi_back.setOnClickListener {
             finish()

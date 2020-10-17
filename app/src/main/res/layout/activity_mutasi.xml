@@ -79,6 +79,7 @@
         app:layout_constraintStart_toEndOf="@id/iv_mutasi_card" />
 
     <TextView
+        android:id="@+id/tv_mutasi_rekening"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12345678900*"

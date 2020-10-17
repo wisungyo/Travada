@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
 import com.example.travada.detailriwayat.presenter.DetailRiwayatActivityPresenter
 import com.example.travada.features.rencana.pojo.GetPemesananDetailResponse
-import kotlinx.android.synthetic.main.activity_detail_riwayat.*
 import kotlinx.android.synthetic.main.detail_riwayat_item_dp_cicilan.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -18,8 +17,7 @@ import kotlin.math.abs
 class AdapterDetailRiwayatActivityDisetujui(
     private val data: List<GetPemesananDetailResponse.Data.Cicilan>,
     val presenter: DetailRiwayatActivityPresenter
-) :
-        RecyclerView.Adapter<AdapterDetailRiwayatActivityDisetujui.ViewHolder>() {
+) : RecyclerView.Adapter<AdapterDetailRiwayatActivityDisetujui.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -46,7 +44,7 @@ class AdapterDetailRiwayatActivityDisetujui(
 
             val df = DecimalFormat("#,###")
             df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-            holder.itemView.tv_detail_riwayat_item_jumlah.text = "Rp. ${df.format(abs(data[position].jumlah))}"
+            holder.itemView.tv_detail_riwayat_item_jumlah.text = "Rp ${df.format(abs(data[position].jumlah))}"
 
             val tahun         = extractTahun(data[position].jatuhTempo)
             val bulan         = extractBulan(data[position].jatuhTempo)
@@ -57,7 +55,7 @@ class AdapterDetailRiwayatActivityDisetujui(
                 "$tanggal $namaBulan $tahun"
 
             when (data[position].status) {
-                "expired" -> {
+                "Expired" -> {
                     holder.itemView.tv_detail_riwayat_item_status.text = "Expired"
                     holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
                         R.drawable.bg_detail_riwayat_item_status_grey)
@@ -65,7 +63,7 @@ class AdapterDetailRiwayatActivityDisetujui(
                     holder.itemView.btn_detail_riwayat_item.isEnabled = false
                     holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn_disable)
                 }
-                "dibayar" -> {
+                "Dibayar" -> {
                     holder.itemView.tv_detail_riwayat_item_status.text = "Dibayar"
                     holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
                         R.drawable.bg_detail_riwayat_item_status_green)
@@ -73,7 +71,7 @@ class AdapterDetailRiwayatActivityDisetujui(
                     holder.itemView.btn_detail_riwayat_item.isEnabled = false
                     holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn_disable)
                 }
-                "menunggu pembayaran" -> {
+                "Menunggu Pembayaran" -> {
                     holder.itemView.tv_detail_riwayat_item_status.text = "Menunggu Pembayaran"
                     holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
                         R.drawable.bg_detail_riwayat_item_status_yellow)
@@ -82,7 +80,7 @@ class AdapterDetailRiwayatActivityDisetujui(
                     holder.itemView.btn_detail_riwayat_item.setBackgroundResource(R.drawable.bg_detail_riwayat_item_btn)
                 }
                 else -> {
-                    holder.itemView.tv_detail_riwayat_item_status.text = "Menunggu Persetujuan"
+                    holder.itemView.tv_detail_riwayat_item_status.text = "Status Tidak Diketahui"
                     holder.itemView.tv_detail_riwayat_item_status.setBackgroundResource(
                         R.drawable.bg_detail_riwayat_item_status_blue)
                     holder.itemView.tv_detail_riwayat_item_status.setTextColor(Color.parseColor("#ffffff"))
@@ -92,7 +90,7 @@ class AdapterDetailRiwayatActivityDisetujui(
             }
 
             holder.itemView.btn_detail_riwayat_item.setOnClickListener {
-                presenter.goToBayarCicilan()
+                presenter.goToBayarCicilan(data[position].id, data[position].jumlah)
             }
         }
     }

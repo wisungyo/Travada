@@ -66,16 +66,16 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
                 }
 
                 when (response.body()?.data?.pemesanan?.status) {
-                    "menunggu" -> {
+                    "Pending" -> {
                         response.body()?.data?.let { getAdapterDetailPemesananMenunggu(it) }
                     }
-                    "ditolak" -> {
+                    "Ditolak" -> {
                         response.body()?.data?.let { getAdapterDetailPemesananDitolak(it) }
                     }
-                    "disetujui" -> {
+                    "Disetujui" -> {
                         response.body()?.data?.cicilan?.let { getAdapterDetailPemesananDisetujui(it) }
                     }
-                    "expired" -> {
+                    "Expired" -> {
                         response.body()?.data?.let { getAdapterDetailPemesananExpired(it) }
                     }
                 }
@@ -117,8 +117,8 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
         listener.showData(adapterDetailRiwayat, linearLayoutDetailRiwayat)
     }
 
-    fun goToBayarCicilan() {
-        listener.showBayarCicilan()
+    fun goToBayarCicilan(id: Int, jumlah: Int) {
+        listener.showBayarCicilan(id, jumlah)
     }
 
     interface Listener {
@@ -136,6 +136,6 @@ class DetailRiwayatActivityPresenter (val listener: Listener): AppCompatActivity
             linearLayoutDetailRiwayatActivity: LinearLayoutManager)
         fun showDestinasiData(data: GetDestinasiResponse.Data?)
         fun showPemesananDataOnDestinasiData(data: GetPemesananDetailResponse.Data?)
-        fun showBayarCicilan()
+        fun showBayarCicilan(id: Int, jumlah: Int)
     }
 }

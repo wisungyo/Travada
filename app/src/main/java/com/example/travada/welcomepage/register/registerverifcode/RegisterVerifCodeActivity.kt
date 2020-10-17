@@ -1,25 +1,20 @@
 package com.example.travada.welcomepage.register.registerverifcode
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
-import com.example.travada.util.util
 import kotlinx.android.synthetic.main.activity_register_verif_code.*
 
 

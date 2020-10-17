@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".features.rencana.wisnu.view.PesanRencanaActivity">
+    tools:context=".features.rencana.pesan.PesanRencanaActivity">
 
     <View
         android:id="@+id/view_rencana_pesan"
@@ -34,9 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/roboto"
-        android:text=" "
+        android:text="Title"
         android:textColor="#fff"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/view_rencana_pesan"
         app:layout_constraintStart_toEndOf="@id/iv_rencana_pesan_back"
         app:layout_constraintTop_toTopOf="@id/view_rencana_pesan" />
@@ -62,7 +62,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="Keberangkatan"
                 android:textColor="#474747"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +90,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="Orang"
                 android:textColor="#474747"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_rencana_pesan_add"
                 app:layout_constraintStart_toStartOf="@id/spinner_rencana_pesan"
                 app:layout_constraintTop_toTopOf="@id/iv_rencana_pesan_add" />
@@ -112,7 +112,7 @@
                 android:id="@+id/et_rencana_pesan_jumlah_orang"
                 android:text="1"
                 android:fontFamily="@font/roboto"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="#777777"
                 android:gravity="center"
                 android:layout_width="40dp"
@@ -144,7 +144,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="Simulasi Cicilan"
                 android:textColor="#474747"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/spinner_rencana_pesan"
                 app:layout_constraintTop_toBottomOf="@id/iv_rencana_pesan_add" />
 
@@ -169,7 +169,7 @@
                         android:id="@+id/tv_rencana_pesan_card_cicilan"
                         android:text="Cicilan"
                         android:fontFamily="@font/roboto"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textColor="#474747"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                         android:id="@+id/tv_rencana_pesan_card_bulan"
                         android:text="Bulan"
                         android:fontFamily="@font/roboto"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textColor="#474747"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
                         android:id="@+id/tv_rencana_pesan_card_biaya"
                         android:text="Biaya"
                         android:fontFamily="@font/roboto"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textColor="#474747"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

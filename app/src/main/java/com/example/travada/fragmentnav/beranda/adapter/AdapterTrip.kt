@@ -13,7 +13,7 @@ import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 
-class AdapterTrip(val listTrip: List<GetPopulerResponse.Data>, val presenter: BerandaFragmentPresenter):
+class AdapterTrip(val list: List<GetPopulerResponse.Data>, val presenter: BerandaFragmentPresenter):
         RecyclerView.Adapter<AdapterTrip.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -25,10 +25,10 @@ class AdapterTrip(val listTrip: List<GetPopulerResponse.Data>, val presenter: Be
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (listTrip[position].gambarList.isNotEmpty()) {
+        if (list[position].gambarList.isNotEmpty()) {
             Glide
                 .with(holder.itemView.context)
-                .load( listTrip[position].gambarList[0])
+                .load( list[position].gambarList[0])
                 .centerCrop()
                 .into(holder.itemView.iv_mainpage_item_trip)
         } else {
@@ -39,26 +39,26 @@ class AdapterTrip(val listTrip: List<GetPopulerResponse.Data>, val presenter: Be
                 .into(holder.itemView.iv_mainpage_item_trip)
         }
 
-        holder.itemView.tv_mainpage_item_trip_title.text = listTrip[position].namaTrip
+        holder.itemView.tv_mainpage_item_trip_title.text = list[position].namaTrip
 
         val df = DecimalFormat("#,###")
         df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-        holder.itemView.tv_mainpage_item_trip_money.text = "Rp. ${df.format(listTrip[position].hargaSatuan)}"
+        holder.itemView.tv_mainpage_item_trip_money.text = "Rp. ${df.format(list[position].hargaSatuan)}"
 
-        holder.itemView.tv_mainpage_item_trip_day.text = "${listTrip[position].durasi} hari"
+        holder.itemView.tv_mainpage_item_trip_day.text = "${list[position].durasi} hari"
 
-        if (position == listTrip.size-1) {
+        if (position == list.size-1) {
             // IDKW, 28 becomes 16dp in the result
             holder.itemView.cl_mainpage_item_trip.setPadding(0, 0, 28, 14)
         }
 
         holder.itemView.cv_mainpage_item_trip.setOnClickListener {
-            presenter.tripItemClicked(listTrip[position].id)
+            presenter.tripItemClicked(list[position].id)
         }
     }
 
     override fun getItemCount(): Int {
-        return listTrip.size
+        return list.size
     }
 
 

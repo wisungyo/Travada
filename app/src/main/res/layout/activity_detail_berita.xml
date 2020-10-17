@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".berita.DetailBeritaActivity">
+    tools:context=".berita.view.DetailBeritaActivity">
 
     <View
         android:id="@+id/view_detail_berita"
@@ -55,7 +55,7 @@
 
             <ImageView
                 android:id="@+id/iv_detail_berita"
-                android:src="@drawable/berita"
+                android:src="@drawable/berita_isi_saldo"
                 android:scaleType="fitXY"
                 android:layout_width="0dp"
                 android:layout_height="60dp"

@@ -14,13 +14,14 @@ import com.example.travada.R
 import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatStatus
 import com.example.travada.detailriwayat.view.DetailRiwayatActivity
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
-import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
+import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananResponse
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 import kotlinx.android.synthetic.main.fragment_riwayat_status.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+import kotlin.collections.ArrayList
 
 class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragmentPresenter.ListenerAdapter {
     private lateinit var presenter: StatusFragmentPresenter
@@ -44,7 +45,7 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
         presenter.fetchDataRiwayat()
     }
 
-    override fun showData(list: List<GetPemesananRiwayatResponse.Data>) {
+    override fun showData(list: ArrayList<GetPemesananResponse.Data>) {
         val adapterRiwayatStatus        = AdapterRiwayatStatus(list, presenter, this)
         val linearLayoutRiwayatStatus   = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         rv_riwayat_status.adapter       = adapterRiwayatStatus
@@ -64,7 +65,7 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
 
     override fun showData(
         dataInfo: GetDestinasiResponse.Data?,
-        dataPemesananRiwayatResponse: GetPemesananRiwayatResponse.Data,
+        dataPemesananRiwayatResponse: GetPemesananResponse.Data,
         holder: AdapterRiwayatStatus.ViewHolder
     ) {
         if (dataInfo != null) {
@@ -115,21 +116,22 @@ class StatusFragment : Fragment(), StatusFragmentPresenter.Listener, StatusFragm
             holder.itemView.tv_riwayat_item_money.text = "Rp. ${df.format(dataPemesananRiwayatResponse.pemesanan.total)}"
 
             when (dataPemesananRiwayatResponse.pemesanan.status) {
-                "disetujui" -> {
+                "Disetujui" -> {
                     holder.itemView.tv_riwayat_item_status.text = "Disetujui"
                     holder.itemView.tv_riwayat_item_status.setTextColor(Color.parseColor("#00C12B"))
                     holder.itemView.view_riwayat_item_status.setBackgroundResource(R.drawable.bg_riwayat_item_status_green)
                 }
-                "ditolak" -> {
+                "Ditolak" -> {
                     holder.itemView.tv_riwayat_item_status.text = "Ditolak"
                     holder.itemView.tv_riwayat_item_status.setTextColor(Color.parseColor("#D15050"))
                     holder.itemView.view_riwayat_item_status.setBackgroundResource(R.drawable.bg_riwayat_item_status_red)
                 }
-                "expired" -> {
-                    holder.itemView.tv_riwayat_item_status.text = "Expired"
-                    holder.itemView.tv_riwayat_item_status.setTextColor(Color.parseColor("#777777"))
-                    holder.itemView.view_riwayat_item_status.setBackgroundResource(R.drawable.bg_riwayat_item_status_grey)
-                }
+            }
+
+            if (dataPemesananRiwayatResponse.statusDisetujui == "Expired") {
+                holder.itemView.tv_riwayat_item_status.text = "Expired"
+                holder.itemView.tv_riwayat_item_status.setTextColor(Color.parseColor("#777777"))
+                holder.itemView.view_riwayat_item_status.setBackgroundResource(R.drawable.bg_riwayat_item_status_grey)
             }
         }
     }

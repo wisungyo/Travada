@@ -5,7 +5,7 @@ import com.example.travada.features.rencana.network.TPApiClient
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
 import com.example.travada.fragmentnav.riwayat.adapter.AdapterRiwayatStatus
 import com.example.travada.fragmentnav.riwayat.network.ApiClientRiwayat
-import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananRiwayatResponse
+import com.example.travada.fragmentnav.riwayat.pojo.GetPemesananResponse
 import com.example.travada.util.util
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,10 +17,10 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
     fun fetchDataRiwayat() {
         val token = Hawk.get(util.SF_TOKEN, "")
         listenerAdapter.showLoadingDialog()
-        ApiClientRiwayat.API_SERVICE_RIWAYAT.getPemesanan(token).enqueue(object : Callback<GetPemesananRiwayatResponse> {
+        ApiClientRiwayat.API_SERVICE_RIWAYAT.getPemesananNew(token).enqueue(object : Callback<GetPemesananResponse> {
             override fun onResponse(
-                call: Call<GetPemesananRiwayatResponse>,
-                response: Response<GetPemesananRiwayatResponse>
+                call: Call<GetPemesananResponse>,
+                response: Response<GetPemesananResponse>
             ) {
                 if (!response.isSuccessful) {
                     listener.showDataError(response.code().toString())
@@ -28,11 +28,11 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
                 }
 
                 response.body()?.data?.let {
-                    val listPemesanan = ArrayList<GetPemesananRiwayatResponse.Data>()
+                    val listPemesanan = ArrayList<GetPemesananResponse.Data>()
                     for (i in 0..it.size-1) {
-                        if (it[i].pemesanan.status == "disetujui" ||
-                            it[i].pemesanan.status == "ditolak" ||
-                            it[i].pemesanan.status == "expired") {
+                        if (it[i].pemesanan.status == "Disetujui" ||
+                            it[i].pemesanan.status == "Ditolak" ||
+                            it[i].statusDisetujui == "Expired") {
                                 listPemesanan.add(it[i])
                         }
                     }
@@ -41,7 +41,7 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
                 listenerAdapter.hideLoadingDialog()
             }
 
-            override fun onFailure(call: Call<GetPemesananRiwayatResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetPemesananResponse>, t: Throwable) {
                 listener.showDataError(t.toString())
                 listenerAdapter.hideLoadingDialog()
             }
@@ -49,7 +49,7 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
     }
 
     fun getDestinasiInfo(
-        data: GetPemesananRiwayatResponse.Data,
+        data: GetPemesananResponse.Data,
         holder: AdapterRiwayatStatus.ViewHolder
     ) {
         TPApiClient.TP_API_SERVICES.getDestination(data.idDestinasi).enqueue(object : Callback<GetDestinasiResponse> {
@@ -75,7 +75,7 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
     }
 
     interface Listener {
-        fun showData(list: List<GetPemesananRiwayatResponse.Data>)
+        fun showData(list: ArrayList<GetPemesananResponse.Data>)
         fun showDetailRiwayat(idDestinasi: Int, idPemesanan: Int)
         fun showDataError(error: String)
     }
@@ -83,7 +83,7 @@ class StatusFragmentPresenter (val listener: Listener, val listenerAdapter: List
     interface ListenerAdapter {
         fun showData(
             dataInfo: GetDestinasiResponse.Data?,
-            dataPemesananRiwayatResponse: GetPemesananRiwayatResponse.Data,
+            dataPemesananRiwayatResponse: GetPemesananResponse.Data,
             holder: AdapterRiwayatStatus.ViewHolder
         )
         fun showLoadingDialog()

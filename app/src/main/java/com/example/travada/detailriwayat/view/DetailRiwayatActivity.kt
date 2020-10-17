@@ -12,11 +12,8 @@ import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityDit
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityExpired
 import com.example.travada.detailriwayat.adapter.AdapterDetailRiwayatActivityMenunggu
 import com.example.travada.features.rencana.pojo.GetDestinasiResponse
-import com.example.travada.features.rencana.pojo.GetPemesananDestinasiResponse
 import com.example.travada.features.rencana.pojo.GetPemesananDetailResponse
-import com.example.travada.sampeldata.DataRiwayat
 import kotlinx.android.synthetic.main.activity_detail_riwayat.*
-import kotlinx.android.synthetic.main.fragment_riwayat_item.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -176,8 +173,10 @@ class DetailRiwayatActivity : AppCompatActivity(), DetailRiwayatActivityPresente
         }
     }
 
-    override fun showBayarCicilan() {
+    override fun showBayarCicilan(id: Int, jumlah: Int) {
         val intentBayarCicilan = Intent(this, BayarCicilanActivity::class.java)
+        intentBayarCicilan.putExtra("ID_CICILAN", id)
+        intentBayarCicilan.putExtra("JUMLAH", jumlah)
         startActivity(intentBayarCicilan)
     }
 }

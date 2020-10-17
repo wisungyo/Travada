@@ -14,13 +14,19 @@ import com.example.travada.features.rencana.searchpage.room.DatabaseItem
 import com.example.travada.welcomepage.forgetpin.inputcode.ForgetpinInputCodeActivity
 import com.example.travada.welcomepage.onboarding.OnboardingEndActivity
 import kotlinx.android.synthetic.main.activity_login_pin.*
+import kotlinx.android.synthetic.main.activity_login_pin.PinView
+import kotlinx.android.synthetic.main.activity_login_pin.btn_logout
+import kotlinx.android.synthetic.main.activity_login_pin.iv_image
+import kotlinx.android.synthetic.main.activity_login_pin.numpad
+import kotlinx.android.synthetic.main.activity_login_pin.tv_err
+import kotlinx.android.synthetic.main.activity_regular_pin.*
 
 class PinBayarCicilanActivity : AppCompatActivity(), PinBayarCicilanActivityPresenter.Listener {
     private lateinit var presenter: PinBayarCicilanActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_pin)
+        setContentView(R.layout.activity_regular_pin)
         presenter = PinBayarCicilanActivityPresenter(this)
 
         Glide
@@ -39,7 +45,9 @@ class PinBayarCicilanActivity : AppCompatActivity(), PinBayarCicilanActivityPres
             }
         }
 
-
+        iv_back.setOnClickListener {
+            finish()
+        }
     }
 
     override fun goToOnboardingEndActivity() {
@@ -52,7 +60,9 @@ class PinBayarCicilanActivity : AppCompatActivity(), PinBayarCicilanActivityPres
 //        val intent = Intent(this, DetailRiwayatActivity::class.java)
 //        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
 //        startActivity(intent)
-        finish()
+        val idCicilan = intent.getIntExtra("ID_CICILAN", 0)
+        presenter.bayarCicilan(idCicilan)
+//        finish()
     }
 
     override fun goToForgetPinActivity() {
@@ -74,5 +84,9 @@ class PinBayarCicilanActivity : AppCompatActivity(), PinBayarCicilanActivityPres
 
     override fun setPinView(numb: String) {
         PinView.setText(numb)
+    }
+
+    override fun finishPin() {
+        finish()
     }
 }

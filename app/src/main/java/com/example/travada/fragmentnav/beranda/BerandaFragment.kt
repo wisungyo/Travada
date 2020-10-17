@@ -11,12 +11,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
-import com.example.travada.berita.BeritaActivity
-import com.example.travada.berita.DetailBeritaActivity
+import com.example.travada.berita.view.BeritaActivity
+import com.example.travada.berita.view.DetailBeritaActivity
 import com.example.travada.features.mutasi.view.MutasiActivity
 import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActivity
 import com.example.travada.features.rencana.searchpage.TPSearchPageActivity
-import com.example.travada.features.rencana.wisnu.view.RencanaActivity
+import com.example.travada.features.rencana.main.RencanaActivity
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.example.travada.features.transfer.TransferMenuActivity
 import com.example.travada.fragmentnav.beranda.adapter.AdapterBerita
@@ -69,14 +69,12 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
            }
         }
 
-        iv_mainpage_card_mutasi.setOnClickListener { presenter.doMutasi() }
+        iv_mainpage_card_topup.setOnClickListener { presenter.doTopup() }
+        iv_mainpage_card_travasave.setOnClickListener { presenter.doTabungan() }
+        iv_mainpage_card_travaplan.setOnClickListener { presenter.doRencana() }
         iv_mainpage_card_transfer.setOnClickListener { presenter.doTransfer() }
+        iv_mainpage_card_mutasi.setOnClickListener { presenter.doMutasi() }
         iv_mainpage_card_pembelian.setOnClickListener { presenter.doPembelian() }
-        iv_mainpage_card_ewallet.setOnClickListener { presenter.doEwallet() }
-        iv_mainpage_card_tabungan.setOnClickListener {
-            presenter.doTabungan()
-        }
-        iv_mainpage_card_rencana.setOnClickListener { presenter.doRencana() }
 
         tv_mainpage_trip_lihat_semua_liburan_kamu.setOnClickListener {
             presenter.doLihatSemuaLiburan()
@@ -100,7 +98,7 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
     }
 
     override fun showData(
-        adapterTabungan: AdapterTabungan,
+//        adapterTabungan: AdapterTabungan,
         adapterInformasi: AdapterInformasi,
         adapterBerita: AdapterBerita,
         linearLayoutTabungan: LinearLayoutManager,
@@ -108,12 +106,12 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         linearLayoutBerita: LinearLayoutManager
     ) {
 
-        rv_mainpage_tabungan.adapter = adapterTabungan
+//        rv_mainpage_tabungan.adapter = adapterTabungan
         rv_mainpage_informasi.adapter = adapterInformasi
         rv_mainpage_berita.adapter = adapterBerita
 
+//        rv_mainpage_tabungan.layoutManager = linearLayoutTabungan
         rv_mainpage_informasi.layoutManager = linearLayoutInformasi
-        rv_mainpage_tabungan.layoutManager = linearLayoutTabungan
         rv_mainpage_berita.layoutManager = linearLayoutBerita
     }
 
@@ -140,10 +138,10 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
         ).show()
     }
 
-    override fun showEwallet() {
+    override fun showTopup() {
         Toast.makeText(
             context,
-            "eWallet under construction..",
+            "Topup under construction..",
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -221,5 +219,14 @@ class BerandaFragment : Fragment(), BerandaFragmentPresenter.Listener {
 
     override fun checkLoadingDialog(): Boolean {
         return MyFragment.isAdded && MyFragment.isVisible && MyFragment.userVisibleHint
+    }
+
+    override fun showAdapterTabungan(
+        adapterTabungan: AdapterTabungan,
+        linearLayoutTabungan: LinearLayoutManager
+    ) {
+
+        rv_mainpage_tabungan.adapter = adapterTabungan
+        rv_mainpage_tabungan.layoutManager = linearLayoutTabungan
     }
 }

@@ -18,8 +18,8 @@ import com.example.travada.features.rencana.detailrencana.adapter.GambarWisataAd
 import com.example.travada.features.rencana.detailrencana.adapter.InfoTambahanAdapter
 import com.example.travada.features.rencana.detailrencana.adapter.RencanaPerjalananAdapter
 import com.example.travada.features.rencana.detailrencana.presenter.DetailRencanaPresenter
-import com.example.travada.features.rencana.pojo.GetDestinasiDetailResponse
-import com.example.travada.features.rencana.wisnu.view.PesanRencanaActivity
+import com.example.travada.features.rencana.pojo.GetDestinasiResponse
+import com.example.travada.features.rencana.pesan.PesanRencanaActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_detail_rencana.*
 import java.text.DecimalFormat
@@ -93,7 +93,21 @@ class DetailRencanaActivity : AppCompatActivity(), DetailRencanaPresenter.Listen
         tvDeskripsiKonten.text = getDestinasi.deskripsi
         tvBiayaDetailRencana.text = "Rp. ${df.format(getDestinasi.hargaSatuan)}"
 
-        Glide.with(this).load(getDestinasi.gambarList[0]).into(ivDetailGambar)
+//        Glide.with(this).load(getDestinasi.gambarList[0]).into(ivDetailGambar)
+
+        if (getDestinasi.gambarList.isNotEmpty()) {
+            Glide
+                .with(this)
+                .load(getDestinasi.gambarList[0])
+                .centerCrop()
+                .into(ivDetailGambar)
+        } else {
+            Glide
+                .with(this)
+                .load("https://cdn.thegeekdiary.com/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png")
+                .centerCrop()
+                .into(ivDetailGambar)
+        }
 
         showListGambar(getDestinasi.gambarList)
         showListPerjalanan(getDestinasi.rencanaList)
