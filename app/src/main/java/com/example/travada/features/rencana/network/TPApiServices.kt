@@ -84,4 +84,30 @@ interface TPApiServices {
     fun getNasabah(
         @Path("idUser") id: Int
     ) : Call<GetNasabah>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("/banking/mutasi/filter/mingguan")
+    fun getMutasiMingguan(
+        @Header("Authorization") token: String
+    ) : Call<GetMutasiFilter>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("/banking/mutasi/filter/bulanan")
+    fun getMutasiBulanan(
+        @Header("Authorization") token: String
+    ) : Call<GetMutasiFilter>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("/banking/mutasi/filter/tahunan")
+    fun getMutasiTahunan(
+        @Header("Authorization") token: String
+    ) : Call<GetMutasiFilter>
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @GET("/banking/mutasi/filter?")
+    fun getMutasiCustom(
+        @Header("Authorization") token: String,
+        @Query("awal") awal: String,
+        @Query("akhir") akhir: String
+    ) : Call<GetMutasiFilter>
 }

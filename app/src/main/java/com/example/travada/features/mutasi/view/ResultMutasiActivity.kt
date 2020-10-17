@@ -1,6 +1,5 @@
 package com.example.travada.features.mutasi.view
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,25 +21,35 @@ class ResultMutasiActivity : AppCompatActivity(), ResultMutasiActivityPresenter.
         setContentView(R.layout.activity_result_mutasi)
         presenter = ResultMutasiActivityPresenter(this)
 
-        val mutasi = intent.getStringExtra("MUTASI")
-        val tglAwal = intent.getStringExtra("TGL_AWAL")
-        val tglAkhir = intent.getStringExtra("TGL_AKHIR")
+        val mutasi      = intent.getStringExtra("MUTASI")
+        val tglAwal     = intent.getStringExtra("TGL_AWAL")
+        val tglAkhir    = intent.getStringExtra("TGL_AKHIR")
+        val namaLengkap = intent.getStringExtra("MUTASI_NAMA")
+        val rekening    = intent.getStringExtra("MUTASI_REK")
 
-        presenter.fetchData()
-//        when (mutasi) {
-//            "minggu" -> {
-//                presenter.fetchDataMinggu()
-//            }
-//            "bulan" -> {
-//                presenter.fetchDataBulan()
-//            }
-//            "tahun" -> {
-//                presenter.fetchDataTahun()
-//            }
-//            "tanggal" -> {
-//                presenter.fetchDataTanggal(tglAwal, tglAkhir)
-//            }
-//        }
+        presenter.fetchUserData(namaLengkap, rekening)
+
+        when (mutasi) {
+            "minggu" -> {
+                presenter.fetchDataMinggu()
+                fetchPeriodeMutasi("1 Minggu Terakhir")
+            }
+            "bulan" -> {
+                presenter.fetchDataBulan()
+                fetchPeriodeMutasi("1 Bulan Terakhir")
+            }
+            "tahun" -> {
+                presenter.fetchDataTahun()
+                fetchPeriodeMutasi("1 Tahun Terakhir")
+            }
+            "tanggal" -> {
+                presenter.fetchDataTanggal(tglAwal, tglAkhir)
+                fetchPeriodeMutasi("${tglAwal} - ${tglAkhir}")
+            }
+            else -> {
+                presenter.fetchDataBulan() // set default to Bulanan
+            }
+        }
 
         iv_result_mutasi_back.setOnClickListener {
             finish()
@@ -52,6 +61,15 @@ class ResultMutasiActivity : AppCompatActivity(), ResultMutasiActivityPresenter.
 //            val intentPDF = Intent(this, PDFMutasiActivity::class.java)
 //            startActivity(intentPDF)
         }
+    }
+
+    fun fetchPeriodeMutasi(periode: String) {
+        tv_result_mutasi_periode_tanggal.text = periode
+    }
+
+    override fun showUserData(namaLengkap: String?, rekening: String?) {
+        tv_result_mutasi_username.text = namaLengkap
+        tv_result_mutasi_rekening.text = rekening
     }
 
     override fun showData(adapter: AdapterResultMutasiActivity, linearLayout: LinearLayoutManager) {

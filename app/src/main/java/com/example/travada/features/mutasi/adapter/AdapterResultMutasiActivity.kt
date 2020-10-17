@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travada.R
 import com.example.travada.features.mutasi.presenter.ResultMutasiActivityPresenter
-import com.example.travada.sampeldata.DataMutasi
+import com.example.travada.features.rencana.pojo.GetMutasiFilter
+import com.example.travada.util.util
+import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.item_result_mutasi.view.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AdapterResultMutasiActivity(
-    val listItem: ArrayList<DataMutasi>,
+    val listItem: List<GetMutasiFilter.Data>?,
     val presenter: ResultMutasiActivityPresenter
 ):
     RecyclerView.Adapter<AdapterResultMutasiActivity.ViewHolder>() {
@@ -30,10 +31,10 @@ class AdapterResultMutasiActivity(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val tahun         = extractTahun(listItem[position].tanggal)
-        val bulan         = extractBulan(listItem[position].tanggal)
-        val namaBulan     = changeBulan(bulan)
-        val tanggal       = extractTanggal(listItem[position].tanggal)
+        val tahun         = listItem?.get(position)?.createdAt?.let { extractTahun(it) }
+        val bulan         = listItem?.get(position)?.createdAt?.let { extractBulan(it) }
+        val namaBulan     = bulan?.let { changeBulan(it) }
+        val tanggal       = listItem?.get(position)?.createdAt?.let { extractTanggal(it) }
 
         holder.itemView.tv_item_result_mutasi_bulan.text = "$namaBulan $tahun"
 
@@ -41,7 +42,9 @@ class AdapterResultMutasiActivity(
             holder.itemView.tv_item_result_mutasi_bulan.visibility = View.VISIBLE
             holder.itemView.view_item_result_mutasi.visibility = View.VISIBLE
         } else {
-            if (listItem[position].tanggal.subSequence(5,7) != listItem[position - 1].tanggal.subSequence(5,7)) {
+            val currentData = listItem?.get(position)?.createdAt?.let { extractBulan(it) }
+            val lastData    = listItem?.get(position-1)?.createdAt?.let { extractBulan(it) }
+            if (currentData != lastData) {
                 holder.itemView.tv_item_result_mutasi_bulan.visibility = View.VISIBLE
                 holder.itemView.view_item_result_mutasi.visibility = View.VISIBLE
             } else {
@@ -50,27 +53,34 @@ class AdapterResultMutasiActivity(
             }
         }
 
-//        if (!listItem[position].nama.contains(" ")) {
-//            holder.itemView.tv_item_result_mutasi_inisial.text = listItem[position].nama.subSequence(0,1)
-//        } else {
-//            val first = listItem[position].nama.split(" ").first()
-//            val last = listItem[position].nama.split(" ").last()
-//            holder.itemView.tv_item_result_mutasi_inisial.text = "${first.subSequence(0,1)}${last.subSequence(0,1)}"
-//        }
+        val transaction = listItem?.get(position)?.nominal?.get(0)?.toString()
+        if (transaction == "-" ) {
+            holder.itemView.tv_item_result_mutasi_title.text =
+                "${listItem?.get(position)?.namaTujuan} ${listItem?.get(position)?.rekeningTujuan}"
 
-        holder.itemView.tv_item_result_mutasi_title.text = listItem[position].nama
+            holder.itemView.tv_item_result_mutasi_source.text = listItem?.get(position)?.namaAsal
 
-        holder.itemView.tv_item_result_mutasi_source.text = listItem[position].source
-
-        val df = DecimalFormat("#,###")
-        df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
-        if (listItem[position].jenis == "debet") {
-            holder.itemView.tv_item_result_mutasi_jumlah.text = "+ ${df.format(listItem[position].jumlah)}"
-            holder.itemView.tv_item_result_mutasi_jumlah.setTextColor(Color.parseColor("#43AC43"))
-        } else {
-            holder.itemView.tv_item_result_mutasi_jumlah.text = "- ${df.format(listItem[position].jumlah)}"
+            val df = DecimalFormat("#,###")
+            df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+            val length = listItem?.get(position)?.nominal?.length
+            val nominal = length?.let { listItem?.get(position)?.nominal?.subSequence(1, it) }
+            holder.itemView.tv_item_result_mutasi_jumlah.text = "${listItem?.get(position)?.nominal}"
             holder.itemView.tv_item_result_mutasi_jumlah.setTextColor(Color.parseColor("#D15050"))
+
+        } else {
+            holder.itemView.tv_item_result_mutasi_title.text =
+                "${listItem?.get(position)?.namaAsal} ${listItem?.get(position)?.rekeningAsal}"
+
+            holder.itemView.tv_item_result_mutasi_source.text = listItem?.get(position)?.namaTujuan
+
+            val df = DecimalFormat("#,###")
+            df.decimalFormatSymbols = DecimalFormatSymbols(Locale.ITALY)
+            val length = listItem?.get(position)?.nominal?.length
+            val nominal = length?.let { listItem?.get(position)?.nominal?.subSequence(1, it) }
+            holder.itemView.tv_item_result_mutasi_jumlah.text = "+ ${listItem?.get(position)?.nominal}"
+            holder.itemView.tv_item_result_mutasi_jumlah.setTextColor(Color.parseColor("#43AC43"))
         }
+
 
         holder.itemView.tv_item_result_mutasi_detail_tanggal.text = "$tanggal $namaBulan $tahun"
     }
@@ -107,7 +117,11 @@ class AdapterResultMutasiActivity(
     }
 
     override fun getItemCount(): Int {
-        return listItem.size
+        return if (listItem != null) {
+            listItem.size
+        } else {
+            0
+        }
     }
 
 

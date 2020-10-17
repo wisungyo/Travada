@@ -32,7 +32,7 @@ class BayarCicilanActivity : AppCompatActivity(), BayarCicilanActivityPresenter.
         setContentView(R.layout.activity_bayar_cicilan)
         presenter = BayarCicilanActivityPresenter(this)
         val idCicilan = intent.getIntExtra("ID_CICILAN", 0)
-        val jumlah = intent.getIntExtra("JUMLAH", 0)
+        val jumlah = abs(intent.getIntExtra("JUMLAH", 0))
 
         val spin = findViewById<View>(R.id.spinner_rencana_pesan) as Spinner
         spin.onItemSelectedListener = this

@@ -11,9 +11,13 @@ import com.example.travada.features.mutasi.presenter.MutasiActivityPresenter
 import com.example.travada.features.rencana.pojo.GetNasabah
 import kotlinx.android.synthetic.main.activity_mutasi.*
 import java.util.*
+import kotlin.properties.Delegates
 
 class MutasiActivity : AppCompatActivity(), MutasiActivityPresenter.Listener {
     lateinit var presenter: MutasiActivityPresenter
+    var namaLengkap by Delegates.notNull<String>()
+    var rekening    by Delegates.notNull<String>()
+
     var date        = false
     var mingguIni   = false
     var bulanIni    = false
@@ -127,28 +131,30 @@ class MutasiActivity : AppCompatActivity(), MutasiActivityPresenter.Listener {
         val intentResultMutasi = Intent(this, ResultMutasiActivity::class.java)
         when {
             mingguIni -> {
-                Toast.makeText(this, "Minggu Ini Activated", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Minggu Ini Activated", Toast.LENGTH_LONG).show()
                 intentResultMutasi.putExtra("MUTASI", "minggu")
             }
             bulanIni -> {
-                Toast.makeText(this, "Bulan Ini Activated", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Bulan Ini Activated", Toast.LENGTH_LONG).show()
                 intentResultMutasi.putExtra("MUTASI", "bulan")
             }
             tahunIni -> {
-                Toast.makeText(this, "Tahun Ini Activated", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Tahun Ini Activated", Toast.LENGTH_LONG).show()
                 intentResultMutasi.putExtra("MUTASI", "tahun")
             }
             date -> {
-                Toast.makeText(this, "Date Activated", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Date Activated", Toast.LENGTH_LONG).show()
                 intentResultMutasi.putExtra("MUTASI", "tanggal")
                 intentResultMutasi.putExtra("TGL_AWAL", tv_mutasi_start.text.toString())
                 intentResultMutasi.putExtra("TGL_AKHIR", tv_mutasi_end.text.toString())
             }
             else -> {
-                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
             }
         }
 
+        intentResultMutasi.putExtra("MUTASI_NAMA", namaLengkap)
+        intentResultMutasi.putExtra("MUTASI_REK", rekening)
         startActivity(intentResultMutasi)
     }
 
@@ -190,5 +196,8 @@ class MutasiActivity : AppCompatActivity(), MutasiActivityPresenter.Listener {
     override fun showUserData(data: GetNasabah.Data) {
         tv_mutasi_username.text = data.namaLengkap
         tv_mutasi_rekening.text = data.noRekening
+
+        namaLengkap = data.namaLengkap
+        rekening    = data.noRekening
     }
 }

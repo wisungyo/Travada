@@ -3,7 +3,7 @@ package com.example.travada.features.rencana.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class GetMutasiMinggu(
+data class GetMutasiFilter(
     @SerializedName("data")
     val `data`: List<Data>,
     @SerializedName("message")
