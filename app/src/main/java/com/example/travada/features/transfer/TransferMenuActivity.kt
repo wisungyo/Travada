@@ -57,9 +57,14 @@ class TransferMenuActivity : AppCompatActivity(), TransferMenuPresenter.Listener
     }
 
     override fun goToVAActivity() {
-        val goToNextActivity = Intent(this, VAInputActivity::class.java)
-//        val goToNextActivity = Intent(this, VAInvoiceActivity::class.java)
-        startActivity(goToNextActivity)
+//        val goToNextActivity = Intent(this, VAInputActivity::class.java)
+////        val goToNextActivity = Intent(this, VAInvoiceActivity::class.java)
+//        startActivity(goToNextActivity)
+        Toast.makeText(
+            this,
+            "Under construction..",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun btnActive() {

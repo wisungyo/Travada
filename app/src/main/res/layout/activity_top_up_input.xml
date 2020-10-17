@@ -120,7 +120,7 @@
                 />
 
             <TextView
-                android:id="@+id/tv_mutasi_username"
+                android:id="@+id/tv_topup_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="null"
@@ -133,6 +133,7 @@
                 app:layout_constraintStart_toEndOf="@id/iv_card_small" />
 
             <TextView
+                android:id="@+id/tv_topup_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="null"
@@ -166,7 +167,8 @@
                 app:errorEnabled="true"
                 app:endIconMode="clear_text"
                 app:hintEnabled="false"
-                app:prefixText="Rp"
+                app:prefixText="Rp "
+                app:prefixTextAppearance="@style/TextAppearance.AppCompat.Medium"
                 >
 
                 <EditText

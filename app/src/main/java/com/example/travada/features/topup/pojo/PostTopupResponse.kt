@@ -3,7 +3,7 @@ package com.example.travada.features.topup.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class GetTopupResponse(
+data class PostTopupResponse(
     @SerializedName("data")
     val `data`: Data,
     @SerializedName("message")

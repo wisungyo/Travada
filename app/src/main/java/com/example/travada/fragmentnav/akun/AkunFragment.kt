@@ -11,6 +11,8 @@ import android.widget.Toast
 import com.example.travada.R
 import com.example.travada.features.rencana.detailrencana.view.DetailRencanaActivity
 import com.example.travada.features.rencana.searchpage.room.DatabaseItem
+import com.example.travada.features.topup.TopUpInputActivity
+import com.example.travada.features.topup.TopUpInputPinActivity
 import com.example.travada.fragmentnav.akun.changepass.AkunChangePassActivity
 import com.example.travada.fragmentnav.akun.changepin.AkunInputNewPinActivity
 import com.example.travada.fragmentnav.akun.network.AkunApiClient
@@ -69,7 +71,9 @@ class AkunFragment : Fragment(), AkunFragmentPresenter.Listener {
         }
 
         btn_changepin.setOnClickListener {
-            goToChangePin()
+//            goToChangePin()
+            val intentActivity = Intent(activity, TopUpInputActivity::class.java)
+            startActivity(intentActivity)
         }
 
         btn_logout.setOnClickListener {
@@ -134,13 +138,23 @@ class AkunFragment : Fragment(), AkunFragmentPresenter.Listener {
     }
 
     override fun goToChangePin() {
-        val intentActivity = Intent(activity, AkunInputNewPinActivity::class.java)
-        startActivity(intentActivity)
+//        val intentActivity = Intent(activity, AkunInputNewPinActivity::class.java)
+//        startActivity(intentActivity)
+        Toast.makeText(
+            context,
+            "Under construction..",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun goToMenuLogin() {
-        val intentActivity = Intent(activity, OnboardingEndActivity::class.java)
-        startActivity(intentActivity)
+//        val intentActivity = Intent(activity, OnboardingEndActivity::class.java)
+//        startActivity(intentActivity)
+        Toast.makeText(
+            context,
+            "Under construction..",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun showLoadingDialog() {

@@ -3,7 +3,7 @@ package com.example.travada.features.topup.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class GetTopupRequest(
+data class PostTopupRequest(
     @SerializedName("nominal")
     val nominal: String,
     @SerializedName("pin")

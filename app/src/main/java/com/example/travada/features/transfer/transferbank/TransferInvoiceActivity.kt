@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.icu.text.NumberFormat
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Bundle
@@ -34,20 +35,21 @@ import java.util.*
 class TransferInvoiceActivity : AppCompatActivity(), TransferInvoicePresenter.Listener {
     private lateinit var presenter: TransferInvoicePresenter
     private lateinit var notificationManager: NotificationManagerCompat
+    private lateinit var bundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transfer_invoice)
         presenter = TransferInvoicePresenter(this)
         notificationManager = NotificationManagerCompat.from(this)
+        intent?.extras?.let { bundle = it }
+
+        setInformation(bundle)
 
         Glide
             .with(this)
             .load(R.drawable.image_login)
             .into(iv_image)
-
-
-
 
         btn_share.setOnClickListener {
             val bitmap = Cekrek.toBitmap(layout_print) {
@@ -252,5 +254,56 @@ class TransferInvoiceActivity : AppCompatActivity(), TransferInvoicePresenter.Li
         val goToNextActivity = Intent(this, TransferMenuActivity::class.java)
         startActivity(goToNextActivity)
         finishAffinity()
+    }
+
+    override fun setInformation(bundle: Bundle) {
+        val createdAt = bundle.getString("createdAt").toString()
+        val nominal = bundle.getString("nominal")?.toLong()
+        val id = bundle.getString("id").toString()
+        val namaAsal = bundle.getString("namaAsal").toString()
+        val namaTujuan = bundle.getString("namaTujuan").toString()
+        val bankAsal = bundle.getString("bankAsal").toString()
+        val rekeningAsal = bundle.getString("rekeningAsal").toString()
+        val bankTujuan = bundle.getString("bankTujuan").toString()
+        val rekeningTujuan = bundle.getString("rekeningTujuan").toString()
+        val catatan = bundle.getString("note").toString()
+
+        var tanggal = createdAt.subSequence(8,10).toString()
+        var bulan = createdAt.subSequence(5,7).toString()
+        var tahun = createdAt.subSequence(0,4).toString()
+        var time = createdAt.substring(11,16).toString()
+
+        var namaBulan = ""
+        when(bulan){
+            "01" -> namaBulan = "Januari"
+            "02" -> namaBulan = "Februari"
+            "03" -> namaBulan = "Maret"
+            "04" -> namaBulan = "April"
+            "05" -> namaBulan = "Mei"
+            "06" -> namaBulan = "Juni"
+            "07" -> namaBulan = "Juli"
+            "08" -> namaBulan = "Agustus"
+            "09" -> namaBulan = "September"
+            "10" -> namaBulan = "Oktober"
+            "11" -> namaBulan = "November"
+            "12" -> namaBulan = "Desember"
+        }
+
+        var timestamp = "$tanggal $namaBulan $tahun - $time"
+
+        val localeID =  Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+
+        tv_timestamp.text = timestamp
+        tv_fromName.text = namaAsal
+        tv_fromBank.text = bankAsal
+        tv_fromNumb.text = StringBuilder(rekeningAsal).insert(4, ' ').insert(9, ' ').insert(14, ' ').toString()
+        tv_toName.text = namaTujuan
+        tv_toBank.text = bankTujuan
+        tv_toNumb.text = StringBuilder(rekeningTujuan).insert(4, ' ').insert(9, ' ').insert(14, ' ').toString()
+        tv_note.text = catatan
+        tv_amount.text = numberFormat.format(nominal)
+        tv_detail_id.text = id
+
     }
 }
