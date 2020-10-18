@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.ListTabunganAdapter
 import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganActivity
@@ -14,9 +15,17 @@ import com.example.travada.features.tabungan.detailtabungan.view.DetailTabunganF
 import com.example.travada.features.tabungan.formtabungansatu.FormTabunganOneActivity
 import com.example.travada.features.tabungan.models.DataWisata
 import com.example.travada.features.tabungan.pojo.GetAllTabunganResponse
+import com.example.travada.features.tabungan.pojo.GetTabunganAll
+import com.example.travada.features.tabungan.pojo.GetTabunganDetailResponse
+import com.example.travada.features.tabungan.pojo.GetTabunganUserAll
 import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_tabungan.*
+import kotlinx.android.synthetic.main.list_liburan_pilihan.view.*
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
+import kotlin.math.abs
 
 
 class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
@@ -31,8 +40,8 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
         presenter = TabunganPresenter(this)
 
         btnBuatLiburan.setOnClickListener {
-            val goToFormTabunganOne = Intent(this, FormTabunganOneActivity::class.java)
-            startActivity(goToFormTabunganOne)
+//            val goToFormTabunganOne = Intent(this, FormTabunganOneActivity::class.java)
+//            startActivity(goToFormTabunganOne)
         }
 
         ivBackMainTabungan.setOnClickListener {
@@ -53,11 +62,11 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
         MyFragment.dismiss()
     }
 
-    override fun implementAllTabungan(getTabungan: MutableList<GetAllTabunganResponse.Data>) {
+    override fun implementAllTabungan(getTabungan: MutableList<GetTabunganUserAll.Data>) {
         setUpRecyclerView(getTabungan)
     }
 
-    fun setUpRecyclerView(listTabungan : List<GetAllTabunganResponse.Data>){
+    fun setUpRecyclerView(listTabungan : List<GetTabunganUserAll.Data>){
         Log.d("TRAVASAVE", "id=${listTabungan[0].id}")
         rvMainTabungan.adapter = ListTabunganAdapter(listTabungan, presenter)
         rvMainTabungan.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
@@ -94,6 +103,5 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
         getSupportFragmentManager().beginTransaction()
             .add(R.id.frameDetailTabungan, fragment).commit();
     }
-
 
 }

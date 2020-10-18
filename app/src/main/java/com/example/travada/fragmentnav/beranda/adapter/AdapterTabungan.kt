@@ -24,8 +24,6 @@ class AdapterTabungan(val listTabungan: List<GetTabunganUserAll.Data>, val prese
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        holder.itemView.iv_mainpage_item_tabungan.setBackgroundResource(listTabungan[position].gambarTabungan)
-
         Glide
             .with(holder.itemView.context)
             .load(listTabungan[position].gambarTabungan)

@@ -75,9 +75,9 @@ class DetailTabunganFragment : Fragment(),
 //            Log.d("TOLONGGG","${id}")
 //        }
 
-        val bundle = arguments
-        val myValue = bundle!!.getInt("TABUNGAN")
-        presenter.getDetailTabungan(myValue)
+//        val bundle = arguments
+//        val myValue = bundle!!.getInt("TABUNGAN")
+//        presenter.getDetailTabungan(myValue)
 
         // myValue.let { presenter.getDetailTabungan(it) }
 //        val bundle = this.arguments
