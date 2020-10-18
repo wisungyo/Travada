@@ -26,7 +26,6 @@ class DetailTabunganActivity : AppCompatActivity(), DetailTabunganPresenter.List
 
         presenter.getDetail(intentId)
 
-
 //        val data = Bundle()
 //        val myMessage =intentId
 //        data.putInt("ID_DETAILTABUNGAN", myMessage)
@@ -37,10 +36,12 @@ class DetailTabunganActivity : AppCompatActivity(), DetailTabunganPresenter.List
 //            .replace(R.id.frameDetailTabungan, fragment)
 //            .commit()
 
-//        val bundle = Bundle()
-//        bundle.putInt("ID_DETAILTABUNGAN", intentId)
-//        val fragment = DetailTabunganFragment()
-//        fragment.setArguments(bundle)
+
+        val bundle = Bundle()
+        bundle.putInt("ID_DETAILTABUNGAN", intentId)
+        Log.d("YOGA","${intentId}")
+        val fragment = DetailTabunganFragment()
+        fragment.setArguments(bundle)
 
 //        val bundle = Bundle()
 //        bundle.putInt("ID_DETAILTABUNGAN", intentId)
@@ -48,16 +49,15 @@ class DetailTabunganActivity : AppCompatActivity(), DetailTabunganPresenter.List
 //        val mPagerAdapter = PageAdapter(supportFragmentManager, bundle)
 //        mPager.setAdapter(mPagerAdapter)
 
-
-        val bundle = Bundle()
-        val id = intentId
-        Log.d("TABUNGAN","${id}")
-        bundle.putInt("TABUNGAN", id)
-        val fragobj = DetailTabunganFragment()
-        fragobj.setArguments(bundle)
-
-
 //
+//        val bundle = Bundle()
+//        val id = intentId
+//        Log.d("TABUNGAN","${id}")
+//        bundle.putInt("TABUNGAN", id)
+//        val fragobj = DetailTabunganFragment()
+//        fragobj.setArguments(bundle)
+
+
 //        val bundle = Bundle()
 //        val myMessage =intentId
 //        bundle.putInt("TABUNGAN_ID", myMessage)
@@ -73,7 +73,7 @@ class DetailTabunganActivity : AppCompatActivity(), DetailTabunganPresenter.List
 //        adapter.addFrag(overviewFrag, getString(R.string.overview));
 
 
-        viewPagerMain.adapter = PageAdapter(supportFragmentManager)
+        viewPagerMain.adapter = PageAdapter(supportFragmentManager,intentId)
         tabMain.setupWithViewPager(viewPagerMain)
 
 

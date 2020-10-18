@@ -40,8 +40,8 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
         presenter = TabunganPresenter(this)
 
         btnBuatLiburan.setOnClickListener {
-//            val goToFormTabunganOne = Intent(this, FormTabunganOneActivity::class.java)
-//            startActivity(goToFormTabunganOne)
+            val goToFormTabunganOne = Intent(this, FormTabunganOneActivity::class.java)
+            startActivity(goToFormTabunganOne)
         }
 
         ivBackMainTabungan.setOnClickListener {
@@ -94,8 +94,7 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
 
     override fun showDetailTabunganWisata(dataWisata: DataWisata) {
 
-        val fragment =
-            DetailTabunganFragment()
+        val fragment = DetailTabunganFragment()
         val bundle = Bundle()
         bundle.putParcelable("detail", dataWisata)
         fragment.setArguments(bundle)
