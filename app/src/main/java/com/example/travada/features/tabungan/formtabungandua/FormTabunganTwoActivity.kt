@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
@@ -32,7 +33,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener {
+class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener, AdapterView.OnItemClickListener  {
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter
     private lateinit var terimaBundle: Bundle
@@ -44,22 +45,20 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         setContentView(R.layout.activity_form_tabungan_two)
 
         intent?.extras?.let { terimaBundle = it }
-        
+
         // jumlahditabung
         terimaBundle = Bundle()
-        terimaBundle.getString("jumlahDitabung").toString().toInt()
-        val jumlahDitabung =
 
-      //  presenter = FormTabunganTwoPresenter(this)
-      //  presenter.fetchTabungBarengData()
-        //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        //  presenter = FormTabunganTwoPresenter(this)
+        //  presenter.fetchTabungBarengData()
+            //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        btnTambahTeman.setOnClickListener {
+            btnTambahTeman.setOnClickListener {
 //            val goToFormTambahTeman = Intent(this, FormTabunganThreeActivity::class.java)
 //            startActivity(goToFormTambahTeman)
-            val intent = Intent(this, FormTabunganThreeActivity::class.java)
-            this.startActivityForResult(intent, 12)
-        }
+                val intent = Intent(this, FormTabunganThreeActivity::class.java)
+                this.startActivityForResult(intent, 12)
+            }
 
         btnLanjutFormTwo.setOnClickListener {
             presenter.goToNextPage(terimaBundle)
@@ -86,21 +85,22 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             metodeTabungan.showDropDown()
         }
 
-
         // periode tabungan
         var periodeTabungan = etPeriodeTabungan as AutoCompleteTextView
         fun dataPeriodeTabungan() {
             var list = listOf("Harian", "Mingguan", "Bulanan")
-            var adapter =
-                ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list)
+
+            var adapter = ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list)
             periodeTabungan.setAdapter(adapter)
             periodeTabungan.threshold = 1
+            periodeTabungan.onItemSelectedListener
         }
 
         periodeTabungan.setOnClickListener {
             dataPeriodeTabungan()
             periodeTabungan.showDropDown()
         }
+
 
         etTanggal.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
@@ -266,27 +266,58 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         })
 
 
-        fun hitung () {
+
+
+
+        fun hitung() {
+
+            val sdf = SimpleDateFormat("dd-MM-yyyy")
+            val date = sdf.parse(etTanggal.text.toString())
+
+            var setoranAwal = etSetoranAwal.text.toString().toInt()
+
+            var jumlahTabung =  terimaBundle.getString("jumlahDitabung").toString().toInt()
+
+            var tanggalSekarangHarian = date.time - Calendar.getInstance().timeInMillis
+            var selisihTanggalHarian = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangHarian)
+
+            var tanggalSekarangMingguan = date.time - Calendar.getInstance().timeInMillis
+            var selisihTanggalMingguan = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangMingguan)/7
+
+            var tanggalSekarangBulanan = date.time - Calendar.getInstance().timeInMillis
+            var selisihTanggalBulanan = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangBulanan)/30
+
+            var setor : Int = 0
+            if (periode == "Harian"){
+               setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalHarian-tanggalSekarangHarian)*multi
+            } else if (periode == "Mingguan") {
+               setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalMingguan-tanggalSekarangMingguan)* multi
+            } else if (periode == "Bulanan") {
+                setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalBulanan-tanggalSekarangBulanan)* multi
+            }
+
+
 
         }
-
 
 
         btnInactive()
     }
 
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        listTabungBareng= ArrayList<DataTabungBareng>()
+        listTabungBareng = ArrayList<DataTabungBareng>()
         if (requestCode == 12) {
             if (resultCode == Activity.RESULT_OK) {
+                multi
                 data?.let {
                     val body = DataTabungBareng(
                         it.getStringExtra(FormTabunganThreeActivity.namaRekening).toString(),
                         it.getStringExtra(FormTabunganThreeActivity.nomorRekening).toString(),
-                        it.getStringExtra(FormTabunganThreeActivity.namaRekening)!!.subSequence(0,1).toString())
+                        it.getStringExtra(FormTabunganThreeActivity.namaRekening)!!
+                            .subSequence(0, 1).toString()
+                    )
 
                     listTabungBareng.add(body)
                 }
@@ -371,6 +402,13 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
     companion object {
         var jumlahSetoran = 0L
         var setoranAwal = 0L
+        var periode= ""
+        var multi = true
+    }
+
+    override fun onItemClick(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+        val item = parent.getString(position)
+        periode = item
     }
 
 }
