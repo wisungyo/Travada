@@ -47,8 +47,10 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
 
         terimaBundle = Bundle()
 
+
+
         presenter = FormTabunganTwoPresenter(this)
-        presenter.fetchTabungBarengData()
+      //  presenter.fetchTabungBarengData()
         //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         btnTambahTeman.setOnClickListener {
@@ -266,6 +268,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        listTabungBareng= ArrayList<DataTabungBareng>()
         if (requestCode == 12) {
             if (resultCode == Activity.RESULT_OK) {
                 data?.let {

@@ -1,7 +1,6 @@
 package com.example.travada.features.tabungan.adapter
 
-import android.R
-import android.R.attr.fragment
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -35,9 +34,3 @@ class PageAdapter(fm: FragmentManager, val id: Int) : FragmentPagerAdapter(fm) {
     }
 }
 
-
-//    private val pages = listOf(
-//        DetailTabunganFragment(),
-//        TransaksiTabunganFragment()
-//
-//    )
