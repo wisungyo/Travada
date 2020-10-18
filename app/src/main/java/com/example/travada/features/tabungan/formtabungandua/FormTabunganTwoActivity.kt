@@ -44,12 +44,13 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         setContentView(R.layout.activity_form_tabungan_two)
 
         intent?.extras?.let { terimaBundle = it }
-
+        
+        // jumlahditabung
         terimaBundle = Bundle()
+        terimaBundle.getString("jumlahDitabung").toString().toInt()
+        val jumlahDitabung =
 
-
-
-        presenter = FormTabunganTwoPresenter(this)
+      //  presenter = FormTabunganTwoPresenter(this)
       //  presenter.fetchTabungBarengData()
         //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
@@ -254,6 +255,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             }
         })
 
+
         etJumlahSetoran.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
                 // code to execute when EditText loses focus
@@ -263,8 +265,17 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             }
         })
 
+
+        fun hitung () {
+
+        }
+
+
+
         btnInactive()
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
