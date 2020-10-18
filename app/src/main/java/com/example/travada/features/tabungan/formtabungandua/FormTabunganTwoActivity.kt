@@ -265,10 +265,6 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             }
         })
 
-
-
-
-
         fun hitung() {
 
             val sdf = SimpleDateFormat("dd-MM-yyyy")
@@ -287,19 +283,15 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             var tanggalSekarangBulanan = date.time - Calendar.getInstance().timeInMillis
             var selisihTanggalBulanan = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangBulanan)/30
 
-            var setor : Int = 0
-            if (periode == "Harian"){
-               setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalHarian-tanggalSekarangHarian)*multi
-            } else if (periode == "Mingguan") {
-               setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalMingguan-tanggalSekarangMingguan)* multi
-            } else if (periode == "Bulanan") {
-                setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalBulanan-tanggalSekarangBulanan)* multi
-            }
-
-
-
+//            var setor : Int = 0
+//            if (periode == "Harian"){
+//               setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalHarian-tanggalSekarangHarian)*multi
+//            } else if (periode == "Mingguan") {
+//               setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalMingguan-tanggalSekarangMingguan)* multi
+//            } else if (periode == "Bulanan") {
+//                setor = jumlahTabung-(setoranAwal*multi)/(selisihTanggalBulanan-tanggalSekarangBulanan)* multi
+//            }
         }
-
 
         btnInactive()
     }
@@ -403,7 +395,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         var jumlahSetoran = 0L
         var setoranAwal = 0L
         var periode= ""
-        var multi = true
+        var multi = false
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
