@@ -67,9 +67,13 @@ class TabunganActivity : AppCompatActivity(), TabunganPresenter.Listener {
     }
 
     fun setUpRecyclerView(listTabungan : List<GetTabunganUserAll.Data>){
-        Log.d("TRAVASAVE", "id=${listTabungan[0].id}")
-        rvMainTabungan.adapter = ListTabunganAdapter(listTabungan, presenter)
-        rvMainTabungan.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        if (listTabungan.isNullOrEmpty()) {
+            return
+        } else {
+            Log.d("TRAVASAVE", "id=${listTabungan[0].id}")
+            rvMainTabungan.adapter = ListTabunganAdapter(listTabungan, presenter)
+            rvMainTabungan.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        }
     }
 
 

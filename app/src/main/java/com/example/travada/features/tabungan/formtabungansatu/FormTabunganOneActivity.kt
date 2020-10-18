@@ -177,12 +177,12 @@ class FormTabunganOneActivity : AppCompatActivity(), FormTabunganOnePresenter.Li
     }
 
     override fun goToNextPage() {
-        val bundle = Bundle()
+//        val bundle = Bundle()
         val intent = Intent(this, FormTabunganTwoActivity::class.java)
-        bundle.putString("namaTujuan", etTujuan.text.toString())
-        bundle.putString("jumlahDitabung", nominal.toString())
-        bundle.putString("uriGambar", uriGambar)
-        intent.putExtras(bundle)
+        intent.putExtra("namaTujuan", etTujuan.text.toString())
+        intent.putExtra("jumlahDitabung", nominal.toString())
+        intent.putExtra("uriGambar", uriGambar)
+//        intent.putExtras(bundle)
         startActivity(intent)
     }
 

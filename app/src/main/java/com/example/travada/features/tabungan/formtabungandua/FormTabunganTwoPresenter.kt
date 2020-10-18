@@ -33,10 +33,9 @@ class FormTabunganTwoPresenter(private val listener: Listener) {
         etTanggal: String,
         etSetoranAwal: String,
         etMetodeTabungan: String,
-        etPeriodeTabungan: String,
-        etJumlahTabungan: String
+        etPeriodeTabungan: String
     ) {
-        if (etTanggal.isNotEmpty() && etSetoranAwal.isNotEmpty() && etMetodeTabungan.isNotEmpty() && etPeriodeTabungan.isNotEmpty() && etJumlahTabungan.isNotEmpty()) {
+        if (etTanggal.isNotEmpty() && etSetoranAwal.isNotEmpty() && etMetodeTabungan.isNotEmpty() && etPeriodeTabungan.isNotEmpty()) {
             listener.btnActive()
         } else {
             listener.btnInactive()

@@ -42,20 +42,46 @@ class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.
             finish()
         }
 
-        val namaTujuan = bundle.getString("namaTujuan")
+//        intent.putExtra("uriGambar", uriGambar)
+//        intent.putExtra("jumlahDitabung", jumlahDitabung)
+//        intent.putExtra("namaTujuan", tujuan)
+//        intent.putExtra("tanggalTarget", etTanggal.text.toString())
+//        intent.putExtra("setoranAwal", etSetoranAwal.text.toString())
+//        intent.putExtra("metodeTabungan", etMetodeTabungan.text.toString())
+//        intent.putExtra("periodeTabungan", etPeriodeTabungan.text.toString())
+//        intent.putExtra("jumlahSetoran", etJumlahSetoran.text.toString())
+
+//        val namaTujuan = bundle.getString("namaTujuan")
+        val namaTujuan = intent.getStringExtra("namaTujuan")
         tvNamaTujuan.setText(namaTujuan)
 
-        val jumlahDitabung = bundle.getString("jumlahDitabung")
+//        val jumlahDitabung = bundle.getString("jumlahDitabung")
+        val jumlahDitabung = intent.getStringExtra("jumlahDitabung")
         tvJumlahDitabung.text = "Rp. ${jumlahDitabung}"
 
-        val setoranAwal = bundle.getString("setoranAwal")
+//        val setoranAwal = bundle.getString("setoranAwal")
+        val setoranAwal = intent.getStringExtra("setoranAwal")
         tvSetoranAwal.text = "Rp. ${setoranAwal}"
 
-        val tabunganBulanan = bundle.getString("jumlahSetoran")
+//        val tabunganBulanan = bundle.getString("jumlahSetoran")
+        val tabunganBulanan = intent.getStringExtra("jumlahSetoran")
         tvTabunganBulanan.text = "Rp. ${tabunganBulanan}"
 
-        val tanggalTarget = bundle.getString("tanggalTarget")
+//        val tanggalTarget = bundle.getString("tanggalTarget")
+        val tanggalTarget = intent.getStringExtra("tanggalTarget")
         tvTanggalTarget.setText(tanggalTarget)
+    }
+
+    override fun showLoadingDialog() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideLoadingDialog() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showToast(text: String) {
+        TODO("Not yet implemented")
     }
 
     override fun showDataTabungBareng(adapterTabungBareng: BarengTemanAdapter) {
