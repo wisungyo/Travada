@@ -29,6 +29,7 @@ import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeA
 import com.example.travada.features.tabungan.helper.CalendarHelper
 import com.example.travada.features.tabungan.models.DataTabungBareng
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
+import kotlinx.android.synthetic.main.activity_register1.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -36,7 +37,8 @@ import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
-class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener, AdapterView.OnItemClickListener  {
+class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener,
+    AdapterView.OnItemClickListener {
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter
     private lateinit var terimaBundle: Bundle
@@ -53,16 +55,16 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         terimaBundle = Bundle()
         multi = false
 
-          presenter = FormTabunganTwoPresenter(this)
+        presenter = FormTabunganTwoPresenter(this)
 //          presenter.fetchTabungBarengData()
-            //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-            btnTambahTeman.setOnClickListener {
+        btnTambahTeman.setOnClickListener {
 //            val goToFormTambahTeman = Intent(this, FormTabunganThreeActivity::class.java)
 //            startActivity(goToFormTambahTeman)
-                val intent = Intent(this, FormTabunganThreeActivity::class.java)
-                this.startActivityForResult(intent, 12)
-            }
+            val intent = Intent(this, FormTabunganThreeActivity::class.java)
+            this.startActivityForResult(intent, 12)
+        }
 
         btnLanjutFormTwo.setOnClickListener {
             presenter.goToNextPage(terimaBundle)
@@ -95,7 +97,8 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         fun dataPeriodeTabungan() {
             var list = listOf("Harian", "Mingguan", "Bulanan")
 
-            var adapter = ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list)
+            var adapter =
+                ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list)
             periodeTabungan.setAdapter(adapter)
             periodeTabungan.threshold = 1
             periodeTabungan.onItemSelectedListener
@@ -279,9 +282,9 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         btnInactive()
     }
 
-//    @RequiresApi(Build.VERSION_CODES.N)
-@RequiresApi(Build.VERSION_CODES.O)
-fun hitung() {
+    //    @RequiresApi(Build.VERSION_CODES.N)
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun hitung() {
 
         val sdf = SimpleDateFormat("dd-MM-yyyy")
         val date = sdf.parse(etTanggal.text.toString())
@@ -300,15 +303,18 @@ fun hitung() {
 
         var tanggalSekarangHarian = date.time - dateNow.time
 //        var selisihTanggalHarian = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangHarian)
-        var selisihTanggalHarian = TimeUnit.DAYS.convert(tanggalSekarangHarian, TimeUnit.MILLISECONDS)
+        var selisihTanggalHarian =
+            TimeUnit.DAYS.convert(tanggalSekarangHarian, TimeUnit.MILLISECONDS)
 
         var tanggalSekarangMingguan = date.time - dateNow.time
 //        var selisihTanggalMingguan = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangMingguan)/7
-        var selisihTanggalMingguan = TimeUnit.DAYS.convert(tanggalSekarangMingguan, TimeUnit.MILLISECONDS)/7
+        var selisihTanggalMingguan =
+            TimeUnit.DAYS.convert(tanggalSekarangMingguan, TimeUnit.MILLISECONDS) / 7
 
         var tanggalSekarangBulanan = date.time - dateNow.time
 //        var selisihTanggalBulanan = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangBulanan)/30
-        var selisihTanggalBulanan = TimeUnit.DAYS.convert(tanggalSekarangBulanan, TimeUnit.MILLISECONDS)/30
+        var selisihTanggalBulanan =
+            TimeUnit.DAYS.convert(tanggalSekarangBulanan, TimeUnit.MILLISECONDS) / 30
 
         var setor = 0L
         var orang = 0
@@ -319,48 +325,53 @@ fun hitung() {
             1
         }
 
-    val periodeNew = etPeriodeTabungan.text.toString()
-    Log.d("SETORAN",  "periode=${periodeNew}")
-    if (periodeNew == "Harian"){
-            Log.d("SETORAN",  "if executed")
+        val periodeNew = etPeriodeTabungan.text.toString()
+        Log.d("SETORAN", "periode=${periodeNew}")
+        if (periodeNew == "Harian") {
+            Log.d("SETORAN", "if executed harian")
 //            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalHarian-tanggalSekarangHarian)*orang
-            setor = (jumlahTabung - (setoranAwal*orang)) / (selisihTanggalHarian/orang)
+            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalHarian / orang)
         } else if (periodeNew == "Mingguan") {
-            Log.d("SETORAN",  "if executed")
+            Log.d("SETORAN", "if executed mingguan")
 //            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalMingguan-tanggalSekarangMingguan)* orang
-            setor = (jumlahTabung - (setoranAwal*orang)) / (selisihTanggalMingguan/orang)
+            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalMingguan / orang)
         } else if (periodeNew == "Bulanan") {
-            Log.d("SETORAN",  "if executed")
+            Log.d("SETORAN", "if executed bulanan")
 //            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalBulanan-tanggalSekarangBulanan)* orang
-            setor = (jumlahTabung - (setoranAwal*orang)) / (selisihTanggalBulanan/orang)
+            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan / orang)
         }
 
-        val setorInt : Int = setor.toInt()
+        val setorInt: Int = setor.toInt()
 
-        Log.d("SETORAN",  "tglAwal=${formatted}")
-        Log.d("SETORAN",  "tglAwal=${dateNow.time}")
-        Log.d("SETORAN",  "tglAkhir=${etTanggal.text.toString()}")
-        Log.d("SETORAN",  "tglAkhir=${date.time}")
-        Log.d("SETORAN",  "tglSekarangHarian=${tanggalSekarangHarian}")
-        Log.d("SETORAN",  "tglSekarangMingguan=${tanggalSekarangMingguan}")
-        Log.d("SETORAN",  "tglSekarangBulanan=${tanggalSekarangBulanan}")
-        Log.d("SETORAN",  "jumlahTabung=${jumlahTabung}")
-        Log.d("SETORAN",  "setoranAwal=${setoranAwal}")
-        Log.d("SETORAN",  "orang=${orang}")
-        Log.d("SETORAN",  "selisihTanggalHarian=${selisihTanggalHarian}")
-        Log.d("SETORAN",  "selisihTanggalMingguan=${selisihTanggalMingguan}")
-        Log.d("SETORAN",  "selisihTanggalBulanan=${selisihTanggalBulanan}")
-        Log.d("SETORAN",  "setor=${setor}")
-        Log.d("SETORAN",  "setorInt=${setorInt}")
-        Log.d("SETORAN",  "hasil=${(jumlahTabung - (setoranAwal*orang)) / (selisihTanggalBulanan*orang)}")
-        etJumlahSetoran.text = "${(jumlahTabung - (setoranAwal*orang)) / (selisihTanggalBulanan*orang)}"
+        Log.d("SETORAN", "tglAwal=${formatted}")
+        Log.d("SETORAN", "tglAwal=${dateNow.time}")
+        Log.d("SETORAN", "tglAkhir=${etTanggal.text.toString()}")
+        Log.d("SETORAN", "tglAkhir=${date.time}")
+        Log.d("SETORAN", "tglSekarangHarian=${tanggalSekarangHarian}")
+        Log.d("SETORAN", "tglSekarangMingguan=${tanggalSekarangMingguan}")
+        Log.d("SETORAN", "tglSekarangBulanan=${tanggalSekarangBulanan}")
+        Log.d("SETORAN", "jumlahTabung=${jumlahTabung}")
+        Log.d("SETORAN", "setoranAwal=${setoranAwal}")
+        Log.d("SETORAN", "orang=${orang}")
+        Log.d("SETORAN", "selisihTanggalHarian=${selisihTanggalHarian}")
+        Log.d("SETORAN", "selisihTanggalMingguan=${selisihTanggalMingguan}")
+        Log.d("SETORAN", "selisihTanggalBulanan=${selisihTanggalBulanan}")
+        Log.d("SETORAN", "setor=${setor}")
+        Log.d("SETORAN", "setorInt=${setorInt}")
+        Log.d(
+            "SETORAN",
+            "hasil=${(jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan * orang)}"
+        )
+//        etJumlahSetoran.text =
+//            "${(jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan * orang)}"
+        etJumlahSetoran.text = setorInt.toString()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkingJumlahSetoran() {
-        val tanggal         = etTanggal.text.toString()
-        val setoranAwal     = etSetoranAwal.text.toString()
-        val metodeTabungan  = etMetodeTabungan.text.toString()
+        val tanggal = etTanggal.text.toString()
+        val setoranAwal = etSetoranAwal.text.toString()
+        val metodeTabungan = etMetodeTabungan.text.toString()
         val periodeTabungan = etPeriodeTabungan.text.toString()
 
         if (tanggal.isNotEmpty() && setoranAwal.isNotEmpty() && metodeTabungan.isNotEmpty() && periodeTabungan.isNotEmpty()) {
@@ -382,6 +393,9 @@ fun hitung() {
                         it.getStringExtra(FormTabunganThreeActivity.namaRekening)!!
                             .subSequence(0, 1).toString()
                     )
+
+                    namatambah = it.getStringExtra(FormTabunganThreeActivity.namaRekening).toString()
+                    rekeningtambah = it.getStringExtra(FormTabunganThreeActivity.nomorRekening).toString()
 
                     listTabungBareng.add(body)
                 }
@@ -437,9 +451,9 @@ fun hitung() {
     }
 
     override fun goToNextPage(bundle: Bundle) {
-        val uriGambar       = intent.getStringExtra("uriGambar")
-        val jumlahDitabung  = intent.getStringExtra("jumlahDitabung")
-        val tujuan          = intent.getStringExtra("namaTujuan")
+        val uriGambar = intent.getStringExtra("uriGambar")
+        val jumlahDitabung = intent.getStringExtra("jumlahDitabung")
+        val tujuan = intent.getStringExtra("namaTujuan")
 
         val intent = Intent(this, DetailFormResultActivity::class.java)
 //        bundle.putString("tanggalTarget", etTanggal.text.toString())
@@ -448,17 +462,33 @@ fun hitung() {
 //        bundle.putString("periodeTabungan", etPeriodeTabungan.text.toString())
 //        bundle.putString("jumlahSetoran", etJumlahSetoran.text.toString())
 //        intent.putExtras(bundle)
+        val bundle = Bundle()
+        bundle.putString("uriGambar", uriGambar)
+        bundle.putString("jumlahDitabung", jumlahDitabung)
+        bundle.putString("namaTujuan", tujuan)
+        bundle.putString("tanggalTarget", etTanggal.text.toString())
+        bundle.putString("setoranAwal", etSetoranAwal.text.toString())
+        bundle.putString("metodeTabungan", etMetodeTabungan.text.toString())
+        bundle.putString("periodeTabungan", etPeriodeTabungan.text.toString())
+        bundle.putString("jumlahSetoran", etJumlahSetoran.text.toString())
+        bundle.putString("namatambah", namatambah)
+        bundle.putString("jumlahSetoran", rekeningtambah)
+        intent.putExtras(bundle)
 
-        intent.putExtra("uriGambar", uriGambar)
-        intent.putExtra("jumlahDitabung", jumlahDitabung)
-        intent.putExtra("namaTujuan", tujuan)
-        intent.putExtra("tanggalTarget", etTanggal.text.toString())
-        intent.putExtra("setoranAwal", etSetoranAwal.text.toString())
-        intent.putExtra("metodeTabungan", etMetodeTabungan.text.toString())
-        intent.putExtra("periodeTabungan", etPeriodeTabungan.text.toString())
-        intent.putExtra("jumlahSetoran", etJumlahSetoran.text.toString())
+//        intent.getStringExtra("jumlahDitabung").toString()
+//        intent.putExtra("uriGambar", uriGambar)
+//        intent.putExtra("jumlahDitabung", jumlahDitabung)
+//        intent.putExtra("namaTujuan", tujuan)
+//        intent.putExtra("tanggalTarget", etTanggal.text.toString())
+//        intent.putExtra("setoranAwal", etSetoranAwal.text.toString())
+//        intent.putExtra("metodeTabungan", etMetodeTabungan.text.toString())
+//        intent.putExtra("periodeTabungan", etPeriodeTabungan.text.toString())
+//        intent.putExtra("jumlahSetoran", etJumlahSetoran.text.toString())
 
         startActivity(intent)
+
+        var namatambah = ""
+        var rekeningtambah = ""
     }
 
     override fun btnInactive() {
@@ -481,8 +511,10 @@ fun hitung() {
     companion object {
         var jumlahSetoran = 0L
         var setoranAwal = 0L
-        var periode= ""
+        var periode = ""
         var multi = false
+        var namatambah = ""
+        var rekeningtambah = ""
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {

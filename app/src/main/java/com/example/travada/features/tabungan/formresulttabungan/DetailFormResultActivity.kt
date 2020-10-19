@@ -1,10 +1,14 @@
 package com.example.travada.features.tabungan.formresulttabungan
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travada.R
@@ -13,6 +17,7 @@ import com.example.travada.features.tabungan.adapter.TabungBarengAdapter
 import com.example.travada.features.tabungan.formtabungandua.FormTabunganTwoPresenter
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
 import com.example.travada.features.tabungan.models.DataTabungBareng
+import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_detail_form_result.*
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import java.text.DecimalFormat
@@ -25,17 +30,24 @@ import java.util.*
 class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.Listener {
     private lateinit var presenter: DetailFormResultPresenter
     private lateinit var bundle: Bundle
+    val MyFragment = LoadingDialog()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_form_result)
 
+
+
         presenter = DetailFormResultPresenter(this)
         intent?.extras?.let { bundle = it }
+
+        presenter.getMe()
+
+        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(bundle.getString("uriGambar")))
+
         btnBuatSekarang.setOnClickListener {
-            val gotoMainTabungan = Intent(this, TabunganActivity::class.java)
-            startActivity(gotoMainTabungan)
+            presenter.dataFinal(bundle, bitmap)
         }
 
         ivFormResultBack.setOnClickListener {
@@ -73,15 +85,20 @@ class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.
     }
 
     override fun showLoadingDialog() {
-        TODO("Not yet implemented")
+        val fm = supportFragmentManager
+        MyFragment.isCancelable = false
+        MyFragment.show(fm, "Fragment")
     }
 
     override fun hideLoadingDialog() {
-        TODO("Not yet implemented")
+        MyFragment.dismiss()
     }
 
     override fun showToast(text: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(
+            this, text,
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun showDataTabungBareng(adapterTabungBareng: BarengTemanAdapter) {
@@ -90,5 +107,15 @@ class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.
         rvDetail.layoutManager = layoutManagerLinear
         rvDetail.adapter = adapterTabungBareng
         rvDetail.overScrollMode = View.OVER_SCROLL_NEVER
+    }
+
+    override fun goTo() {
+        val gotoMainTabungan = Intent(this, TabunganActivity::class.java)
+        startActivity(gotoMainTabungan)
+    }
+
+    companion object{
+        var akunsendiri = ""
+        var noreksendiri = ""
     }
 }
