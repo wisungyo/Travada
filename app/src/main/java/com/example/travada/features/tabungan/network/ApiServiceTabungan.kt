@@ -1,6 +1,7 @@
 package com.example.travada.features.tabungan.network
 
 import com.example.travada.features.tabungan.pojo.*
+import com.example.travada.fragmentnav.akun.pojo.GetUserMeResponse
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -16,6 +17,8 @@ interface ApiServiceTabungan {
 //    @POST("tabungan")
 //    fun createTabungan(@Body body: RequestBody): Call<>
 
+    @GET("auth/user/me")
+    fun getMe(@Header("Authorization") authHeader: String?): Call<GetUserMeResponse>
 
 
     // GET

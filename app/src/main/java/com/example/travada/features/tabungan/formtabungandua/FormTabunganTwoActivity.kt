@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
@@ -28,27 +29,34 @@ import com.example.travada.features.tabungan.formtabungantiga.FormTabunganThreeA
 import com.example.travada.features.tabungan.helper.CalendarHelper
 import com.example.travada.features.tabungan.models.DataTabungBareng
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
+import kotlinx.android.synthetic.main.activity_register1.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
-class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener {
+class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener,
+    AdapterView.OnItemClickListener {
     lateinit var DateEditText: EditText
     private lateinit var presenter: FormTabunganTwoPresenter
     private lateinit var terimaBundle: Bundle
     lateinit var listTabungBareng: ArrayList<DataTabungBareng>
 
-    @RequiresApi(Build.VERSION_CODES.N)
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_tabungan_two)
 
         intent?.extras?.let { terimaBundle = it }
 
+        // jumlahditabung
         terimaBundle = Bundle()
+        multi = false
 
         presenter = FormTabunganTwoPresenter(this)
-        presenter.fetchTabungBarengData()
+//          presenter.fetchTabungBarengData()
         //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         btnTambahTeman.setOnClickListener {
@@ -76,6 +84,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                 ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list)
             metodeTabungan.setAdapter(adapter)
             metodeTabungan.threshold = 1
+            checkingJumlahSetoran()
         }
 
         metodeTabungan.setOnClickListener {
@@ -83,15 +92,17 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             metodeTabungan.showDropDown()
         }
 
-
         // periode tabungan
         var periodeTabungan = etPeriodeTabungan as AutoCompleteTextView
         fun dataPeriodeTabungan() {
             var list = listOf("Harian", "Mingguan", "Bulanan")
+
             var adapter =
                 ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list)
             periodeTabungan.setAdapter(adapter)
             periodeTabungan.threshold = 1
+            periodeTabungan.onItemSelectedListener
+            checkingJumlahSetoran()
         }
 
         periodeTabungan.setOnClickListener {
@@ -99,26 +110,28 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
             periodeTabungan.showDropDown()
         }
 
+
         etTanggal.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 presenter.checked(
                     etTanggal.text.toString(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
-                    etPeriodeTabungan.text.toString(),
-                    etJumlahSetoran.text.toString()
+                    etPeriodeTabungan.text.toString()
                 )
+                checkingJumlahSetoran()
             }
         })
 
         etSetoranAwal.addTextChangedListener(object : TextWatcher {
             var processed = ""
 
-            @RequiresApi(Build.VERSION_CODES.N)
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun afterTextChanged(count: Editable?) {
                 if (etSetoranAwal == count) {
                     etSetoranAwal.clearFocus()
@@ -150,6 +163,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                     e.printStackTrace()
                 }
                 etSetoranAwal.addTextChangedListener(this)
+                checkingJumlahSetoran()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -161,14 +175,16 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                     etTanggal.text.toString(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
-                    etPeriodeTabungan.text.toString(),
-                    etJumlahSetoran.text.toString()
+                    etPeriodeTabungan.text.toString()
                 )
             }
         })
 
         etMetodeTabungan.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun afterTextChanged(p0: Editable?) {
+                checkingJumlahSetoran()
+            }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -177,8 +193,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                     etTanggal.text.toString(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
-                    etPeriodeTabungan.text.toString(),
-                    etJumlahSetoran.text.toString()
+                    etPeriodeTabungan.text.toString()
                 )
             }
         })
@@ -193,50 +208,9 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         })
 
         etPeriodeTabungan.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.checked(
-                    etTanggal.text.toString(),
-                    etSetoranAwal.text.toString(),
-                    etMetodeTabungan.text.toString(),
-                    etPeriodeTabungan.text.toString(),
-                    etJumlahSetoran.text.toString()
-                )
-            }
-        })
-
-        etJumlahSetoran.addTextChangedListener(object : TextWatcher {
-            var processed = ""
-
-            @RequiresApi(Build.VERSION_CODES.N)
-            override fun afterTextChanged(count: Editable?) {
-                if (count.toString().length == 1 && count.toString().startsWith("0")) {
-                    count?.clear();
-                }
-
-                val initial = count.toString()
-                if (etJumlahSetoran == null) return
-                if (initial.isEmpty()) return
-
-                val cleanString = initial.replace(".", "")
-                val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
-                nf.setGroupingUsed(true);
-
-                var myNumber = cleanString.toLong()
-                jumlahSetoran = cleanString.toLong()
-                processed = nf.format(myNumber)
-                etJumlahSetoran.removeTextChangedListener(this)
-                etJumlahSetoran.setText(processed)
-
-                try {
-                    etJumlahSetoran.setSelection(processed.length)
-                } catch (e: NumberFormatException) {
-                    e.printStackTrace()
-                }
-                etJumlahSetoran.addTextChangedListener(this)
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun afterTextChanged(p0: Editable?) {
+                checkingJumlahSetoran()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -246,11 +220,55 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                     etTanggal.text.toString(),
                     etSetoranAwal.text.toString(),
                     etMetodeTabungan.text.toString(),
-                    etPeriodeTabungan.text.toString(),
-                    etJumlahSetoran.text.toString()
+                    etPeriodeTabungan.text.toString()
                 )
             }
         })
+
+//        etJumlahSetoran.addTextChangedListener(object : TextWatcher {
+//            var processed = ""
+//
+//            @RequiresApi(Build.VERSION_CODES.N)
+//            override fun afterTextChanged(count: Editable?) {
+//                if (count.toString().length == 1 && count.toString().startsWith("0")) {
+//                    count?.clear();
+//                }
+//
+//                val initial = count.toString()
+//                if (etJumlahSetoran == null) return
+//                if (initial.isEmpty()) return
+//
+//                val cleanString = initial.replace(".", "")
+//                val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
+//                nf.setGroupingUsed(true);
+//
+//                var myNumber = cleanString.toLong()
+//                jumlahSetoran = cleanString.toLong()
+//                processed = nf.format(myNumber)
+//                etJumlahSetoran.removeTextChangedListener(this)
+//                etJumlahSetoran.setText(processed)
+//
+//                try {
+//                    etJumlahSetoran.setSelection(processed.length)
+//                } catch (e: NumberFormatException) {
+//                    e.printStackTrace()
+//                }
+//                etJumlahSetoran.addTextChangedListener(this)
+//            }
+//
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                presenter.checked(
+//                    etTanggal.text.toString(),
+//                    etSetoranAwal.text.toString(),
+//                    etMetodeTabungan.text.toString(),
+//                    etPeriodeTabungan.text.toString(),
+//                    etJumlahSetoran.text.toString()
+//                )
+//            }
+//        })
+
 
         etJumlahSetoran.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
@@ -264,15 +282,120 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         btnInactive()
     }
 
+    //    @RequiresApi(Build.VERSION_CODES.N)
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun hitung() {
+
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+        val date = sdf.parse(etTanggal.text.toString())
+
+        var setoranAwalRaw = etSetoranAwal.text.toString()
+        var setoranAwal = setoranAwalRaw.replace(".", "").toInt()
+
+
+        var jumlahTabungRaw = intent.getStringExtra("jumlahDitabung").toString()
+        var jumlahTabung = jumlahTabungRaw.replace(".", "").toInt()
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = current.format(formatter)
+        val dateNow = sdf.parse(formatted)
+
+        var tanggalSekarangHarian = date.time - dateNow.time
+//        var selisihTanggalHarian = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangHarian)
+        var selisihTanggalHarian =
+            TimeUnit.DAYS.convert(tanggalSekarangHarian, TimeUnit.MILLISECONDS)
+
+        var tanggalSekarangMingguan = date.time - dateNow.time
+//        var selisihTanggalMingguan = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangMingguan)/7
+        var selisihTanggalMingguan =
+            TimeUnit.DAYS.convert(tanggalSekarangMingguan, TimeUnit.MILLISECONDS) / 7
+
+        var tanggalSekarangBulanan = date.time - dateNow.time
+//        var selisihTanggalBulanan = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(tanggalSekarangBulanan)/30
+        var selisihTanggalBulanan =
+            TimeUnit.DAYS.convert(tanggalSekarangBulanan, TimeUnit.MILLISECONDS) / 30
+
+        var setor = 0L
+        var orang = 0
+
+        orang = if (multi) {
+            2
+        } else {
+            1
+        }
+
+        val periodeNew = etPeriodeTabungan.text.toString()
+        Log.d("SETORAN", "periode=${periodeNew}")
+        if (periodeNew == "Harian") {
+            Log.d("SETORAN", "if executed harian")
+//            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalHarian-tanggalSekarangHarian)*orang
+            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalHarian / orang)
+        } else if (periodeNew == "Mingguan") {
+            Log.d("SETORAN", "if executed mingguan")
+//            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalMingguan-tanggalSekarangMingguan)* orang
+            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalMingguan / orang)
+        } else if (periodeNew == "Bulanan") {
+            Log.d("SETORAN", "if executed bulanan")
+//            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalBulanan-tanggalSekarangBulanan)* orang
+            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan / orang)
+        }
+
+        val setorInt: Int = setor.toInt()
+
+        Log.d("SETORAN", "tglAwal=${formatted}")
+        Log.d("SETORAN", "tglAwal=${dateNow.time}")
+        Log.d("SETORAN", "tglAkhir=${etTanggal.text.toString()}")
+        Log.d("SETORAN", "tglAkhir=${date.time}")
+        Log.d("SETORAN", "tglSekarangHarian=${tanggalSekarangHarian}")
+        Log.d("SETORAN", "tglSekarangMingguan=${tanggalSekarangMingguan}")
+        Log.d("SETORAN", "tglSekarangBulanan=${tanggalSekarangBulanan}")
+        Log.d("SETORAN", "jumlahTabung=${jumlahTabung}")
+        Log.d("SETORAN", "setoranAwal=${setoranAwal}")
+        Log.d("SETORAN", "orang=${orang}")
+        Log.d("SETORAN", "selisihTanggalHarian=${selisihTanggalHarian}")
+        Log.d("SETORAN", "selisihTanggalMingguan=${selisihTanggalMingguan}")
+        Log.d("SETORAN", "selisihTanggalBulanan=${selisihTanggalBulanan}")
+        Log.d("SETORAN", "setor=${setor}")
+        Log.d("SETORAN", "setorInt=${setorInt}")
+        Log.d(
+            "SETORAN",
+            "hasil=${(jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan * orang)}"
+        )
+//        etJumlahSetoran.text =
+//            "${(jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan * orang)}"
+        etJumlahSetoran.text = setorInt.toString()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkingJumlahSetoran() {
+        val tanggal = etTanggal.text.toString()
+        val setoranAwal = etSetoranAwal.text.toString()
+        val metodeTabungan = etMetodeTabungan.text.toString()
+        val periodeTabungan = etPeriodeTabungan.text.toString()
+
+        if (tanggal.isNotEmpty() && setoranAwal.isNotEmpty() && metodeTabungan.isNotEmpty() && periodeTabungan.isNotEmpty()) {
+            hitung()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        listTabungBareng = ArrayList<DataTabungBareng>()
         if (requestCode == 12) {
             if (resultCode == Activity.RESULT_OK) {
+                multi = true
                 data?.let {
                     val body = DataTabungBareng(
                         it.getStringExtra(FormTabunganThreeActivity.namaRekening).toString(),
                         it.getStringExtra(FormTabunganThreeActivity.nomorRekening).toString(),
-                        it.getStringExtra(FormTabunganThreeActivity.namaRekening)!!.subSequence(0,1).toString())
+                        it.getStringExtra(FormTabunganThreeActivity.namaRekening)!!
+                            .subSequence(0, 1).toString()
+                    )
+
+                    namatambah = it.getStringExtra(FormTabunganThreeActivity.namaRekening).toString()
+                    rekeningtambah = it.getStringExtra(FormTabunganThreeActivity.nomorRekening).toString()
 
                     listTabungBareng.add(body)
                 }
@@ -280,11 +403,12 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                 showDataTabungBareng(adapterTabungBareng)
             }
         }
+        checkingJumlahSetoran()
     }
 
     override fun onResume() {
         super.onResume()
-        presenter
+//        presenter
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -327,14 +451,44 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
     }
 
     override fun goToNextPage(bundle: Bundle) {
+        val uriGambar = intent.getStringExtra("uriGambar")
+        val jumlahDitabung = intent.getStringExtra("jumlahDitabung")
+        val tujuan = intent.getStringExtra("namaTujuan")
+
         val intent = Intent(this, DetailFormResultActivity::class.java)
+//        bundle.putString("tanggalTarget", etTanggal.text.toString())
+//        bundle.putString("setoranAwal", etSetoranAwal.text.toString())
+//        bundle.putString("metodeTabungan", etMetodeTabungan.text.toString())
+//        bundle.putString("periodeTabungan", etPeriodeTabungan.text.toString())
+//        bundle.putString("jumlahSetoran", etJumlahSetoran.text.toString())
+//        intent.putExtras(bundle)
+        val bundle = Bundle()
+        bundle.putString("uriGambar", uriGambar)
+        bundle.putString("jumlahDitabung", jumlahDitabung)
+        bundle.putString("namaTujuan", tujuan)
         bundle.putString("tanggalTarget", etTanggal.text.toString())
         bundle.putString("setoranAwal", etSetoranAwal.text.toString())
         bundle.putString("metodeTabungan", etMetodeTabungan.text.toString())
         bundle.putString("periodeTabungan", etPeriodeTabungan.text.toString())
         bundle.putString("jumlahSetoran", etJumlahSetoran.text.toString())
+        bundle.putString("namatambah", namatambah)
+        bundle.putString("jumlahSetoran", rekeningtambah)
         intent.putExtras(bundle)
+
+//        intent.getStringExtra("jumlahDitabung").toString()
+//        intent.putExtra("uriGambar", uriGambar)
+//        intent.putExtra("jumlahDitabung", jumlahDitabung)
+//        intent.putExtra("namaTujuan", tujuan)
+//        intent.putExtra("tanggalTarget", etTanggal.text.toString())
+//        intent.putExtra("setoranAwal", etSetoranAwal.text.toString())
+//        intent.putExtra("metodeTabungan", etMetodeTabungan.text.toString())
+//        intent.putExtra("periodeTabungan", etPeriodeTabungan.text.toString())
+//        intent.putExtra("jumlahSetoran", etJumlahSetoran.text.toString())
+
         startActivity(intent)
+
+        var namatambah = ""
+        var rekeningtambah = ""
     }
 
     override fun btnInactive() {
@@ -357,6 +511,15 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
     companion object {
         var jumlahSetoran = 0L
         var setoranAwal = 0L
+        var periode = ""
+        var multi = false
+        var namatambah = ""
+        var rekeningtambah = ""
+    }
+
+    override fun onItemClick(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+        val item = parent.getString(position)
+        periode = item
     }
 
 }

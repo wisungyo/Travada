@@ -1,8 +1,7 @@
 package com.example.travada.features.tabungan.detailtabungan.view
 
-import android.R.attr.defaultValue
-import android.R.attr.key
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,15 +58,20 @@ class DetailTabunganFragment : Fragment(),
 
         presenter = DetailTabunganFragmentPresenter(this)
 
+        val strtext = arguments!!.getInt("ID_DETAILTABUNGAN")
+        Log.d("TOLONGGG","$strtext")
+        presenter.getDetailTabungan(strtext)
+
+//        val myValue = this.arguments!!.getInt("ID_DETAILTABUNGAN")
+//        presenter.getDetailTabungan(myValue)
+
 //        val args = getArguments();
 //        val side = args?.getInt("ID_DETAILTABUNGAN")
 //        side?.let { presenter.getDetailTabungan(it) }
 
         // val myInt = bundle.getInt("ID_DETAILTABUNGAN")
 
-//        val strtext = arguments!!.getInt("TABUNGAN")
-//        Log.d("TOLONGGG","$strtext")
-//        presenter.getDetailTabungan(strtext)
+
 
 
 //        arguments?.getInt("TABUNGAN")?.let {
