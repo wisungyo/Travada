@@ -42,7 +42,7 @@ class DetailFormResultPresenter (val listener: Listener){
         builder.addFormDataPart("tujuan", bundle.getString("namaTujuan").toString())
         builder.addFormDataPart("jumlah_tabungan", bundle.getString("jumlahDitabung").toString())
         builder.addFormDataPart("target", bundle.getString("tanggalTarget").toString())
-        builder.addFormDataPart("setoran_awal", bundle.getString("setoranAwal").toString())
+        builder.addFormDataPart("setoran_awal", bundle.getLong("setoranAwal").toString())
         builder.addFormDataPart("autodebet", "true")
         builder.addFormDataPart("periode", bundle.getString("periodeTabungan").toString())
         builder.addFormDataPart("nama", akunsendiri)
@@ -56,7 +56,7 @@ class DetailFormResultPresenter (val listener: Listener){
         var token = Hawk.get(util.SF_TOKEN, "0")
 
         listener.showLoadingDialog()
-        ApiClientTabungan.TP_API_SERVICES.createTabungan(token, builder.build()).enqueue(object : retrofit2.Callback<PostTabunganResponse> {
+        ApiClientTabungan.TP_API_SERVICES.createTabungan(builder.build(),token).enqueue(object : retrofit2.Callback<PostTabunganResponse> {
             override fun onFailure(call: Call<PostTabunganResponse>, t: Throwable) {
                 listener.showToast(t.message.toString())
                 listener.hideLoadingDialog()
@@ -99,8 +99,8 @@ class DetailFormResultPresenter (val listener: Listener){
                     response: Response<GetUserMeResponse>
                 ) {
                     response.body()?.data?.let {
-                        akunsendiri = it.noRekening
-                        noreksendiri = it.namaLengkap
+                        akunsendiri = it.namaLengkap
+                        noreksendiri = it.noRekening
                     }
                     listener.hideLoadingDialog()
                 }

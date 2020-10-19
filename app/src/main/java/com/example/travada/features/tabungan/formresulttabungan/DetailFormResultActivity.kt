@@ -7,10 +7,12 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
 import com.example.travada.features.tabungan.adapter.TabungBarengAdapter
@@ -20,6 +22,7 @@ import com.example.travada.features.tabungan.models.DataTabungBareng
 import com.example.travada.util.loadingdialog.LoadingDialog
 import kotlinx.android.synthetic.main.activity_detail_form_result.*
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
+import kotlinx.android.synthetic.main.activity_verif_register4.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.SimpleDateFormat
@@ -37,14 +40,21 @@ class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_form_result)
 
-
-
         presenter = DetailFormResultPresenter(this)
         intent?.extras?.let { bundle = it }
+
+
 
         presenter.getMe()
 
         val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(bundle.getString("uriGambar")))
+
+
+        Glide
+            .with(this)
+            .load(bundle.getString("uriGambar"))
+            .into(imageWisata)
+
 
         btnBuatSekarang.setOnClickListener {
             presenter.dataFinal(bundle, bitmap)

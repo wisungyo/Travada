@@ -7,11 +7,10 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiServiceTabungan {
-    @Headers("Content-Type: application/json;charset=UTF-8")
+
     @POST("tabungan")
     fun createTabungan(
-        @Header("Authorization") token: String,
-        @Body body: RequestBody): Call<PostTabunganResponse>
+        @Body body: RequestBody, @Header("Authorization") token: String?): Call<PostTabunganResponse>
 
 
 //    @POST("tabungan")
