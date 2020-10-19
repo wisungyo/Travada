@@ -157,7 +157,7 @@ class AkunFragment : Fragment(), AkunFragmentPresenter.Listener {
     override fun goToMenuLogin() {
         val intentActivity = Intent(activity, OnboardingEndActivity::class.java)
         startActivity(intentActivity)
-        finishAffinity(Activity())
+        activity?.finishAffinity()
 //        Toast.makeText(
 //            context,
 //            "Under construction..",

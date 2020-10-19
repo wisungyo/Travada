@@ -89,12 +89,18 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Listener {
     override fun goToNextPage() {
         val goToNextActivity = Intent(this, MainPageActivity::class.java)
         startActivity(goToNextActivity)
+        finishAffinity()
     }
 
     override fun goToForgotPassPage() {
-        val goToNextActivity = Intent(this, ForgetpassInputEmailActivity::class.java)
-        startActivity(goToNextActivity)
-        finish()
+//        val goToNextActivity = Intent(this, ForgetpassInputEmailActivity::class.java)
+//        startActivity(goToNextActivity)
+//        finish()
+
+        Toast.makeText(
+            this@LoginActivity, "Belum tersedia",
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun showLoadingDialog() {

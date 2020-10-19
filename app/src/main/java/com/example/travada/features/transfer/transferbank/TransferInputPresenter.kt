@@ -43,6 +43,7 @@ class TransferInputPresenter(val listener: Listener) {
             override fun onFailure(call: Call<GetUserMeResponse>, t: Throwable) {
                 listener.showToast(t.message.toString())
                 listener.hideLoadingDialog()
+                listener.btnInactive()
             }
 
             override fun onResponse(
@@ -54,6 +55,7 @@ class TransferInputPresenter(val listener: Listener) {
                     saldo = it.balance
                 }
                 listener.hideLoadingDialog()
+                listener.btnInactive()
             }
         })
     }

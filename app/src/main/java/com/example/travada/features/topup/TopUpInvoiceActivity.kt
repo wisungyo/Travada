@@ -297,8 +297,8 @@ class TopUpInvoiceActivity : AppCompatActivity(), TopUpInvoicePresenter.Listener
 
         tv_timestamp.text = timestamp
         tv_fromName.text = namaAsal
-        tv_fromBank.text = bankAsal
-        tv_fromNumb.text = StringBuilder(rekeningAsal).insert(4, ' ').insert(9, ' ').insert(14, ' ').toString()
+        tv_fromBank.text = "Bank Binar"
+        tv_fromNumb.text = StringBuilder(rekeningAsal).insert(4, ' ').insert(9, ' ').toString()
         tv_toName.text = namaTujuan
         tv_amount.text = numberFormat.format(nominal)
         tv_detail_id.text = id

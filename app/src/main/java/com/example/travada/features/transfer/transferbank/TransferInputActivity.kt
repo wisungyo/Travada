@@ -87,6 +87,8 @@ class TransferInputActivity : AppCompatActivity(), TransferInputPresenter.Listen
             finish()
         }
 
+
+
     }
 
     override fun btnActive() {

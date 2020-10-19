@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.transfer.TransferMenuActivity
 import com.example.travada.features.transfer.va.VAInvoiceActivity
+import com.example.travada.mainpage.MainPageActivity
 import com.example.travada.util.util
 import id.zelory.cekrek.Cekrek
 import id.zelory.cekrek.config.CanvasSize
@@ -251,7 +252,7 @@ class TransferInvoiceActivity : AppCompatActivity(), TransferInvoicePresenter.Li
 
 
     override fun goToTransferMenu() {
-        val goToNextActivity = Intent(this, TransferMenuActivity::class.java)
+        val goToNextActivity = Intent(this, MainPageActivity::class.java)
         startActivity(goToNextActivity)
         finishAffinity()
     }
@@ -297,10 +298,10 @@ class TransferInvoiceActivity : AppCompatActivity(), TransferInvoicePresenter.Li
         tv_timestamp.text = timestamp
         tv_fromName.text = namaAsal
         tv_fromBank.text = bankAsal
-        tv_fromNumb.text = StringBuilder(rekeningAsal).insert(4, ' ').insert(9, ' ').insert(14, ' ').toString()
+        tv_fromNumb.text = StringBuilder(rekeningAsal).insert(4, ' ').insert(9, ' ').toString()
         tv_toName.text = namaTujuan
         tv_toBank.text = bankTujuan
-        tv_toNumb.text = StringBuilder(rekeningTujuan).insert(4, ' ').insert(9, ' ').insert(14, ' ').toString()
+        tv_toNumb.text = StringBuilder(rekeningTujuan).insert(4, ' ').insert(9, ' ').toString()
         tv_note.text = catatan
         tv_amount.text = numberFormat.format(nominal)
         tv_detail_id.text = id
