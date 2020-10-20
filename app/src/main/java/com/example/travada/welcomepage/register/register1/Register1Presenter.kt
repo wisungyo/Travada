@@ -67,11 +67,11 @@ class Register1Presenter(val listener: Register1Presenter.Listener) {
     }
 
     fun checkAccountnumb(text: String){
-        if(text.isNotEmpty()){
+        if(text.length == 12){
             listener.errAccountnumb(null)
             isError = false
         } else {
-            listener.errAccountnumb("Nama tidak boleh kosong" )
+            listener.errAccountnumb("Nomor Rekening harus 12 digit" )
             isError = true
         }
     }

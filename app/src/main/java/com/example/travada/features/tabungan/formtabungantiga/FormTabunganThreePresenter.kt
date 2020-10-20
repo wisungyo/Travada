@@ -22,7 +22,11 @@ class FormTabunganThreePresenter(private val listener: Listener)  {
 
             override fun onFailure(call: Call<GetRekeningTemanResponse>, t: Throwable) {
                 t.message?.let {
-                    listener.implementLihatRekeningFailure(it)
+                    var body = GetRekeningTemanResponse(
+                        "Nomer rekening tidak ditemukan", ""
+                    )
+                    listener.implementLihatRekening(body)
+                    listener.btnInactive()
                 }
             }
         })

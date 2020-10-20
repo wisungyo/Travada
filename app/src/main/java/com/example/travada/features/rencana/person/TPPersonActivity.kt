@@ -7,6 +7,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -24,6 +26,8 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.*
 import android.util.Base64
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
@@ -312,37 +316,37 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
 
         if (requestCode == CAMERA_REQUEST_KTP) {
             if (data != null) {
-//                var bitmap = data?.extras?.get("data") as Bitmap
+                var bitmap = data?.extras?.get("data") as Bitmap
 //
 //                val baos = ByteArrayOutputStream()
 //                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
 //                val imageBytes: ByteArray = baos.toByteArray()
 //                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
 //                uriKTP = imageString
-                uriKTP = data.data.toString()
-//                val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-//                val imageFileName =
-//                    SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
-//                        .toString()
-//                val outputDirectory = getOutputDirectory()
-//                val image: File = File(
-//                    outputDirectory,
-//                    imageFileName + ".jpg"
-//                )
-//
-//                if (!image.exists()) {
-//                    var fos: FileOutputStream? = null
-//                    try {
-//                        fos = FileOutputStream(image)
-//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
-//                        fos.flush()
-//                        fos.close()
-//                    } catch (e: IOException) {
-//                        e.printStackTrace()
-//                    }
-//                }
-//
-//                uriKTP = Uri.fromFile(image).toString()
+//                uriKTP = data.data.toString()
+                val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+                val imageFileName =
+                    SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
+                        .toString()
+                val outputDirectory = getOutputDirectory()
+                val image: File = File(
+                    outputDirectory,
+                    imageFileName + ".jpg"
+                )
+
+                if (!image.exists()) {
+                    var fos: FileOutputStream? = null
+                    try {
+                        fos = FileOutputStream(image)
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                        fos.flush()
+                        fos.close()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+
+                uriKTP = Uri.fromFile(image).toString()
 
 
                 btn_KTP.setBackgroundResource(R.drawable.bg_btndone)
@@ -396,14 +400,38 @@ class TPPersonActivity : AppCompatActivity(), TPPersonPresenter.Listener {
             }
         } else if (requestCode == CAMERA_REQUEST_PASSPORT) {
             if (data != null) {
-//                var bitmap = data?.extras?.get("data") as Bitmap
-                uriPassport = data.data.toString()
+                var bitmap = data?.extras?.get("data") as Bitmap
+//                uriPassport = data.data.toString()
 
 //                val baos = ByteArrayOutputStream()
 //                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
 //                val imageBytes: ByteArray = baos.toByteArray()
 //                val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
 //                uriPassport = imageString
+
+                val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+                val imageFileName =
+                    SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
+                        .toString()
+                val outputDirectory = getOutputDirectory()
+                val image: File = File(
+                    outputDirectory,
+                    imageFileName + ".jpg"
+                )
+
+                if (!image.exists()) {
+                    var fos: FileOutputStream? = null
+                    try {
+                        fos = FileOutputStream(image)
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                        fos.flush()
+                        fos.close()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+
+                uriPassport = Uri.fromFile(image).toString()
 
                 btn_Passport.setBackgroundResource(R.drawable.bg_btndone)
                 btn_Passport.setCompoundDrawablesWithIntrinsicBounds(

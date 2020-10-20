@@ -26,6 +26,9 @@ class FormTabunganThreeActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_tabungan_three)
 
+        namaRekeningTeman = ""
+        nomorRekeningTeman = ""
+
         btn_check.setOnClickListener {
             presenter.getRekeningTeman(etNomorRekening.text.toString())
         }
@@ -52,6 +55,8 @@ class FormTabunganThreeActivity : AppCompatActivity(),
                 presenter.checked(etNomorRekening.text.toString())
             }
         })
+
+        btnInactive()
     }
 
     override fun goToTerima() {

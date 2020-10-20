@@ -11,7 +11,6 @@ import com.example.travada.features.tabungan.pojo.PostTabunganResponse
 import com.example.travada.fragmentnav.akun.network.AkunApiClient
 import com.example.travada.fragmentnav.akun.pojo.GetUserMeResponse
 import com.example.travada.util.util
-import com.example.travada.welcomepage.network.WPApiClient
 import com.example.travada.welcomepage.pojo.PostRegisterResponse
 import com.google.gson.Gson
 import com.orhanobut.hawk.Hawk
@@ -48,10 +47,10 @@ class DetailFormResultPresenter (val listener: Listener){
         builder.addFormDataPart("nama", akunsendiri)
         builder.addFormDataPart("rekening", noreksendiri)
 
-        if (bundle.getString("namatambah").toString().isNotEmpty()) {
-            builder.addFormDataPart("nama", bundle.getString("namatambah").toString())
-            builder.addFormDataPart("rekening", bundle.getString("rekeningtambah").toString())
-        }
+//        if (bundle.getString("namatambah").toString().isNotEmpty()) {
+//            builder.addFormDataPart("nama", bundle.getString("namatambah").toString())
+//            builder.addFormDataPart("rekening", bundle.getString("rekeningtambah").toString())
+//        }
 
         var token = Hawk.get(util.SF_TOKEN, "0")
 
@@ -81,6 +80,78 @@ class DetailFormResultPresenter (val listener: Listener){
 
         })
     }
+
+
+    fun dataFinal1(Bundle: Bundle, bitmap: Bitmap, listlist : ArrayList<DataTabungBareng>) {
+        val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
+        lateinit var bundle: Bundle
+        Bundle?.let {
+            bundle = it
+        }
+
+        val bos1 = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, bos1)
+
+        builder.addFormDataPart(
+            "foto", "photo1.jpg",
+            RequestBody.create(MultipartBody.FORM, bos1.toByteArray())
+        )
+
+        builder.addFormDataPart("tujuan", bundle.getString("namaTujuan").toString())
+        builder.addFormDataPart("jumlah_tabungan", bundle.getString("jumlahDitabung").toString())
+        builder.addFormDataPart("target", bundle.getString("tanggalTarget").toString())
+        builder.addFormDataPart("setoran_awal", bundle.getLong("setoranAwal").toString())
+        builder.addFormDataPart("autodebet", "true")
+        builder.addFormDataPart("periode", bundle.getString("periodeTabungan").toString())
+        builder.addFormDataPart("nama", akunsendiri)
+        builder.addFormDataPart("rekening", noreksendiri)
+
+//        for (i in 0..listlist.size) {
+//            builder.addFormDataPart("nama", listlist[i].nama)
+//            builder.addFormDataPart("rekening", listlist[i].nomorRekening)
+//        }
+
+        for (i in 0..(listlist.size-1)) {
+            builder.addFormDataPart("nama", listlist[i].nama.toString())
+            builder.addFormDataPart("rekening", listlist[i].nomorRekening.toString())
+        }
+
+
+
+//        if (bundle.getString("namatambah").toString().isNotEmpty()) {
+//            builder.addFormDataPart("nama", bundle.getString("namatambah").toString())
+//            builder.addFormDataPart("rekening", bundle.getString("rekeningtambah").toString())
+//        }
+
+        var token = Hawk.get(util.SF_TOKEN, "0")
+
+        listener.showLoadingDialog()
+        ApiClientTabungan.TP_API_SERVICES.createTabungan(builder.build(),token).enqueue(object : retrofit2.Callback<PostTabunganResponse> {
+            override fun onFailure(call: Call<PostTabunganResponse>, t: Throwable) {
+                listener.showToast(t.message.toString())
+                listener.hideLoadingDialog()
+            }
+
+            override fun onResponse(
+                call: Call<PostTabunganResponse>,
+                response: Response<PostTabunganResponse>
+            ) {
+                if (response.isSuccessful) {
+                    listener.goTo()
+                    listener.hideLoadingDialog()
+                } else {
+                    val errorResponse: PostRegisterResponse = Gson().fromJson(
+                        response.errorBody()?.string(),
+                        PostRegisterResponse::class.java
+                    )
+                    listener.showToast(errorResponse.message)
+                    listener.hideLoadingDialog()
+                }
+            }
+
+        })
+    }
+
 
     fun getMe() {
         var token = Hawk.get(util.SF_TOKEN, "0")

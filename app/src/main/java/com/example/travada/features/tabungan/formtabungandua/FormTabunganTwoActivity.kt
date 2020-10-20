@@ -30,11 +30,13 @@ import com.example.travada.features.tabungan.helper.CalendarHelper
 import com.example.travada.features.tabungan.models.DataTabungBareng
 import kotlinx.android.synthetic.main.activity_form_tabungan_two.*
 import kotlinx.android.synthetic.main.activity_register1.*
+import kotlinx.android.synthetic.main.item_t_p_search_page.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
+import kotlin.properties.Delegates
 
 
 class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Listener,
@@ -43,6 +45,11 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
     private lateinit var presenter: FormTabunganTwoPresenter
     private lateinit var terimaBundle: Bundle
     lateinit var listTabungBareng: ArrayList<DataTabungBareng>
+
+    lateinit var namaTambah: ArrayList<String>
+    lateinit var nomerRekeningTambah: ArrayList<String>
+    lateinit var inisialTambah: ArrayList<String>
+    var setorInt:Int = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +65,11 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         presenter = FormTabunganTwoPresenter(this)
 //          presenter.fetchTabungBarengData()
         //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
+        listTabungBareng = ArrayList<DataTabungBareng>()
+        namaTambah =  ArrayList<String>()
+        nomerRekeningTambah = ArrayList<String>()
+        inisialTambah = ArrayList<String>()
 
         btnTambahTeman.setOnClickListener {
 //            val goToFormTambahTeman = Intent(this, FormTabunganThreeActivity::class.java)
@@ -270,14 +282,14 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
 //        })
 
 
-        etJumlahSetoran.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                // code to execute when EditText loses focus
-                val imm: InputMethodManager =
-                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(v.windowToken, 0)
-            }
-        })
+//        etJumlahSetoran.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+//            if (!hasFocus) {
+//                // code to execute when EditText loses focus
+//                val imm: InputMethodManager =
+//                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                imm.hideSoftInputFromWindow(v.windowToken, 0)
+//            }
+//        })
 
         btnInactive()
     }
@@ -316,55 +328,87 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         var selisihTanggalBulanan =
             TimeUnit.DAYS.convert(tanggalSekarangBulanan, TimeUnit.MILLISECONDS) / 30
 
-        var setor = 0L
-        var orang = 0
+        var setor: Double = 0.0
+        var orang = 1
 
-        orang = if (multi) {
-            2
-        } else {
-            1
+        if (selisihTanggalHarian.toString() == "0") {
+            selisihTanggalHarian = 1
         }
+        if (selisihTanggalMingguan.toString() == "0") {
+            selisihTanggalMingguan = 1
+        }
+        if (selisihTanggalBulanan.toString() == "0") {
+            selisihTanggalBulanan = 1
+        }
+
+        orang = listTabungBareng.size + 1
+
+
+        Log.d("errcheck", "==========================")
+        Log.d("errcheck", listTabungBareng.size.toString())
+        Log.d("errcheck", orang.toString())
+        Log.d("errcheck", jumlahTabung.toString())
+        Log.d("errcheck", setoranAwal.toString())
+        Log.d("errcheck", selisihTanggalHarian.toString())
+        Log.d(
+            "errcheck",
+            "(jumlahTabung - (setoranAwal * orang)" + ((jumlahTabung - (setoranAwal * orang)).toDouble()).toString()
+        )
+        Log.d(
+            "errcheck",
+            "(selisihTanggalHarian / orang)" + (selisihTanggalHarian.toDouble() / orang.toDouble()).toString()
+        )
+        Log.d(
+            "errcheck",
+            "Hasil" + ((jumlahTabung - (setoranAwal * orang)).toDouble() / (selisihTanggalHarian.toDouble() / orang.toDouble())).toString()
+        )
 
         val periodeNew = etPeriodeTabungan.text.toString()
         Log.d("SETORAN", "periode=${periodeNew}")
         if (periodeNew == "Harian") {
             Log.d("SETORAN", "if executed harian")
 //            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalHarian-tanggalSekarangHarian)*orang
-            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalHarian / orang)
+            setor =
+                ((jumlahTabung - (setoranAwal * orang)).toDouble() / (selisihTanggalHarian.toDouble() * orang.toDouble()).toDouble()).toDouble()
         } else if (periodeNew == "Mingguan") {
             Log.d("SETORAN", "if executed mingguan")
 //            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalMingguan-tanggalSekarangMingguan)* orang
-            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalMingguan / orang)
+            setor =
+                ((jumlahTabung - (setoranAwal * orang)).toDouble() / (selisihTanggalMingguan.toDouble() * orang.toDouble()).toDouble()).toDouble()
         } else if (periodeNew == "Bulanan") {
             Log.d("SETORAN", "if executed bulanan")
 //            setor = jumlahTabung-(setoranAwal*orang)/(selisihTanggalBulanan-tanggalSekarangBulanan)* orang
-            setor = (jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan / orang)
+            setor =
+                ((jumlahTabung - (setoranAwal * orang)).toDouble() / (selisihTanggalBulanan.toDouble() * orang.toDouble()).toDouble()).toDouble()
         }
 
-        val setorInt: Int = setor.toInt()
+        setorInt = setor.toInt()
 
-        Log.d("SETORAN", "tglAwal=${formatted}")
-        Log.d("SETORAN", "tglAwal=${dateNow.time}")
-        Log.d("SETORAN", "tglAkhir=${etTanggal.text.toString()}")
-        Log.d("SETORAN", "tglAkhir=${date.time}")
-        Log.d("SETORAN", "tglSekarangHarian=${tanggalSekarangHarian}")
-        Log.d("SETORAN", "tglSekarangMingguan=${tanggalSekarangMingguan}")
-        Log.d("SETORAN", "tglSekarangBulanan=${tanggalSekarangBulanan}")
-        Log.d("SETORAN", "jumlahTabung=${jumlahTabung}")
-        Log.d("SETORAN", "setoranAwal=${setoranAwal}")
-        Log.d("SETORAN", "orang=${orang}")
-        Log.d("SETORAN", "selisihTanggalHarian=${selisihTanggalHarian}")
-        Log.d("SETORAN", "selisihTanggalMingguan=${selisihTanggalMingguan}")
-        Log.d("SETORAN", "selisihTanggalBulanan=${selisihTanggalBulanan}")
-        Log.d("SETORAN", "setor=${setor}")
-        Log.d("SETORAN", "setorInt=${setorInt}")
-        Log.d(
-            "SETORAN",
-            "hasil=${(jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan * orang)}"
-        )
-//        etJumlahSetoran.text =
-//            "${(jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan * orang)}"
-        etJumlahSetoran.text = setorInt.toString()
+//        Log.d("SETORAN", "tglAwal=${formatted}")
+//        Log.d("SETORAN", "tglAwal=${dateNow.time}")
+//        Log.d("SETORAN", "tglAkhir=${etTanggal.text.toString()}")
+//        Log.d("SETORAN", "tglAkhir=${date.time}")
+//        Log.d("SETORAN", "tglSekarangHarian=${tanggalSekarangHarian}")
+//        Log.d("SETORAN", "tglSekarangMingguan=${tanggalSekarangMingguan}")
+//        Log.d("SETORAN", "tglSekarangBulanan=${tanggalSekarangBulanan}")
+//        Log.d("SETORAN", "jumlahTabung=${jumlahTabung}")
+//        Log.d("SETORAN", "setoranAwal=${setoranAwal}")
+//        Log.d("SETORAN", "orang=${orang}")
+//        Log.d("SETORAN", "selisihTanggalHarian=${selisihTanggalHarian}")
+//        Log.d("SETORAN", "selisihTanggalMingguan=${selisihTanggalMingguan}")
+//        Log.d("SETORAN", "selisihTanggalBulanan=${selisihTanggalBulanan}")
+//        Log.d("SETORAN", "setor=${setor}")
+//        Log.d("SETORAN", "setorInt=${setorInt}")
+//        Log.d(
+//            "SETORAN",
+//            "hasil=${(jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan * orang)}"
+//        )
+////        etJumlahSetoran.text =
+////            "${(jumlahTabung - (setoranAwal * orang)) / (selisihTanggalBulanan * orang)}"
+        val localeID = Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+
+        layoutEtJumlahTabungan.text = "Jumlah Setoran ${numberFormat.format(setorInt)}"
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -382,7 +426,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        listTabungBareng = ArrayList<DataTabungBareng>()
+
         if (requestCode == 12) {
             if (resultCode == Activity.RESULT_OK) {
                 multi = true
@@ -394,10 +438,18 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
                             .subSequence(0, 1).toString()
                     )
 
-                    namatambah = it.getStringExtra(FormTabunganThreeActivity.namaRekening).toString()
-                    rekeningtambah = it.getStringExtra(FormTabunganThreeActivity.nomorRekening).toString()
+                    namatambah =
+                        it.getStringExtra(FormTabunganThreeActivity.namaRekening).toString()
+                    rekeningtambah =
+                        it.getStringExtra(FormTabunganThreeActivity.nomorRekening).toString()
+
+                    namaTambah.add(it.getStringExtra(FormTabunganThreeActivity.namaRekening).toString())
+                    nomerRekeningTambah.add(it.getStringExtra(FormTabunganThreeActivity.nomorRekening).toString())
+                    inisialTambah.add(it.getStringExtra(FormTabunganThreeActivity.namaRekening)!!
+                        .subSequence(0, 1).toString())
 
                     listTabungBareng.add(body)
+                    Log.d("errcheck", listTabungBareng.toString())
                 }
                 val adapterTabungBareng = BarengTemanAdapter(listTabungBareng)
                 showDataTabungBareng(adapterTabungBareng)
@@ -470,7 +522,7 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         bundle.putLong("setoranAwal", setoranAwal)
         bundle.putString("metodeTabungan", etMetodeTabungan.text.toString())
         bundle.putString("periodeTabungan", etPeriodeTabungan.text.toString())
-        bundle.putString("jumlahSetoran", etJumlahSetoran.text.toString())
+        bundle.putInt("jumlahSetoran", setorInt)
         bundle.putString("namatambah", namatambah)
         bundle.putString("rekeningtambah", rekeningtambah)
         intent.putExtras(bundle)
@@ -483,7 +535,12 @@ class FormTabunganTwoActivity : AppCompatActivity(), FormTabunganTwoPresenter.Li
         intent.putExtra("setoranAwal", etSetoranAwal.text.toString())
         intent.putExtra("metodeTabungan", etMetodeTabungan.text.toString())
         intent.putExtra("periodeTabungan", etPeriodeTabungan.text.toString())
-        intent.putExtra("jumlahSetoran", etJumlahSetoran.text.toString())
+        intent.putExtra("jumlahSetoran", setorInt.toString())
+//        intent.putExtra("namaTambah", namaTambah)
+//        intent.putExtra("nomerRekeningTambah", nomerRekeningTambah)
+//        intent.putExtra("inisialTambah", inisialTambah)
+        intent.putExtra("DataList", listTabungBareng)
+
 
         startActivity(intent)
 

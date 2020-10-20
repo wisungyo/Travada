@@ -63,8 +63,8 @@ class ListTabunganAdapter(
         holder.itemView.pbWisata.progress = progress.toInt()
         holder.itemView.tvProgresNumber.text = "${progress.toInt()} %"
 
-        holder.itemView.clTabuganList.setOnClickListener {
-            presenter.itemClicked(listTabungan[position].id)
-        }
+//        holder.itemView.clTabuganList.setOnClickListener {
+//            presenter.itemClicked(listTabungan[position].id)
+//        }
     }
 }

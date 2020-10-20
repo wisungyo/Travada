@@ -104,7 +104,7 @@ interface TPApiServices {
     ) : Call<GetMutasiFilter>
 
     @Headers("Content-Type: application/json;charset=UTF-8")
-    @GET("/banking/mutasi/filter?")
+    @GET("di")
     fun getMutasiCustom(
         @Header("Authorization") token: String,
         @Query("awal") awal: String,

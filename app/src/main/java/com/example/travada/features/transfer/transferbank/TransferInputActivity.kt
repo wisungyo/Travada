@@ -88,7 +88,7 @@ class TransferInputActivity : AppCompatActivity(), TransferInputPresenter.Listen
         }
 
 
-
+btnInactive()
     }
 
     override fun btnActive() {
@@ -114,7 +114,7 @@ class TransferInputActivity : AppCompatActivity(), TransferInputPresenter.Listen
         }
         bundle.putString("nominal", value.toString())
         bundle.putString("accountnumb", et_accountnumb.text.toString())
-        bundle.putString("note", catatan)
+        bundle.putString("note", catatan.toString())
         intent.putExtras(bundle)
         startActivity(intent)
     }

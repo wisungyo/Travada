@@ -2,6 +2,7 @@ package com.example.travada.features.tabungan.formresulttabungan
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.icu.text.NumberFormat
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.travada.R
 import com.example.travada.features.tabungan.adapter.BarengTemanAdapter
+import com.example.travada.features.tabungan.adapter.ListTabunganAdapter
 import com.example.travada.features.tabungan.adapter.TabungBarengAdapter
 import com.example.travada.features.tabungan.formtabungandua.FormTabunganTwoPresenter
 import com.example.travada.features.tabungan.maintabungan.TabunganActivity
@@ -29,11 +31,13 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.Listener {
     private lateinit var presenter: DetailFormResultPresenter
     private lateinit var bundle: Bundle
     val MyFragment = LoadingDialog()
+    lateinit var listTabungBareng: ArrayList<DataTabungBareng>
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,11 +47,16 @@ class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.
         presenter = DetailFormResultPresenter(this)
         intent?.extras?.let { bundle = it }
 
+        listTabungBareng = ArrayList<DataTabungBareng>()
+
 
 
         presenter.getMe()
 
-        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(bundle.getString("uriGambar")))
+        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(
+            getContentResolver(),
+            Uri.parse(bundle.getString("uriGambar"))
+        )
 
 
         Glide
@@ -56,9 +65,7 @@ class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.
             .into(imageWisata)
 
 
-        btnBuatSekarang.setOnClickListener {
-            presenter.dataFinal(bundle, bitmap)
-        }
+
 
         ivFormResultBack.setOnClickListener {
             finish()
@@ -77,21 +84,64 @@ class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.
         val namaTujuan = intent.getStringExtra("namaTujuan")
         tvNamaTujuan.setText(namaTujuan)
 
+        val localeID = Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+
 //        val jumlahDitabung = bundle.getString("jumlahDitabung")
-        val jumlahDitabung = intent.getStringExtra("jumlahDitabung")
-        tvJumlahDitabung.text = "Rp. ${jumlahDitabung}"
+        val jumlahDitabung = intent.getStringExtra("jumlahDitabung")?.replace(".","")?.toInt()
+        tvJumlahDitabung.text = numberFormat.format(jumlahDitabung)
 
 //        val setoranAwal = bundle.getString("setoranAwal")
-        val setoranAwal = intent.getStringExtra("setoranAwal")
-        tvSetoranAwal.text = "Rp. ${setoranAwal}"
+        val setoranAwal = intent.getStringExtra("setoranAwal")?.replace(".","")?.toInt()
+        tvSetoranAwal.text = numberFormat.format(setoranAwal)
 
 //        val tabunganBulanan = bundle.getString("jumlahSetoran")
-        val tabunganBulanan = intent.getStringExtra("jumlahSetoran")
-        tvTabunganBulanan.text = "Rp. ${tabunganBulanan}"
+        val tabunganBulanan = intent.getStringExtra("jumlahSetoran")?.replace(".","")?.toInt()
+        tvTabunganBulanan.text = numberFormat.format(tabunganBulanan)
 
 //        val tanggalTarget = bundle.getString("tanggalTarget")
         val tanggalTarget = intent.getStringExtra("tanggalTarget")
         tvTanggalTarget.setText(tanggalTarget)
+
+//        val listnama = intent.getStringArrayListExtra("namaTambah")
+//        val listnorek = intent.getStringArrayListExtra("nomerRekeningTambah")
+//        val listinisial = intent.getStringArrayListExtra("inisialTambah")
+//
+//        if (listnama != null) {
+//            val to = listnama.size+1
+//            for (value in 0..to) {
+//                val body = DataTabungBareng(
+//                    listnama.get(value).toString(),
+//                    listnorek?.get(value).toString(),
+//                    listinisial?.get(value).toString()
+//                )
+//
+//                listTabungBareng.add(body)
+//            }
+//
+//            val adapterTabungBareng = BarengTemanAdapter(listTabungBareng)
+//            showDataTabungBareng(adapterTabungBareng)
+//        }
+
+
+        val listlist = intent.getParcelableArrayListExtra<DataTabungBareng>("DataList")
+        if (listlist != null) {
+                val adapterTabungBareng = BarengTemanAdapter(listlist)
+                showDataTabungBareng(adapterTabungBareng)
+        }
+
+
+
+        btnBuatSekarang.setOnClickListener {
+            if (listlist != null) {
+                presenter.dataFinal1(bundle, bitmap, listlist)
+            } else {
+                presenter.dataFinal(bundle, bitmap)
+            }
+
+        }
+
+
     }
 
     override fun showLoadingDialog() {
@@ -124,7 +174,7 @@ class DetailFormResultActivity : AppCompatActivity(), DetailFormResultPresenter.
         startActivity(gotoMainTabungan)
     }
 
-    companion object{
+    companion object {
         var akunsendiri = ""
         var noreksendiri = ""
     }

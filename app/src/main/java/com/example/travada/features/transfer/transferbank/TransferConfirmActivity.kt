@@ -44,7 +44,7 @@ class TransferConfirmActivity : AppCompatActivity(), TransferConfirmPresenter.Li
         val localeID =  Locale("in", "ID")
         val numberFormat = NumberFormat.getCurrencyInstance(localeID)
 
-        tv_accountnumb.text = StringBuilder(accountnumb).insert(4, ' ').insert(9, ' ').insert(14, ' ').toString()
+        tv_accountnumb.text = StringBuilder(accountnumb).insert(4, ' ').insert(9, ' ').toString()
         tv_note.text = note
         tv_transfer_nominal.text = numberFormat.format(nominal)
         tv_transfer_total.text = numberFormat.format(nominal)
