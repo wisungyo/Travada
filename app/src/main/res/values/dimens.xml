@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="heading1">20sp</dimen>
     <dimen name="heading2">18sp</dimen>
     <dimen name="heading3">16sp</dimen>
     <dimen name="heading4">14sp</dimen>
     <dimen name="text">12sp</dimen>
     <dimen name="textbutton">16sp</dimen>
+    <dimen name="bottombtn">80dp</dimen>
+    <dimen name="actionBarHeight">49dp</dimen>
+    <dimen name="actionBarMarginStart">22dp</dimen>
+    <dimen name="btnradius">4dp</dimen>
+    <dimen name="btnradiusround">20dp</dimen>
+    <dimen name="marginform">24dp</dimen>
+    <dimen name="margintopform">24dp</dimen>
+    <dimen name="outercircle">2dp</dimen>
+    <dimen name="insidecircle">6dp</dimen>
 
-    <dimen name="actionBarHeight"> </dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override = "true" >12sp</dimen>
+    <dimen name="dialog_radius">100dp</dimen>
 
+    <dimen name="transfermarginform">16dp</dimen>
+    <dimen name="transfermargintopform">32dp</dimen>
+    <dimen name="transferetmargintopform">20dp</dimen>
+    <dimen name="transfermargintopform2">28dp</dimen>
+    <dimen name="transferetmargintopform2">12dp</dimen>
 
+    <dimen name="akunmargintopform">18dp</dimen>
+    <dimen name="akunmarginform">16dp</dimen>
 </resources>

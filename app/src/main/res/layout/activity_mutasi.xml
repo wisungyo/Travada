@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.mutasi.view.MutasiActivity">
+
+    <View
+        android:id="@+id/view_mutasi"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="#2A85F4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_mutasi_back"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/view_mutasi"
+        app:layout_constraintStart_toStartOf="@id/view_mutasi"
+        app:layout_constraintTop_toTopOf="@id/view_mutasi" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_topbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Mutasi"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/view_mutasi"
+        app:layout_constraintStart_toEndOf="@id/iv_mutasi_back"
+        app:layout_constraintTop_toTopOf="@id/view_mutasi" />
+
+    <View
+        android:id="@+id/view_mutasi_card"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@drawable/bg_rencana_pesan_jumlah_orang"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/view_mutasi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_mutasi_card"
+        android:layout_width="95dp"
+        android:layout_height="55dp"
+        android:src="@drawable/ic_card_user"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="@id/view_mutasi_card"
+        app:layout_constraintBottom_toBottomOf="@id/view_mutasi_card"
+        app:layout_constraintStart_toStartOf="@id/view_mutasi_card" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wisnu Agung Prasetyo*"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="#474747"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="@id/iv_mutasi_card"
+        app:layout_constraintStart_toEndOf="@id/iv_mutasi_card" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_rekening"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12345678900*"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="#474747"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_mutasi_card"
+        app:layout_constraintStart_toEndOf="@id/iv_mutasi_card" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_periode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Periode Mutasi"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="#474747"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/view_mutasi_card"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:padding="12dp"
+        android:paddingEnd="28dp"
+        android:background="@drawable/bg_rencana_pesan_jumlah_orang"
+        android:fontFamily="@font/roboto"
+        android:gravity="start"
+        android:text="Dari Tanggal"
+        android:textAlignment="textStart"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mutasi_periode"
+        app:layout_constraintEnd_toStartOf="@id/iv_mutasi_next"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_calendar"
+        app:layout_constraintEnd_toEndOf="@id/tv_mutasi_start"
+        app:layout_constraintTop_toTopOf="@id/tv_mutasi_start"
+        app:layout_constraintBottom_toBottomOf="@id/tv_mutasi_start" />
+
+    <ImageView
+        android:id="@+id/iv_mutasi_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_next_grey"
+        app:layout_constraintTop_toTopOf="@id/tv_mutasi_start"
+        app:layout_constraintBottom_toBottomOf="@id/tv_mutasi_start"
+        app:layout_constraintStart_toStartOf="@id/gl_mutasi"
+        app:layout_constraintEnd_toEndOf="@id/gl_mutasi" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="12dp"
+        android:paddingEnd="28dp"
+        android:background="@drawable/bg_rencana_pesan_jumlah_orang"
+        android:fontFamily="@font/roboto"
+        android:gravity="start"
+        android:text="Sampai Tanggal"
+        android:textAlignment="textStart"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_mutasi_next"
+        app:layout_constraintTop_toBottomOf="@id/tv_mutasi_periode" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_calendar"
+        app:layout_constraintEnd_toEndOf="@id/tv_mutasi_end"
+        app:layout_constraintTop_toTopOf="@id/tv_mutasi_end"
+        app:layout_constraintBottom_toBottomOf="@id/tv_mutasi_end" />
+
+    <View
+        android:id="@+id/view_mutasi_line_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EDEDED"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_mutasi_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_minggu_ini"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Minggu ini"
+        android:fontFamily="@font/roboto"
+        android:textSize="14dp"
+        android:background="#ffffff"
+        android:textColor="#777777"
+        android:paddingTop="12dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/view_mutasi_line_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view_mutasi_line_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EDEDED"
+        app:layout_constraintTop_toBottomOf="@id/tv_mutasi_minggu_ini"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_bulan_ini"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bulan ini"
+        android:fontFamily="@font/roboto"
+        android:textSize="14dp"
+        android:textColor="#777777"
+        android:background="#ffffff"
+        android:paddingTop="12dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/view_mutasi_line_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view_mutasi_line_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EDEDED"
+        app:layout_constraintTop_toBottomOf="@id/tv_mutasi_bulan_ini"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_mutasi_tahun_ini"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tahun ini"
+        android:fontFamily="@font/roboto"
+        android:textSize="14dp"
+        android:textColor="#777777"
+        android:background="#ffffff"
+        android:paddingTop="12dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/view_mutasi_line_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view_mutasi_line_4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EDEDED"
+        app:layout_constraintTop_toBottomOf="@id/tv_mutasi_tahun_ini"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_mutasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <View
+        android:id="@+id/view_mutasi_bot_bar"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/btn_mutasi"
+        android:text="Lanjutkan"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:minHeight="0dp"
+        android:background="@drawable/bg_konfirmasi_rencana_btn_disable"
+        android:enabled="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="11dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

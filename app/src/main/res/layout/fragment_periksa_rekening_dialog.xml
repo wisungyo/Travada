@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/dialog_counst"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.tabungan.dialogfragment.PeriksaRekeningDialog">
+
+    <TextView
+        android:id="@+id/tvTitleTabungBareng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:layout_marginTop="16dp"
+        android:text="Tabungan Bareng Teman"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/heading3"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNamaTeman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/roboto"
+        android:text="Abigail Nicole"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTabungBareng" />
+
+    <TextView
+        android:id="@+id/tvRekeningTeman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/roboto"
+        android:text="32462742"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNamaTeman" />
+
+    <View
+        android:id="@+id/viewLineHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRekeningTeman" />
+
+    <View
+        android:id="@+id/viewLineVertical"
+        android:layout_width="0.5dp"
+        android:layout_height="43dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewLineHorizontal" />
+
+    <TextView
+        android:id="@+id/btnBatal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="14dp"
+        android:fontFamily="@font/roboto"
+        android:text="Batalkan"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintTop_toBottomOf="@id/viewLineHorizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/viewLineVertical"
+        />
+
+    <TextView
+        android:id="@+id/btnLanjutPeriksa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="14dp"
+        android:fontFamily="@font/roboto"
+        android:text="Lanjut"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintTop_toBottomOf="@id/viewLineHorizontal"
+        app:layout_constraintStart_toStartOf="@id/viewLineVertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

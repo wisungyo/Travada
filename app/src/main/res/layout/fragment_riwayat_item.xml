@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wrapper_riwayat_proses_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_riwayat_item"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:cardCornerRadius="8dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <ImageView
+            android:id="@+id/iv_riwayat_item"
+            android:background="@drawable/bg_riwayat_item_img"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_riwayat_item_title"
+        android:text=" "
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="#474747"
+        android:maxLines="1"
+        android:layout_marginStart="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/cv_riwayat_item"
+        app:layout_constraintStart_toEndOf="@id/cv_riwayat_item"
+        app:layout_constraintEnd_toStartOf="@id/view_riwayat_item_status"/>
+
+    <View
+        android:id="@+id/view_riwayat_item_status"
+        android:background="@drawable/bg_riwayat_item_status_blue"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_riwayat_item_status"
+        android:text=" "
+        android:fontFamily="@font/roboto"
+        android:textSize="10sp"
+        android:textColor="#2A85F4"
+        android:maxLines="1"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/view_riwayat_item_status"
+        app:layout_constraintStart_toStartOf="@id/view_riwayat_item_status"
+        app:layout_constraintEnd_toEndOf="@id/view_riwayat_item_status"
+        app:layout_constraintBottom_toBottomOf="@id/view_riwayat_item_status" />
+
+    <ImageView
+        android:id="@+id/iv_riwayat_item_clock"
+        android:src="@drawable/ic_clock_blue"
+        android:layout_marginTop="8dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintTop_toBottomOf="@id/view_riwayat_item_status"
+        app:layout_constraintStart_toStartOf="@id/tv_riwayat_item_title" />
+
+    <TextView
+        android:id="@+id/tv_riwayat_item_date"
+        android:text=" "
+        android:fontFamily="@font/roboto"
+        android:textSize="12sp"
+        android:textColor="#474747"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/view_riwayat_item_status"
+        app:layout_constraintStart_toEndOf="@id/iv_riwayat_item_clock" />
+
+    <TextView
+        android:id="@+id/tv_riwayat_item_made_date"
+        android:text=" "
+        android:fontFamily="@font/roboto"
+        android:textSize="12sp"
+        android:textColor="#474747"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/iv_riwayat_item_clock"
+        app:layout_constraintStart_toStartOf="@id/iv_riwayat_item_clock" />
+
+    <TextView
+        android:id="@+id/tv_riwayat_item_money"
+        android:text=" "
+        android:fontFamily="@font/roboto"
+        android:textSize="12sp"
+        android:textColor="#474747"
+        android:layout_marginStart="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tv_riwayat_item_made_date"
+        app:layout_constraintEnd_toEndOf="@id/view_riwayat_item_status" />
+
+    <View
+        android:id="@+id/view_riwayat_item_separate"
+        android:background="#EDEDED"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_riwayat_item_money"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
