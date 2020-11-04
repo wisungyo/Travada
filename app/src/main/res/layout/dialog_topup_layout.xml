@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitleTabungBareng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:text="Konfirmasi Topup"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/tvRekeningTeman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:gravity="center"
+        android:fontFamily="@font/roboto"
+        android:text="Tabungan akan dipotong dari saldo \naktif kamu"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTabungBareng" />
+
+    <View
+        android:id="@+id/viewLineHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRekeningTeman" />
+
+    <View
+        android:id="@+id/viewLineVertical"
+        android:layout_width="0.5dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewLineHorizontal" />
+
+    <TextView
+        android:id="@+id/btnBatal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/roboto"
+        android:text="Batalkan"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintTop_toBottomOf="@id/viewLineHorizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/viewLineVertical"
+        />
+
+    <TextView
+        android:id="@+id/btnLanjutPeriksa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/roboto"
+        android:text="Lanjut"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintTop_toBottomOf="@id/viewLineHorizontal"
+        app:layout_constraintStart_toStartOf="@id/viewLineVertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".features.tabungan.formtabungandua.FormTabunganTwoActivity">
+
+    <View
+        android:id="@+id/barTabungan"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFormTwoBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/ic_baseline_arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/barTabungan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Trava Save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        app:layout_constraintBottom_toBottomOf="@id/ivFormTwoBack"
+        app:layout_constraintStart_toEndOf="@id/ivFormTwoBack"
+        app:layout_constraintTop_toTopOf="@id/ivFormTwoBack" />
+
+
+    <!--RecyclerView nested -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedViewFormTwo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barTabungan">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Guide vertical -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gVertical1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gVertical2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".95" />
+
+            <!--Guide horizontal -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gHorizontal2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="72dp" />
+
+            <!--input text tanggal -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEtTgltarget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/gHorizontal">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTanggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:hint="Tanggal target pencapaian"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--input text setoran awal -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEtSetoranAwal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:prefixTextAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/layoutEtTgltarget"
+                app:prefixText="Rp ">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSetoranAwal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Setoran awal"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--input text metode tabungan -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEtMetodeTabungan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/layoutEtSetoranAwal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/etMetodeTabungan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_polygon"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="Metode tabungan"
+                    android:inputType="none"
+                    android:textIsSelectable="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--input periode tabungan -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEtPeriodeTabungan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/layoutEtMetodeTabungan">
+
+                <AutoCompleteTextView
+                    android:id="@+id/etPeriodeTabungan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_polygon"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="Periode tabungan"
+                    android:inputType="none"
+                    android:textIsSelectable="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--input text jumlah setoran -->
+            <TextView
+                android:id="@+id/layoutEtJumlahTabungan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="10dp"
+                android:text="Rp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/layoutEtPeriodeTabungan"
+                />
+
+
+            <TextView
+                android:id="@+id/tvTitleTabunganBareng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/roboto"
+                android:text="Tabungan bareng teman"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/layoutEtJumlahTabungan"
+                app:layout_goneMarginTop="25dp" />
+
+            <!--button tambah teman -->
+            <Button
+                android:id="@+id/btnTambahTeman"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_white_dash"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_baseline_add_blue"
+                android:focusable="true"
+                android:fontFamily="@font/roboto"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingStart="100dp"
+                android:paddingEnd="90dp"
+                android:text="Tambah teman"
+                android:textAllCaps="false"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/heading3"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleTabunganBareng" />
+
+            <!--recyclerView teman -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTabunganBarengTeman"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/gHorizontal2"
+                app:layout_constraintEnd_toEndOf="@id/gVertical2"
+                app:layout_constraintStart_toStartOf="@id/gVertical1"
+                app:layout_constraintTop_toBottomOf="@id/btnTambahTeman"
+                tools:listitem="@layout/list_tabung_bareng_teman" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!--view di bawah tombol lanjut -->
+    <View
+        android:id="@+id/viewButton"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--button lanjut -->
+    <Button
+        android:id="@+id/btnLanjutFormTwo"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_inactive"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/roboto"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Lanjut"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@id/viewButton"
+        app:layout_constraintEnd_toEndOf="@id/viewButton"
+        app:layout_constraintStart_toStartOf="@id/viewButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>

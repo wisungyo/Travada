@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.transfer.va.VAInvoiceActivity"
+    android:background="@color/white">
+
+    <View
+        android:id="@+id/actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarHeight"
+        android:background="@drawable/bg_actionbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:background="@drawable/ic_baseline_close_white"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:fontFamily="@string/font"
+        android:text="Resi"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+    <LinearLayout
+        android:id="@+id/btn_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottombtn"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btnwhite"
+            android:clickable="false"
+            android:drawableStart="@drawable/ic_share_blue"
+            android:drawablePadding="8dp"
+            android:focusable="true"
+            android:fontFamily="@string/font"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="fill"
+            android:text="Bagikan"
+            android:paddingStart="36dp"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/heading3"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_download"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btnwhite"
+            android:clickable="false"
+            android:drawableStart="@drawable/ic_download_blue"
+            android:drawablePadding="8dp"
+            android:focusable="true"
+            android:fontFamily="@string/font"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="fill"
+            android:paddingStart="30dp"
+            android:text="Download"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/heading3"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_bottom"
+        app:layout_constraintTop_toBottomOf="@id/actionbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_print"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:paddingBottom="24dp"
+            android:background="@color/white"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="127dp"
+                android:background="@drawable/bg_actionbar"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/frame_white"
+                android:elevation="5dp"
+                android:paddingStart="16dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="117dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_transaction_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="27dp"
+                    android:drawableStart="@drawable/ic_check_green"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@string/font"
+                    android:text="Transaksi Berhasil"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading3"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_image" />
+
+                <TextView
+                    android:id="@+id/tv_timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="27dp"
+                    android:fontFamily="@string/font"
+                    android:text="null"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_transaction_status" />
+
+                <ImageView
+                    android:id="@+id/separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="9dp"
+                    android:src="@drawable/dotted_line"
+                    app:layout_constraintTop_toBottomOf="@id/tv_timestamp" />
+
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:fontFamily="@string/font"
+                    android:text="Dari Rekening"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/separator" />
+
+                <TextView
+                    android:id="@+id/tv_fromName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@string/font"
+                    android:text="null"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_from" />
+
+                <TextView
+                    android:id="@+id/tv_fromBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@string/font"
+                    android:text="null"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fromName" />
+
+                <TextView
+                    android:id="@+id/tv_fromNumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@string/font"
+                    android:text="null"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_fromBank"
+                    app:layout_constraintStart_toEndOf="@id/tv_fromBank"
+                    app:layout_constraintTop_toTopOf="@id/tv_fromBank" />
+
+                <TextView
+                    android:id="@+id/tv_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@string/font"
+                    android:text="Virtual Akun"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fromBank" />
+
+                <TextView
+                    android:id="@+id/tv_toName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@string/font"
+                    android:text="null"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_to" />
+
+                <TextView
+                    android:id="@+id/tv_toBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@string/font"
+                    android:text="null"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_toName" />
+
+                <TextView
+                    android:id="@+id/tv_toNumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@string/font"
+                    android:text="null"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_toBank"
+                    app:layout_constraintStart_toEndOf="@id/tv_toBank"
+                    app:layout_constraintTop_toTopOf="@id/tv_toBank" />
+
+
+                <TextView
+                    android:id="@+id/tv_note"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="-"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_toBank" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Catatan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_note" />
+
+                <View
+                    android:id="@+id/view_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_amount"
+                    app:layout_constraintTop_toBottomOf="@id/tv_note" />
+
+                <TextView
+                    android:id="@+id/tv_amount"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Rp 0"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/view_amount"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/view_amount" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:layout_marginStart="8dp"
+                    android:text="Jumlah"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_amount"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@string/font"
+                    android:text="Detail Transaksi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading4"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_amount" />
+
+                <TextView
+                    android:id="@+id/tv_detail_id"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="null"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="ID Transaksi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_detail_id" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

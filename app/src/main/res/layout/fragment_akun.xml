@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragmentnav.akun.AkunFragment"
+    android:background="@color/white"
+    >
+
+    <View
+        android:id="@+id/actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarHeight"
+        android:background="@drawable/bg_actionbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:fontFamily="@string/fontmedium"
+        android:text="Akun"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+    <ImageView
+        android:id="@+id/iv_card"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_card_user"
+        />
+
+    <TextView
+        android:id="@+id/tv_accountnumb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01234567890"
+        app:layout_constraintTop_toTopOf="@id/iv_card"
+        app:layout_constraintBottom_toBottomOf="@id/iv_card"
+        app:layout_constraintStart_toStartOf="@id/iv_card"
+        android:layout_marginStart="52dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading2"
+        />
+
+    <TextView
+        android:id="@+id/tv_accountname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Siapa"
+        app:layout_constraintTop_toBottomOf="@id/tv_accountnumb"
+        app:layout_constraintStart_toStartOf="@id/tv_accountnumb"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading4"
+        android:textStyle="bold"
+        />
+
+
+    <View
+        android:id="@+id/gray_line"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/grayblue"
+        app:layout_constraintTop_toBottomOf="@id/iv_card"
+        />
+
+    <TextView
+        android:id="@+id/tv_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pengaturan"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading3"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/gray_line"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="14dp"
+        />
+
+    <Button
+        android:id="@+id/btn_changepass"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Ubah Password"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintTop_toBottomOf="@id/tv_setting"
+        android:drawableStart="@drawable/ic_padlock"
+        android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
+        android:textAlignment="textStart"
+        android:drawablePadding="12dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="22dp"
+        android:background="@color/white"
+        android:layout_marginTop="8dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        />
+
+    <Button
+        android:id="@+id/btn_changepin"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Ubah Pin"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintTop_toBottomOf="@id/btn_changepass"
+        android:drawableStart="@drawable/ic_key"
+        android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
+        android:textAlignment="textStart"
+        android:drawablePadding="12dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="22dp"
+        android:background="@color/white"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="1dp"
+        />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Keluar"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintTop_toBottomOf="@id/btn_changepin"
+        android:drawableStart="@drawable/ic_out"
+        android:textAlignment="textStart"
+        android:drawablePadding="12dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="22dp"
+        android:background="@color/white"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="1dp"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

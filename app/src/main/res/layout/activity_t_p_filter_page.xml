@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.rencana.searchpage.TPFilterPageActivity"
+    android:background="@color/white"
+    >
+
+    <View
+        android:id="@+id/actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarHeight"
+        android:background="@drawable/bg_actionbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:background="@drawable/ic_baseline_close_white"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/actionBarMarginStart"
+        android:fontFamily="@string/font"
+        android:text="Filter"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="@id/actionbar" />
+
+
+    <View
+        android:id="@+id/bottombtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottombtn"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/bottombtn"
+        app:layout_constraintEnd_toEndOf="@id/bottombtn"
+        app:layout_constraintTop_toTopOf="@id/bottombtn"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_active"
+        android:text="Terapkan"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_harga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@string/font"
+        android:text="Harga"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionbar" />
+
+    <TextView
+        android:id="@+id/sb_valueMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_seekbar_value"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintStart_toStartOf="@id/sb_price"
+        app:layout_constraintTop_toBottomOf="@id/tv_harga"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="12dp"
+        android:text="RP 0"
+        android:fontFamily="@string/font"
+        android:textSize="@dimen/text"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/sb_valueMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_seekbar_value"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintEnd_toEndOf="@id/sb_price"
+        app:layout_constraintTop_toBottomOf="@id/tv_harga"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="12dp"
+        android:text="RP 50.000.000"
+        android:textSize="@dimen/text"
+        android:textColor="@color/black"
+        />
+
+    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+        android:id="@+id/sb_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
+        app:bar_color="@color/inactiveblue"
+        app:bar_highlight_color="@color/blue"
+        app:data_type="_integer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sb_valueMin"
+        app:left_thumb_color="@color/gray"
+        app:steps="1"
+        app:max_value="5000"
+        app:min_value="0"
+        app:right_thumb_image="@drawable/img_thumb_seekbar"
+        app:left_thumb_image="@drawable/img_thumb_seekbar"
+        app:right_thumb_image_pressed="@drawable/img_thumb_seekbar"
+        app:left_thumb_image_pressed="@drawable/img_thumb_seekbar"/>
+
+    <TextView
+        android:id="@+id/tv_benua"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@string/font"
+        android:text="Benua"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading4"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sb_price" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_benua"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        >
+
+        <CheckBox
+            android:id="@+id/Asia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asia"
+            android:fontFamily="@string/font"
+            android:textSize="@dimen/heading4"
+            android:textColor="@color/black"
+            />
+
+        <CheckBox
+            android:id="@+id/Amerika"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amerika"
+            android:fontFamily="@string/font"
+            android:textSize="@dimen/heading4"
+            android:textColor="@color/black"
+            />
+
+        <CheckBox
+            android:id="@+id/Australia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Australia"
+            android:fontFamily="@string/font"
+            android:textSize="@dimen/heading4"
+            android:textColor="@color/black"
+            />
+
+        <CheckBox
+            android:id="@+id/Afrika"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Afrika"
+            android:fontFamily="@string/font"
+            android:textSize="@dimen/heading4"
+            android:textColor="@color/black"
+            />
+
+        <CheckBox
+            android:id="@+id/Eropa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eropa"
+            android:fontFamily="@string/font"
+            android:textSize="@dimen/heading4"
+            android:textColor="@color/black"
+            />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

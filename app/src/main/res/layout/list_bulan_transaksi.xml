@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.MaterialComponents.Light"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <TextView
+            android:id="@+id/tvBulan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="15dp"
+            android:text="Juni 2020 "
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/heading4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBulanTransaksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            tools:listitem="@layout/list_transaksi"
+            app:layout_constraintTop_toBottomOf="@id/tvBulan"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
